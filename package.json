@@ -228,7 +228,7 @@
     "chai": "3.5.0",
     "chai-enzyme": "0.5.2",
     "cheerio": "0.20.0",
-    "coveralls": "2.11.12",
+    "coveralls": "2.11.14",
     "cross-env": "2.0.0",
     "css-loader": "0.23.1",
     "enzyme": "2.4.1",
