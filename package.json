@@ -203,7 +203,7 @@
     "react-router-scroll": "0.4.1",
     "redux": "3.5.2",
     "redux-immutable": "3.0.9",
-    "redux-saga": "0.14.1",
+    "redux-saga": "0.14.2",
     "reselect": "2.5.3",
     "sanitize.css": "4.1.0",
     "soundmanager2": "^2.97.20150601-a",
