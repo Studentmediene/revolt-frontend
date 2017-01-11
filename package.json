@@ -202,7 +202,7 @@
     "react-router-redux": "4.0.7",
     "react-router-scroll": "0.4.1",
     "redux": "3.5.2",
-    "redux-immutable": "3.0.9",
+    "redux-immutable": "3.0.10",
     "redux-saga": "0.13.0",
     "reselect": "2.5.3",
     "sanitize.css": "4.1.0",
