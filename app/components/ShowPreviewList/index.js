@@ -8,6 +8,7 @@ import React from 'react';
 import Show from 'components/ShowPreview';
 
 import styles from './styles.css';
+import arrowImage from './arrow_down.svg';
 
 function ShowPreviewList(props) {
   const compareShows = (showA, showB) => showA.name.localeCompare(showB.name);
@@ -27,8 +28,10 @@ function ShowPreviewList(props) {
       <div className={styles.activeShows}>
         {activeShows}
       </div>
-      <h1>Arkiverte programmer</h1>
-      <div className={styles.archivedShows}>
+      <button className={styles.archivedShowsButton} onClick={props.toggleArchivedShows}>
+        Arkiverte programmer <img src={arrowImage} alt="Arrow" className={props.hideArchivedShows ? styles.arrowDown : styles.arrowLeft} />
+      </button>
+      <div className={props.hideArchivedShows ? styles.archivedShowsHidden : styles.archivedShowsVisible}>
         {archivedShows}
       </div>
     </div>
@@ -37,6 +40,8 @@ function ShowPreviewList(props) {
 
 ShowPreviewList.propTypes = {
   shows: React.PropTypes.array.isRequired,
+  hideArchivedShows: React.PropTypes.bool.isRequired,
+  toggleArchivedShows: React.PropTypes.func.isRequired,
 };
 
 export default ShowPreviewList;
