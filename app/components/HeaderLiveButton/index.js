@@ -9,7 +9,7 @@ function HeaderLiveButton() {
         <div className={styles.playButtonInner}></div>
       </div>
       <div className={styles.meta}>
-        Hør live nå!
+        Lytt direkte!
       </div>
     </div>
   );

@@ -11,8 +11,8 @@
 .audioControls {
   display: flex;
   flex-direction: row;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 .backButton {
@@ -34,12 +34,17 @@
   flex-direction: row;
 }
 
+.line {
+  width: 4px;
+  background-color: #FFF;
+}
+
 .rightFacingTriangle {
   width: 0;
   height: 0;
-  border-left: 16px solid #FFF;
-  border-top: 16px solid transparent;
-  border-bottom: 16px solid transparent;
+  border-left: 28px solid #FFF;
+  border-top: 14px solid transparent;
+  border-bottom: 14px solid transparent;
 }
 
 .forwardButton {
@@ -74,7 +79,7 @@
 }
 
 .playPauseButtonInner {
-  height: 30px;
+  height: 28px;
   width: 30px;
   overflow: hidden;
   position: relative;
@@ -106,8 +111,8 @@
   width: 0;
   height: 0;
   border-right: 30px solid #333;
-  border-top: 15px solid transparent;
-  border-bottom: 15px solid transparent;
+  border-top: 14px solid transparent;
+  border-bottom: 14px solid transparent;
   transition: transform 0.25s ease;
 }
 
@@ -145,6 +150,7 @@
   background-color: #4A4A4A;
   height: 100%;
   width: 0;
+  border-right: 2px solid #EBB71F;
   will-change: width;
 }
 

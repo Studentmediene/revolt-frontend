@@ -20,13 +20,28 @@ import ShowPreviewList from 'components/ShowPreviewList';
 export class Shows extends React.Component { // eslint-disable-line react/prefer-stateless-function
   componentWillMount() {
     this.props.loadShow();
+    this.state = {
+      hideArchivedShows: true,
+    };
+    this.toggleArchivedShows = this.toggleArchivedShows.bind(this);
+  }
+
+  toggleArchivedShows(event) {
+    event.preventDefault();
+    this.setState((prevState) => (
+      { hideArchivedShows: !prevState.hideArchivedShows }
+    ));
   }
 
   render() {
     let showPreviewList = null;
 
     if (this.props.shows !== false) {
-      showPreviewList = <ShowPreviewList shows={this.props.shows} />;
+      showPreviewList = (<ShowPreviewList
+        shows={this.props.shows}
+        hideArchivedShows={this.state.hideArchivedShows}
+        toggleArchivedShows={this.toggleArchivedShows}
+      />);
     }
 
     return (

@@ -5,12 +5,11 @@
  */
 
 import React from 'react';
-import styles from './styles.css';
 
 export default class About extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <div className={styles.about}>
+      <div>
         <h1>Om Radio Revolt</h1>
         <p>Radio Revolt er en ikke-kommersiell studentdrevet radiokanal som gir deg det nyeste innen musikk, underholdning og studentnyheter fra Trondheim. Kanalen sender nytt innhold hver dag og sammarbeider også mye med studentavisa Under Dusken. Radio Revolts mål er å være et alternativt tilbud, ikke bare til studenter, men til alle som vil høre radio laget av studenter. Vi har en utfordrende musikkprofil, med intervjuer av aktuelle artister og spilling av mange lokale band.</p>
         <h2>Historie</h2>
