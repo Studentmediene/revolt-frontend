@@ -9,13 +9,10 @@ import { getSendeplan } from 'utils/api';
 
 // Individual exports for testing
 export function* loadSendeplan(action) {
-  console.log('Saga: Load sendeplan initiated for: ' + String(action.weekDay))
   try {
     const result = yield call(getSendeplan, action.year, action.month + 1, action.day);
-    console.log('Saga: Load sendeplan succesful for: ' + String(action.weekDay))
     yield put(sendeplanSuccess(result, action.weekDay));
   } catch (error) {
-  console.log('Saga: Load sendeplan succesful for: ' + String(action.weekDay))
     yield put(sendeplanError());
   }
 }

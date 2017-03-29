@@ -4,7 +4,7 @@
  *
  */
 
-import { fromJS, Map } from 'immutable';
+import { fromJS } from 'immutable';
 import {
   LOAD_SENDEPLAN_PENDING,
   LOAD_SENDEPLAN_SUCCESS,
@@ -24,8 +24,6 @@ function sendeplanReducer(state = initialState, action) {
       .set('loading', true)
       .set('error', false);
     case LOAD_SENDEPLAN_SUCCESS:
-      console.log('Saving sendeplan for: ' + String(action.weekDay))
-      console.log({...state.get('sendeplan')})
       return state
       .set('loading', false)
       .set('error', false)

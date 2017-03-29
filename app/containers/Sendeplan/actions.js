@@ -11,7 +11,6 @@
  } from './constants';
 
  export function loadSendeplan(year, month, day, weekDay) {
-   console.log('Loading sendeplan for: ' + String(weekDay))
    return {
      type: LOAD_SENDEPLAN_PENDING,
      year,

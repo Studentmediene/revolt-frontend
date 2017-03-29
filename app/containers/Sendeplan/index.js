@@ -21,7 +21,6 @@ export class Sendeplan extends React.Component { // eslint-disable-line react/pr
 
 
   componentWillMount() {
-    console.log('Loading sendeplans');
     const dayOfWeek = moment().day(1);
     this.props.loadSendeplanDay(dayOfWeek.year(), dayOfWeek.month(), dayOfWeek.date(), 'monday');
     dayOfWeek.add(1, 'days');
@@ -138,6 +137,7 @@ export class Sendeplan extends React.Component { // eslint-disable-line react/pr
 
 Sendeplan.propTypes = {
   loadSendeplanDay: React.PropTypes.func.isRequired,
+  sendeplan: React.PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
