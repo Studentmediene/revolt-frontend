@@ -209,7 +209,7 @@
     "soundmanager2": "^2.97.20150601-a",
     "uuid": "2.0.2",
     "warning": "3.0.0",
-    "whatwg-fetch": "2.0.1"
+    "whatwg-fetch": "2.0.2"
   },
   "devDependencies": {
     "babel-cli": "6.11.4",
