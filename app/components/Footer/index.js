@@ -18,7 +18,7 @@ function Footer() {
         <p>Uautorisert lenking, videreføring eller kopiering er ulovlig.</p>
         <br />
         <p>Radioredaktør: Peter Wallumrød</p>
-        <p>Ansvarlig redaktør: Anette Sivertstøl</p>
+        <p>Ansvarlig redaktør: Håkon Pedersen</p>
         <br />
         <p>
           <a className={styles.footerLink} href="mailto:redaktor@radiorevolt.no">
