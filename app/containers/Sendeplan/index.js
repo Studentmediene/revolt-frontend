@@ -56,9 +56,18 @@ export class Sendeplan extends React.Component { // eslint-disable-line react/pr
           sendeliste.push('Ikke tilgjengelig');
         }
       }
+      const nowHour = String(moment().format('HH'));
+      const nowDate = String(moment().date());
+      // 8, 10 = date and 11, 13 = hour
       for (let i = 0; i < json.length; i++) {
         for (let j = 0; j < findDiff(json[i]); j++) {
-          sendeliste.push(json[i].title);
+          if (nowHour > json[i].starttime.slice(11, 13) &&
+              nowHour < json[i].endtime.slice(11, 13) &&
+              nowDate === json[i].starttime.slice(8, 10)) {
+            sendeliste.push('*' + json[i].title);
+          } else {
+            sendeliste.push(json[i].title);
+          }
         }
       }
     }
@@ -71,13 +80,24 @@ export class Sendeplan extends React.Component { // eslint-disable-line react/pr
       return diff;
     }
 
+    if (this.props.sendeplan.monday === undefined ||
+    this.props.sendeplan.tuesday === undefined ||
+    this.props.sendeplan.wednesday === undefined ||
+    this.props.sendeplan.thursday === undefined ||
+    this.props.sendeplan.friday === undefined ||
+    this.props.sendeplan.saturday === undefined ||
+    this.props.sendeplan.sunday === undefined) {
+      return (
+        <p> Sendeplanen lastes inn... </p>
+      );
+    }
     makeSendeliste(this.props.sendeplan.monday);
     makeSendeliste(this.props.sendeplan.tuesday);
     makeSendeliste(this.props.sendeplan.wednesday);
     makeSendeliste(this.props.sendeplan.thursday);
     makeSendeliste(this.props.sendeplan.friday);
     makeSendeliste(this.props.sendeplan.saturday);
-    makeSendeliste(this.props.sendeplan.sunday);
+    makeSendeliste(this.props.sendeplan.sunday)
 
     times = times.map((time) =>
       <td key={time}>{time}</td>
@@ -100,7 +120,7 @@ export class Sendeplan extends React.Component { // eslint-disable-line react/pr
     const sun = makeSendelisteComponents(6, sendeliste);
 
     const row = times.map((time, index) =>
-      <tr>
+      <tr key={times.index}>
       {times[index]}
       {mon[index]}
       {tue[index]}
@@ -114,7 +134,7 @@ export class Sendeplan extends React.Component { // eslint-disable-line react/pr
 
     return (
       <div className={styles.sendeplan}>
-        <h2>Sendeplanen for Radio Revolt</h2>
+        <h2>Sendeplan for Radio Revolt</h2>
         <table>
           <tbody>
             <tr>
