@@ -1,20 +1,24 @@
-.sendeplan {
-  margin-left: -242px;
-}
-
-th,
 td {
   border: 1px black solid;
-  padding: 15px;
-  text-align: left;
+  padding: 8px;
+  text-align: center;
 }
 
 th {
+  border: 1px black solid;
+  padding: 3px;
+  text-align: center;
   background-color: #ECB61C;
   color: white;
 }
 
 h2 {
   text-align: center;
-  margin-left: 210px;
+}
+
+table {
+  font-size: 85%;
+  position: relative;
+  left: 0;
+  right: 0;
 }

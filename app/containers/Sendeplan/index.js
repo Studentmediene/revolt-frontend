@@ -56,18 +56,19 @@ export class Sendeplan extends React.Component { // eslint-disable-line react/pr
           sendeliste.push('Ikke tilgjengelig');
         }
       }
-      const nowHour = String(moment().format('HH'));
-      const nowDate = String(moment().date());
+      // const nowHour = String(moment().format('HH'));
+      // const nowDate = String(moment().date());
       // 8, 10 = date and 11, 13 = hour
       for (let i = 0; i < json.length; i++) {
         for (let j = 0; j < findDiff(json[i]); j++) {
-          if (nowHour > json[i].starttime.slice(11, 13) &&
+          /* if (nowHour > json[i].starttime.slice(11, 13) &&
               nowHour < json[i].endtime.slice(11, 13) &&
               nowDate === json[i].starttime.slice(8, 10)) {
-            sendeliste.push('*' + json[i].title);
+            sendeliste.push(`* ${json[i].title}`);
           } else {
             sendeliste.push(json[i].title);
-          }
+          } */
+          sendeliste.push(json[i].title);
         }
       }
     }
@@ -97,7 +98,7 @@ export class Sendeplan extends React.Component { // eslint-disable-line react/pr
     makeSendeliste(this.props.sendeplan.thursday);
     makeSendeliste(this.props.sendeplan.friday);
     makeSendeliste(this.props.sendeplan.saturday);
-    makeSendeliste(this.props.sendeplan.sunday)
+    makeSendeliste(this.props.sendeplan.sunday);
 
     times = times.map((time) =>
       <td key={time}>{time}</td>
