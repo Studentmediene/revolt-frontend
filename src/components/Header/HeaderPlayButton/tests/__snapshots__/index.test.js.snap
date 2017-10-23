@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<HeaderPlayButton /> renders correctly 1`] = `
+<div
+  className="container"
+>
+  <button
+    className="playButton"
+    onClick={[Function]}
+    onKeyPress={[Function]}
+  >
+    <div
+      className="playIcon"
+    >
+      <div
+        className="playIconInner"
+      />
+    </div>
+    <div
+      className="buttonText"
+    >
+      Lytt direkte!
+    </div>
+  </button>
+</div>
+`;

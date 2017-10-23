@@ -2,16 +2,18 @@ language: node_js
 sudo: true
 dist: xenial
 node_js:
-  - "8.3"
+- '8.3'
 script: npm run build
 before_install:
-  - export CHROME_BIN=/usr/bin/google-chrome
-  - export DISPLAY=:99.0
-  - sudo apt-get update
-  - sudo apt-get install -y libappindicator1 fonts-liberation
-  - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  - sudo dpkg -i google-chrome*.deb
-  - sh -e /etc/init.d/xvfb start
+- export CHROME_BIN=/usr/bin/google-chrome
+- export DISPLAY=:99.0
+- sudo apt-get update
+- sudo apt-get install -y libappindicator1 fonts-liberation
+- wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+- sudo dpkg -i google-chrome*.deb
+- sh -e /etc/init.d/xvfb start
 notifications:
   email:
     on_failure: change
+  slack:
+    secure: KoGNFUnoDzwPxBV8WnXU+XoihHhNQGkspYOvgnSZha+Ta6+nFbIiHai1K/F0QddT43aElQk9ko7nL5aLO2GTQzlBvgmJIYniQznurhe0FLBttGWqj7A/PjfVuyF6MlBYk62fP0zKT/KBDAU1jr4ox00GCkbFHxHle0aeeDI+mD7xZV8ImB4fr6f9OI65WpLQrNWRPYFfEuYN0EPxq4MaBv3f8CGJtXL8+VCN2gZcqVDA4UEjHQ9QwWKhUdLxeRyD9fH5h13TxG+84UXHVtKRoYolj1uruqur0NrS+5lj+JZM1ZBmvFvYnvDbC0kYOR+T1A0lD4pr0Wnz++nlafz6MxGhn1bgcxOwJogvOv4nnZRaBVgYVRMCe1RBlu8hQvsrdsqGbXEcckdlJWeCzfvEs3yuf1UOcvA44WLsGLqicwtORXktiRjR7CpL2JnoTNV5xyzC53rfDz3jbS5QhrdLa/y047JgpC5xnAnJEj6d53mmQqY7I4BOaxLcovSqcNsqoI1LdhVCNPVYqQttcgQuCf3IDXwW7v+5OKs9Q+dYxqwxll4/g3C86rJtNZFUz8ybVc46WyK+8ddbVkFj1AD0cIVwqN7jlUEaPDKgAf67txeQeE7+05a7cWUafQxgx1153p02r9/UL98cw/OjLsS/zMS9SnqrTv+E5+8twHYwwSU=

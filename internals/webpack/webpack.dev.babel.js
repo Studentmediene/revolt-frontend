@@ -25,8 +25,9 @@ module.exports = require('./webpack.base.babel')({
   // Add hot reloading in development
   entry: [
     'eventsource-polyfill', // Necessary for hot reloading with IE
+    'whatwg-fetch', // fetch polyfill
     'webpack-hot-middleware/client',
-    path.join(process.cwd(), 'app/app.js'), // Start with app/app.js
+    path.join(process.cwd(), 'src/index.js'), // Start with src/index.js
   ],
 
   // Don't use hashes in dev mode for better performance
@@ -168,7 +169,7 @@ function dependencyHandlers() {
  */
 function templateContent() {
   const html = fs
-    .readFileSync(path.resolve(process.cwd(), 'app/index.html'))
+    .readFileSync(path.resolve(process.cwd(), 'src/index.html'))
     .toString();
 
   if (!dllPlugin) {

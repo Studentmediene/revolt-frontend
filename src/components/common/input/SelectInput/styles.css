@@ -1,0 +1,15 @@
+.selectInput { /* stylelint-disable */
+  margin-bottom: 20px;
+}
+
+select {
+  border: 1px solid #AAA;
+  border-radius: 3px;
+  padding: 5px;
+  width: 20rem;
+}
+
+.label {
+  font-weight: bold;
+  display: block;
+}

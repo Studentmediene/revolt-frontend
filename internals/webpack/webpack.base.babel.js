@@ -104,7 +104,7 @@ module.exports = options => ({
     }),
   ]),
   resolve: {
-    modules: ['app', 'node_modules'],
+    modules: ['src', 'node_modules'],
     extensions: ['.js', '.jsx', '.json'],
     mainFields: ['module', 'main'],
   },

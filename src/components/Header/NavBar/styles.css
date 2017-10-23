@@ -1,0 +1,41 @@
+.navbarList {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  margin: 1em 0;
+  padding: 0;
+  font-size: 1.3em;
+}
+
+.navbarItem {
+  list-style: none;
+  display: inline;
+  text-align: center;
+  padding-left: 1.5em;
+}
+
+.navbarItem:first-child {
+  padding-left: 0;
+}
+
+.navbarItem:hover {
+  text-decoration: underline;
+}
+
+.navbarLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Vertical navbar for very small displays */
+@media (max-width: 300px) {
+  .navbarList {
+    flex-direction: column;
+    margin: 0;
+  }
+
+  .navbarItem {
+    padding-top: 0.5em;
+    padding-left: 0;
+  }
+}

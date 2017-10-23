@@ -1,0 +1,4 @@
+.showForm {
+  display: flex;
+  flex-direction: column;
+}

@@ -1,0 +1,19 @@
+.textAreaInputWrapper {  /* stylelint-disable */
+  margin-bottom: 20px;
+}
+
+.textAreaInput {
+  font-family: inherit;
+  font-size: inherit;
+  display:block;
+  border: 1px solid #AAA;
+  border-radius: 3px;
+	padding: 5px;
+  width: 20rem;
+  height: auto;
+}
+
+.label {
+  font-weight: bold;
+  display:block;
+}

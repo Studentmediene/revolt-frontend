@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Logo /> renders correctly 1`] = `
+<Link
+  replace={false}
+  to="/"
+>
+  <img
+    alt="Logo"
+    className="logo"
+    src="RR_logo.png"
+  />
+</Link>
+`;

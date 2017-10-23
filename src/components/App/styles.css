@@ -1,0 +1,28 @@
+.container {
+  margin-top: 1em;
+  color: #111;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.content {
+  width: 80%;
+  margin: 0 auto;
+}
+
+@media (min-width: 600px) {
+  .content {
+    width: 70%;
+  }
+}
+
+@media (min-width: 1100px) {
+  .content {
+    width: 60%;
+  }
+}
+
+@media (min-width: 1500px) {
+  .content {
+    width: 50%;
+  }
+}

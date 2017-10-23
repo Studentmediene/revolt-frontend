@@ -1,0 +1,37 @@
+.activeShows {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.archivedShowsButton {
+  font-size: 24px;
+}
+
+.arrowDown {
+  width: 20px;
+  transition: 100ms linear all;
+  transform: rotate(90deg);
+}
+
+.arrowLeft {
+  width: 20px;
+  transition: 100ms linear all;
+}
+
+.archivedShowsButton:hover {
+  cursor: pointer;
+}
+
+.archivedShowsVisible {
+  display: flex;
+  flex-wrap: wrap;
+  height: auto;
+  justify-content: space-around;
+}
+
+.archivedShowsHidden {
+  height: 0;
+  overflow: hidden;
+}

@@ -1,0 +1,15 @@
+.checkboxWrapper { /* stylelint-disable */
+  margin-bottom: 10px;
+}
+
+.checkboxInput {
+  margin-right: 5px;
+}
+.checkboxInput:hover {
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.checkboxLabel:hover {
+  cursor: pointer;
+}

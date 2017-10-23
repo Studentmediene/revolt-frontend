@@ -8,7 +8,10 @@ const OfflinePlugin = require('offline-plugin');
 
 module.exports = require('./webpack.base.babel')({
   // In production, we skip all hot-reloading stuff
-  entry: [path.join(process.cwd(), 'app/app.js')],
+  entry: [
+    'whatwg-fetch', // fetch polyfill
+    path.join(process.cwd(), 'src/index.js'),
+  ],
 
   // Utilize long-term caching by adding content hashes (not compilation hashes) to compiled assets
   output: {
@@ -71,7 +74,7 @@ module.exports = require('./webpack.base.babel')({
 
     // Minify and optimize the index.html
     new HtmlWebpackPlugin({
-      template: 'app/index.html',
+      template: 'src/index.html',
       minify: {
         removeComments: true,
         collapseWhitespace: true,

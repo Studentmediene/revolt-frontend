@@ -8,6 +8,7 @@ const addDevMiddlewares = (app, webpackConfig) => {
   const webpack = require('webpack');
   const webpackDevMiddleware = require('webpack-dev-middleware');
   const webpackHotMiddleware = require('webpack-hot-middleware');
+  const proxy = require('http-proxy-middleware');
   const compiler = webpack(webpackConfig);
   const middleware = webpackDevMiddleware(compiler, {
     noInfo: true,
@@ -29,6 +30,10 @@ const addDevMiddlewares = (app, webpackConfig) => {
       res.sendFile(path.join(process.cwd(), pkg.dllPlugin.path, filename));
     });
   }
+
+  app.use('/api', proxy({ target: 'http://localhost:9000/' }));
+  app.use('/media', proxy({ target: 'http://localhost:8000/' }));
+  app.use('/graphql', proxy({ target: 'http://localhost:8000/' }));
 
   app.get('*', (req, res) => {
     fs.readFile(path.join(compiler.outputPath, 'index.html'), (err, file) => {

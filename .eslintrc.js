@@ -18,6 +18,7 @@ module.exports = {
     sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
+      experimentalObjectRestSpread: true,
     },
   },
   rules: {
@@ -30,11 +31,15 @@ module.exports = {
     ],
     'linebreak-style': ['error', 'unix'],
     'no-console': 'warn',
+    'jsx-a11y/no-onchange': 'off',
   },
   settings: {
+    react: {
+      version: '15.4.2',
+    },
     'import/resolver': {
       'babel-module': {},
     },
-    'import/ignore': ['.css$', '.png$', 'node_modules/*'],
+    'import/ignore': ['.css$', '.png$', '.svg$', 'node_modules/*'],
   },
 };

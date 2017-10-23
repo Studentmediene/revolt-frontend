@@ -1,0 +1,17 @@
+.textFieldWrapper {
+  margin-bottom: 20px;
+}
+
+.textField {
+  margin-bottom: 10px;
+  display: block;
+  border: 1px solid #AAA;
+  border-radius: 3px;
+  padding: 5px;
+  width: 20rem;
+}
+
+.label {
+  font-weight: bold;
+  display: block;
+}
