@@ -19,6 +19,12 @@ import styles from './styles.css';
 
 export class Sendeplan extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      showAll: false,
+    };
+  }
 
   componentWillMount() {
     const dayOfWeek = moment().day(1);
@@ -35,6 +41,12 @@ export class Sendeplan extends React.Component { // eslint-disable-line react/pr
     this.props.loadSendeplanDay(dayOfWeek.year(), dayOfWeek.month(), dayOfWeek.date(), 'saturday');
     dayOfWeek.add(1, 'days');
     this.props.loadSendeplanDay(dayOfWeek.year(), dayOfWeek.month(), dayOfWeek.date(), 'sunday');
+  }
+
+  makeSendePlanWeek() {
+    this.setState({
+      showAll: true,
+    });
   }
 
   render() {
@@ -56,23 +68,16 @@ export class Sendeplan extends React.Component { // eslint-disable-line react/pr
           sendeliste.push('Ikke tilgjengelig');
         }
       }
-      // const nowHour = String(moment().format('HH'));
-      // const nowDate = String(moment().date());
-      // 8, 10 = date and 11, 13 = hour
       for (let i = 0; i < json.length; i++) {
         for (let j = 0; j < findDiff(json[i]); j++) {
-          /* if (nowHour > json[i].starttime.slice(11, 13) &&
-              nowHour < json[i].endtime.slice(11, 13) &&
-              nowDate === json[i].starttime.slice(8, 10)) {
-            sendeliste.push(`* ${json[i].title}`);
-          } else {
-            sendeliste.push(json[i].title);
-          } */
           sendeliste.push(json[i].title);
         }
       }
     }
 
+    /* Finds the difference in hours of the start time and end time of a show
+    and returns the difference so that it can be added it into the sendeplan
+    this amount of times. */
     function findDiff(json) {
       let diff = Number(json.endtime.slice(11, 13)) - Number(json.starttime.slice(11, 13));
       if (Number(json.endtime.slice(14, 16)) > Number(json.starttime.slice(14, 16))) {
@@ -133,24 +138,52 @@ export class Sendeplan extends React.Component { // eslint-disable-line react/pr
       </tr>
     );
 
+    const today = moment().day() - 1;
+    const now = makeSendelisteComponents(today, sendeliste);
+    const rowToday = times.map((time, index) =>
+      <tr key={times.index}>
+      {times[index]}
+      {now[index]}
+      </tr>
+    );
+
     return (
       <div className={styles.sendeplan}>
         <h2>Sendeplan for Radio Revolt</h2>
-        <table>
-          <tbody>
-            <tr>
-              <th>Tid</th>
-              <th>Mandag</th>
-              <th>Tirsdag</th>
-              <th>Onsdag</th>
-              <th>Torsdag</th>
-              <th>Fredag</th>
-              <th>Lørdag</th>
-              <th>Søndag</th>
-            </tr>
-          {row}
-          </tbody>
-        </table>
+        { this.state.showAll ?
+          <div>
+            <table>
+              <tbody>
+                <tr>
+                  <th>Tid</th>
+                  <th>Mandag</th>
+                  <th>Tirsdag</th>
+                  <th>Onsdag</th>
+                  <th>Torsdag</th>
+                  <th>Fredag</th>
+                  <th>Lørdag</th>
+                  <th>Søndag</th>
+                </tr>
+              {row}
+              </tbody>
+            </table>
+          </div>
+      :
+          <div>
+            <table>
+              <tbody>
+                <tr>
+                  <th>Tid</th>
+                  <th>Program</th>
+                </tr>
+              {rowToday}
+              </tbody>
+            </table>
+            <button onClick={() => this.makeSendePlanWeek()}>
+            Se program for hele uken
+            </button>
+          </div>
+      }
       </div>
     );
   }
@@ -174,3 +207,25 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sendeplan);
+/*
+return (
+  <div className={styles.sendeplan}>
+    <h2>Sendeplan for Radio Revolt</h2>
+    <table>
+      <tbody>
+        <tr>
+          <th>Tid</th>
+          <th>Mandag</th>
+          <th>Tirsdag</th>
+          <th>Onsdag</th>
+          <th>Torsdag</th>
+          <th>Fredag</th>
+          <th>Lørdag</th>
+          <th>Søndag</th>
+        </tr>
+      {row}
+      </tbody>
+    </table>
+  </div>
+);
+*/
