@@ -18,7 +18,7 @@ import {
 } from 'components/Player/actions';
 import Episode from 'components/Episode';
 import PostPreview from 'components/PostPreview';
-import ShowDetailHeader from 'components/ShowDetailHeader';
+import ShowHeader from 'components/Show/ShowHeader';
 
 export class Show extends React.Component {
   componentWillMount() {
@@ -73,7 +73,7 @@ export class Show extends React.Component {
 
     return (
       <div>
-        <ShowDetailHeader show={this.props.show} />
+        <ShowHeader show={this.props.show} />
         <div>{elements}</div>
       </div>
     );

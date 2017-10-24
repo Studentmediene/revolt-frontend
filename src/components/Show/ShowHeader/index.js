@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import styles from './styles.css';
 
-const ShowDetailHeader = ({ show: { title, content, logoImageUrl } }) => (
+const ShowHeader = ({ show: { title, content, logoImageUrl } }) => (
   <div className={styles.container}>
     <div className={styles.showInfo}>
       <img className={styles.image} src={logoImageUrl} alt={title} />
@@ -15,8 +15,8 @@ const ShowDetailHeader = ({ show: { title, content, logoImageUrl } }) => (
   </div>
 );
 
-ShowDetailHeader.propTypes = {
+ShowHeader.propTypes = {
   show: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
 };
 
-export default ShowDetailHeader;
+export default ShowHeader;
