@@ -18,9 +18,18 @@ export const episodeFormat = ({ id, showName, createdAt, lead }) => ({
   lead,
 });
 
-export const postFormat = ({ id, image, title, slug, lead, content }) => ({
+export const postFormat = ({
+  id,
+  image,
+  publishAt,
+  title,
+  slug,
+  lead,
+  content,
+}) => ({
   id,
   coverPhotoUrl: `${MEDIA_URL}${image}`,
+  publishAt,
   title,
   slug,
   lead,

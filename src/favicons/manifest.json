@@ -8,6 +8,6 @@
 		}
 	],
 	"theme_color": "#ecb61c",
-	"start_url": "http:\/\/radiorevolt.no",
+	"start_url": "https:\/\/radiorevolt.no",
 	"display": "standalone"
 }

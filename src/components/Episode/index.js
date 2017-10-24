@@ -1,18 +1,8 @@
 import React from 'react';
-import moment from 'moment';
+
+import { getNormalizedDateString } from 'utils/dateUtils';
 
 import styles from './styles.css';
-
-const getNormalizedDateString = dateString => {
-  const paddedString = i => (i < 10 ? `0${i}` : `${i}`);
-
-  const date = moment(dateString);
-  const year = date.year();
-  const month = date.month() + 1;
-  const day = date.date();
-
-  return `${paddedString(day)}.${paddedString(month)}.${year}`;
-};
 
 const Episode = props => {
   if (props.digasBroadcastId === 0) {
@@ -35,7 +25,7 @@ const Episode = props => {
       </div>
       <div className={styles.meta}>
         <div className={styles.title}>
-          {props.showName} {getNormalizedDateString(props.createdAt)}
+          {props.showName} {getNormalizedDateString(props.publishAt)}
         </div>
         <div className={styles.lead}>{props.lead}</div>
       </div>
@@ -49,6 +39,7 @@ Episode.propTypes = {
   title: React.PropTypes.string,
   showName: React.PropTypes.string,
   createdAt: React.PropTypes.string,
+  publishAt: React.PropTypes.string.isRequired,
   lead: React.PropTypes.string,
   podcastUrl: React.PropTypes.string,
   playOnDemand: React.PropTypes.func,

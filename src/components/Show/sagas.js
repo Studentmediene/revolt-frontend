@@ -18,6 +18,7 @@ export function* loadShow(slug) {
       name,
       image,
       content,
+      lead,
       archived,
       episodes {
         id,

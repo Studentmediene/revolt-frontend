@@ -1,9 +1,3 @@
-/*
- *
- * Show
- *
- */
-
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -27,7 +21,6 @@ import PostPreview from 'components/PostPreview';
 import ShowDetailHeader from 'components/ShowDetailHeader';
 
 export class Show extends React.Component {
-  // eslint-disable-line react/prefer-stateless-function
   componentWillMount() {
     this.props.loadShow(this.props.match.params.slug);
   }
@@ -42,13 +35,13 @@ export class Show extends React.Component {
     }
     const episodes = this.props.episodes.map(e => ({
       ...e,
-      date: e.createdAt,
+      date: e.publishAt,
       episode: true,
     }));
 
     const posts = this.props.posts.map(p => ({
       ...p,
-      date: p.createdAt,
+      date: p.publishAt,
       episode: false,
     }));
 
