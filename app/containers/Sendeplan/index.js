@@ -4,6 +4,12 @@
  *
  */
 
+/* TODO
+ * Fjerne nattmusikk DONE
+ * Resize day og week
+ * Move button
+ * Fjerne ikke tilgjengelig??
+*/
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -52,7 +58,7 @@ export class Sendeplan extends React.Component { // eslint-disable-line react/pr
   render() {
     // Creates an array of all time-stamps for the table.
     let times = [];
-    for (let i = 0; i < 24; i++) {
+    for (let i = 7; i < 24; i++) {
       if (i < 10) {
         times.push(`0${i}:00`);
       } else {
@@ -70,13 +76,15 @@ export class Sendeplan extends React.Component { // eslint-disable-line react/pr
       }
       for (let i = 0; i < json.length; i++) {
         for (let j = 0; j < findDiff(json[i]); j++) {
-          sendeliste.push(json[i].title);
+          if (json[i].title !== 'Nattmusikk') {
+            sendeliste.push(json[i].title);
+          }
         }
       }
     }
 
     /* Finds the difference in hours of the start time and end time of a show
-    and returns the difference so that it can be added it into the sendeplan
+    and returns the difference so that it can be added into the sendeplan
     this amount of times. */
     function findDiff(json) {
       let diff = Number(json.endtime.slice(11, 13)) - Number(json.starttime.slice(11, 13));
@@ -113,7 +121,7 @@ export class Sendeplan extends React.Component { // eslint-disable-line react/pr
       if (!sendeplan) {
         return null;
       }
-      return sendeplan.slice(daynumber * 24, (daynumber + 1) * 24).map((program) =>
+      return sendeplan.slice(daynumber * 17, (daynumber + 1) * 17).map((program) =>
         <td key={program.index}>{program}</td>
     ); }
 
@@ -152,7 +160,7 @@ export class Sendeplan extends React.Component { // eslint-disable-line react/pr
         <h2>Sendeplan for Radio Revolt</h2>
         { this.state.showAll ?
           <div>
-            <table>
+            <table id="todayTable">
               <tbody>
                 <tr>
                   <th>Tid</th>
@@ -170,7 +178,10 @@ export class Sendeplan extends React.Component { // eslint-disable-line react/pr
           </div>
       :
           <div>
-            <table>
+            <button onClick={() => this.makeSendePlanWeek()}>
+            Klikk her for å se program for hele uken
+            </button>
+            <table id="weekTable">
               <tbody>
                 <tr>
                   <th>Tid</th>
@@ -179,9 +190,6 @@ export class Sendeplan extends React.Component { // eslint-disable-line react/pr
               {rowToday}
               </tbody>
             </table>
-            <button onClick={() => this.makeSendePlanWeek()}>
-            Se program for hele uken
-            </button>
           </div>
       }
       </div>
