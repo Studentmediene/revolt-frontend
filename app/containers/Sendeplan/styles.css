@@ -1,6 +1,6 @@
 td {
   border: 1px black solid;
-  padding: 8px;
+  padding: 6px;
   text-align: center;
 }
 
@@ -21,4 +21,15 @@ table {
   position: relative;
   left: 0;
   right: 0;
+  width: 55%;
+}
+
+button {
+  border: 1px black solid;
+  padding: 10px;
+  border-radius: 2px;
+}
+
+button:hover {
+  cursor: pointer;
 }

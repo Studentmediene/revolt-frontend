@@ -7,7 +7,7 @@
 /* TODO
  * Fjerne nattmusikk DONE
  * Resize day og week
- * Move button
+ * Move button DONE
  * Fjerne ikke tilgjengelig??
 */
 import React from 'react';
@@ -163,7 +163,7 @@ export class Sendeplan extends React.Component { // eslint-disable-line react/pr
             <table id="todayTable">
               <tbody>
                 <tr>
-                  <th>Tid</th>
+                  <th id="test">Tid</th>
                   <th>Mandag</th>
                   <th>Tirsdag</th>
                   <th>Onsdag</th>
@@ -176,11 +176,12 @@ export class Sendeplan extends React.Component { // eslint-disable-line react/pr
               </tbody>
             </table>
           </div>
-      :
+          :
           <div>
             <button onClick={() => this.makeSendePlanWeek()}>
             Klikk her for å se program for hele uken
             </button>
+            <h3> Sendeplanen for i dag: </h3>
             <table id="weekTable">
               <tbody>
                 <tr>
