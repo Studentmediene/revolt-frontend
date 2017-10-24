@@ -3,13 +3,6 @@
  * Sendeplan
  *
  */
-
-/* TODO
- * Fjerne nattmusikk DONE
- * Resize day og week
- * Move button DONE
- * Fjerne ikke tilgjengelig??
-*/
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -216,25 +209,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sendeplan);
-/*
-return (
-  <div className={styles.sendeplan}>
-    <h2>Sendeplan for Radio Revolt</h2>
-    <table>
-      <tbody>
-        <tr>
-          <th>Tid</th>
-          <th>Mandag</th>
-          <th>Tirsdag</th>
-          <th>Onsdag</th>
-          <th>Torsdag</th>
-          <th>Fredag</th>
-          <th>Lørdag</th>
-          <th>Søndag</th>
-        </tr>
-      {row}
-      </tbody>
-    </table>
-  </div>
-);
-*/
