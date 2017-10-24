@@ -1,10 +1,5 @@
-/*
- *
- * FrontPage
- *
- */
-
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { withRouter } from 'react-router-dom';
@@ -39,13 +34,10 @@ export class FrontPage extends React.Component {
 }
 
 FrontPage.propTypes = {
-  posts: React.PropTypes.oneOfType([
-    React.PropTypes.bool,
-    React.PropTypes.array,
-  ]),
-  loading: React.PropTypes.bool,
-  error: React.PropTypes.bool,
-  loadPosts: React.PropTypes.func,
+  posts: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
+  loading: PropTypes.bool,
+  error: PropTypes.bool,
+  loadPosts: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({

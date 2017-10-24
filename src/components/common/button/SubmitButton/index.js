@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import styles from './styles.css';
 
@@ -14,9 +15,9 @@ const SubmitButton = props => (
 );
 
 SubmitButton.propTypes = {
-  onClick: React.PropTypes.func.isRequired,
-  disabled: React.PropTypes.bool,
-  children: React.PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
+  children: PropTypes.string.isRequired,
 };
 
 export default SubmitButton;

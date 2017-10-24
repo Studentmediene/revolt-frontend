@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import styles from './styles.css';
@@ -10,8 +11,8 @@ const LinkButton = props => (
 );
 
 LinkButton.propTypes = {
-  to: React.PropTypes.string.isRequired,
-  text: React.PropTypes.string.isRequired,
+  to: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
 };
 
 export default LinkButton;

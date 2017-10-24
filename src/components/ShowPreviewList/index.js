@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Show from 'components/ShowPreview';
 
 import styles from './styles.css';
@@ -47,9 +48,9 @@ const ShowPreviewList = props => {
 };
 
 ShowPreviewList.propTypes = {
-  shows: React.PropTypes.array.isRequired,
-  hideArchivedShows: React.PropTypes.bool.isRequired,
-  toggleArchivedShows: React.PropTypes.func.isRequired,
+  shows: PropTypes.array.isRequired,
+  hideArchivedShows: PropTypes.bool.isRequired,
+  toggleArchivedShows: PropTypes.func.isRequired,
 };
 
 export default ShowPreviewList;

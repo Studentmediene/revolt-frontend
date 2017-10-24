@@ -1,10 +1,5 @@
-/*
- *
- * ShowAdmin
- *
- */
-
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
@@ -141,17 +136,14 @@ export class ShowAdmin extends React.Component {
 }
 
 ShowAdmin.propTypes = {
-  onAddShow: React.PropTypes.func.isRequired,
-  dispatchDigasIdChange: React.PropTypes.func.isRequired,
-  clearDigasPodcastUrl: React.PropTypes.func.isRequired,
-  loadDigasShows: React.PropTypes.func.isRequired,
-  digasPodcastUrl: React.PropTypes.string,
-  digasLoading: React.PropTypes.bool,
-  digasError: React.PropTypes.bool,
-  digasShows: React.PropTypes.oneOfType([
-    React.PropTypes.bool,
-    React.PropTypes.array,
-  ]),
+  onAddShow: PropTypes.func.isRequired,
+  dispatchDigasIdChange: PropTypes.func.isRequired,
+  clearDigasPodcastUrl: PropTypes.func.isRequired,
+  loadDigasShows: PropTypes.func.isRequired,
+  digasPodcastUrl: PropTypes.string,
+  digasLoading: PropTypes.bool,
+  digasError: PropTypes.bool,
+  digasShows: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
 };
 
 ShowAdmin.defaultProps = {
