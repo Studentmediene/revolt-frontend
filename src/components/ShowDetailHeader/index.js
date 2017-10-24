@@ -3,17 +3,13 @@ import PropTypes from 'prop-types';
 
 import styles from './styles.css';
 
-const ShowDetailHeader = props => (
+const ShowDetailHeader = ({ show: { title, content, logoImageUrl } }) => (
   <div className={styles.container}>
     <div className={styles.showInfo}>
-      <img
-        className={styles.image}
-        src={props.show.logoImageUrl}
-        alt={props.show.title}
-      />
+      <img className={styles.image} src={logoImageUrl} alt={title} />
       <div className={styles.showText}>
-        <h2 className={styles.name}>{props.show.title}</h2>
-        <p className={styles.lead}>{props.show.lead}</p>
+        <h2 className={styles.title}>{title}</h2>
+        <div dangerouslySetInnerHTML={{ __html: content }} />
       </div>
     </div>
   </div>
