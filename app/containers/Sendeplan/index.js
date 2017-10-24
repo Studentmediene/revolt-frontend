@@ -153,10 +153,10 @@ export class Sendeplan extends React.Component { // eslint-disable-line react/pr
         <h2>Sendeplan for Radio Revolt</h2>
         { this.state.showAll ?
           <div>
-            <table id="todayTable">
+            <table>
               <tbody>
                 <tr>
-                  <th id="test">Tid</th>
+                  <th>Tid</th>
                   <th>Mandag</th>
                   <th>Tirsdag</th>
                   <th>Onsdag</th>
@@ -175,7 +175,7 @@ export class Sendeplan extends React.Component { // eslint-disable-line react/pr
             Klikk her for å se program for hele uken
             </button>
             <h3> Sendeplanen for i dag: </h3>
-            <table id="weekTable">
+            <table>
               <tbody>
                 <tr>
                   <th>Tid</th>

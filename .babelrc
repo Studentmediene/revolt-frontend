@@ -1,0 +1,35 @@
+{
+  "presets": [
+    ["env", {
+        "targets": {
+          "browsers": ["last 2 versions"],
+          "node": "current"
+        }
+      }
+    ],
+    "react"
+  ],
+  "plugins": [
+    ["module-resolver", {
+      "root": ["./src"]
+    }],
+    ["transform-runtime", {
+      "polyfill": true,
+      "regenerator": true
+    }],
+    "transform-class-properties",
+    "transform-object-rest-spread"
+  ],
+  "env": {
+    "production": {
+      "plugins": [
+        "transform-react-constant-elements",
+        "transform-react-inline-elements",
+        "transform-react-remove-prop-types"
+      ]
+    },
+    "development": {
+      "presets": ["react-hmre"]
+    }
+  }
+}

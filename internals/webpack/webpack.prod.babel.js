@@ -1,19 +1,16 @@
 // Important modules this config uses
 const path = require('path');
 const webpack = require('webpack');
+const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OfflinePlugin = require('offline-plugin');
 
-// PostCSS plugins
-const cssnext = require('postcss-cssnext');
-const postcssFocus = require('postcss-focus');
-const postcssReporter = require('postcss-reporter');
-
 module.exports = require('./webpack.base.babel')({
   // In production, we skip all hot-reloading stuff
   entry: [
-    path.join(process.cwd(), 'app/app.js'),
+    'whatwg-fetch', // fetch polyfill
+    path.join(process.cwd(), 'src/index.js'),
   ],
 
   // Utilize long-term caching by adding content hashes (not compilation hashes) to compiled assets
@@ -24,21 +21,38 @@ module.exports = require('./webpack.base.babel')({
 
   // We use ExtractTextPlugin so we get a seperate CSS file instead
   // of the CSS being in the JS and injected as a style tag
-  cssLoaders: ExtractTextPlugin.extract({
-    fallbackLoader: 'style-loader',
-    loader: 'css-loader?modules&-autoprefixer&importLoaders=1!postcss-loader',
+
+  cssRules: ExtractTextPlugin.extract({
+    fallback: require.resolve('style-loader'),
+    use: [
+      {
+        loader: require.resolve('css-loader'),
+        options: {
+          modules: true,
+          localIdentName: '[hash:base64:6]',
+          importLoaders: 1,
+        },
+      },
+      {
+        loader: require.resolve('postcss-loader'),
+        options: {
+          plugins: () => [
+            require('postcss-flexbugs-fixes'),
+            autoprefixer({
+              browsers: [
+                '>1%',
+                'last 4 versions',
+                'Firefox ESR',
+                'not ie < 9', // React doesn't support IE8 anyway
+              ],
+              flexbox: 'no-2009',
+            }),
+          ],
+        },
+      },
+    ],
   }),
 
-  // In production, we minify our CSS with cssnano
-  postcssPlugins: [
-    postcssFocus(),
-    cssnext({
-      browsers: ['last 2 versions', 'IE >= 10', 'ios_saf >= 8'],
-    }),
-    postcssReporter({
-      clearMessages: true,
-    }),
-  ],
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
@@ -51,9 +65,6 @@ module.exports = require('./webpack.base.babel')({
     // See http://mxs.is/googmv
     new webpack.optimize.OccurrenceOrderPlugin(true),
 
-    // Merge all duplicate modules
-    new webpack.optimize.DedupePlugin(),
-
     // Minify and optimize the JavaScript
     new webpack.optimize.UglifyJsPlugin({
       compress: {
@@ -63,7 +74,7 @@ module.exports = require('./webpack.base.babel')({
 
     // Minify and optimize the index.html
     new HtmlWebpackPlugin({
-      template: 'app/index.html',
+      template: 'src/index.html',
       minify: {
         removeComments: true,
         collapseWhitespace: true,

@@ -3,9 +3,6 @@ const pullAll = require('lodash/pullAll');
 const uniq = require('lodash/uniq');
 
 const ReactBoilerplate = {
-  // This refers to the react-boilerplate version this project is based on.
-  version: '3.0.0',
-
   /**
    * The DLL Plugin provides a dramatic speed increase to webpack build and hot module reloading
    * by caching the module metadata for all of our npm dependencies. We enable it by default
@@ -26,7 +23,6 @@ const ReactBoilerplate = {
         'cross-env',
         'express',
         'ip',
-        'minimist',
         'sanitize.css',
       ],
 
@@ -34,7 +30,7 @@ const ReactBoilerplate = {
        * Specify any additional dependencies here. We include core-js and lodash
        * since a lot of our dependencies depend on them and they get picked up by webpack.
        */
-      include: ['core-js', 'eventsource-polyfill', 'babel-polyfill', 'lodash'],
+      include: ['core-js', 'eventsource-polyfill', 'lodash'],
 
       // The path where the DLL manifest and bundle will get built
       path: resolve('../node_modules/react-boilerplate-dlls'),
@@ -42,8 +38,10 @@ const ReactBoilerplate = {
 
     entry(pkg) {
       const dependencyNames = Object.keys(pkg.dependencies);
-      const exclude = pkg.dllPlugin.exclude || ReactBoilerplate.dllPlugin.defaults.exclude;
-      const include = pkg.dllPlugin.include || ReactBoilerplate.dllPlugin.defaults.include;
+      const exclude =
+        pkg.dllPlugin.exclude || ReactBoilerplate.dllPlugin.defaults.exclude;
+      const include =
+        pkg.dllPlugin.include || ReactBoilerplate.dllPlugin.defaults.include;
       const includeDependencies = uniq(dependencyNames.concat(include));
 
       return {
