@@ -12,7 +12,8 @@ export function* loadFrontPageArticles() {
       title,
       slug,
       image,
-      lead
+      lead,
+      publishAt
     }
   }`;
   try {

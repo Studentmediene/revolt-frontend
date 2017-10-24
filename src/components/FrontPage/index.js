@@ -30,7 +30,7 @@ export class FrontPage extends React.Component {
     if (this.props.posts !== false) {
       // Sort the posts so that the latest posts is first
       posts = this.props.posts.sort((postA, postB) =>
-        moment(postB.createdAt).diff(postA.createdAt),
+        moment(postB.publishAt).diff(postA.publishAt),
       );
       posts = <PostPreviewList posts={this.props.posts} />;
     }
