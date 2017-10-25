@@ -15,7 +15,6 @@ import {
   getPodcastPlaylist,
   getOnDemandPlaylist,
 } from 'components/Player/actions';
-import styles from './styles.css';
 import Episode from 'components/Episode';
 import PostPreview from 'components/PostPreview';
 import ShowDetailHeader from 'components/ShowDetailHeader';
@@ -65,7 +64,7 @@ export class Show extends React.Component {
         );
       }
       return (
-        <div className={styles.post} key={index}>
+        <div key={index}>
           <PostPreview {...element} />
         </div>
       );
@@ -74,7 +73,7 @@ export class Show extends React.Component {
     return (
       <div>
         <ShowDetailHeader show={this.props.show} />
-        <div className={styles.content}>{elements}</div>
+        <div>{elements}</div>
       </div>
     );
   }

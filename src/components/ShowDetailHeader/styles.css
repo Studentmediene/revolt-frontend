@@ -1,19 +1,10 @@
-.showDetailHeader { /* stylelint-disable */
-
-}
-.container {
-  width: 80%;
-  margin: 0 auto;
-}
-
 .image {
   width: 100%;
 }
 
 .showInfo {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
   align-items: flex-start;
   margin-bottom: 2rem;
 }
