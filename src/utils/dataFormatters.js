@@ -11,8 +11,9 @@ export const showFormat = ({ id, name, image, lead, slug, archived }) => ({
   archived,
 });
 
-export const episodeFormat = ({ id, showName, createdAt, lead }) => ({
+export const episodeFormat = ({ id, title, showName, createdAt, lead }) => ({
   id,
+  title,
   showName,
   publishAt: createdAt,
   lead,
