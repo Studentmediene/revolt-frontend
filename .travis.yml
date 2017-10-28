@@ -1,9 +1,12 @@
 language: node_js
-sudo: true
+sudo: false
 dist: xenial
 node_js:
 - '8.3'
 script: npm run build
+cache:
+  directories:
+    - "node_modules"
 notifications:
   email:
     on_failure: change
