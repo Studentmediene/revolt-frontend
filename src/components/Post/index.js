@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { withRouter } from 'react-router-dom';
-import moment from 'moment';
+
+import { getNormalizedDateString } from 'utils/dateUtils';
 import { selectPost, selectPostLoading, selectPostError } from './selectors';
 import { loadPost } from './actions';
 import styles from './styles.css';
@@ -11,32 +12,13 @@ import styles from './styles.css';
 export class Post extends React.Component {
   componentWillMount() {
     this.props.loadPost(this.props.match.params.slug);
-    moment.locale('NB_no', {
-      calendar: {
-        lastDay: '[I går] HH:mm',
-        sameDay: '[I dag] HH:mm',
-        nextDay: '[I morgen] HH:mm',
-        sameElse: 'DD.MM.YY HH:mm',
-      },
-    });
-  }
-
-  getNormalizedDateString(dateString) {
-    const paddedString = i => (i < 10 ? `0${i}` : `${i}`);
-
-    const date = moment(dateString);
-    const year = date.year();
-    const month = date.month() + 1;
-    const day = date.date();
-
-    return `${paddedString(day)}.${paddedString(month)}.${year}`;
   }
 
   render() {
     if (this.props.loading || this.props.post === false) {
       return <div />;
     }
-    const time = this.getNormalizedDateString(this.props.post.createdAt);
+    const time = getNormalizedDateString(this.props.post.publishAt);
 
     return (
       <div className={styles.post}>
@@ -59,7 +41,6 @@ Post.propTypes = {
   loadPost: PropTypes.func.isRequired,
   loading: PropTypes.bool,
   error: PropTypes.bool,
-  isAuthenticated: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
