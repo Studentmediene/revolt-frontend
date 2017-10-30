@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
@@ -15,10 +16,9 @@ import {
   getPodcastPlaylist,
   getOnDemandPlaylist,
 } from 'components/Player/actions';
-import styles from './styles.css';
 import Episode from 'components/Episode';
 import PostPreview from 'components/PostPreview';
-import ShowDetailHeader from 'components/ShowDetailHeader';
+import ShowHeader from 'components/Show/ShowHeader';
 
 export class Show extends React.Component {
   componentWillMount() {
@@ -65,7 +65,7 @@ export class Show extends React.Component {
         );
       }
       return (
-        <div className={styles.post} key={index}>
+        <div key={index}>
           <PostPreview {...element} />
         </div>
       );
@@ -73,32 +73,23 @@ export class Show extends React.Component {
 
     return (
       <div>
-        <ShowDetailHeader show={this.props.show} />
-        <div className={styles.content}>{elements}</div>
+        <ShowHeader show={this.props.show} />
+        <div>{elements}</div>
       </div>
     );
   }
 }
 
 Show.propTypes = {
-  show: React.PropTypes.oneOfType([
-    React.PropTypes.bool,
-    React.PropTypes.object,
-  ]),
-  episodes: React.PropTypes.oneOfType([
-    React.PropTypes.bool,
-    React.PropTypes.array,
-  ]),
-  posts: React.PropTypes.oneOfType([
-    React.PropTypes.bool,
-    React.PropTypes.array,
-  ]),
-  match: React.PropTypes.object,
-  loadShow: React.PropTypes.func,
-  loading: React.PropTypes.bool,
-  error: React.PropTypes.bool,
-  playPodcast: React.PropTypes.func,
-  playOnDemand: React.PropTypes.func,
+  show: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+  episodes: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
+  posts: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
+  match: PropTypes.object,
+  loadShow: PropTypes.func,
+  loading: PropTypes.bool,
+  error: PropTypes.bool,
+  playPodcast: PropTypes.func,
+  playOnDemand: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({

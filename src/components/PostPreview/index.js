@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import styles from './styles.css';
@@ -20,10 +21,10 @@ const PostPreview = props => (
 );
 
 PostPreview.propTypes = {
-  title: React.PropTypes.string.isRequired,
-  slug: React.PropTypes.string.isRequired,
-  lead: React.PropTypes.string.isRequired,
-  coverPhotoUrl: React.PropTypes.string,
+  title: PropTypes.string.isRequired,
+  slug: PropTypes.string.isRequired,
+  lead: PropTypes.string.isRequired,
+  coverPhotoUrl: PropTypes.string,
 };
 
 export default PostPreview;

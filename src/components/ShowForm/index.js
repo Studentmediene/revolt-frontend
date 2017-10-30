@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import styles from './styles.css';
 
@@ -65,25 +66,23 @@ const ShowForm = props => {
 };
 
 ShowForm.propTypes = {
-  onTitleChange: React.PropTypes.func.isRequired,
-  onImageChange: React.PropTypes.func.isRequired,
-  onLeadChange: React.PropTypes.func.isRequired,
-  onDescriptionChange: React.PropTypes.func.isRequired,
-  onDigasIdChange: React.PropTypes.func.isRequired,
-  onLanguageChange: React.PropTypes.func.isRequired,
-  onArchivedChange: React.PropTypes.func.isRequired,
-  onExplicitContentChange: React.PropTypes.func.isRequired,
-  onAddShow: React.PropTypes.func.isRequired,
+  onTitleChange: PropTypes.func.isRequired,
+  onImageChange: PropTypes.func.isRequired,
+  onLeadChange: PropTypes.func.isRequired,
+  onDescriptionChange: PropTypes.func.isRequired,
+  onDigasIdChange: PropTypes.func.isRequired,
+  onLanguageChange: PropTypes.func.isRequired,
+  onArchivedChange: PropTypes.func.isRequired,
+  onExplicitContentChange: PropTypes.func.isRequired,
+  onAddShow: PropTypes.func.isRequired,
 
-  title: React.PropTypes.string.isRequired,
-  lead: React.PropTypes.string.isRequired,
-  description: React.PropTypes.string.isRequired,
-  digasIdOptions: React.PropTypes.oneOfType([
-    React.PropTypes.bool,
-    React.PropTypes.array,
-  ]).isRequired,
-  archived: React.PropTypes.bool.isRequired,
-  explicitContent: React.PropTypes.bool.isRequired,
+  title: PropTypes.string.isRequired,
+  lead: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  digasIdOptions: PropTypes.oneOfType([PropTypes.bool, PropTypes.array])
+    .isRequired,
+  archived: PropTypes.bool.isRequired,
+  explicitContent: PropTypes.bool.isRequired,
 };
 
 export default ShowForm;

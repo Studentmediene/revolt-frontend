@@ -1,5 +1,6 @@
 .container {
-  margin-top: 1em;
+  padding-top: 1em;
+  background-color: #F5F5F5;
   color: #111;
   font-family: 'Open Sans', sans-serif;
 }

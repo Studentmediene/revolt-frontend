@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactGA from 'react-ga';
+import moment from 'moment';
 import { Provider } from 'react-redux';
 import { Route } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux';
@@ -12,6 +13,16 @@ import createRoutes from 'routes';
 
 import { initializeErrorReporting } from 'utils/errorReporting';
 initializeErrorReporting();
+
+// Set global locales for moment
+moment.locale('NB_no', {
+  calendar: {
+    lastDay: '[I går] HH:mm',
+    sameDay: '[I dag] HH:mm',
+    nextDay: '[I morgen] HH:mm',
+    sameElse: 'DD.MM.YY HH:mm',
+  },
+});
 
 // Import the CSS reset, which HtmlWebpackPlugin transfers to the build folder
 import 'sanitize.css/sanitize.css';

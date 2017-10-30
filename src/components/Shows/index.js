@@ -1,10 +1,5 @@
-/*
- *
- * Shows
- *
- */
-
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { withRouter } from 'react-router-dom';
@@ -49,13 +44,10 @@ export class Shows extends React.Component {
 }
 
 Shows.propTypes = {
-  loadShow: React.PropTypes.func,
-  loading: React.PropTypes.bool,
-  error: React.PropTypes.bool,
-  shows: React.PropTypes.oneOfType([
-    React.PropTypes.bool,
-    React.PropTypes.array,
-  ]),
+  loadShow: PropTypes.func,
+  loading: PropTypes.bool,
+  error: PropTypes.bool,
+  shows: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
 };
 
 Shows.defaultProps = {

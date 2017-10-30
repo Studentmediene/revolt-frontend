@@ -1,10 +1,5 @@
-/*
- *
- * EpisodeAdminPicker
- *
- */
-
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import {
@@ -270,35 +265,22 @@ export class EpisodeAdminEditor extends React.Component {
 }
 
 EpisodeAdminEditor.propTypes = {
-  shows: React.PropTypes.oneOfType([
-    React.PropTypes.bool,
-    React.PropTypes.array,
-  ]).isRequired,
-  show: React.PropTypes.oneOfType([
-    React.PropTypes.bool,
-    React.PropTypes.object,
-  ]).isRequired,
-  episodes: React.PropTypes.oneOfType([
-    React.PropTypes.bool,
-    React.PropTypes.array,
-  ]).isRequired,
-  digasOnDemandEpisodes: React.PropTypes.oneOfType([
-    React.PropTypes.bool,
-    React.PropTypes.array,
-  ]).isRequired,
-  digasPodcastEpisodes: React.PropTypes.oneOfType([
-    React.PropTypes.bool,
-    React.PropTypes.array,
-  ]).isRequired,
-  onUpdateEpisode: React.PropTypes.func.isRequired,
-  onDeleteEpisode: React.PropTypes.func.isRequired,
-  loadShows: React.PropTypes.func.isRequired,
-  loadShowById: React.PropTypes.func.isRequired,
-  clearShow: React.PropTypes.func.isRequired,
-  loadDigasEpisodes: React.PropTypes.func.isRequired,
-  clearDigasEpisodes: React.PropTypes.func.isRequired,
-  digasEpisodesLoading: React.PropTypes.bool.isRequired,
-  digasEpisodesError: React.PropTypes.bool.isRequired,
+  shows: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]).isRequired,
+  show: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
+  episodes: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]).isRequired,
+  digasOnDemandEpisodes: PropTypes.oneOfType([PropTypes.bool, PropTypes.array])
+    .isRequired,
+  digasPodcastEpisodes: PropTypes.oneOfType([PropTypes.bool, PropTypes.array])
+    .isRequired,
+  onUpdateEpisode: PropTypes.func.isRequired,
+  onDeleteEpisode: PropTypes.func.isRequired,
+  loadShows: PropTypes.func.isRequired,
+  loadShowById: PropTypes.func.isRequired,
+  clearShow: PropTypes.func.isRequired,
+  loadDigasEpisodes: PropTypes.func.isRequired,
+  clearDigasEpisodes: PropTypes.func.isRequired,
+  digasEpisodesLoading: PropTypes.bool.isRequired,
+  digasEpisodesError: PropTypes.bool.isRequired,
 };
 
 EpisodeAdminEditor.defaultProps = {

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import styles from './styles.css';
 
@@ -17,12 +18,9 @@ const SelectInput = props => {
 };
 
 SelectInput.propTypes = {
-  label: React.PropTypes.string,
-  options: React.PropTypes.oneOfType([
-    React.PropTypes.bool,
-    React.PropTypes.array,
-  ]),
-  onChange: React.PropTypes.func.isRequired,
+  label: PropTypes.string,
+  options: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
+  onChange: PropTypes.func.isRequired,
 };
 
 export default SelectInput;

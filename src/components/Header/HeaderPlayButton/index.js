@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
@@ -7,7 +8,7 @@ import { playLive } from 'components/Player/actions';
 
 export class HeaderPlayButton extends React.Component {
   static propTypes = {
-    playLive: React.PropTypes.func.isRequired,
+    playLive: PropTypes.func.isRequired,
   };
 
   render() {
