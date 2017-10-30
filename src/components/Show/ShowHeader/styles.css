@@ -1,5 +1,6 @@
-.image {
-  width: 100%;
+.container {
+  width: 80%;
+  margin: 0 auto;
 }
 
 .showInfo {
@@ -9,19 +10,12 @@
   margin-bottom: 2rem;
 }
 
-.lead {
-  font-style: italic;
-  margin-top: 0;
+.image {
+  width: 100%;
 }
 
-.name {
+.title {
   text-align: center;
-}
-
-.post {
-  border-bottom: 1px solid lightgray;
-  padding-bottom: 1rem;
-  margin-bottom: 1rem;
 }
 
 @media (min-width: 1000px) {
@@ -33,7 +27,7 @@
     margin-bottom: 3rem;
   }
 
-  .name {
+  .title {
     margin-top: 0;
     text-align: left;
   }
