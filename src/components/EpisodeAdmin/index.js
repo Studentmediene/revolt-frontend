@@ -1,10 +1,5 @@
-/*
- *
- * EpisodeAdmin
- *
- */
-
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
@@ -190,27 +185,18 @@ export class EpisodeAdmin extends React.Component {
 }
 
 EpisodeAdmin.propTypes = {
-  onAddEpisode: React.PropTypes.func.isRequired,
-  loadShows: React.PropTypes.func.isRequired,
-  loadDigasEpisodes: React.PropTypes.func.isRequired,
-  clearDigasEpisodes: React.PropTypes.func.isRequired,
-  shows: React.PropTypes.oneOfType([
-    React.PropTypes.bool,
-    React.PropTypes.array,
-  ]),
-  showsLoading: React.PropTypes.bool.isRequired,
-  showsError: React.PropTypes.bool.isRequired,
-  digasOnDemandEpisodes: React.PropTypes.oneOfType([
-    React.PropTypes.bool,
-    React.PropTypes.array,
-  ]),
-  digasPodcastEpisodes: React.PropTypes.oneOfType([
-    React.PropTypes.bool,
-    React.PropTypes.array,
-  ]),
-  digasEpisodesLoading: React.PropTypes.bool.isRequired,
-  digasEpisodesError: React.PropTypes.bool.isRequired,
-  playOnDemand: React.PropTypes.func.isRequired,
+  onAddEpisode: PropTypes.func.isRequired,
+  loadShows: PropTypes.func.isRequired,
+  loadDigasEpisodes: PropTypes.func.isRequired,
+  clearDigasEpisodes: PropTypes.func.isRequired,
+  shows: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
+  showsLoading: PropTypes.bool.isRequired,
+  showsError: PropTypes.bool.isRequired,
+  digasOnDemandEpisodes: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
+  digasPodcastEpisodes: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
+  digasEpisodesLoading: PropTypes.bool.isRequired,
+  digasEpisodesError: PropTypes.bool.isRequired,
+  playOnDemand: PropTypes.func.isRequired,
 };
 
 EpisodeAdmin.defaultProps = {

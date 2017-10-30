@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import LinkButton from 'components/common/button/LinkButton';
 
 import styles from './styles.css';
@@ -15,10 +16,10 @@ const AdminOptionButton = props => {
 };
 
 AdminOptionButton.propTypes = {
-  image: React.PropTypes.string,
-  name: React.PropTypes.string,
-  newObjectPath: React.PropTypes.string,
-  editObjectPath: React.PropTypes.string,
+  image: PropTypes.string,
+  name: PropTypes.string,
+  newObjectPath: PropTypes.string,
+  editObjectPath: PropTypes.string,
 };
 
 export default AdminOptionButton;

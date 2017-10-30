@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import TextInput from 'components/common/input/TextInput';
 import TextAreaInput from 'components/common/input/TextAreaInput';
@@ -46,28 +47,21 @@ const EpisodeForm = props => {
 };
 
 EpisodeForm.propTypes = {
-  onTitleChange: React.PropTypes.func.isRequired,
-  onLeadChange: React.PropTypes.func.isRequired,
-  onShowChange: React.PropTypes.func.isRequired,
-  onOnDemandEpisodeChange: React.PropTypes.func.isRequired,
-  onPodcastEpisodeChange: React.PropTypes.func.isRequired,
+  onTitleChange: PropTypes.func.isRequired,
+  onLeadChange: PropTypes.func.isRequired,
+  onShowChange: PropTypes.func.isRequired,
+  onOnDemandEpisodeChange: PropTypes.func.isRequired,
+  onPodcastEpisodeChange: PropTypes.func.isRequired,
 
-  title: React.PropTypes.string.isRequired,
-  lead: React.PropTypes.string.isRequired,
-  shows: React.PropTypes.oneOfType([
-    React.PropTypes.bool,
-    React.PropTypes.array,
-  ]).isRequired,
-  digasOnDemandEpisodes: React.PropTypes.oneOfType([
-    React.PropTypes.bool,
-    React.PropTypes.array,
-  ]).isRequired,
-  digasPodcastEpisodes: React.PropTypes.oneOfType([
-    React.PropTypes.bool,
-    React.PropTypes.array,
-  ]).isRequired,
-  onAddButtonDisabled: React.PropTypes.bool,
-  onAddEpisode: React.PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  lead: PropTypes.string.isRequired,
+  shows: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]).isRequired,
+  digasOnDemandEpisodes: PropTypes.oneOfType([PropTypes.bool, PropTypes.array])
+    .isRequired,
+  digasPodcastEpisodes: PropTypes.oneOfType([PropTypes.bool, PropTypes.array])
+    .isRequired,
+  onAddButtonDisabled: PropTypes.bool,
+  onAddEpisode: PropTypes.func.isRequired,
 };
 
 export default EpisodeForm;

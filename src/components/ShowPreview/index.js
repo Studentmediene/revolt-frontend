@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import styles from './styles.css';
@@ -20,10 +21,10 @@ const ShowPreview = props => (
 );
 
 ShowPreview.propTypes = {
-  title: React.PropTypes.string.isRequired,
-  logoImageUrl: React.PropTypes.string.isRequired,
-  slug: React.PropTypes.string.isRequired,
-  lead: React.PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  logoImageUrl: PropTypes.string.isRequired,
+  slug: PropTypes.string.isRequired,
+  lead: PropTypes.string.isRequired,
 };
 
 export default ShowPreview;

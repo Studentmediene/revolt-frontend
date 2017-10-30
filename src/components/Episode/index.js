@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { getNormalizedDateString } from 'utils/dateUtils';
 
@@ -34,15 +35,15 @@ const Episode = props => {
 };
 
 Episode.propTypes = {
-  digasBroadcastId: React.PropTypes.number,
-  id: React.PropTypes.number,
-  title: React.PropTypes.string,
-  showName: React.PropTypes.string,
-  createdAt: React.PropTypes.string,
-  publishAt: React.PropTypes.string.isRequired,
-  lead: React.PropTypes.string,
-  podcastUrl: React.PropTypes.string,
-  playOnDemand: React.PropTypes.func,
+  digasBroadcastId: PropTypes.number,
+  id: PropTypes.number,
+  title: PropTypes.string,
+  showName: PropTypes.string,
+  createdAt: PropTypes.string,
+  publishAt: PropTypes.string.isRequired,
+  lead: PropTypes.string,
+  podcastUrl: PropTypes.string,
+  playOnDemand: PropTypes.func,
 };
 
 export default Episode;

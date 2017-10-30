@@ -9,6 +9,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { Switch, withRouter } from 'react-router-dom';
@@ -23,7 +24,7 @@ import { playLive } from 'components/Player/actions';
 
 class App extends React.Component {
   static propTypes = {
-    routes: React.PropTypes.array.isRequired,
+    routes: PropTypes.array.isRequired,
   };
   render() {
     return (

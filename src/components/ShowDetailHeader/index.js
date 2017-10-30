@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import styles from './styles.css';
 
@@ -19,10 +20,7 @@ const ShowDetailHeader = props => (
 );
 
 ShowDetailHeader.propTypes = {
-  show: React.PropTypes.oneOfType([
-    React.PropTypes.bool,
-    React.PropTypes.object,
-  ]),
+  show: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
 };
 
 export default ShowDetailHeader;

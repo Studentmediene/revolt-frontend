@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import styles from './styles.css';
 
@@ -26,10 +27,7 @@ const ShowPickerList = props => {
 };
 
 ShowPickerList.propTypes = {
-  shows: React.PropTypes.oneOfType([
-    React.PropTypes.bool,
-    React.PropTypes.array,
-  ]),
+  shows: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
 };
 
 export default ShowPickerList;

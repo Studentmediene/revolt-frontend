@@ -1,10 +1,5 @@
-/*
- *
- * Post
- *
- */
-
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { withRouter } from 'react-router-dom';
@@ -59,15 +54,12 @@ export class Post extends React.Component {
 }
 
 Post.propTypes = {
-  post: React.PropTypes.oneOfType([
-    React.PropTypes.bool,
-    React.PropTypes.object,
-  ]),
-  match: React.PropTypes.object,
-  loadPost: React.PropTypes.func.isRequired,
-  loading: React.PropTypes.bool,
-  error: React.PropTypes.bool,
-  isAuthenticated: React.PropTypes.bool,
+  post: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+  match: PropTypes.object,
+  loadPost: PropTypes.func.isRequired,
+  loading: PropTypes.bool,
+  error: PropTypes.bool,
+  isAuthenticated: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({

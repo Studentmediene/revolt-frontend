@@ -1,10 +1,5 @@
-/*
- *
- * Player
- *
- */
-
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { soundManager } from 'soundmanager2';
 import { createStructuredSelector } from 'reselect';
@@ -388,16 +383,13 @@ class Player extends React.Component {
 }
 
 Player.propTypes = {
-  playLive: React.PropTypes.func,
-  playPodcast: React.PropTypes.func,
-  playOnDemand: React.PropTypes.func,
-  playlist: React.PropTypes.oneOfType([
-    React.PropTypes.bool,
-    React.PropTypes.array,
-  ]),
-  offset: React.PropTypes.number,
-  index: React.PropTypes.number,
-  live: React.PropTypes.bool,
+  playLive: PropTypes.func,
+  playPodcast: PropTypes.func,
+  playOnDemand: PropTypes.func,
+  playlist: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
+  offset: PropTypes.number,
+  index: PropTypes.number,
+  live: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({

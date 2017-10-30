@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import PostPreview from 'components/PostPreview';
 import styles from './styles.css';
@@ -14,7 +15,7 @@ const PostPreviewList = props => {
 };
 
 PostPreviewList.propTypes = {
-  posts: React.PropTypes.array.isRequired,
+  posts: PropTypes.array.isRequired,
 };
 
 export default PostPreviewList;

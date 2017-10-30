@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import styles from './styles.css';
 
@@ -10,8 +11,8 @@ const UploadFileInput = props => (
 );
 
 UploadFileInput.propTypes = {
-  onChange: React.PropTypes.func,
-  label: React.PropTypes.string,
+  onChange: PropTypes.func,
+  label: PropTypes.string,
 };
 
 export default UploadFileInput;
