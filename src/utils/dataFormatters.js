@@ -36,6 +36,7 @@ export const postFormat = ({
   slug,
   lead,
   content,
+  categories,
 }) => ({
   id,
   coverPhotoUrl: `${MEDIA_URL}${image}`,
@@ -44,4 +45,5 @@ export const postFormat = ({
   slug,
   lead,
   content,
+  categories,
 });
