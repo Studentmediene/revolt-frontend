@@ -20,11 +20,29 @@ export class Post extends React.Component {
     }
     const time = getNormalizedDateString(this.props.post.publishAt);
 
+    let categories;
+    if (this.props.post.categories && this.props.post.categories.length > 0) {
+      categories = this.props.post.categories.map((category, index) => {
+        if (index === this.props.post.categories.length - 1) {
+          return <span key={category.name}>{category.name}</span>;
+        } else {
+          return <span key={category.name}>{category.name}, </span>;
+        }
+      });
+      categories = (
+        <div>
+          <span>Kategorier: </span>
+          {categories}
+        </div>
+      );
+    }
+
     return (
       <div className={styles.post}>
         <h1 className={styles.title}>{this.props.post.title}</h1>
         <div className={styles.meta}>
-          <span className={styles.createdAt}>{time}</span>
+          {categories}
+          <div className={styles.createdAt}>{time}</div>
         </div>
         <p
           className={styles.body}
