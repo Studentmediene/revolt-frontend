@@ -90,6 +90,23 @@ export default function createRoutes(store) {
       ),
     },
     {
+      path: '/sendeplan',
+      name: 'sendeplan',
+      component: asyncComponent(() =>
+        Promise.all([
+          System.import('components/Sendeplan/reducer'),
+          System.import('components/Sendeplan/sagas'),
+          System.import('components/Sendeplan'),
+        ])
+          .then(([reducer, sagas, component]) => {
+            injectReducer('sendeplan', reducer.default);
+            injectSagas(sagas.default);
+            return component;
+          })
+          .catch(errorLoading),
+      ),
+    },
+    {
       path: '*',
       name: 'notfound',
       component: asyncComponent(() =>

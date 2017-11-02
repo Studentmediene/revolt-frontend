@@ -1,5 +1,5 @@
 import { takeEvery } from 'redux-saga';
-import { call, put } from 'redux-saga/effects';
+import { call, put, take } from 'redux-saga/effects';
 import {
   sendeplanSuccess,
   sendeplanError,
@@ -18,9 +18,7 @@ export function* loadSendeplan(action) {
 }
 
 export function* loadSendeplanWatcher() {
-  while (true) { // eslint-disable-line no-constant-condition
-    yield takeEvery(LOAD_SENDEPLAN_PENDING, loadSendeplan);
-  }
+  yield takeEvery(LOAD_SENDEPLAN_PENDING, loadSendeplan);
 }
 
 // All sagas to be loaded

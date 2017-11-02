@@ -25,7 +25,7 @@ export class Sendeplan extends React.Component { // eslint-disable-line react/pr
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const dayOfWeek = moment().day(1);
     this.props.loadSendeplanDay(dayOfWeek.year(), dayOfWeek.month(), dayOfWeek.date(), 'monday');
     dayOfWeek.add(1, 'days');
