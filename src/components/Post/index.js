@@ -7,6 +7,8 @@ import { withRouter } from 'react-router-dom';
 import { getNormalizedDateString } from 'utils/dateUtils';
 import { selectPost, selectPostLoading, selectPostError } from './selectors';
 import { loadPost } from './actions';
+
+import './summernote-video-attributes.css';
 import styles from './styles.css';
 
 export class Post extends React.Component {
