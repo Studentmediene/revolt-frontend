@@ -16,7 +16,8 @@ import { loadSendeplan } from './actions';
 
 import styles from './styles.css';
 
-export class Sendeplan extends React.Component { // eslint-disable-line react/prefer-stateless-function
+export class Sendeplan extends React.Component {
+  // eslint-disable-line react/prefer-stateless-function
 
   constructor(props) {
     super(props);
@@ -27,19 +28,54 @@ export class Sendeplan extends React.Component { // eslint-disable-line react/pr
 
   componentDidMount() {
     const dayOfWeek = moment().day(1);
-    this.props.loadSendeplanDay(dayOfWeek.year(), dayOfWeek.month(), dayOfWeek.date(), 'monday');
+    this.props.loadSendeplanDay(
+      dayOfWeek.year(),
+      dayOfWeek.month(),
+      dayOfWeek.date(),
+      'monday',
+    );
     dayOfWeek.add(1, 'days');
-    this.props.loadSendeplanDay(dayOfWeek.year(), dayOfWeek.month(), dayOfWeek.date(), 'tuesday');
+    this.props.loadSendeplanDay(
+      dayOfWeek.year(),
+      dayOfWeek.month(),
+      dayOfWeek.date(),
+      'tuesday',
+    );
     dayOfWeek.add(1, 'days');
-    this.props.loadSendeplanDay(dayOfWeek.year(), dayOfWeek.month(), dayOfWeek.date(), 'wednesday');
+    this.props.loadSendeplanDay(
+      dayOfWeek.year(),
+      dayOfWeek.month(),
+      dayOfWeek.date(),
+      'wednesday',
+    );
     dayOfWeek.add(1, 'days');
-    this.props.loadSendeplanDay(dayOfWeek.year(), dayOfWeek.month(), dayOfWeek.date(), 'thursday');
+    this.props.loadSendeplanDay(
+      dayOfWeek.year(),
+      dayOfWeek.month(),
+      dayOfWeek.date(),
+      'thursday',
+    );
     dayOfWeek.add(1, 'days');
-    this.props.loadSendeplanDay(dayOfWeek.year(), dayOfWeek.month(), dayOfWeek.date(), 'friday');
+    this.props.loadSendeplanDay(
+      dayOfWeek.year(),
+      dayOfWeek.month(),
+      dayOfWeek.date(),
+      'friday',
+    );
     dayOfWeek.add(1, 'days');
-    this.props.loadSendeplanDay(dayOfWeek.year(), dayOfWeek.month(), dayOfWeek.date(), 'saturday');
+    this.props.loadSendeplanDay(
+      dayOfWeek.year(),
+      dayOfWeek.month(),
+      dayOfWeek.date(),
+      'saturday',
+    );
     dayOfWeek.add(1, 'days');
-    this.props.loadSendeplanDay(dayOfWeek.year(), dayOfWeek.month(), dayOfWeek.date(), 'sunday');
+    this.props.loadSendeplanDay(
+      dayOfWeek.year(),
+      dayOfWeek.month(),
+      dayOfWeek.date(),
+      'sunday',
+    );
   }
 
   makeSendePlanWeek() {
@@ -80,23 +116,28 @@ export class Sendeplan extends React.Component { // eslint-disable-line react/pr
     and returns the difference so that it can be added into the sendeplan
     this amount of times. */
     function findDiff(json) {
-      let diff = Number(json.endtime.slice(11, 13)) - Number(json.starttime.slice(11, 13));
-      if (Number(json.endtime.slice(14, 16)) > Number(json.starttime.slice(14, 16))) {
+      let diff =
+        Number(json.endtime.slice(11, 13)) -
+        Number(json.starttime.slice(11, 13));
+      if (
+        Number(json.endtime.slice(14, 16)) >
+        Number(json.starttime.slice(14, 16))
+      ) {
         diff += 1;
       }
       return diff;
     }
 
-    if (this.props.sendeplan.monday === undefined ||
-    this.props.sendeplan.tuesday === undefined ||
-    this.props.sendeplan.wednesday === undefined ||
-    this.props.sendeplan.thursday === undefined ||
-    this.props.sendeplan.friday === undefined ||
-    this.props.sendeplan.saturday === undefined ||
-    this.props.sendeplan.sunday === undefined) {
-      return (
-        <p> Sendeplanen lastes inn... </p>
-      );
+    if (
+      this.props.sendeplan.monday === undefined ||
+      this.props.sendeplan.tuesday === undefined ||
+      this.props.sendeplan.wednesday === undefined ||
+      this.props.sendeplan.thursday === undefined ||
+      this.props.sendeplan.friday === undefined ||
+      this.props.sendeplan.saturday === undefined ||
+      this.props.sendeplan.sunday === undefined
+    ) {
+      return <p> Sendeplanen lastes inn... </p>;
     }
     makeSendeliste(this.props.sendeplan.monday);
     makeSendeliste(this.props.sendeplan.tuesday);
@@ -106,17 +147,16 @@ export class Sendeplan extends React.Component { // eslint-disable-line react/pr
     makeSendeliste(this.props.sendeplan.saturday);
     makeSendeliste(this.props.sendeplan.sunday);
 
-    times = times.map((time) =>
-      <td key={time}>{time}</td>
-    );
+    times = times.map(time => <td key={time}>{time}</td>);
 
     function makeSendelisteComponents(daynumber, sendeplan) {
       if (!sendeplan) {
         return null;
       }
-      return sendeplan.slice(daynumber * 17, (daynumber + 1) * 17).map((program) =>
-        <td key={program.index}>{program}</td>
-    ); }
+      return sendeplan
+        .slice(daynumber * 17, (daynumber + 1) * 17)
+        .map(program => <td key={program.index}>{program}</td>);
+    }
 
     const mon = makeSendelisteComponents(0, sendeliste);
     const tue = makeSendelisteComponents(1, sendeliste);
@@ -126,32 +166,32 @@ export class Sendeplan extends React.Component { // eslint-disable-line react/pr
     const sat = makeSendelisteComponents(5, sendeliste);
     const sun = makeSendelisteComponents(6, sendeliste);
 
-    const row = times.map((time, index) =>
+    const row = times.map((time, index) => (
       <tr key={times.index}>
-      {times[index]}
-      {mon[index]}
-      {tue[index]}
-      {wed[index]}
-      {thu[index]}
-      {fri[index]}
-      {sat[index]}
-      {sun[index]}
+        {times[index]}
+        {mon[index]}
+        {tue[index]}
+        {wed[index]}
+        {thu[index]}
+        {fri[index]}
+        {sat[index]}
+        {sun[index]}
       </tr>
-    );
+    ));
 
     const today = moment().day() - 1;
     const now = makeSendelisteComponents(today, sendeliste);
-    const rowToday = times.map((time, index) =>
+    const rowToday = times.map((time, index) => (
       <tr key={times.index}>
-      {times[index]}
-      {now[index]}
+        {times[index]}
+        {now[index]}
       </tr>
-    );
+    ));
 
     return (
       <div className={styles.sendeplan}>
         <h2>Sendeplan for Radio Revolt</h2>
-        { this.state.showAll ?
+        {this.state.showAll ? (
           <div>
             <table>
               <tbody>
@@ -165,14 +205,14 @@ export class Sendeplan extends React.Component { // eslint-disable-line react/pr
                   <th>Lørdag</th>
                   <th>Søndag</th>
                 </tr>
-              {row}
+                {row}
               </tbody>
             </table>
           </div>
-          :
+        ) : (
           <div>
             <button onClick={() => this.makeSendePlanWeek()}>
-            Klikk her for å se program for hele uken
+              Klikk her for å se program for hele uken
             </button>
             <h3> Sendeplanen for i dag: </h3>
             <table>
@@ -181,11 +221,11 @@ export class Sendeplan extends React.Component { // eslint-disable-line react/pr
                   <th>Tid</th>
                   <th>Program</th>
                 </tr>
-              {rowToday}
+                {rowToday}
               </tbody>
             </table>
           </div>
-      }
+        )}
       </div>
     );
   }
@@ -204,7 +244,8 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    loadSendeplanDay: (year, month, day, weekDay) => dispatch(loadSendeplan(year, month, day, weekDay)),
+    loadSendeplanDay: (year, month, day, weekDay) =>
+      dispatch(loadSendeplan(year, month, day, weekDay)),
   };
 }
 
