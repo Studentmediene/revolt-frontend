@@ -37,6 +37,7 @@ export const postFormat = ({
   lead,
   content,
   categories,
+  episodes,
 }) => ({
   id,
   coverPhotoUrl: `${MEDIA_URL}${image}`,
@@ -46,4 +47,5 @@ export const postFormat = ({
   lead,
   content,
   categories,
+  episodes,
 });

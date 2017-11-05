@@ -23,6 +23,11 @@ export function* loadPost(slug) {
         name,
         textColor,
         backgroundColor
+      },
+      episodes {
+        id,
+        title,
+        lead,
       }
     }
   }`;
