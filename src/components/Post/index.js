@@ -6,7 +6,9 @@ import { withRouter } from 'react-router-dom';
 
 import { getNormalizedDateString } from 'utils/dateUtils';
 import { selectPost, selectPostLoading, selectPostError } from './selectors';
+import { getOnDemandPlaylist } from 'components/Player/actions';
 import { loadPost } from './actions';
+import Episode from 'components/Episode';
 
 import './summernote-video-attributes.css';
 import styles from './styles.css';
@@ -20,6 +22,7 @@ export class Post extends React.Component {
     if (this.props.loading || this.props.post === false) {
       return <div />;
     }
+    const { episodes } = this.props.post;
     const time = getNormalizedDateString(this.props.post.publishAt);
 
     let categories;
@@ -50,6 +53,14 @@ export class Post extends React.Component {
           className={styles.body}
           dangerouslySetInnerHTML={{ __html: this.props.post.content }}
         />
+        {episodes &&
+          episodes.map(element => (
+            <Episode
+              {...element}
+              key={element.id}
+              playOnDemand={this.props.playOnDemand}
+            />
+          ))}
       </div>
     );
   }
@@ -61,6 +72,7 @@ Post.propTypes = {
   loadPost: PropTypes.func.isRequired,
   loading: PropTypes.bool,
   error: PropTypes.bool,
+  playOnDemand: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -73,6 +85,8 @@ function mapDispatchToProps(dispatch) {
   return {
     loadPost: slug => dispatch(loadPost(slug)),
     dispatch,
+    playOnDemand: (episodeId, offset = 0) =>
+      dispatch(getOnDemandPlaylist(episodeId, offset)),
   };
 }
 
