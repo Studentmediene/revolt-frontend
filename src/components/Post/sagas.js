@@ -18,6 +18,16 @@ export function* loadPost(slug) {
       show{
         name,
         slug
+      },
+      categories{
+        name,
+        textColor,
+        backgroundColor
+      },
+      episodes {
+        id,
+        title,
+        lead,
       }
     }
   }`;

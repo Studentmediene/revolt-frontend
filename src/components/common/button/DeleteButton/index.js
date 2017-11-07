@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import styles from './styles.css';
 
@@ -20,9 +21,9 @@ const DeleteButton = props => {
 };
 
 DeleteButton.propTypes = {
-  onClick: React.PropTypes.func.isRequired,
-  confirmText: React.PropTypes.string.isRequired,
-  children: React.PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+  confirmText: PropTypes.string.isRequired,
+  children: PropTypes.string.isRequired,
 };
 
 export default DeleteButton;

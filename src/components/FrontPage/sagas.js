@@ -13,7 +13,12 @@ export function* loadFrontPageArticles() {
       slug,
       image,
       lead,
-      publishAt
+      publishAt,
+      categories {
+        name,
+        textColor,
+        backgroundColor
+      }
     }
   }`;
   try {

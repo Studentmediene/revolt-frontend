@@ -1,6 +1,5 @@
 import React from 'react';
-
-import { getNormalizedDateString } from 'utils/dateUtils';
+import PropTypes from 'prop-types';
 
 import styles from './styles.css';
 
@@ -24,9 +23,7 @@ const Episode = props => {
         <div className={styles.playButtonInner} />
       </div>
       <div className={styles.meta}>
-        <div className={styles.title}>
-          {props.showName} {getNormalizedDateString(props.publishAt)}
-        </div>
+        <div className={styles.title}>{props.title}</div>
         <div className={styles.lead}>{props.lead}</div>
       </div>
     </button>
@@ -34,15 +31,11 @@ const Episode = props => {
 };
 
 Episode.propTypes = {
-  digasBroadcastId: React.PropTypes.number,
-  id: React.PropTypes.number,
-  title: React.PropTypes.string,
-  showName: React.PropTypes.string,
-  createdAt: React.PropTypes.string,
-  publishAt: React.PropTypes.string.isRequired,
-  lead: React.PropTypes.string,
-  podcastUrl: React.PropTypes.string,
-  playOnDemand: React.PropTypes.func,
+  digasBroadcastId: PropTypes.number,
+  id: PropTypes.number,
+  title: PropTypes.string,
+  lead: PropTypes.string,
+  playOnDemand: PropTypes.func,
 };
 
 export default Episode;

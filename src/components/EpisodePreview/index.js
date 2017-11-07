@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 
 import styles from './styles.css';
@@ -31,9 +32,9 @@ function EpisodePreview(props) {
 }
 
 EpisodePreview.propTypes = {
-  showName: React.PropTypes.string,
-  publishAt: React.PropTypes.string,
-  lead: React.PropTypes.string,
+  showName: PropTypes.string,
+  publishAt: PropTypes.string,
+  lead: PropTypes.string,
 };
 
 export default EpisodePreview;

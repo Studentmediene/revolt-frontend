@@ -1,10 +1,5 @@
-/*
- *
- * PostAdmin
- *
- */
-
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
@@ -176,17 +171,11 @@ export class PostAdmin extends React.Component {
 }
 
 PostAdmin.propTypes = {
-  shows: React.PropTypes.oneOfType([
-    React.PropTypes.bool,
-    React.PropTypes.array,
-  ]),
-  categories: React.PropTypes.oneOfType([
-    React.PropTypes.bool,
-    React.PropTypes.array,
-  ]),
-  onAddPost: React.PropTypes.func,
-  loadShows: React.PropTypes.func,
-  loadCategories: React.PropTypes.func,
+  shows: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
+  categories: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
+  onAddPost: PropTypes.func,
+  loadShows: PropTypes.func,
+  loadCategories: PropTypes.func,
 };
 
 PostAdmin.defaultProps = {

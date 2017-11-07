@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PostPreviewList /> renders correctly with posts 1`] = `
+<div
+  className="postPreviewList"
+>
+  <div
+    className="post"
+    key="post-0"
+  >
+    <PostPreview
+      categories={
+        Array [
+          Object {
+            "backgroundColor": "#FFFFFF",
+            "name": "categoryName1",
+            "textColor": "#000000",
+          },
+          Object {
+            "backgroundColor": "#FFFFFF",
+            "name": "categoryName1",
+            "textColor": "#000000",
+          },
+        ]
+      }
+      image="image"
+      lead="Lead"
+      publishAt="2017-11-01 18:11:44+00:00"
+      slug="slug1"
+      title="post1"
+    />
+  </div>
+  <div
+    className="post"
+    key="post-1"
+  >
+    <PostPreview
+      categories={Array []}
+      image="image"
+      lead="Lead"
+      publishAt="2017-11-01 18:11:44+00:01"
+      slug="slug2"
+      title="post2"
+    />
+  </div>
+</div>
+`;
+
+exports[`<PostPreviewList /> renders correctly without posts 1`] = `
+<div
+  className="postPreviewList"
+/>
+`;
