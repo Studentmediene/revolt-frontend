@@ -28,5 +28,17 @@ exports[`<NavBar /> renders correctly 1`] = `
       Programmer
     </Link>
   </li>
+  <li
+    className="navbarItem"
+    key="/sendeplan"
+  >
+    <Link
+      className="navbarLink"
+      replace={false}
+      to="/sendeplan"
+    >
+      Sendeplan
+    </Link>
+  </li>
 </ul>
 `;

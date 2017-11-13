@@ -1,0 +1,35 @@
+td {
+  border: 1px black solid;
+  padding: 6px;
+  text-align: center;
+}
+
+th {
+  border: 1px black solid;
+  padding: 3px;
+  text-align: center;
+  background-color: #ECB61C;
+  color: white;
+}
+
+h2 {
+  text-align: center;
+}
+
+table {
+  font-size: 85%;
+  position: relative;
+  left: 0;
+  right: 0;
+  width: 55%;
+}
+
+button {
+  border: 1px black solid;
+  padding: 10px;
+  border-radius: 2px;
+}
+
+button:hover {
+  cursor: pointer;
+}

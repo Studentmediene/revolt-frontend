@@ -21,6 +21,13 @@ export const getPodcasts = showId =>
 export const getOnDemand = showId =>
   get(`http://pappagorg.radiorevolt.no/v1/lyd/ondemand/${showId}`);
 
+export const SENDEPLAN_API_URL = 'http://api.radiorevolt.no/v1/sendinger/dato/';
+
+export const getSendeplan = (year, month, date) =>
+  fetch(`${SENDEPLAN_API_URL}${year}/${month}/${date}/autoavvikler`)
+    .then(handleError)
+    .then(res => res.json());
+
 // Lazy way to ignore undefined imports in not yet used files
 export const CATEGORIES_URL = null;
 export const POSTS_URL = null;

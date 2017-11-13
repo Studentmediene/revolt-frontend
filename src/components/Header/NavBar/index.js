@@ -12,6 +12,10 @@ const navbarLinks = [
     path: '/programmer',
     title: 'Programmer',
   },
+  {
+    path: '/sendeplan',
+    title: 'Sendeplan',
+  },
 ];
 
 const NavBar = () => (
