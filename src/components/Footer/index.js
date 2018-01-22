@@ -13,7 +13,7 @@ const Footer = () => {
         </p>
         <p>Uautorisert lenking, videreføring eller kopiering er ulovlig.</p>
         <br />
-        <p>Radioredaktør: Peter Wallumrød</p>
+        <p>Radioredaktør: Paulina Dubkov</p>
         <p>Ansvarlig redaktør: Håkon Pedersen</p>
         <br />
         <p>
@@ -29,7 +29,7 @@ const Footer = () => {
             Om oss
           </Link>
         </p>
-        <p>2017 © Radio Revolt</p>
+        <p>2018 © Radio Revolt</p>
       </div>
     </div>
   );
