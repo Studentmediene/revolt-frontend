@@ -20,7 +20,8 @@ export const getPodcasts = showId => `${API_URL}/v1/lyd/podcast/${showId}`;
 
 export const getOnDemand = showId => `${API_URL}/v1/lyd/ondemand/${showId}`;
 
-export const getCurrentShows = get(`${API_URL}/v2/sendinger/currentshows`);
+export const getCurrentShows = () =>
+  get(`${API_URL}/v2/sendinger/currentshows`);
 
 export const SENDEPLAN_API_URL = `${API_URL}/v1/sendinger/dato/`;
 
