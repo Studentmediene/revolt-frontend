@@ -9,9 +9,9 @@ import {
   podcastPlaylistError,
   onDemandPlaylistLoaded,
   onDemandPlaylistError,
+  currentShowTitle,
 } from './actions';
-import { getGraphQL } from 'utils/api';
-
+import { getGraphQL, getCurrentShows } from 'utils/api';
 // Individual exports for testing
 export function* playPodcast(episodeId, offset) {
   const query = `query {
@@ -44,7 +44,6 @@ export function* playPodcast(episodeId, offset) {
         index = episodes.length - 1 - i;
       }
     }
-
     yield put(podcastPlaylistLoaded(playlist, index, offset));
   } catch (error) {
     yield put(podcastPlaylistError());
@@ -69,6 +68,8 @@ export function* playOnDemand(episodeId, offset) {
   try {
     const graphQlRes = yield call(getGraphQL, query);
     const episode = graphQlRes.data.episode;
+    const currentShow = yield call(getCurrentShows);
+    const liveTitle = currentShow.current.title;
     const playlist = episode.show.episodes
       .map(e => ({
         id: e.id,
@@ -81,6 +82,7 @@ export function* playOnDemand(episodeId, offset) {
     const index = playlist.indexOf(playlist.find(e => e.id === episode.id));
 
     yield put(onDemandPlaylistLoaded(playlist, index, offset));
+    yield put(currentShowTitle(liveTitle));
   } catch (error) {
     yield put(onDemandPlaylistError());
   }

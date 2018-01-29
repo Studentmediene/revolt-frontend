@@ -12,6 +12,7 @@ import {
   selectIndex,
   selectOffset,
   selectLive,
+  selectLiveTitle,
 } from './selectors';
 import styles from './styles.css';
 
@@ -178,7 +179,7 @@ class Player extends React.Component {
 
   playLive = () => {
     this.setState({
-      displayText: 'Radio Revolt',
+      displayText: this.props.liveTitle,
       url: `${this.liveUrl}?offset=${this.props.offset}`,
     });
 
@@ -390,6 +391,7 @@ Player.propTypes = {
   offset: PropTypes.number,
   index: PropTypes.number,
   live: PropTypes.bool,
+  liveTitle: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -397,6 +399,7 @@ const mapStateToProps = createStructuredSelector({
   live: selectLive(),
   offset: selectOffset(),
   index: selectIndex(),
+  liveTitle: selectLiveTitle(),
 });
 
 function mapDispatchToProps(dispatch) {
