@@ -192,7 +192,7 @@ export class Sendeplan extends React.Component {
       <div className={styles.sendeplan}>
         <h2>Sendeplan for Radio Revolt</h2>
         {this.state.showAll ? (
-          <div>
+          <div className={styles.sendeplan}>
             <table>
               <tbody>
                 <tr>
@@ -210,7 +210,7 @@ export class Sendeplan extends React.Component {
             </table>
           </div>
         ) : (
-          <div>
+          <div className={styles.sendeplan}>
             <button onClick={() => this.makeSendePlanWeek()}>
               Klikk her for å se program for hele uken
             </button>
