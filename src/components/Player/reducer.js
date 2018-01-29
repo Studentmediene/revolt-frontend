@@ -13,7 +13,7 @@ import {
   GET_ON_DEMAND_PLAYLIST_PENDING,
   GET_ON_DEMAND_PLAYLIST_SUCCESS,
   GET_ON_DEMAND_PLAYLIST_FAIELD,
-  GET_ON_DEMAND_TITLE,
+  GET_LIVE_TITLE,
 } from './constants';
 
 const initialState = fromJS({
@@ -54,7 +54,7 @@ function playerReducer(state = initialState, action) {
         .set('offset', action.offset);
     case GET_ON_DEMAND_PLAYLIST_FAIELD:
       return state.set('loading', false).set('error', true);
-    case GET_ON_DEMAND_TITLE:
+    case GET_LIVE_TITLE:
       return state.set('liveTitle', action.liveTitle);
     default:
       return state;
