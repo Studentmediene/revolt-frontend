@@ -97,7 +97,7 @@ function* updateLiveTitleTimer() {
   const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
   while (true) {
     yield call(updateLiveTitle);
-    yield call(delay, 10000);
+    yield call(delay, 60000);
   }
 }
 
