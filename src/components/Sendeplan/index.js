@@ -192,7 +192,7 @@ export class Sendeplan extends React.Component {
       <div className={styles.sendeplan}>
         <h2>Sendeplan for Radio Revolt</h2>
         {this.state.showAll ? (
-          <div>
+          <div className={styles.fullTable}>
             <table>
               <tbody>
                 <tr>

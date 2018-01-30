@@ -33,3 +33,9 @@
 .sendeplan button:hover {
   cursor: pointer;
 }
+
+.fullTable {
+  overflow: auto;
+  border-left: 1px solid #BBB;
+  border-right: 1px solid #BBB;
+}
