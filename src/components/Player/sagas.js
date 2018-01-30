@@ -1,8 +1,10 @@
 import { take, call, put } from 'redux-saga/effects';
+import { takeEvery } from 'redux-saga';
 
 import {
   GET_PODCAST_PLAYLIST_PENDING,
   GET_ON_DEMAND_PLAYLIST_PENDING,
+  PLAY_LIVE,
 } from './constants';
 import {
   podcastPlaylistLoaded,
@@ -68,8 +70,6 @@ export function* playOnDemand(episodeId, offset) {
   try {
     const graphQlRes = yield call(getGraphQL, query);
     const episode = graphQlRes.data.episode;
-    const currentShow = yield call(getCurrentShows);
-    const liveTitle = currentShow.current.title;
     const playlist = episode.show.episodes
       .map(e => ({
         id: e.id,
@@ -82,10 +82,15 @@ export function* playOnDemand(episodeId, offset) {
     const index = playlist.indexOf(playlist.find(e => e.id === episode.id));
 
     yield put(onDemandPlaylistLoaded(playlist, index, offset));
-    yield put(currentShowTitle(liveTitle));
   } catch (error) {
     yield put(onDemandPlaylistError());
   }
+}
+
+function* playLive() {
+  const currentShow = yield call(getCurrentShows);
+  const liveTitle = currentShow.current.title;
+  yield put(currentShowTitle(liveTitle));
 }
 
 export function* playPodcastWatcher() {
@@ -104,5 +109,9 @@ export function* playOnDemandWatcher() {
   }
 }
 
+function* playLiveWatcher() {
+  yield takeEvery(PLAY_LIVE, playLive);
+}
+
 // All sagas to be loaded
-export default [playPodcastWatcher, playOnDemandWatcher];
+export default [playPodcastWatcher, playOnDemandWatcher, playLiveWatcher];

@@ -91,6 +91,9 @@ class Player extends React.Component {
 
     if (nextProps.live) {
       this.playLive();
+      this.setState({
+        displayText: nextProps.liveTitle,
+      });
     } else if (nextProps.playlist) {
       this.playlistController = new PlaylistController(
         nextProps.playlist,
