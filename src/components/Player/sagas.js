@@ -1,10 +1,10 @@
-import { take, call, put } from 'redux-saga/effects';
-import { takeEvery } from 'redux-saga';
+import { take, call, put, fork, cancel } from 'redux-saga/effects';
 
 import {
   GET_PODCAST_PLAYLIST_PENDING,
   GET_ON_DEMAND_PLAYLIST_PENDING,
   PLAY_LIVE,
+  PAUSE_LIVE,
 } from './constants';
 import {
   podcastPlaylistLoaded,
@@ -87,10 +87,26 @@ export function* playOnDemand(episodeId, offset) {
   }
 }
 
-function* playLive() {
+function* updateLiveTitle() {
   const currentShow = yield call(getCurrentShows);
   const liveTitle = currentShow.current.title;
   yield put(currentShowTitle(liveTitle));
+}
+
+function* updateLiveTitleTimer() {
+  const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+  while (true) {
+    yield call(updateLiveTitle);
+    yield call(delay, 10000);
+  }
+}
+
+function* playLive() {
+  while (yield take(PLAY_LIVE)) {
+    const bgSyncTask = yield fork(updateLiveTitleTimer);
+    yield take(PAUSE_LIVE);
+    yield cancel(bgSyncTask);
+  }
 }
 
 export function* playPodcastWatcher() {
@@ -109,9 +125,5 @@ export function* playOnDemandWatcher() {
   }
 }
 
-function* playLiveWatcher() {
-  yield takeEvery(PLAY_LIVE, playLive);
-}
-
 // All sagas to be loaded
-export default [playPodcastWatcher, playOnDemandWatcher, playLiveWatcher];
+export default [playPodcastWatcher, playOnDemandWatcher, playLive];

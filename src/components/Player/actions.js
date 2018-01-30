@@ -13,6 +13,7 @@ import {
   GET_ON_DEMAND_PLAYLIST_SUCCESS,
   GET_ON_DEMAND_PLAYLIST_FAIELD,
   GET_LIVE_TITLE,
+  PAUSE_LIVE,
 } from './constants';
 
 export function playLive(offset = 0) {
@@ -72,5 +73,11 @@ export function currentShowTitle(liveTitle) {
   return {
     type: GET_LIVE_TITLE,
     liveTitle,
+  };
+}
+
+export function pauseLive() {
+  return {
+    type: PAUSE_LIVE,
   };
 }
