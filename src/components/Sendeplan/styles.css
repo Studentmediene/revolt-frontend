@@ -34,7 +34,8 @@
   cursor: pointer;
 }
 
-.sendeplan div {
+.fullTable {
   overflow: auto;
-  border: 1px solid black;
+  border-left: 1px solid #BBB;
+  border-right: 1px solid #BBB;
 }
