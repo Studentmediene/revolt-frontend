@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import LazyLoad from 'react-lazyload';
 import { Link } from 'react-router-dom';
 
 import styles from './styles.css';
@@ -25,11 +26,13 @@ const PostPreview = props => {
   return (
     <div className={styles.postPreview}>
       <Link className={styles.imageLink} to={`/post/${props.slug}`}>
-        <img
-          className={styles.image}
-          src={props.coverPhotoUrl}
-          alt={props.title}
-        />
+        <LazyLoad height={350} offset={100} once>
+          <img
+            className={styles.image}
+            src={props.coverPhotoUrl}
+            alt={props.title}
+          />
+        </LazyLoad>
         {categories}
       </Link>
       <Link className={styles.titleLink} to={`/post/${props.slug}`}>

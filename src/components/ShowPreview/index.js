@@ -1,17 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import LazyLoad from 'react-lazyload';
 
 import styles from './styles.css';
 
 const ShowPreview = props => (
   <div className={styles.container}>
     <Link className={styles.imageLink} to={`/programmer/${props.slug}`}>
-      <img
-        className={styles.image}
-        src={props.logoImageUrl}
-        alt={props.title}
-      />
+      <LazyLoad height={300} offset={100} once>
+        <img
+          className={styles.image}
+          src={props.logoImageUrl}
+          alt={props.title}
+        />
+      </LazyLoad>
     </Link>
     <Link className={styles.nameLink} to={`/programmer/${props.slug}`}>
       <h2 className={styles.name}>{props.title}</h2>
