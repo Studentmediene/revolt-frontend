@@ -6,12 +6,18 @@ import { createStructuredSelector } from 'reselect';
 import { fromJS, is } from 'immutable';
 
 import PlaylistController from './utils/PlaylistController';
-import { playLive, getPodcastPlaylist, getOnDemandPlaylist } from './actions';
+import {
+  playLive,
+  getPodcastPlaylist,
+  getOnDemandPlaylist,
+  pauseLive,
+} from './actions';
 import {
   selectPlaylist,
   selectIndex,
   selectOffset,
   selectLive,
+  selectLiveTitle,
 } from './selectors';
 import styles from './styles.css';
 
@@ -90,6 +96,9 @@ class Player extends React.Component {
 
     if (nextProps.live) {
       this.playLive();
+      this.setState({
+        displayText: nextProps.liveTitle,
+      });
     } else if (nextProps.playlist) {
       this.playlistController = new PlaylistController(
         nextProps.playlist,
@@ -125,6 +134,11 @@ class Player extends React.Component {
   togglePlayPause = () => {
     if (this.soundObject && this.soundObject.readyState) {
       this.soundObject.togglePause();
+      if (this.state.paused) {
+        this.props.playLive();
+      } else {
+        this.props.pauseLive();
+      }
     } else {
       this.props.playLive(0);
     }
@@ -178,7 +192,7 @@ class Player extends React.Component {
 
   playLive = () => {
     this.setState({
-      displayText: 'Radio Revolt',
+      displayText: this.props.liveTitle,
       url: `${this.liveUrl}?offset=${this.props.offset}`,
     });
 
@@ -384,12 +398,14 @@ class Player extends React.Component {
 
 Player.propTypes = {
   playLive: PropTypes.func,
+  pauseLive: PropTypes.func,
   playPodcast: PropTypes.func,
   playOnDemand: PropTypes.func,
   playlist: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
   offset: PropTypes.number,
   index: PropTypes.number,
   live: PropTypes.bool,
+  liveTitle: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -397,12 +413,14 @@ const mapStateToProps = createStructuredSelector({
   live: selectLive(),
   offset: selectOffset(),
   index: selectIndex(),
+  liveTitle: selectLiveTitle(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
     playLive: (offset = 0) => dispatch(playLive(offset)),
+    pauseLive: () => dispatch(pauseLive()),
     playPodcast: (episodeId, offset = 0) =>
       dispatch(getPodcastPlaylist(episodeId, offset)),
     playOnDemand: (episodeId, offset = 0) =>

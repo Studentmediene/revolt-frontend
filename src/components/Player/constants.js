@@ -19,3 +19,7 @@ export const GET_ON_DEMAND_PLAYLIST_SUCCESS =
   'app/Player/GET_ON_DEMAND_PLAYLIST_SUCCESS';
 export const GET_ON_DEMAND_PLAYLIST_FAIELD =
   'app/Player/GET_ON_DEMAND_PLAYLIST_FAIELD';
+
+export const GET_LIVE_TITLE = 'app/Player/GET_LIVE_TITLE';
+
+export const PAUSE_LIVE = 'app/Player/PAUSE_LIVE';

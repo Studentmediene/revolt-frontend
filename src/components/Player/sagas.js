@@ -1,17 +1,19 @@
-import { take, call, put } from 'redux-saga/effects';
+import { take, call, put, fork, cancel } from 'redux-saga/effects';
 
 import {
   GET_PODCAST_PLAYLIST_PENDING,
   GET_ON_DEMAND_PLAYLIST_PENDING,
+  PLAY_LIVE,
+  PAUSE_LIVE,
 } from './constants';
 import {
   podcastPlaylistLoaded,
   podcastPlaylistError,
   onDemandPlaylistLoaded,
   onDemandPlaylistError,
+  currentShowTitle,
 } from './actions';
-import { getGraphQL } from 'utils/api';
-
+import { getGraphQL, getCurrentShows } from 'utils/api';
 // Individual exports for testing
 export function* playPodcast(episodeId, offset) {
   const query = `query {
@@ -44,7 +46,6 @@ export function* playPodcast(episodeId, offset) {
         index = episodes.length - 1 - i;
       }
     }
-
     yield put(podcastPlaylistLoaded(playlist, index, offset));
   } catch (error) {
     yield put(podcastPlaylistError());
@@ -86,6 +87,28 @@ export function* playOnDemand(episodeId, offset) {
   }
 }
 
+function* updateLiveTitle() {
+  const currentShow = yield call(getCurrentShows);
+  const liveTitle = currentShow.current.title;
+  yield put(currentShowTitle(liveTitle));
+}
+
+function* updateLiveTitleTimer() {
+  const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+  while (true) {
+    yield call(updateLiveTitle);
+    yield call(delay, 60000);
+  }
+}
+
+function* playLive() {
+  while (yield take(PLAY_LIVE)) {
+    const bgSyncTask = yield fork(updateLiveTitleTimer);
+    yield take(PAUSE_LIVE);
+    yield cancel(bgSyncTask);
+  }
+}
+
 export function* playPodcastWatcher() {
   // eslint-disable-next-line no-constant-condition
   while (true) {
@@ -103,4 +126,4 @@ export function* playOnDemandWatcher() {
 }
 
 // All sagas to be loaded
-export default [playPodcastWatcher, playOnDemandWatcher];
+export default [playPodcastWatcher, playOnDemandWatcher, playLive];

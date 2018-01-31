@@ -12,6 +12,8 @@ import {
   GET_ON_DEMAND_PLAYLIST_PENDING,
   GET_ON_DEMAND_PLAYLIST_SUCCESS,
   GET_ON_DEMAND_PLAYLIST_FAIELD,
+  GET_LIVE_TITLE,
+  PAUSE_LIVE,
 } from './constants';
 
 export function playLive(offset = 0) {
@@ -64,5 +66,18 @@ export function onDemandPlaylistLoaded(playlist, index, offset = 0) {
 export function onDemandPlaylistError() {
   return {
     type: GET_ON_DEMAND_PLAYLIST_FAIELD,
+  };
+}
+
+export function currentShowTitle(liveTitle) {
+  return {
+    type: GET_LIVE_TITLE,
+    liveTitle,
+  };
+}
+
+export function pauseLive() {
+  return {
+    type: PAUSE_LIVE,
   };
 }
