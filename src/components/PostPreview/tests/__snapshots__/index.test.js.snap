@@ -9,10 +9,20 @@ exports[`<PostPreview /> renders correctly with categories 1`] = `
     replace={false}
     to="/post/slug"
   >
-    <img
-      alt="title"
-      className="image"
-    />
+    <LazyLoad
+      height={350}
+      offset={100}
+      once={true}
+      overflow={false}
+      resize={false}
+      scroll={true}
+      unmountIfInvisible={false}
+    >
+      <img
+        alt="title"
+        className="image"
+      />
+    </LazyLoad>
     <div
       className="category"
       key="categoryName1"
@@ -68,10 +78,20 @@ exports[`<PostPreview /> renders correctly without categories 1`] = `
     replace={false}
     to="/post/slug"
   >
-    <img
-      alt="title"
-      className="image"
-    />
+    <LazyLoad
+      height={350}
+      offset={100}
+      once={true}
+      overflow={false}
+      resize={false}
+      scroll={true}
+      unmountIfInvisible={false}
+    >
+      <img
+        alt="title"
+        className="image"
+      />
+    </LazyLoad>
   </Link>
   <Link
     className="titleLink"
