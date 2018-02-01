@@ -24,7 +24,7 @@ export function* loadShow(slug) {
         id,
         title,
         lead,
-        createdAt,
+        publishAt,
       },
       posts {
         id,
