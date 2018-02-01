@@ -20,11 +20,11 @@ export const showFormat = ({
   archived,
 });
 
-export const episodeFormat = ({ id, title, showName, createdAt, lead }) => ({
+export const episodeFormat = ({ id, title, showName, publishAt, lead }) => ({
   id,
   title,
   showName,
-  publishAt: createdAt,
+  publishAt,
   lead,
 });
 
