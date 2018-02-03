@@ -21,6 +21,12 @@ exports[`<PostPreview /> renders correctly with categories 1`] = `
       <img
         alt="title"
         className="image"
+        src="large_image"
+        srcSet="
+                    large_image 1024w,
+                    medium_image 768w,
+                    small_image 300w
+                  "
       />
     </LazyLoad>
     <div
@@ -90,6 +96,12 @@ exports[`<PostPreview /> renders correctly without categories 1`] = `
       <img
         alt="title"
         className="image"
+        src="large_image"
+        srcSet="
+                    large_image 1024w,
+                    medium_image 768w,
+                    small_image 300w
+                  "
       />
     </LazyLoad>
   </Link>

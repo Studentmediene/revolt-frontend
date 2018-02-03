@@ -11,7 +11,11 @@ export function* loadFrontPageArticles() {
       id,
       title,
       slug,
-      image,
+      croppedImages {
+        large,
+        medium,
+        small
+      },
       lead,
       publishAt,
       categories {
