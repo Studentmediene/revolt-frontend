@@ -24,14 +24,18 @@
   width: 55%;
 }
 
-.sendeplan button {
-  border: 1px black solid;
+.toggleWeek {
+  border: 1px #222 solid;
   padding: 10px;
   border-radius: 2px;
+  -webkit-transition-duration: 0.3s; /* Safari */
+  transition-duration: 0.3s;
 }
 
-.sendeplan button:hover {
+.toggleWeek:hover {
   cursor: pointer;
+  background-color: #222;
+  color: white;
 }
 
 .fullTable {
