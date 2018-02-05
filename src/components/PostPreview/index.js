@@ -31,11 +31,7 @@ const PostPreview = props => {
         <LazyLoad height={350} offset={100} once>
           <img
             className={styles.image}
-            srcSet={`
-              ${large} 1024w,
-              ${medium} 768w,
-              ${small} 300w
-            `}
+            srcSet={`${large} 1024w, ${medium} 768w, ${small} 300w`}
             src={large}
             alt={props.title}
           />
