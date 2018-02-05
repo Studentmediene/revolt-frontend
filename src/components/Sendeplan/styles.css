@@ -39,3 +39,9 @@
   border-left: 1px solid #BBB;
   border-right: 1px solid #BBB;
 }
+
+.simpleTable {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
