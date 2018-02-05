@@ -39,9 +39,6 @@
 }
 
 .fullTable {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   overflow: auto;
   border-left: 1px solid #BBB;
   border-right: 1px solid #BBB;
@@ -51,6 +48,12 @@
   .fullTable {
     border-left: none;
     border-right: none;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sendeplan table {
+    align-self: center;
   }
 }
 
