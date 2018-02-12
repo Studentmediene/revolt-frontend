@@ -1,7 +1,5 @@
 .fullTable {
   overflow: auto;
-  border-left: 1px solid #BBB;
-  border-right: 1px solid #BBB;
 }
 
 .fullTable table {
