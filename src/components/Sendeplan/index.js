@@ -155,7 +155,19 @@ export class Sendeplan extends React.Component {
       }
       return sendeplan
         .slice(daynumber * 17, (daynumber + 1) * 17)
-        .map(program => <td key={program.index}>{program}</td>);
+        .map(program => {
+          let className = null;
+          /* Adds a class 'live' to the shows that are not reruns
+          to make it bold in the table */
+          if (!program.includes('(R)')) {
+            className = styles.live;
+          }
+          return (
+            <td key={program.index} className={className}>
+              {program}
+            </td>
+          );
+        });
     }
 
     const mon = makeSendelisteComponents(0, sendeliste);
