@@ -8,11 +8,31 @@
   table-layout: fixed;
   border-collapse: collapse;
   font-size: 80%;
-  width: 1100px;
+  width: 1400px;
+  margin-left: -131px;
 }
 
+.fullTable table tr td:nth-child(1),
+.fullTable table tr th:nth-child(1) {
+  position: absolute;
+  left: 0;
+  width: 45px;
+}
+
+.sendeplan table td {
+  background-color: #F5F5F5;
+}
+
+/* z-index is set to 1 due to the first columns border
+overlaps the th-border because it's set to position: absolute
+in fullTable */
 .sendeplan table tr th:nth-child(1) {
   width: 45px;
+  z-index: 1;
+}
+
+.sendeplan {
+  position: relative;
 }
 
 .simpleTable {
@@ -23,11 +43,12 @@
 }
 
 .simpleTable table {
+  table-layout: fixed;
   width: 30%;
 }
 
 .sendeplan td {
-  border: 1px black solid;
+  border: 1px #AAA solid;
   padding: 6px;
   width: 20px;
 }
