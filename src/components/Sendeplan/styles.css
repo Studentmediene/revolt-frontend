@@ -39,3 +39,7 @@
   border-left: 1px solid #BBB;
   border-right: 1px solid #BBB;
 }
+
+.live {
+  font-weight: bold;
+}
