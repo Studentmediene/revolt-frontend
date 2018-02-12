@@ -1,0 +1,130 @@
+.audioControls {
+  display: flex;
+  flex-direction: row;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.backButton {
+  transform: rotate(180deg);
+  padding-left: 11px;
+  padding-right: 11px;
+  margin-left: 4px;
+  margin-right: 4px;
+  cursor: pointer;
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 50px;
+}
+
+.backButtonInner {
+  display: flex;
+  flex-direction: row;
+}
+.rightFacingTriangle {
+  width: 0;
+  height: 0;
+  border-left: 28px solid #FFF;
+  border-top: 14px solid transparent;
+  border-bottom: 14px solid transparent;
+}
+
+.forwardButton {
+  padding-left: 11px;
+  padding-right: 11px;
+  margin-left: 4px;
+  margin-right: 4px;
+  cursor: pointer;
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 50px;
+}
+
+.forwardButtonInner {
+  display: flex;
+  flex-direction: row;
+}
+
+.playPauseButton {
+  padding-left: 11px;
+  padding-right: 11px;
+  margin-left: 4px;
+  margin-right: 4px;
+  cursor: pointer;
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 50px;
+}
+
+.playPauseButtonInner {
+  height: 28px;
+  width: 30px;
+  overflow: hidden;
+  position: relative;
+}
+
+.line {
+  width: 4px;
+  background-color: #FFF;
+}
+
+.left {
+  height: 100%;
+  float: left;
+  background-color: #FFF;
+  width: 36%;
+  transition: all 0.25s ease;
+  overflow: hidden;
+}
+
+.right {
+  height: 100%;
+  float: right;
+  width: 36%;
+  background-color: #FFF;
+  transition: all 0.25s ease;
+}
+
+.triangle1,
+.triangle2 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: transparent;
+  width: 0;
+  height: 0;
+  border-right: 30px solid #333;
+  border-top: 14px solid transparent;
+  border-bottom: 14px solid transparent;
+  transition: transform 0.25s ease;
+}
+
+.triangle1 {
+  transform: translate(0, -100%);
+}
+
+.triangle2 {
+  transform: translate(0, 100%);
+}
+
+.paused .left {
+  width: 50%;
+}
+
+.paused .right {
+  width: 50%;
+}
+
+.paused .triangle1 {
+  transform: translate(0, -50%);
+}
+
+.paused .triangle2 {
+  transform: translate(0, 50%);
+}

@@ -6,6 +6,8 @@ import { createStructuredSelector } from 'reselect';
 import { fromJS, is } from 'immutable';
 
 import PlaylistController from './utils/PlaylistController';
+import AudioProgress from './components/AudioProgress';
+import AudioControls from './components/AudioControls';
 import {
   playLive,
   getPodcastPlaylist,
@@ -319,78 +321,25 @@ class Player extends React.Component {
       timeRatio = null;
     }
 
-    let playPauseButtonStyle = styles.playPauseButton;
-    if (this.state.paused) {
-      playPauseButtonStyle += ` ${styles.paused}`;
-    }
-
-    const audioProgressStyle = {
-      width: progressBarWidth,
-    };
-    if (this.state.paused || this.state.live) {
-      audioProgressStyle.border = 'none';
-    }
-
     return (
       <div className={styles.container} title={this.state.displayText}>
-        <div className={styles.audioControls}>
-          <button
-            className={styles.backButton}
-            onClick={this.playPrevious}
-            onKeyPress={this.playPrevious}
-          >
-            <div className={styles.backButtonInner}>
-              <div className={styles.rightFacingTriangle} />
-              <div className={styles.line} />
-            </div>
-          </button>
-          <button
-            className={playPauseButtonStyle}
-            onClick={this.togglePlayPause}
-            onKeyPress={this.togglePlayPause}
-          >
-            <div className={styles.playPauseButtonInner}>
-              <div className={styles.left} />
-              <div className={styles.right} />
-              <div className={styles.triangle1} />
-              <div className={styles.triangle2} />
-            </div>
-          </button>
-          <button
-            className={styles.forwardButton}
-            onClick={this.playNext}
-            onKeyPress={this.playNext}
-          >
-            <div className={styles.forwardButtonInner}>
-              <div className={styles.rightFacingTriangle} />
-              <div className={styles.line} />
-            </div>
-          </button>
-        </div>
-
-        <div
-          role="toolbar"
-          className={styles.audioProgressContainer}
-          ref={ref => {
-            this.audioProgressContainer = ref;
+        <AudioControls
+          playNext={() => this.playNext()}
+          playPrevious={() => this.playPrevious()}
+          togglePlayPause={() => this.togglePlayPause()}
+          paused={this.state.paused}
+        />
+        <AudioProgress
+          audioProgressRef={el => {
+            this.audioProgressContainer = el;
           }}
-          onMouseDown={this.updateDisplayPosition}
-          onMouseMove={this.updateDisplayPosition}
-          onTouchStart={this.updateDisplayPosition}
-          onTouchMove={this.updateDisplayPosition}
-        >
-          <div className={styles.audioProgress} style={audioProgressStyle} />
-          <div className={styles.audioProgressOverlay}>
-            <div className={styles.audioInfoMarquee}>
-              <div className={styles.audioInfo} draggable="false">
-                {this.state.displayText}
-              </div>
-            </div>
-            <div className={styles.audioTimeProgress} draggable="false">
-              {timeRatio}
-            </div>
-          </div>
-        </div>
+          displayText={this.state.displayText}
+          live={this.state.live}
+          paused={this.state.paused}
+          progressBarWidth={progressBarWidth}
+          timeRatio={timeRatio}
+          updateDisplayPosition={e => this.updateDisplayPosition(e)}
+        />
       </div>
     );
   }
