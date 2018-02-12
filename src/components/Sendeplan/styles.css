@@ -1,6 +1,31 @@
+.fullTable {
+  overflow: auto;
+  border-left: 1px solid #BBB;
+  border-right: 1px solid #BBB;
+}
+
+.fullTable table {
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 80%;
+  width: 150%;
+}
+
+.simpleTable {
+  font-size: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.simpleTable table {
+  width: 25%;
+}
+
 .sendeplan td {
   border: 1px black solid;
   padding: 6px;
+  width: 20px;
 }
 
 .sendeplan th {
@@ -15,14 +40,6 @@
   text-align: center;
 }
 
-.sendeplan table {
-  font-size: 85%;
-  position: relative;
-  left: 0;
-  right: 0;
-  width: 40%;
-}
-
 .toggleWeek {
   border: 1px #222 solid;
   padding: 10px;
@@ -35,18 +52,6 @@
   cursor: pointer;
   background-color: #222;
   color: white;
-}
-
-.fullTable {
-  overflow: auto;
-  border-left: 1px solid #BBB;
-  border-right: 1px solid #BBB;
-}
-
-.simpleTable {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 @media screen and (min-width: 1997px) {
