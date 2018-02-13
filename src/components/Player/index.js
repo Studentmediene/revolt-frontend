@@ -1,13 +1,14 @@
+/*eslint no-console: ["error", { allow: ["log"] }] */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { soundManager } from 'soundmanager2';
 import { createStructuredSelector } from 'reselect';
 import { fromJS, is } from 'immutable';
 
 import PlaylistController from './utils/PlaylistController';
 import AudioProgress from './components/AudioProgress';
 import AudioControls from './components/AudioControls';
+import SoundManager from './components/SoundManager';
 import {
   playLive,
   getPodcastPlaylist,
@@ -30,8 +31,6 @@ class Player extends React.Component {
     this.volume = 80;
     // Whether or not we are seeking
     this.seekInProgress = false;
-    // Stores the soundmanager sound object
-    this.soundObject = null;
     // The HTML of the progress container (updated in the render-function)
     this.audioProgressContainer = null;
     /* bounding rectangle used for calculating seek
@@ -43,8 +42,6 @@ class Player extends React.Component {
     this.resizeListener = null;
     // The controller handling playlist actions
     this.playlistController = new PlaylistController();
-    // The live URL
-    this.liveUrl = 'https://direkte.radiorevolt.no/revolt.ogg';
     // Max live offset in seconds
     this.maxLiveOffset = 60 * 60 * 4; // four hours
   }
@@ -60,24 +57,20 @@ class Player extends React.Component {
     live: false,
     // Whether or not it's paused
     paused: true,
+    // Audio URL
+    url: null,
   };
 
   componentWillMount() {
     // Load correct URL based on browser support
     const oggUrl = 'https://direkte.radiorevolt.no/revolt.ogg';
-    const aacUrl = 'https://direkte.radiorevolt.no/revolt.aac';
-    if (soundManager.canPlayURL(oggUrl)) {
-      this.liveUrl = oggUrl;
-    } else {
-      this.liveUrl = aacUrl;
-    }
-
-    // SoundManager2 setup
-    soundManager.setup({
-      preferFlash: false,
-      debugMode: false,
-      html5PollingInterval: 50,
-    });
+    //const aacUrl = 'https://direkte.radiorevolt.no/revolt.aac';
+    this.liveUrl = oggUrl;
+    // if (soundManager.canPlayURL(oggUrl)) {
+    //   this.liveUrl = oggUrl;
+    // } else {
+    //   this.liveUrl = aacUrl;
+    // }
   }
 
   componentDidMount() {
@@ -117,52 +110,29 @@ class Player extends React.Component {
     window.removeEventListener('mouseup', this.seekReleaseListener);
     document.removeEventListener('touchend', this.seekReleaseListener);
     window.removeEventListener('resize', this.resizeListener);
-    // stop the audio (we can't know when garbage collection will run)
-    soundManager.stopAll();
   }
 
-  resume = () => {
-    if (this.soundObject && this.soundObject.readyState) {
-      this.soundObject.resume();
-    }
-  };
-
-  pause = () => {
-    if (this.soundObject && this.soundObject.readyState) {
-      this.soundObject.pause();
-    }
-  };
-
   togglePlayPause = () => {
-    if (this.soundObject && this.soundObject.readyState) {
-      this.soundObject.togglePause();
-      if (this.state.paused) {
-        this.props.playLive();
-      } else {
-        this.props.pauseLive();
-      }
-    } else {
-      this.props.playLive(0);
-    }
+    this.setState(state => ({
+      paused: !state.paused,
+    }));
   };
 
   playNext = () => {
     if (!this.props.live) {
-      if (this.soundObject && this.soundObject.readyState) {
-        this.playShow(this.playlistController.getNext());
-      }
+      this.playShow(this.playlistController.getNext());
     }
   };
 
   playPrevious = () => {
     if (!this.props.live) {
-      if (this.soundObject && this.soundObject.readyState) {
-        const backLimit = 2 * 1000; // two seconds
-        if (this.soundObject.position < backLimit) {
-          this.playShow(this.playlistController.getPrevious());
-        } else {
-          this.soundObject.setPosition(0);
-        }
+      const backLimit = 2 * 1000; // two seconds
+      if (this.state.position < backLimit) {
+        this.playShow(this.playlistController.getPrevious());
+      } else {
+        this.setState({
+          position: 0,
+        });
       }
     }
   };
@@ -173,8 +143,6 @@ class Player extends React.Component {
     if (!this.seekInProgress) return;
 
     event.preventDefault();
-    // Update the position
-    this.soundObject.setPosition(this.state.displayPosition);
     // Cancel the seeking
     this.seekInProgress = false;
   };
@@ -201,72 +169,13 @@ class Player extends React.Component {
     this.play(this.liveUrl);
   };
 
-  play = (url, pos = 0) => {
-    if (!this.soundObject) {
-      // Create a new sound object
-      this.soundObject = soundManager.createSound({
-        url,
-        volume: this.volume,
-        whileplaying: () => {
-          if (!this.props.live && !this.seekInProgress) {
-            this.setState({
-              displayPosition: this.soundObject.position,
-              displayDuration: this.soundObject.durationEstimate,
-            });
-          }
-        },
-        onplay: () => {
-          this.setState({
-            paused: false,
-          });
-        },
-        onpause: () => {
-          this.setState({
-            paused: true,
-          });
-        },
-        onresume: () => {
-          this.setState({
-            paused: false,
-          });
-        },
-        onstop: () => {
-          this.setState({
-            paused: true,
-            live: false,
-          });
-        },
-        onfinish: () => {
-          if (!this.props.live) {
-            const lastIndex = this.playlistController.getPosition();
-            const next = this.playlistController.getNext();
-
-            // Check that there is more shows to play
-            if (next && this.playlistController.getPosition !== lastIndex) {
-              // Play the next show
-              this.playShow(next);
-            }
-          }
-        },
-        onload: () => {
-          // While the sound is loading
-        },
-        onerror: () => {
-          // When shits fucked
-        },
-      });
-    }
-
-    // required to reset pause/play state on iOS so whileplaying() works? odd.
-    this.soundObject.stop();
-
-    soundManager.stopAll();
-
-    this.soundObject.play({
+  play(url, position = 0) {
+    this.setState({
       url,
-      position: pos * 1000,
+      position,
+      paused: false,
     });
-  };
+  }
 
   updateDisplayPosition = event => {
     /* This only updates the displayed position of the player,
@@ -288,9 +197,9 @@ class Player extends React.Component {
     const containerWidth = boundingRect.width;
     const progressPercentage = position / containerWidth;
 
-    this.setState({
-      displayPosition: progressPercentage * this.soundObject.durationEstimate,
-    });
+    this.setState(state => ({
+      position: progressPercentage * state.durationEstimate,
+    }));
   };
 
   fetchAudioProgressBoundingRect = () => {
@@ -303,9 +212,18 @@ class Player extends React.Component {
     return `${mins < 10 ? '0' : ''}${mins}:${secs < 10 ? '0' : ''}${secs}`;
   };
 
+  whilePlaying(soundObject) {
+    if (!this.props.live && !this.seekInProgress) {
+      this.setState({
+        position: soundObject.position,
+        durationEstimate: soundObject.durationEstimate,
+      });
+    }
+  }
+
   render() {
-    const position = this.state.displayPosition;
-    const duration = this.state.displayDuration;
+    const position = this.state.position;
+    const duration = this.state.durationEstimate;
 
     const displayPosition = this.convertSecondsToDisplayTime(position / 1000);
     const displayDuration = this.convertSecondsToDisplayTime(duration / 1000);
@@ -317,12 +235,56 @@ class Player extends React.Component {
       timeRatio = null;
       progressBarWidth = `${(1 - this.props.offset / this.maxLiveOffset) *
         100}%`;
-    } else if (!this.soundObject) {
-      timeRatio = null;
     }
+    // TODO: !this.soundObject
+    // timeRatio = null;
 
     return (
       <div className={styles.container} title={this.state.displayText}>
+        <SoundManager
+          url={this.state.url}
+          paused={this.state.paused}
+          position={this.state.position}
+          volume={this.volume}
+          whilePlaying={(...a) => this.whilePlaying(...a)}
+          onPlay={() => {
+            console.log('onPlay event');
+            this.setState({
+              paused: false,
+            });
+          }}
+          onPause={() => {
+            console.log('onPause event');
+            this.setState({
+              paused: true,
+            });
+          }}
+          onResume={() => {
+            console.log('onResume event');
+            this.setState({
+              paused: false,
+            });
+          }}
+          onStop={() => {
+            console.log('onStop event');
+            this.setState({
+              // paused: true,
+              live: false,
+            });
+          }}
+          onFinishedPlaying={() => {
+            if (!this.props.live) {
+              const lastIndex = this.playlistController.getPosition();
+              const next = this.playlistController.getNext();
+
+              // Check that there is more shows to play
+              if (next && this.playlistController.getPosition !== lastIndex) {
+                // Play the next show
+                this.playShow(next);
+              }
+            }
+          }}
+        />
         <AudioControls
           playNext={() => this.playNext()}
           playPrevious={() => this.playPrevious()}
