@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { fromJS, is } from 'immutable';
+import { soundManager } from 'soundmanager2';
 
 import PlaylistController from './utils/PlaylistController';
 import AudioProgress from './components/AudioProgress';
@@ -60,19 +61,21 @@ class Player extends React.Component {
     // Whether or not it's paused
     paused: true,
     // Audio URL
+    // duvholt: move to reducer? maybe?
     url: null,
   };
 
   componentWillMount() {
-    // Load correct URL based on browser support
-    const oggUrl = 'https://direkte.radiorevolt.no/revolt.ogg';
-    //const aacUrl = 'https://direkte.radiorevolt.no/revolt.aac';
-    this.liveUrl = oggUrl;
-    // if (soundManager.canPlayURL(oggUrl)) {
-    //   this.liveUrl = oggUrl;
-    // } else {
-    //   this.liveUrl = aacUrl;
-    // }
+    soundManager.onready(() => {
+      // Load correct URL based on browser support
+      const oggUrl = 'https://direkte.radiorevolt.no/revolt.ogg';
+      const aacUrl = 'https://direkte.radiorevolt.no/revolt.aac';
+      if (soundManager.canPlayURL(oggUrl)) {
+        this.liveUrl = oggUrl;
+      } else {
+        this.liveUrl = aacUrl;
+      }
+    });
   }
 
   componentDidMount() {
