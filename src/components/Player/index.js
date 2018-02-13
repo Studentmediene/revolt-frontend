@@ -48,9 +48,11 @@ class Player extends React.Component {
 
   state = {
     // Number of seconds played
-    displayPosition: 0,
+    position: 0,
+    // Position while user is seeking
+    seekPosition: 0,
     // Duration of the audio (estimate)
-    dispayDuration: 0,
+    duration: 0,
     // Display text
     displayText: '',
     // Whether or not it is live (not a podcast or SoD)
@@ -141,8 +143,14 @@ class Player extends React.Component {
     // This function is activated when the user lets go of the mouse
     // If the user is not currently seeking, don't do anything
     if (!this.seekInProgress) return;
+    // Disable live seeking
+    if (this.props.live) return;
 
     event.preventDefault();
+
+    this.setState(state => ({
+      position: state.seekPosition,
+    }));
     // Cancel the seeking
     this.seekInProgress = false;
   };
@@ -198,7 +206,7 @@ class Player extends React.Component {
     const progressPercentage = position / containerWidth;
 
     this.setState(state => ({
-      position: progressPercentage * state.durationEstimate,
+      seekPosition: progressPercentage * state.durationEstimate,
     }));
   };
 
@@ -213,23 +221,23 @@ class Player extends React.Component {
   };
 
   whilePlaying(soundObject) {
-    if (!this.props.live && !this.seekInProgress) {
-      this.setState({
-        position: soundObject.position,
-        durationEstimate: soundObject.durationEstimate,
-      });
-    }
+    this.setState({
+      position: soundObject.position,
+      durationEstimate: soundObject.durationEstimate,
+    });
   }
 
   render() {
-    const position = this.state.position;
+    const { position, seekPosition } = this.state;
     const duration = this.state.durationEstimate;
 
-    const displayPosition = this.convertSecondsToDisplayTime(position / 1000);
+    const displayPosition = this.convertSecondsToDisplayTime(
+      seekPosition / 1000,
+    );
     const displayDuration = this.convertSecondsToDisplayTime(duration / 1000);
 
     let timeRatio = `${displayPosition} / ${displayDuration}`;
-    let progressBarWidth = `${position / duration * 100}%`;
+    let progressBarWidth = `${seekPosition / duration * 100}%`;
 
     if (this.props.live) {
       timeRatio = null;
@@ -244,7 +252,7 @@ class Player extends React.Component {
         <SoundManager
           url={this.state.url}
           paused={this.state.paused}
-          position={this.state.position}
+          position={position}
           volume={this.volume}
           whilePlaying={(...a) => this.whilePlaying(...a)}
           onPlay={() => {
