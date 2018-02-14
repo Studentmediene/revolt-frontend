@@ -52,6 +52,10 @@ AudioProgress.propTypes = {
   live: PropTypes.bool.isRequired,
   paused: PropTypes.bool.isRequired,
   progressBarWidth: PropTypes.string.isRequired,
-  timeRatio: PropTypes.string.isRequired,
+  timeRatio: PropTypes.string,
   updateDisplayPosition: PropTypes.func.isRequired,
+};
+
+AudioProgress.defaultProps = {
+  timeRatio: null,
 };

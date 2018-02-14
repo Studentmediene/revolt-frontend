@@ -242,9 +242,9 @@ class Player extends React.Component {
       timeRatio = null;
       progressBarWidth = `${(1 - this.props.offset / this.maxLiveOffset) *
         100}%`;
+    } else if (!this.state.url) {
+      timeRatio = null;
     }
-    // TODO: !this.soundObject
-    // timeRatio = null;
 
     return (
       <div className={styles.container} title={this.state.displayText}>
