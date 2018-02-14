@@ -56,12 +56,9 @@ class Player extends React.Component {
     duration: 0,
     // Display text
     displayText: '',
-    // Whether or not it is live (not a podcast or SoD)
-    live: false,
     // Whether or not it's paused
     paused: true,
     // Audio URL
-    // duvholt: move to reducer? maybe?
     url: null,
   };
 
@@ -165,7 +162,6 @@ class Player extends React.Component {
 
     this.setState({
       displayText: `${show.show}: ${show.title}`,
-      live: false,
     });
 
     this.play(show.url, pos);
@@ -276,13 +272,6 @@ class Player extends React.Component {
               paused: false,
             });
           }}
-          onStop={() => {
-            console.log('onStop event');
-            this.setState({
-              // paused: true,
-              live: false,
-            });
-          }}
           onFinishedPlaying={() => {
             if (!this.props.live) {
               const lastIndex = this.playlistController.getPosition();
@@ -307,7 +296,7 @@ class Player extends React.Component {
             this.audioProgressContainer = el;
           }}
           displayText={this.state.displayText}
-          live={this.state.live}
+          live={this.props.live}
           paused={this.state.paused}
           progressBarWidth={progressBarWidth}
           timeRatio={timeRatio}
