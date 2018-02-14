@@ -41,14 +41,21 @@ export default class SoundManager extends Component {
   }
 
   updateSound(prevProps) {
-    if (this.props.paused) {
-      this.pause();
-    } else {
-      if (this.soundObject.playState === 0) {
+    if (!this.soundObject) {
+      // Sound manager is not ready
+      return;
+    }
+    if (this.soundObject.playState === 0) {
+      if (!this.props.paused) {
         this.play();
       } else {
-        this.resume();
+        // No audio has been loaded
+        return;
       }
+    } else if (this.props.paused) {
+      this.pause();
+    } else {
+      this.resume();
     }
 
     if (this.props.position != null) {
