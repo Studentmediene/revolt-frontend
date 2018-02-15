@@ -14,6 +14,10 @@ import {
   GET_ON_DEMAND_PLAYLIST_FAIELD,
   GET_LIVE_TITLE,
   PAUSE_LIVE,
+  TOGGLE_PLAY_PAUSE,
+  RESUME,
+  PAUSE,
+  PLAYER_STATUS,
 } from './constants';
 
 export function playLive(offset = 0) {
@@ -79,5 +83,30 @@ export function currentShowTitle(liveTitle) {
 export function pauseLive() {
   return {
     type: PAUSE_LIVE,
+  };
+}
+
+export function togglePlayPause() {
+  return {
+    type: TOGGLE_PLAY_PAUSE,
+  };
+}
+
+export function resume() {
+  return {
+    type: RESUME,
+  };
+}
+
+export function pause() {
+  return {
+    type: PAUSE,
+  };
+}
+
+export function playerStatus({ paused }) {
+  return {
+    type: PLAYER_STATUS,
+    paused,
   };
 }

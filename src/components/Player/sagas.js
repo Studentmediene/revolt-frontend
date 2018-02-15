@@ -1,10 +1,21 @@
-import { take, call, put, fork, cancel } from 'redux-saga/effects';
+import {
+  select,
+  take,
+  call,
+  put,
+  fork,
+  cancel,
+  takeLatest,
+} from 'redux-saga/effects';
 
 import {
   GET_PODCAST_PLAYLIST_PENDING,
   GET_ON_DEMAND_PLAYLIST_PENDING,
   PLAY_LIVE,
   PAUSE_LIVE,
+  TOGGLE_PLAY_PAUSE,
+  RESUME,
+  PAUSE,
 } from './constants';
 import {
   podcastPlaylistLoaded,
@@ -12,7 +23,9 @@ import {
   onDemandPlaylistLoaded,
   onDemandPlaylistError,
   currentShowTitle,
+  playerStatus,
 } from './actions';
+import { selectPaused } from './selectors';
 import { getGraphQL, getCurrentShows } from 'utils/api';
 // Individual exports for testing
 export function* playPodcast(episodeId, offset) {
@@ -125,5 +138,36 @@ export function* playOnDemandWatcher() {
   }
 }
 
+export function* togglePlayPause() {
+  const paused = yield select(selectPaused());
+  yield put(
+    playerStatus({
+      paused: !paused,
+    }),
+  );
+}
+
+export function* resume() {
+  yield put(
+    playerStatus({
+      paused: false,
+    }),
+  );
+}
+
+export function* pause() {
+  yield put(
+    playerStatus({
+      paused: true,
+    }),
+  );
+}
+
+export function* playerSaga() {
+  yield takeLatest(TOGGLE_PLAY_PAUSE, togglePlayPause);
+  yield takeLatest(RESUME, resume);
+  yield takeLatest(PAUSE, pause);
+}
+
 // All sagas to be loaded
-export default [playPodcastWatcher, playOnDemandWatcher, playLive];
+export default [playerSaga, playPodcastWatcher, playOnDemandWatcher, playLive];

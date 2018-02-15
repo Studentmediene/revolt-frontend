@@ -42,12 +42,22 @@ const selectLiveTitle = () =>
     playerState.get('liveTitle'),
   );
 
+const selectUrl = () =>
+  createSelector(selectPlayerDomain(), playerState => playerState.get('url'));
+
+const selectPaused = () =>
+  createSelector(selectPlayerDomain(), playerState =>
+    playerState.get('paused'),
+  );
+
 export {
   selectPlayerDomain,
   selectPlaylist,
   selectIndex,
   selectOffset,
   selectLive,
+  selectPaused,
+  selectUrl,
   selectPlayerLoading,
   selectPlayerError,
   selectLiveTitle,

@@ -15,6 +15,9 @@ import {
   getPodcastPlaylist,
   getOnDemandPlaylist,
   pauseLive,
+  pause,
+  resume,
+  togglePlayPause,
 } from './actions';
 import {
   selectPlaylist,
@@ -22,6 +25,8 @@ import {
   selectOffset,
   selectLive,
   selectLiveTitle,
+  selectPaused,
+  selectUrl,
 } from './selectors';
 import styles from './styles.css';
 
@@ -56,10 +61,6 @@ class Player extends React.Component {
     duration: 0,
     // Display text
     displayText: '',
-    // Whether or not it's paused
-    paused: true,
-    // Audio URL
-    url: null,
   };
 
   componentWillMount() {
@@ -114,12 +115,6 @@ class Player extends React.Component {
     window.removeEventListener('resize', this.resizeListener);
   }
 
-  togglePlayPause = () => {
-    this.setState(state => ({
-      paused: !state.paused,
-    }));
-  };
-
   playNext = () => {
     if (!this.props.live) {
       this.playShow(this.playlistController.getNext());
@@ -170,7 +165,7 @@ class Player extends React.Component {
   playLive = () => {
     this.setState({
       displayText: this.props.liveTitle,
-      url: `${this.liveUrl}?offset=${this.props.offset}`,
+      // url: `${this.liveUrl}?offset=${this.props.offset}`,
     });
 
     this.play(this.liveUrl);
@@ -178,9 +173,9 @@ class Player extends React.Component {
 
   play(url, position = 0) {
     this.setState({
-      url,
+      // url,
       position,
-      paused: false,
+      // paused: false,
     });
   }
 
@@ -246,35 +241,26 @@ class Player extends React.Component {
       timeRatio = null;
       progressBarWidth = `${(1 - this.props.offset / this.maxLiveOffset) *
         100}%`;
-    } else if (!this.state.url) {
+    } else if (!this.props.url) {
       timeRatio = null;
     }
 
     return (
       <div className={styles.container} title={this.state.displayText}>
         <SoundManager
-          url={this.state.url}
-          paused={this.state.paused}
+          url={this.props.url}
+          paused={this.props.paused}
           position={position}
           volume={this.volume}
           whilePlaying={(...a) => this.whilePlaying(...a)}
           onPlay={() => {
             console.log('onPlay event');
-            this.setState({
-              paused: false,
-            });
           }}
           onPause={() => {
-            console.log('onPause event');
-            this.setState({
-              paused: true,
-            });
+            this.props.pause();
           }}
           onResume={() => {
-            console.log('onResume event');
-            this.setState({
-              paused: false,
-            });
+            this.props.resume();
           }}
           onFinishedPlaying={() => {
             if (!this.props.live) {
@@ -292,8 +278,8 @@ class Player extends React.Component {
         <AudioControls
           playNext={() => this.playNext()}
           playPrevious={() => this.playPrevious()}
-          togglePlayPause={() => this.togglePlayPause()}
-          paused={this.state.paused}
+          togglePlayPause={() => this.props.togglePlayPause()}
+          paused={this.props.paused}
         />
         <AudioProgress
           audioProgressRef={el => {
@@ -301,7 +287,7 @@ class Player extends React.Component {
           }}
           displayText={this.state.displayText}
           live={this.props.live}
-          paused={this.state.paused}
+          paused={this.props.paused}
           progressBarWidth={progressBarWidth}
           timeRatio={timeRatio}
           updateDisplayPosition={e => this.updateDisplayPosition(e)}
@@ -320,7 +306,17 @@ Player.propTypes = {
   offset: PropTypes.number,
   index: PropTypes.number,
   live: PropTypes.bool,
+  paused: PropTypes.bool,
+  url: PropTypes.string,
   liveTitle: PropTypes.string,
+  togglePlayPause: PropTypes.func.isRequired,
+  resume: PropTypes.func.isRequired,
+  pause: PropTypes.func.isRequired,
+};
+
+Player.defaultProps = {
+  paused: true,
+  url: null,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -328,6 +324,8 @@ const mapStateToProps = createStructuredSelector({
   live: selectLive(),
   offset: selectOffset(),
   index: selectIndex(),
+  paused: selectPaused(),
+  url: selectUrl(),
   liveTitle: selectLiveTitle(),
 });
 
@@ -340,6 +338,9 @@ function mapDispatchToProps(dispatch) {
       dispatch(getPodcastPlaylist(episodeId, offset)),
     playOnDemand: (episodeId, offset = 0) =>
       dispatch(getOnDemandPlaylist(episodeId, offset)),
+    togglePlayPause: () => dispatch(togglePlayPause()),
+    resume: () => dispatch(resume()),
+    pause: () => dispatch(pause()),
   };
 }
 
