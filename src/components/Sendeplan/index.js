@@ -211,19 +211,24 @@ export class Sendeplan extends React.Component {
           </div>
         ) : (
           <div>
-            <button onClick={() => this.makeSendePlanWeek()}>
-              Klikk her for å se program for hele uken
-            </button>
-            <h3> Sendeplanen for i dag: </h3>
-            <table>
-              <tbody>
-                <tr>
-                  <th>Tid</th>
-                  <th>Program</th>
-                </tr>
-                {rowToday}
-              </tbody>
-            </table>
+            <div className={styles.simpleTable}>
+              <button
+                className={styles.toggleWeek}
+                onClick={() => this.makeSendePlanWeek()}
+              >
+                Klikk her for å se program for hele uken
+              </button>
+              <h3> Sendeplanen for i dag: </h3>
+              <table>
+                <tbody>
+                  <tr>
+                    <th>Tid</th>
+                    <th>Program</th>
+                  </tr>
+                  {rowToday}
+                </tbody>
+              </table>
+            </div>
           </div>
         )}
       </div>
