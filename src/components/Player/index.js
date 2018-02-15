@@ -197,6 +197,10 @@ class Player extends React.Component {
 
     event.preventDefault();
 
+    // Hack: The initial position of the bounding rect is not always correct,
+    // so as a workaround we always fetch the latest bounding rect
+    this.fetchAudioProgressBoundingRect();
+
     const boundingRect = this.audioProgressBoundingRect;
     const isTouch = event.type.slice(0, 5) === 'touch';
     const pageX = isTouch ? event.targetTouches.item(0).pageX : event.pageX;
