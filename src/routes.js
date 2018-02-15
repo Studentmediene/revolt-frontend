@@ -107,6 +107,23 @@ export default function createRoutes(store) {
       ),
     },
     {
+      path: '/plainpost/:slug',
+      name: 'plainpost',
+      component: asyncComponent(() =>
+        Promise.all([
+          System.import('components/Post/reducer'),
+          System.import('components/Post/sagas'),
+          System.import('components/Post'),
+        ])
+          .then(([reducer, sagas, component]) => {
+            injectReducer('post', reducer.default);
+            injectSagas(sagas.default);
+            return component;
+          })
+          .catch(errorLoading),
+      ),
+    },
+    {
       path: '*',
       name: 'notfound',
       component: asyncComponent(() =>
