@@ -89,3 +89,7 @@ in fullTable */
     align-self: center;
   }
 }
+
+.live {
+  font-weight: bold;
+}
