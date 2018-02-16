@@ -115,8 +115,10 @@ export default class AudioProgress extends Component {
       timeRatio = null;
       progressBarWidth = `${(1 - this.props.offset / this.maxLiveOffset) *
         100}%`;
-    } else if (!this.props.url) {
+    } else if (!this.props.url || duration < 100) {
+      // Audio either hasn't loading or is playing blank.mp3
       timeRatio = null;
+      progressBarWidth = 0;
     }
 
     const audioProgressStyle = {
