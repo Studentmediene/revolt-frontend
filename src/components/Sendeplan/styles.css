@@ -42,7 +42,7 @@ in fullTable */
 
 .simpleTable table {
   table-layout: fixed;
-  width: 30%;
+  width: 200px;
 }
 
 .sendeplan td {
