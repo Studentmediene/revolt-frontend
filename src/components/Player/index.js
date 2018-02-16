@@ -12,7 +12,6 @@ import {
   playLive,
   getPodcastPlaylist,
   getOnDemandPlaylist,
-  pauseLive,
   pause,
   resume,
   togglePlayPause,
@@ -226,7 +225,6 @@ class Player extends React.Component {
 
 Player.propTypes = {
   playLive: PropTypes.func,
-  pauseLive: PropTypes.func,
   playPodcast: PropTypes.func,
   playOnDemand: PropTypes.func,
   playlist: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
@@ -262,7 +260,6 @@ function mapDispatchToProps(dispatch) {
   return {
     dispatch,
     playLive: (offset = 0) => dispatch(playLive(offset)),
-    pauseLive: () => dispatch(pauseLive()),
     playPodcast: (episodeId, offset = 0) =>
       dispatch(getPodcastPlaylist(episodeId, offset)),
     playOnDemand: (episodeId, offset = 0) =>

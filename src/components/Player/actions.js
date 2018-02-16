@@ -13,7 +13,6 @@ import {
   GET_ON_DEMAND_PLAYLIST_SUCCESS,
   GET_ON_DEMAND_PLAYLIST_FAIELD,
   GET_LIVE_TITLE,
-  PAUSE_LIVE,
   TOGGLE_PLAY_PAUSE,
   RESUME,
   PAUSE,
@@ -78,12 +77,6 @@ export function currentShowTitle(liveTitle) {
   return {
     type: GET_LIVE_TITLE,
     liveTitle,
-  };
-}
-
-export function pauseLive() {
-  return {
-    type: PAUSE_LIVE,
   };
 }
 

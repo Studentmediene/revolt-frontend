@@ -1,18 +1,9 @@
-import {
-  select,
-  take,
-  call,
-  put,
-  fork,
-  cancel,
-  takeLatest,
-} from 'redux-saga/effects';
+import { select, take, call, put, fork, takeLatest } from 'redux-saga/effects';
 
 import {
   GET_PODCAST_PLAYLIST_PENDING,
   GET_ON_DEMAND_PLAYLIST_PENDING,
   PLAY_LIVE,
-  PAUSE_LIVE,
   TOGGLE_PLAY_PAUSE,
   RESUME,
   PAUSE,
@@ -123,12 +114,9 @@ function* updateLiveTitleTimer() {
   }
 }
 
-function* playLive() {
-  while (yield take(PLAY_LIVE)) {
-    const bgSyncTask = yield fork(updateLiveTitleTimer);
-    yield take(PAUSE_LIVE);
-    yield cancel(bgSyncTask);
-  }
+function* liveUpdater() {
+  yield take(PLAY_LIVE);
+  yield fork(updateLiveTitleTimer);
 }
 
 export function* playPodcastWatcher() {
@@ -206,7 +194,13 @@ export function* playerSaga() {
   yield takeLatest(PAUSE, pause);
   yield takeLatest(PLAY_NEXT, playNext);
   yield takeLatest(PLAY_PREVIOUS, playPrevious);
+  yield takeLatest(PLAY_LIVE, updateLiveTitle);
 }
 
 // All sagas to be loaded
-export default [playerSaga, playPodcastWatcher, playOnDemandWatcher, playLive];
+export default [
+  playerSaga,
+  playPodcastWatcher,
+  playOnDemandWatcher,
+  liveUpdater,
+];
