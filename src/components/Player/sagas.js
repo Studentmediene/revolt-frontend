@@ -5,8 +5,6 @@ import {
   GET_ON_DEMAND_PLAYLIST_PENDING,
   PLAY_LIVE,
   TOGGLE_PLAY_PAUSE,
-  RESUME,
-  PAUSE,
   PLAY_NEXT,
   PLAY_PREVIOUS,
 } from './constants';
@@ -152,22 +150,6 @@ export function* togglePlayPause() {
   }
 }
 
-export function* resume() {
-  yield put(
-    playerStatus({
-      paused: false,
-    }),
-  );
-}
-
-export function* pause() {
-  yield put(
-    playerStatus({
-      paused: true,
-    }),
-  );
-}
-
 export function* playNext() {
   const live = yield select(selectLive());
   if (live) {
@@ -198,8 +180,6 @@ export function* playPrevious() {
 
 export function* playerSaga() {
   yield takeLatest(TOGGLE_PLAY_PAUSE, togglePlayPause);
-  yield takeLatest(RESUME, resume);
-  yield takeLatest(PAUSE, pause);
   yield takeLatest(PLAY_NEXT, playNext);
   yield takeLatest(PLAY_PREVIOUS, playPrevious);
   yield takeLatest(PLAY_LIVE, updateLiveTitle);

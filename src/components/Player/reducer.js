@@ -16,6 +16,8 @@ import {
   GET_LIVE_TITLE,
   PLAYER_STATUS,
   PLAY_ON_DEMAND_EPISODE,
+  RESUME,
+  PAUSE,
 } from './constants';
 import blankmp3 from './blank.mp3';
 
@@ -84,6 +86,10 @@ function playerReducer(state = initialState, action) {
       }
       return state.set('playingTitle', action.liveTitle);
     }
+    case RESUME:
+      return state.set('paused', false);
+    case PAUSE:
+      return state.set('paused', true);
     case PLAYER_STATUS:
       return state.set('paused', action.paused);
     default:
