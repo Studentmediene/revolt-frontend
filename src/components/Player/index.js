@@ -56,6 +56,12 @@ class Player extends React.Component {
     });
   }
 
+  resetPosition() {
+    this.setState({
+      position: 0,
+    });
+  }
+
   onSeek(seekPosition) {
     this.setState({
       position: seekPosition,
@@ -90,6 +96,7 @@ class Player extends React.Component {
             this.props.resume();
           }}
           onFinishedPlaying={() => {
+            this.resetPosition();
             this.props.playNext();
           }}
         />
@@ -99,9 +106,7 @@ class Player extends React.Component {
             if (!this.props.live) {
               const backLimit = 2 * 1000; // two seconds
               if (this.state.position >= backLimit) {
-                this.setState({
-                  position: 0,
-                });
+                this.resetPosition();
               } else {
                 this.props.playPrevious();
               }
