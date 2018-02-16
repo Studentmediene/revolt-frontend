@@ -74,8 +74,12 @@ function playerReducer(state = initialState, action) {
     }
     case GET_ON_DEMAND_PLAYLIST_FAIELD:
       return state.set('loading', false).set('error', true);
-    case GET_LIVE_TITLE:
+    case GET_LIVE_TITLE: {
+      if (!state.get('live')) {
+        return state;
+      }
       return state.set('playingTitle', action.liveTitle);
+    }
     case PLAYER_STATUS:
       return state.set('paused', action.paused);
     default:
