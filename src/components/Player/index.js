@@ -24,7 +24,7 @@ import {
   selectIndex,
   selectOffset,
   selectLive,
-  selectLiveTitle,
+  selectPlayingTitle,
   selectPaused,
   selectUrl,
 } from './selectors';
@@ -95,7 +95,7 @@ class Player extends React.Component {
     if (nextProps.live) {
       this.playLive();
       this.setState({
-        displayText: nextProps.liveTitle,
+        displayText: nextProps.playingTitle,
       });
     } else if (nextProps.playlist) {
       this.playlistController = new PlaylistController(
@@ -164,7 +164,7 @@ class Player extends React.Component {
 
   playLive = () => {
     this.setState({
-      displayText: this.props.liveTitle,
+      displayText: this.props.playingTitle,
       // url: `${this.liveUrl}?offset=${this.props.offset}`,
     });
 
@@ -308,7 +308,7 @@ Player.propTypes = {
   live: PropTypes.bool,
   paused: PropTypes.bool,
   url: PropTypes.string,
-  liveTitle: PropTypes.string,
+  playingTitle: PropTypes.string,
   togglePlayPause: PropTypes.func.isRequired,
   resume: PropTypes.func.isRequired,
   pause: PropTypes.func.isRequired,
@@ -326,7 +326,7 @@ const mapStateToProps = createStructuredSelector({
   index: selectIndex(),
   paused: selectPaused(),
   url: selectUrl(),
-  liveTitle: selectLiveTitle(),
+  playingTitle: selectPlayingTitle(),
 });
 
 function mapDispatchToProps(dispatch) {

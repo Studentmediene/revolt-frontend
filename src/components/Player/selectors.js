@@ -37,9 +37,9 @@ const selectPlayerLoading = () =>
 const selectPlayerError = () =>
   createSelector(selectPlayerDomain(), playerState => playerState.get('error'));
 
-const selectLiveTitle = () =>
+const selectPlayingTitle = () =>
   createSelector(selectPlayerDomain(), playerState =>
-    playerState.get('liveTitle'),
+    playerState.get('playingTitle'),
   );
 
 const selectUrl = () =>
@@ -60,5 +60,5 @@ export {
   selectUrl,
   selectPlayerLoading,
   selectPlayerError,
-  selectLiveTitle,
+  selectPlayingTitle,
 };

@@ -24,7 +24,7 @@ const initialState = fromJS({
   playlist: false,
   loading: false,
   error: false,
-  liveTitle: 'Radio Revolt',
+  playingTitle: 'Radio Revolt',
   paused: true,
   url: null,
 });
@@ -64,7 +64,7 @@ function playerReducer(state = initialState, action) {
     case GET_ON_DEMAND_PLAYLIST_FAIELD:
       return state.set('loading', false).set('error', true);
     case GET_LIVE_TITLE:
-      return state.set('liveTitle', action.liveTitle);
+      return state.set('playingTitle', action.liveTitle);
     case PLAYER_STATUS:
       return state.set('paused', action.paused);
     default:
