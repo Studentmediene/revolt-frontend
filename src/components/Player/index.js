@@ -59,8 +59,6 @@ class Player extends React.Component {
     seekPosition: 0,
     // Duration of the audio (estimate)
     duration: 0,
-    // Display text
-    displayText: '',
   };
 
   componentWillMount() {
@@ -94,9 +92,6 @@ class Player extends React.Component {
 
     if (nextProps.live) {
       this.playLive();
-      this.setState({
-        displayText: nextProps.playingTitle,
-      });
     } else if (nextProps.playlist) {
       this.playlistController = new PlaylistController(
         nextProps.playlist,
@@ -155,19 +150,10 @@ class Player extends React.Component {
       return;
     }
 
-    this.setState({
-      displayText: `${show.show}: ${show.title}`,
-    });
-
     this.play(show.url, pos);
   };
 
   playLive = () => {
-    this.setState({
-      displayText: this.props.playingTitle,
-      // url: `${this.liveUrl}?offset=${this.props.offset}`,
-    });
-
     this.play(this.liveUrl);
   };
 
@@ -246,7 +232,7 @@ class Player extends React.Component {
     }
 
     return (
-      <div className={styles.container} title={this.state.displayText}>
+      <div className={styles.container} title={this.props.playingTitle}>
         <SoundManager
           url={this.props.url}
           paused={this.props.paused}
@@ -285,7 +271,7 @@ class Player extends React.Component {
           audioProgressRef={el => {
             this.audioProgressContainer = el;
           }}
-          displayText={this.state.displayText}
+          displayText={this.props.playingTitle}
           live={this.props.live}
           paused={this.props.paused}
           progressBarWidth={progressBarWidth}
