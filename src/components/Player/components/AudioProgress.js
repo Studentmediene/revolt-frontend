@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import styles from './AudioProgress.css';
 
 export default class AudioProgress extends Component {
@@ -87,9 +88,11 @@ export default class AudioProgress extends Component {
   };
 
   convertSecondsToDisplayTime = number => {
-    const secs = (number % 60).toFixed();
-    const mins = Math.floor(number / 60);
-    return `${mins < 10 ? '0' : ''}${mins}:${secs < 10 ? '0' : ''}${secs}`;
+    const date = moment.utc(number * 1000);
+    if (date.hours() > 0) {
+      return date.format('HH:mm:ss');
+    }
+    return date.format('mm:ss');
   };
 
   fetchAudioProgressBoundingRect = () => {
