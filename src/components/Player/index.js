@@ -34,26 +34,11 @@ class Player extends React.Component {
     super(props);
     // Initial volume
     this.volume = 80;
-    // Whether or not we are seeking
-    this.seekInProgress = false;
-    // The HTML of the progress container (updated in the render-function)
-    this.audioProgressContainer = null;
-    /* bounding rectangle used for calculating seek
-     * position from mouse/touch coordinates
-     */
-    this.audioProgressBoundingRect = null;
-    // EventListeners to create on mount and remove on unmount
-    this.seekReleaseListener = null;
-    this.resizeListener = null;
-    // Max live offset in seconds
-    this.maxLiveOffset = 60 * 60 * 4; // four hours
   }
 
   state = {
     // Number of seconds played
     position: 0,
-    // Position while user is seeking
-    seekPosition: 0,
     // Duration of the audio (estimate)
     duration: 0,
   };
@@ -71,76 +56,11 @@ class Player extends React.Component {
     });
   }
 
-  componentDidMount() {
-    const seekReleaseListener = (this.seekReleaseListener = this.seek);
-    window.addEventListener('mouseup', seekReleaseListener);
-    document.addEventListener('touchend', seekReleaseListener);
-    const resizeListener = (this.resizeListener = this.fetchAudioProgressBoundingRect);
-    window.addEventListener('resize', resizeListener);
-    resizeListener();
+  onSeek(seekPosition) {
+    this.setState({
+      position: seekPosition,
+    });
   }
-
-  componentWillUnmount() {
-    // remove event listeners bound outside the scope of our component
-    window.removeEventListener('mouseup', this.seekReleaseListener);
-    document.removeEventListener('touchend', this.seekReleaseListener);
-    window.removeEventListener('resize', this.resizeListener);
-  }
-
-  seek = event => {
-    // This function is activated when the user lets go of the mouse
-    // If the user is not currently seeking, don't do anything
-    if (!this.seekInProgress) return;
-    // Disable live seeking
-    if (this.props.live) return;
-
-    event.preventDefault();
-
-    this.setState(state => ({
-      position: state.seekPosition,
-    }));
-    // Cancel the seeking
-    this.seekInProgress = false;
-  };
-
-  updateDisplayPosition = event => {
-    /* This only updates the displayed position of the player,
-     * and not the actual position of the sound object.
-     */
-    if (event.type === 'mousedown' || event.type === 'touchstart') {
-      // TODO: make sure we don't select stuff in the background while seeking
-      this.seekInProgress = true;
-    } else if (!this.seekInProgress) {
-      return;
-    }
-
-    event.preventDefault();
-
-    // Hack: The initial position of the bounding rect is not always correct,
-    // so as a workaround we always fetch the latest bounding rect
-    this.fetchAudioProgressBoundingRect();
-
-    const boundingRect = this.audioProgressBoundingRect;
-    const isTouch = event.type.slice(0, 5) === 'touch';
-    const pageX = isTouch ? event.targetTouches.item(0).pageX : event.pageX;
-    const position = pageX - boundingRect.left - document.body.scrollLeft;
-    const containerWidth = boundingRect.width;
-    const progressPercentage = position / containerWidth;
-
-    this.setState(state => ({
-      seekPosition: progressPercentage * state.durationEstimate,
-    }));
-  };
-
-  fetchAudioProgressBoundingRect = () => {
-    this.audioProgressBoundingRect = this.audioProgressContainer.getBoundingClientRect();
-  };
-
-  convertSecondsToDisplayTime = number => {
-    const secs = (number % 60).toFixed();
-    const mins = Math.floor(number / 60);
-    return `${mins < 10 ? '0' : ''}${mins}:${secs < 10 ? '0' : ''}${secs}`;
-  };
 
   whilePlaying(soundObject) {
     this.setState({
@@ -150,24 +70,7 @@ class Player extends React.Component {
   }
 
   render() {
-    const { position, seekPosition } = this.state;
-    const duration = this.state.durationEstimate;
-
-    const displayPosition = this.convertSecondsToDisplayTime(
-      seekPosition / 1000,
-    );
-    const displayDuration = this.convertSecondsToDisplayTime(duration / 1000);
-
-    let timeRatio = `${displayPosition} / ${displayDuration}`;
-    let progressBarWidth = `${seekPosition / duration * 100}%`;
-
-    if (this.props.live) {
-      timeRatio = null;
-      progressBarWidth = `${(1 - this.props.offset / this.maxLiveOffset) *
-        100}%`;
-    } else if (!this.props.url) {
-      timeRatio = null;
-    }
+    const { position } = this.state;
 
     return (
       <div className={styles.container} title={this.props.playingTitle}>
@@ -208,15 +111,13 @@ class Player extends React.Component {
           paused={this.props.paused}
         />
         <AudioProgress
-          audioProgressRef={el => {
-            this.audioProgressContainer = el;
-          }}
           displayText={this.props.playingTitle}
           live={this.props.live}
           paused={this.props.paused}
-          progressBarWidth={progressBarWidth}
-          timeRatio={timeRatio}
-          updateDisplayPosition={e => this.updateDisplayPosition(e)}
+          url={this.props.url}
+          position={this.state.position}
+          durationEstimate={this.state.durationEstimate}
+          onSeek={position => this.onSeek(position)}
         />
       </div>
     );
