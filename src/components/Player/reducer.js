@@ -63,6 +63,10 @@ function playerReducer(state = initialState, action) {
         .set('error', false)
         .set('playlist', action.playlist);
     case PLAY_ON_DEMAND_EPISODE: {
+      // Might be triggered before playlist has loaded
+      if (state.get('loading')) {
+        return state;
+      }
       const episode = state.get('playlist')[action.index];
       return state
         .set('paused', false)
