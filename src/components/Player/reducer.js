@@ -17,6 +17,7 @@ import {
   PLAYER_STATUS,
   PLAY_ON_DEMAND_EPISODE,
 } from './constants';
+import blankmp3 from './blank.mp3';
 
 const initialState = fromJS({
   live: false,
@@ -51,7 +52,11 @@ function playerReducer(state = initialState, action) {
     case GET_PODCAST_PLAYLIST_FAIELD:
       return state.set('loading', false).set('error', true);
     case GET_ON_DEMAND_PLAYLIST_PENDING:
-      return state.set('loading', true).set('error', false);
+      return state
+        .set('loading', true)
+        .set('error', false)
+        .set('paused', false)
+        .set('url', blankmp3);
     case GET_ON_DEMAND_PLAYLIST_SUCCESS:
       return state
         .set('loading', false)
