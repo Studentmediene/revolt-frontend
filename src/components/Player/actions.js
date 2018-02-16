@@ -18,6 +18,9 @@ import {
   RESUME,
   PAUSE,
   PLAYER_STATUS,
+  PLAY_NEXT,
+  PLAY_PREVIOUS,
+  PLAY_ON_DEMAND_EPISODE,
 } from './constants';
 
 export function playLive(offset = 0) {
@@ -58,12 +61,10 @@ export function getOnDemandPlaylist(episodeId, offset = 0) {
   };
 }
 
-export function onDemandPlaylistLoaded(playlist, index, offset = 0) {
+export function onDemandPlaylistLoaded(playlist) {
   return {
     type: GET_ON_DEMAND_PLAYLIST_SUCCESS,
     playlist,
-    index,
-    offset,
   };
 }
 
@@ -108,5 +109,25 @@ export function playerStatus({ paused }) {
   return {
     type: PLAYER_STATUS,
     paused,
+  };
+}
+
+export function playNext() {
+  return {
+    type: PLAY_NEXT,
+  };
+}
+
+export function playPrevious() {
+  return {
+    type: PLAY_PREVIOUS,
+  };
+}
+
+export function playOnDemandEpisode(index, offset = 0) {
+  return {
+    type: PLAY_ON_DEMAND_EPISODE,
+    index,
+    offset,
   };
 }

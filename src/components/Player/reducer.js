@@ -15,6 +15,7 @@ import {
   GET_ON_DEMAND_PLAYLIST_FAIELD,
   GET_LIVE_TITLE,
   PLAYER_STATUS,
+  PLAY_ON_DEMAND_EPISODE,
 } from './constants';
 
 const initialState = fromJS({
@@ -51,18 +52,20 @@ function playerReducer(state = initialState, action) {
       return state.set('loading', false).set('error', true);
     case GET_ON_DEMAND_PLAYLIST_PENDING:
       return state.set('loading', true).set('error', false);
-    case GET_ON_DEMAND_PLAYLIST_SUCCESS: {
-      const current = action.playlist[action.index];
+    case GET_ON_DEMAND_PLAYLIST_SUCCESS:
       return state
         .set('loading', false)
         .set('error', false)
-        .set('live', false)
-        .set('playlist', action.playlist)
-        .set('index', action.index)
-        .set('url', current.url)
-        .set('playingTitle', `${current.show}: ${current.title}`)
+        .set('playlist', action.playlist);
+    case PLAY_ON_DEMAND_EPISODE: {
+      const episode = state.get('playlist')[action.index];
+      return state
         .set('paused', false)
-        .set('offset', action.offset);
+        .set('live', false)
+        .set('index', action.index)
+        .set('offset', action.offset)
+        .set('url', episode.url)
+        .set('playingTitle', `${episode.show}: ${episode.title}`);
     }
     case GET_ON_DEMAND_PLAYLIST_FAIELD:
       return state.set('loading', false).set('error', true);

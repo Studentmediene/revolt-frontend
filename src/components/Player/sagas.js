@@ -16,6 +16,8 @@ import {
   TOGGLE_PLAY_PAUSE,
   RESUME,
   PAUSE,
+  PLAY_NEXT,
+  PLAY_PREVIOUS,
 } from './constants';
 import {
   podcastPlaylistLoaded,
@@ -24,8 +26,14 @@ import {
   onDemandPlaylistError,
   currentShowTitle,
   playerStatus,
+  playOnDemandEpisode,
 } from './actions';
-import { selectPaused } from './selectors';
+import {
+  selectPaused,
+  selectLive,
+  selectIndex,
+  selectPlaylist,
+} from './selectors';
 import { getGraphQL, getCurrentShows } from 'utils/api';
 // Individual exports for testing
 export function* playPodcast(episodeId, offset) {
@@ -94,7 +102,8 @@ export function* playOnDemand(episodeId, offset) {
 
     const index = playlist.indexOf(playlist.find(e => e.id === episode.id));
 
-    yield put(onDemandPlaylistLoaded(playlist, index, offset));
+    yield put(onDemandPlaylistLoaded(playlist));
+    yield put(playOnDemandEpisode(index, offset));
   } catch (error) {
     yield put(onDemandPlaylistError());
   }
@@ -163,10 +172,40 @@ export function* pause() {
   );
 }
 
+export function* playNext() {
+  const live = yield select(selectLive());
+  if (live) {
+    return;
+  }
+  const playlistIndex = yield select(selectIndex());
+  const playlist = yield select(selectPlaylist());
+  const nextIndex = playlistIndex + 1;
+  if (nextIndex >= playlist.length) {
+    return;
+  }
+  yield put(playOnDemandEpisode(nextIndex));
+}
+
+export function* playPrevious() {
+  const live = yield select(selectLive());
+  if (live) {
+    return;
+  }
+  const playlistIndex = yield select(selectIndex());
+  const playlist = yield select(selectPlaylist());
+  const nextIndex = playlistIndex - 1;
+  if (nextIndex < 0 || nextIndex >= playlist.length) {
+    return;
+  }
+  yield put(playOnDemandEpisode(nextIndex));
+}
+
 export function* playerSaga() {
   yield takeLatest(TOGGLE_PLAY_PAUSE, togglePlayPause);
   yield takeLatest(RESUME, resume);
   yield takeLatest(PAUSE, pause);
+  yield takeLatest(PLAY_NEXT, playNext);
+  yield takeLatest(PLAY_PREVIOUS, playPrevious);
 }
 
 // All sagas to be loaded

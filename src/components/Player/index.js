@@ -3,10 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { fromJS, is } from 'immutable';
 import { soundManager } from 'soundmanager2';
 
-import PlaylistController from './utils/PlaylistController';
 import AudioProgress from './components/AudioProgress';
 import AudioControls from './components/AudioControls';
 import SoundManager from './components/SoundManager';
@@ -18,6 +16,8 @@ import {
   pause,
   resume,
   togglePlayPause,
+  playNext,
+  playPrevious,
 } from './actions';
 import {
   selectPlaylist,
@@ -46,8 +46,6 @@ class Player extends React.Component {
     // EventListeners to create on mount and remove on unmount
     this.seekReleaseListener = null;
     this.resizeListener = null;
-    // The controller handling playlist actions
-    this.playlistController = new PlaylistController();
     // Max live offset in seconds
     this.maxLiveOffset = 60 * 60 * 4; // four hours
   }
@@ -83,51 +81,12 @@ class Player extends React.Component {
     resizeListener();
   }
 
-  componentWillReceiveProps(nextProps) {
-    // Test if we got something new
-    if (is(fromJS(this.props), fromJS(nextProps))) {
-      // The props are identical
-      return;
-    }
-
-    if (nextProps.live) {
-      this.playLive();
-    } else if (nextProps.playlist) {
-      this.playlistController = new PlaylistController(
-        nextProps.playlist,
-        nextProps.index,
-      );
-      if (nextProps.playlist.length > 0) {
-        this.playShow(this.playlistController.getCurrent());
-      }
-    }
-  }
-
   componentWillUnmount() {
     // remove event listeners bound outside the scope of our component
     window.removeEventListener('mouseup', this.seekReleaseListener);
     document.removeEventListener('touchend', this.seekReleaseListener);
     window.removeEventListener('resize', this.resizeListener);
   }
-
-  playNext = () => {
-    if (!this.props.live) {
-      this.playShow(this.playlistController.getNext());
-    }
-  };
-
-  playPrevious = () => {
-    if (!this.props.live) {
-      const backLimit = 2 * 1000; // two seconds
-      if (this.state.position < backLimit) {
-        this.playShow(this.playlistController.getPrevious());
-      } else {
-        this.setState({
-          position: 0,
-        });
-      }
-    }
-  };
 
   seek = event => {
     // This function is activated when the user lets go of the mouse
@@ -144,26 +103,6 @@ class Player extends React.Component {
     // Cancel the seeking
     this.seekInProgress = false;
   };
-
-  playShow = (show, pos = 0) => {
-    if (show === null) {
-      return;
-    }
-
-    this.play(show.url, pos);
-  };
-
-  playLive = () => {
-    this.play(this.liveUrl);
-  };
-
-  play(url, position = 0) {
-    this.setState({
-      // url,
-      position,
-      // paused: false,
-    });
-  }
 
   updateDisplayPosition = event => {
     /* This only updates the displayed position of the player,
@@ -249,21 +188,23 @@ class Player extends React.Component {
             this.props.resume();
           }}
           onFinishedPlaying={() => {
-            if (!this.props.live) {
-              const lastIndex = this.playlistController.getPosition();
-              const next = this.playlistController.getNext();
-
-              // Check that there is more shows to play
-              if (next && this.playlistController.getPosition !== lastIndex) {
-                // Play the next show
-                this.playShow(next);
-              }
-            }
+            this.props.playNext();
           }}
         />
         <AudioControls
-          playNext={() => this.playNext()}
-          playPrevious={() => this.playPrevious()}
+          playNext={() => this.props.playNext()}
+          playPrevious={() => {
+            if (!this.props.live) {
+              const backLimit = 2 * 1000; // two seconds
+              if (this.state.position >= backLimit) {
+                this.setState({
+                  position: 0,
+                });
+              } else {
+                this.props.playPrevious();
+              }
+            }
+          }}
           togglePlayPause={() => this.props.togglePlayPause()}
           paused={this.props.paused}
         />
@@ -298,6 +239,8 @@ Player.propTypes = {
   togglePlayPause: PropTypes.func.isRequired,
   resume: PropTypes.func.isRequired,
   pause: PropTypes.func.isRequired,
+  playNext: PropTypes.func.isRequired,
+  playPrevious: PropTypes.func.isRequired,
 };
 
 Player.defaultProps = {
@@ -327,6 +270,8 @@ function mapDispatchToProps(dispatch) {
     togglePlayPause: () => dispatch(togglePlayPause()),
     resume: () => dispatch(resume()),
     pause: () => dispatch(pause()),
+    playNext: () => dispatch(playNext()),
+    playPrevious: () => dispatch(playPrevious()),
   };
 }
 

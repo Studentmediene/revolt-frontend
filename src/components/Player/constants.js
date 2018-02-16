@@ -28,3 +28,8 @@ export const TOGGLE_PLAY_PAUSE = 'app/Player/TOGGLE_PLAY_PAUSE';
 export const RESUME = 'app/Player/RESUME';
 export const PAUSE = 'app/Player/PAUSE';
 export const PLAYER_STATUS = 'app/Player/PLAYER_STATUS';
+
+export const PLAY_NEXT = 'app/Player/PLAY_NEXT';
+export const PLAY_PREVIOUS = 'app/Player/PLAY_PREVIOUS';
+
+export const PLAY_ON_DEMAND_EPISODE = 'app/Player/PLAY_ON_DEMAND_EPISODE';
