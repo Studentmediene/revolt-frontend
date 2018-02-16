@@ -16,6 +16,7 @@ import {
   onDemandPlaylistLoaded,
   onDemandPlaylistError,
   currentShowTitle,
+  playLive,
   playerStatus,
   playOnDemandEpisode,
 } from './actions';
@@ -24,6 +25,7 @@ import {
   selectLive,
   selectIndex,
   selectPlaylist,
+  selectUrl,
 } from './selectors';
 import { getGraphQL, getCurrentShows } from 'utils/api';
 // Individual exports for testing
@@ -136,12 +138,18 @@ export function* playOnDemandWatcher() {
 }
 
 export function* togglePlayPause() {
-  const paused = yield select(selectPaused());
-  yield put(
-    playerStatus({
-      paused: !paused,
-    }),
-  );
+  const url = yield select(selectUrl());
+  if (url) {
+    const paused = yield select(selectPaused());
+    yield put(
+      playerStatus({
+        paused: !paused,
+      }),
+    );
+  } else {
+    // Start live if pressing play button for the first time
+    yield put(playLive());
+  }
 }
 
 export function* resume() {
