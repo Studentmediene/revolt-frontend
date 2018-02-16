@@ -37,6 +37,13 @@ class Player extends React.Component {
     duration: 0,
   };
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.url != nextProps.url) {
+      // Audio URL has changed, so let's reset progress position
+      this.resetPosition();
+    }
+  }
+
   resetPosition() {
     this.setState({
       position: 0,
@@ -74,7 +81,6 @@ class Player extends React.Component {
             this.props.resume();
           }}
           onFinishedPlaying={() => {
-            this.resetPosition();
             this.props.playNext();
           }}
         />
@@ -83,10 +89,10 @@ class Player extends React.Component {
           playPrevious={() => {
             if (!this.props.live) {
               const backLimit = 2 * 1000; // two seconds
-              if (this.state.position >= backLimit) {
-                this.resetPosition();
-              } else {
+              if (this.state.position < backLimit) {
                 this.props.playPrevious();
+              } else {
+                this.resetPosition();
               }
             }
           }}
