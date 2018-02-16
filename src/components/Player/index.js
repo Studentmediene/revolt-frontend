@@ -8,9 +8,6 @@ import AudioProgress from './components/AudioProgress';
 import AudioControls from './components/AudioControls';
 import SoundManager from './components/SoundManager';
 import {
-  playLive,
-  getPodcastPlaylist,
-  getOnDemandPlaylist,
   pause,
   resume,
   togglePlayPause,
@@ -18,8 +15,6 @@ import {
   playPrevious,
 } from './actions';
 import {
-  selectPlaylist,
-  selectIndex,
   selectOffset,
   selectLive,
   selectPlayingTitle,
@@ -72,9 +67,6 @@ class Player extends React.Component {
           position={position}
           volume={this.volume}
           whilePlaying={(...a) => this.whilePlaying(...a)}
-          onPlay={() => {
-            console.log('onPlay event');
-          }}
           onPause={() => {
             this.props.pause();
           }}
@@ -116,13 +108,8 @@ class Player extends React.Component {
 }
 
 Player.propTypes = {
-  playLive: PropTypes.func,
-  playPodcast: PropTypes.func,
-  playOnDemand: PropTypes.func,
-  playlist: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
-  offset: PropTypes.number,
-  index: PropTypes.number,
   live: PropTypes.bool,
+  offset: PropTypes.number,
   paused: PropTypes.bool,
   url: PropTypes.string,
   playingTitle: PropTypes.string,
@@ -139,10 +126,8 @@ Player.defaultProps = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  playlist: selectPlaylist(),
   live: selectLive(),
   offset: selectOffset(),
-  index: selectIndex(),
   paused: selectPaused(),
   url: selectUrl(),
   playingTitle: selectPlayingTitle(),
@@ -150,12 +135,6 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
-    playLive: (offset = 0) => dispatch(playLive(offset)),
-    playPodcast: (episodeId, offset = 0) =>
-      dispatch(getPodcastPlaylist(episodeId, offset)),
-    playOnDemand: (episodeId, offset = 0) =>
-      dispatch(getOnDemandPlaylist(episodeId, offset)),
     togglePlayPause: () => dispatch(togglePlayPause()),
     resume: () => dispatch(resume()),
     pause: () => dispatch(pause()),
