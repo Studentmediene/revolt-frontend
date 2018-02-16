@@ -1,4 +1,3 @@
-/*eslint no-console: ["error", { allow: ["log"] }] */
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { soundManager } from 'soundmanager2';
@@ -13,18 +12,10 @@ export default class SoundManager extends Component {
   }
 
   componentWillMount() {
-    console.log('Initial SoundManager setup');
     soundManager.setup({
       preferFlash: false,
       debugMode: false,
       html5PollingInterval: 50,
-    });
-  }
-
-  componentDidMount() {
-    soundManager.onready(() => {
-      console.log('Sound manager is ready!');
-      // this.setupSound();
     });
   }
 
@@ -66,32 +57,27 @@ export default class SoundManager extends Component {
         soundPosition !== position &&
         Math.round(soundPosition) !== Math.round(position)
       ) {
-        console.log('Setting new position', position);
         this.soundObject.setPosition(position);
       }
     }
 
     if (this.props.volume !== prevProps.volume) {
-      console.log('Setting new volume', this.props.volume);
       this.soundObject.setVolume(this.props.volume);
     }
   }
 
   play() {
-    console.log('Started playing sound');
     this.soundObject.play();
   }
 
   resume() {
     if (this.soundObject.paused) {
-      console.log('Resuming SoundManager');
       this.soundObject.resume();
     }
   }
 
   pause() {
     if (!this.soundObject.paused) {
-      console.log('Pausing SoundManager');
       this.soundObject.pause();
     }
   }
@@ -100,19 +86,15 @@ export default class SoundManager extends Component {
     if (this.props.url === null) {
       return;
     }
-    console.log('Setting up SoundManager');
     if (this.soundObject) {
-      // TODO: Remove sound if it exists?
-      console.log('Stopping old SoundManager', this.soundObject);
       try {
         this.soundObject.destruct();
       } catch (e) {
-        console.log('Failed to destruct soundObject', e);
+        // For now we just fail silently
       }
     }
     // Create a new sound object
     const props = this.props;
-    console.log('props', props);
     this.soundObject = soundManager.createSound({
       url: props.url,
       volume: props.volume,
@@ -141,7 +123,6 @@ export default class SoundManager extends Component {
         props.onError(this);
       },
     });
-    console.log('Created new SoundManager');
   }
 
   render() {
