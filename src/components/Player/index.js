@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { soundManager } from 'soundmanager2';
 
 import AudioProgress from './components/AudioProgress';
 import AudioControls from './components/AudioControls';
@@ -42,19 +41,6 @@ class Player extends React.Component {
     // Duration of the audio (estimate)
     duration: 0,
   };
-
-  componentWillMount() {
-    soundManager.onready(() => {
-      // Load correct URL based on browser support
-      const oggUrl = 'https://direkte.radiorevolt.no/revolt.ogg';
-      const aacUrl = 'https://direkte.radiorevolt.no/revolt.aac';
-      if (soundManager.canPlayURL(oggUrl)) {
-        this.liveUrl = oggUrl;
-      } else {
-        this.liveUrl = aacUrl;
-      }
-    });
-  }
 
   resetPosition() {
     this.setState({

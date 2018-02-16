@@ -5,6 +5,7 @@
  */
 
 export const PLAY_LIVE = 'app/Player/PLAY_LIVE';
+export const PLAY_LIVE_PENDING = 'app/Player/PLAY_LIVE_PENDING';
 
 export const GET_PODCAST_PLAYLIST_PENDING =
   'app/Player/GET_PODCAST_PLAYLIST_PENDING';

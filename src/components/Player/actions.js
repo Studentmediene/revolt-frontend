@@ -6,6 +6,7 @@
 
 import {
   PLAY_LIVE,
+  PLAY_LIVE_PENDING,
   GET_PODCAST_PLAYLIST_PENDING,
   GET_PODCAST_PLAYLIST_SUCCESS,
   GET_PODCAST_PLAYLIST_FAIELD,
@@ -24,7 +25,15 @@ import {
 
 export function playLive(offset = 0) {
   return {
+    type: PLAY_LIVE_PENDING,
+    offset,
+  };
+}
+
+export function playLiveURL(url, offset = 0) {
+  return {
     type: PLAY_LIVE,
+    url,
     offset,
   };
 }

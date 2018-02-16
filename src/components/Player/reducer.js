@@ -38,7 +38,7 @@ function playerReducer(state = initialState, action) {
     case PLAY_LIVE:
       return state
         .set('live', true)
-        .set('url', 'https://direkte.radiorevolt.no/revolt.ogg')
+        .set('url', action.url)
         .set('paused', false)
         .set('offset', action.offset);
     case GET_PODCAST_PLAYLIST_PENDING:

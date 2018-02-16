@@ -1,9 +1,10 @@
 import { select, take, call, put, fork, takeLatest } from 'redux-saga/effects';
+import { soundManager } from 'soundmanager2';
 
 import {
   GET_PODCAST_PLAYLIST_PENDING,
   GET_ON_DEMAND_PLAYLIST_PENDING,
-  PLAY_LIVE,
+  PLAY_LIVE_PENDING,
   TOGGLE_PLAY_PAUSE,
   PLAY_NEXT,
   PLAY_PREVIOUS,
@@ -14,6 +15,7 @@ import {
   onDemandPlaylistLoaded,
   onDemandPlaylistError,
   currentShowTitle,
+  playLiveURL,
   playLive,
   playerStatus,
   playOnDemandEpisode,
@@ -100,6 +102,24 @@ export function* playOnDemand(episodeId, offset) {
   }
 }
 
+function canPlayOgg(oggUrl) {
+  return new Promise(resolve => {
+    soundManager.onready(() => {
+      resolve(soundManager.canPlayURL(oggUrl));
+    });
+  });
+}
+
+function* playLiveSaga() {
+  const oggUrl = 'https://direkte.radiorevolt.no/revolt.ogg';
+  const aacUrl = 'https://direkte.radiorevolt.no/revolt.aac';
+
+  const supportsOgg = yield call(canPlayOgg, oggUrl);
+  const url = supportsOgg ? oggUrl : aacUrl;
+  yield put(playLiveURL(url));
+  yield call(updateLiveTitle);
+}
+
 function* updateLiveTitle() {
   const currentShow = yield call(getCurrentShows);
   const liveTitle = currentShow.current.title;
@@ -115,7 +135,7 @@ function* updateLiveTitleTimer() {
 }
 
 function* liveUpdater() {
-  yield take(PLAY_LIVE);
+  yield take(PLAY_LIVE_PENDING);
   yield fork(updateLiveTitleTimer);
 }
 
@@ -182,7 +202,7 @@ export function* playerSaga() {
   yield takeLatest(TOGGLE_PLAY_PAUSE, togglePlayPause);
   yield takeLatest(PLAY_NEXT, playNext);
   yield takeLatest(PLAY_PREVIOUS, playPrevious);
-  yield takeLatest(PLAY_LIVE, updateLiveTitle);
+  yield takeLatest(PLAY_LIVE_PENDING, playLiveSaga);
 }
 
 // All sagas to be loaded
