@@ -37,9 +37,17 @@ const selectPlayerLoading = () =>
 const selectPlayerError = () =>
   createSelector(selectPlayerDomain(), playerState => playerState.get('error'));
 
-const selectLiveTitle = () =>
+const selectPlayingTitle = () =>
   createSelector(selectPlayerDomain(), playerState =>
-    playerState.get('liveTitle'),
+    playerState.get('playingTitle'),
+  );
+
+const selectUrl = () =>
+  createSelector(selectPlayerDomain(), playerState => playerState.get('url'));
+
+const selectPaused = () =>
+  createSelector(selectPlayerDomain(), playerState =>
+    playerState.get('paused'),
   );
 
 export {
@@ -48,7 +56,9 @@ export {
   selectIndex,
   selectOffset,
   selectLive,
+  selectPaused,
+  selectUrl,
   selectPlayerLoading,
   selectPlayerError,
-  selectLiveTitle,
+  selectPlayingTitle,
 };

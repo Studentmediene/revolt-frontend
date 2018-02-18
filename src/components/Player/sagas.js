@@ -1,10 +1,13 @@
-import { take, call, put, fork, cancel } from 'redux-saga/effects';
+import { select, take, call, put, fork, takeLatest } from 'redux-saga/effects';
+import { soundManager } from 'soundmanager2';
 
 import {
   GET_PODCAST_PLAYLIST_PENDING,
   GET_ON_DEMAND_PLAYLIST_PENDING,
-  PLAY_LIVE,
-  PAUSE_LIVE,
+  PLAY_LIVE_PENDING,
+  TOGGLE_PLAY_PAUSE,
+  PLAY_NEXT,
+  PLAY_PREVIOUS,
 } from './constants';
 import {
   podcastPlaylistLoaded,
@@ -12,7 +15,18 @@ import {
   onDemandPlaylistLoaded,
   onDemandPlaylistError,
   currentShowTitle,
+  playLiveURL,
+  playLive,
+  playerStatus,
+  playOnDemandEpisode,
 } from './actions';
+import {
+  selectPaused,
+  selectLive,
+  selectIndex,
+  selectPlaylist,
+  selectUrl,
+} from './selectors';
 import { getGraphQL, getCurrentShows } from 'utils/api';
 // Individual exports for testing
 export function* playPodcast(episodeId, offset) {
@@ -81,10 +95,29 @@ export function* playOnDemand(episodeId, offset) {
 
     const index = playlist.indexOf(playlist.find(e => e.id === episode.id));
 
-    yield put(onDemandPlaylistLoaded(playlist, index, offset));
+    yield put(onDemandPlaylistLoaded(playlist));
+    yield put(playOnDemandEpisode(index, offset));
   } catch (error) {
     yield put(onDemandPlaylistError());
   }
+}
+
+function canPlayOgg(oggUrl) {
+  return new Promise(resolve => {
+    soundManager.onready(() => {
+      resolve(soundManager.canPlayURL(oggUrl));
+    });
+  });
+}
+
+function* playLiveSaga() {
+  const oggUrl = 'https://direkte.radiorevolt.no/revolt.ogg';
+  const aacUrl = 'https://direkte.radiorevolt.no/revolt.aac';
+
+  const supportsOgg = yield call(canPlayOgg, oggUrl);
+  const url = supportsOgg ? oggUrl : aacUrl;
+  yield put(playLiveURL(url));
+  yield call(updateLiveTitle);
 }
 
 function* updateLiveTitle() {
@@ -101,12 +134,9 @@ function* updateLiveTitleTimer() {
   }
 }
 
-function* playLive() {
-  while (yield take(PLAY_LIVE)) {
-    const bgSyncTask = yield fork(updateLiveTitleTimer);
-    yield take(PAUSE_LIVE);
-    yield cancel(bgSyncTask);
-  }
+function* liveUpdater() {
+  yield take(PLAY_LIVE_PENDING);
+  yield fork(updateLiveTitleTimer);
 }
 
 export function* playPodcastWatcher() {
@@ -125,5 +155,60 @@ export function* playOnDemandWatcher() {
   }
 }
 
+export function* togglePlayPause() {
+  const url = yield select(selectUrl());
+  if (url) {
+    const paused = yield select(selectPaused());
+    yield put(
+      playerStatus({
+        paused: !paused,
+      }),
+    );
+  } else {
+    // Start live if pressing play button for the first time
+    yield put(playLive());
+  }
+}
+
+export function* playNext() {
+  const live = yield select(selectLive());
+  if (live) {
+    return;
+  }
+  const playlistIndex = yield select(selectIndex());
+  const playlist = yield select(selectPlaylist());
+  const nextIndex = playlistIndex + 1;
+  if (nextIndex >= playlist.length) {
+    return;
+  }
+  yield put(playOnDemandEpisode(nextIndex));
+}
+
+export function* playPrevious() {
+  const live = yield select(selectLive());
+  if (live) {
+    return;
+  }
+  const playlistIndex = yield select(selectIndex());
+  const playlist = yield select(selectPlaylist());
+  const nextIndex = playlistIndex - 1;
+  if (nextIndex < 0 || nextIndex >= playlist.length) {
+    return;
+  }
+  yield put(playOnDemandEpisode(nextIndex));
+}
+
+export function* playerSaga() {
+  yield takeLatest(TOGGLE_PLAY_PAUSE, togglePlayPause);
+  yield takeLatest(PLAY_NEXT, playNext);
+  yield takeLatest(PLAY_PREVIOUS, playPrevious);
+  yield takeLatest(PLAY_LIVE_PENDING, playLiveSaga);
+}
+
 // All sagas to be loaded
-export default [playPodcastWatcher, playOnDemandWatcher, playLive];
+export default [
+  playerSaga,
+  playPodcastWatcher,
+  playOnDemandWatcher,
+  liveUpdater,
+];

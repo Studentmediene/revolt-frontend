@@ -6,6 +6,7 @@
 
 import {
   PLAY_LIVE,
+  PLAY_LIVE_PENDING,
   GET_PODCAST_PLAYLIST_PENDING,
   GET_PODCAST_PLAYLIST_SUCCESS,
   GET_PODCAST_PLAYLIST_FAIELD,
@@ -13,12 +14,26 @@ import {
   GET_ON_DEMAND_PLAYLIST_SUCCESS,
   GET_ON_DEMAND_PLAYLIST_FAIELD,
   GET_LIVE_TITLE,
-  PAUSE_LIVE,
+  TOGGLE_PLAY_PAUSE,
+  RESUME,
+  PAUSE,
+  PLAYER_STATUS,
+  PLAY_NEXT,
+  PLAY_PREVIOUS,
+  PLAY_ON_DEMAND_EPISODE,
 } from './constants';
 
 export function playLive(offset = 0) {
   return {
+    type: PLAY_LIVE_PENDING,
+    offset,
+  };
+}
+
+export function playLiveURL(url, offset = 0) {
+  return {
     type: PLAY_LIVE,
+    url,
     offset,
   };
 }
@@ -54,12 +69,10 @@ export function getOnDemandPlaylist(episodeId, offset = 0) {
   };
 }
 
-export function onDemandPlaylistLoaded(playlist, index, offset = 0) {
+export function onDemandPlaylistLoaded(playlist) {
   return {
     type: GET_ON_DEMAND_PLAYLIST_SUCCESS,
     playlist,
-    index,
-    offset,
   };
 }
 
@@ -76,8 +89,47 @@ export function currentShowTitle(liveTitle) {
   };
 }
 
-export function pauseLive() {
+export function togglePlayPause() {
   return {
-    type: PAUSE_LIVE,
+    type: TOGGLE_PLAY_PAUSE,
+  };
+}
+
+export function resume() {
+  return {
+    type: RESUME,
+  };
+}
+
+export function pause() {
+  return {
+    type: PAUSE,
+  };
+}
+
+export function playerStatus({ paused }) {
+  return {
+    type: PLAYER_STATUS,
+    paused,
+  };
+}
+
+export function playNext() {
+  return {
+    type: PLAY_NEXT,
+  };
+}
+
+export function playPrevious() {
+  return {
+    type: PLAY_PREVIOUS,
+  };
+}
+
+export function playOnDemandEpisode(index, offset = 0) {
+  return {
+    type: PLAY_ON_DEMAND_EPISODE,
+    index,
+    offset,
   };
 }
