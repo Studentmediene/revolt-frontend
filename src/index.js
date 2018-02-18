@@ -12,7 +12,9 @@ import configureStore from 'store';
 import createRoutes from 'routes';
 
 import { initializeErrorReporting } from 'utils/errorReporting';
-initializeErrorReporting();
+if (process.env.NODE_ENV === 'production') {
+  initializeErrorReporting();
+}
 
 // Set global locales for moment
 moment.locale('NB_no', {
