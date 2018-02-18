@@ -1,8 +1,8 @@
 /**
-*
-* Foorumi
-*
-*/
+ *
+ * Foorumi
+ *
+ */
 
 import React from 'react';
 

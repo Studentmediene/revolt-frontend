@@ -1,3 +1,5 @@
+/* global System */
+// TOOD: Remove global system when upgrading webpack
 import { getAsyncInjectors } from 'utils/asyncInjectors';
 import asyncComponent from 'utils/asyncComponent';
 
