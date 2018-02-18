@@ -32,8 +32,18 @@ const addDevMiddlewares = (app, webpackConfig) => {
   }
 
   app.use('/api', proxy({ target: 'http://localhost:9000/' }));
-  app.use('/media', proxy({ target: 'http://localhost:8000/' }));
-  app.use('/graphql', proxy({ target: 'http://localhost:8000/' }));
+
+  let backendProxy;
+  if (process.env.PRODUCTION_API === 'true') {
+    backendProxy = proxy({
+      target: 'https://radiorevolt.no/',
+      headers: { host: 'radiorevolt.no' },
+    });
+  } else {
+    backendProxy = proxy({ target: 'http://localhost:8000/' });
+  }
+  app.use('/media', backendProxy);
+  app.use('/graphql', backendProxy);
 
   app.get('*', (req, res) => {
     fs.readFile(path.join(compiler.outputPath, 'index.html'), (err, file) => {
