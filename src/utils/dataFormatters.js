@@ -1,4 +1,3 @@
-import { MEDIA_URL } from './api';
 /*
   Functions used to convert GraphQL data to a format that fits the frontend
 */
@@ -20,17 +19,17 @@ export const showFormat = ({
   archived,
 });
 
-export const episodeFormat = ({ id, title, showName, createdAt, lead }) => ({
+export const episodeFormat = ({ id, title, showName, publishAt, lead }) => ({
   id,
   title,
   showName,
-  publishAt: createdAt,
+  publishAt,
   lead,
 });
 
 export const postFormat = ({
   id,
-  image,
+  croppedImages,
   publishAt,
   title,
   slug,
@@ -40,7 +39,7 @@ export const postFormat = ({
   episodes,
 }) => ({
   id,
-  coverPhotoUrl: `${MEDIA_URL}${image}`,
+  croppedImages,
   publishAt,
   title,
   slug,

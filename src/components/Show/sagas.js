@@ -24,13 +24,17 @@ export function* loadShow(slug) {
         id,
         title,
         lead,
-        createdAt,
+        publishAt,
       },
       posts {
         id,
         title,
         slug,
-        image,
+        croppedImages {
+          large,
+          medium,
+          small
+        },
         publishAt,
         lead,
         createdBy {

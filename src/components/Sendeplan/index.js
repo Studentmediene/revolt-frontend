@@ -155,7 +155,19 @@ export class Sendeplan extends React.Component {
       }
       return sendeplan
         .slice(daynumber * 17, (daynumber + 1) * 17)
-        .map(program => <td key={program.index}>{program}</td>);
+        .map(program => {
+          let className = null;
+          /* Adds a class 'live' to the shows that are not reruns
+          to make it bold in the table */
+          if (!program.includes('(R)')) {
+            className = styles.live;
+          }
+          return (
+            <td key={program.index} className={className}>
+              {program}
+            </td>
+          );
+        });
     }
 
     const mon = makeSendelisteComponents(0, sendeliste);
@@ -192,7 +204,7 @@ export class Sendeplan extends React.Component {
       <div className={styles.sendeplan}>
         <h2>Sendeplan for Radio Revolt</h2>
         {this.state.showAll ? (
-          <div>
+          <div className={styles.fullTable}>
             <table>
               <tbody>
                 <tr>
@@ -211,19 +223,24 @@ export class Sendeplan extends React.Component {
           </div>
         ) : (
           <div>
-            <button onClick={() => this.makeSendePlanWeek()}>
-              Klikk her for å se program for hele uken
-            </button>
-            <h3> Sendeplanen for i dag: </h3>
-            <table>
-              <tbody>
-                <tr>
-                  <th>Tid</th>
-                  <th>Program</th>
-                </tr>
-                {rowToday}
-              </tbody>
-            </table>
+            <div className={styles.simpleTable}>
+              <button
+                className={styles.toggleWeek}
+                onClick={() => this.makeSendePlanWeek()}
+              >
+                Klikk her for å se program for hele uken
+              </button>
+              <h3> Sendeplanen for i dag: </h3>
+              <table>
+                <tbody>
+                  <tr>
+                    <th>Tid</th>
+                    <th>Program</th>
+                  </tr>
+                  {rowToday}
+                </tbody>
+              </table>
+            </div>
           </div>
         )}
       </div>

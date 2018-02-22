@@ -12,7 +12,9 @@ import configureStore from 'store';
 import createRoutes from 'routes';
 
 import { initializeErrorReporting } from 'utils/errorReporting';
-initializeErrorReporting();
+if (process.env.NODE_ENV === 'production') {
+  initializeErrorReporting();
+}
 
 // Set global locales for moment
 moment.locale('NB_no', {
@@ -61,5 +63,12 @@ ReactDOM.render(
 // Install ServiceWorker and AppCache in the end since
 // it's not most important operation and if main code fails,
 // we do not want it installed
-import { install } from 'offline-plugin/runtime';
-install();
+import { install, applyUpdate } from 'offline-plugin/runtime';
+install({
+  onUpdateReady: () => {
+    applyUpdate();
+  },
+  onUpdated: () => {
+    window.location.reload();
+  },
+});

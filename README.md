@@ -17,7 +17,11 @@ Then serve the webapp by running
 npm start
 ```
 
-To get content for the webpage (not just the skeleton) follow the readme at [github.com/Studentmediene/RadioRevolt-API](https://github.com/Studentmediene/RadioRevolt-API).
+To get content for the webpage (not just the skeleton) follow the readme at [github.com/Studentmediene/kapina-backend](https://github.com/Studentmediene/kapina-backend).
+
+It's also possible to use the production backend directly by starting the project with `PRODUCTION_API=true` like this:
+
+`PRODUCTION_API=true npm start`
 
 ## Branch naming
 All branches must be named `<type>/<JIRA id>-<description>`
