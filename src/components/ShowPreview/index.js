@@ -7,15 +7,17 @@ import styles from './styles.css';
 
 const ShowPreview = props => (
   <div className={styles.container}>
-    <Link className={styles.imageLink} to={`/programmer/${props.slug}`}>
-      <LazyLoad height={300} offset={100} once>
-        <img
-          className={styles.image}
-          src={props.logoImageUrl}
-          alt={props.title}
-        />
-      </LazyLoad>
-    </Link>
+    <div className={styles.logoImage}>
+      <Link className={styles.imageLink} to={`/programmer/${props.slug}`}>
+        <LazyLoad height={300} offset={100} once>
+          <img
+            className={styles.image}
+            src={props.logoImageUrl}
+            alt={props.title}
+          />
+        </LazyLoad>
+      </Link>
+    </div>
     <Link className={styles.nameLink} to={`/programmer/${props.slug}`}>
       <h2 className={styles.name}>{props.title}</h2>
     </Link>
