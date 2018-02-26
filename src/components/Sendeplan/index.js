@@ -4,6 +4,7 @@
  *
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import moment from 'moment';
@@ -157,7 +158,19 @@ export class Sendeplan extends React.Component {
       }
       return sendeplan
         .slice(daynumber * 17, (daynumber + 1) * 17)
-        .map(program => <td key={program.index}>{program}</td>);
+        .map(program => {
+          let className = null;
+          /* Adds a class 'live' to the shows that are not reruns
+          to make it bold in the table */
+          if (!program.includes('(R)')) {
+            className = styles.live;
+          }
+          return (
+            <td key={program.index} className={className}>
+              {program}
+            </td>
+          );
+        });
     }
 
     const mon = makeSendelisteComponents(0, sendeliste);
@@ -213,19 +226,24 @@ export class Sendeplan extends React.Component {
           </div>
         ) : (
           <div>
-            <button onClick={() => this.makeSendePlanWeek()}>
-              Klikk her for å se program for hele uken
-            </button>
-            <h3> Sendeplanen for i dag: </h3>
-            <table>
-              <tbody>
-                <tr>
-                  <th>Tid</th>
-                  <th>Program</th>
-                </tr>
-                {rowToday}
-              </tbody>
-            </table>
+            <div className={styles.simpleTable}>
+              <button
+                className={styles.toggleWeek}
+                onClick={() => this.makeSendePlanWeek()}
+              >
+                Klikk her for å se program for hele uken
+              </button>
+              <h3> Sendeplanen for i dag: </h3>
+              <table>
+                <tbody>
+                  <tr>
+                    <th>Tid</th>
+                    <th>Program</th>
+                  </tr>
+                  {rowToday}
+                </tbody>
+              </table>
+            </div>
           </div>
         )}
       </div>
@@ -234,8 +252,8 @@ export class Sendeplan extends React.Component {
 }
 
 Sendeplan.propTypes = {
-  loadSendeplanDay: React.PropTypes.func.isRequired,
-  sendeplan: React.PropTypes.object,
+  loadSendeplanDay: PropTypes.func.isRequired,
+  sendeplan: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({

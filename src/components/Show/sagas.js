@@ -30,7 +30,11 @@ export function* loadShow(slug) {
         id,
         title,
         slug,
-        image,
+        croppedImages {
+          large,
+          medium,
+          small
+        },
         publishAt,
         lead,
         createdBy {

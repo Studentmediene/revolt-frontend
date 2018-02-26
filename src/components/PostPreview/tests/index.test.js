@@ -6,7 +6,11 @@ import PostPreview from '../';
 describe('<PostPreview />', () => {
   it('renders correctly with categories', () => {
     const mockProps = {
-      image: 'image',
+      croppedImages: {
+        large: 'large_image',
+        medium: 'medium_image',
+        small: 'small_image',
+      },
       lead: 'Lead',
       publishAt: '2017-11-01 18:11:44+00:00',
       slug: 'slug',
@@ -30,7 +34,11 @@ describe('<PostPreview />', () => {
 
   it('renders correctly without categories', () => {
     const mockProps = {
-      image: 'image',
+      croppedImages: {
+        large: 'large_image',
+        medium: 'medium_image',
+        small: 'small_image',
+      },
       lead: 'Lead',
       publishAt: '2017-11-01 18:11:44+00:00',
       slug: 'slug',

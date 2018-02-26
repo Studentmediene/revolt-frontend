@@ -1,41 +1,95 @@
+.fullTable {
+  overflow: auto;
+}
+
+.fullTable table {
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 80%;
+  width: 1400px;
+  margin-left: -131px;
+}
+
+.fullTable table tr td:nth-child(1),
+.fullTable table tr th:nth-child(1) {
+  position: absolute;
+  left: 0;
+  width: 45px;
+}
+
+.sendeplan table td {
+  background-color: #F5F5F5;
+}
+
+/* z-index is set to 1 due to the first columns border
+overlaps the th-border because it's set to position: absolute
+in fullTable */
+.sendeplan table tr th:nth-child(1) {
+  width: 45px;
+  z-index: 1;
+}
+
+.sendeplan {
+  position: relative;
+}
+
+.simpleTable {
+  font-size: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.simpleTable table {
+  table-layout: fixed;
+  width: 200px;
+}
+
 .sendeplan td {
-  border: 1px black solid;
+  border: 1px #AAA solid;
   padding: 6px;
-  text-align: center;
+  width: 20px;
 }
 
 .sendeplan th {
   border: 1px black solid;
-  padding: 3px;
-  text-align: center;
+  padding-left: 6px;
   background-color: #ECB61C;
   color: white;
+  text-align: left;
 }
 
 .sendeplan h2 {
   text-align: center;
 }
 
-.sendeplan table {
-  font-size: 85%;
-  position: relative;
-  left: 0;
-  right: 0;
-  width: 55%;
-}
-
-.sendeplan button {
-  border: 1px black solid;
+.toggleWeek {
+  border: 1px #222 solid;
   padding: 10px;
   border-radius: 2px;
+  -webkit-transition-duration: 0.3s; /* Safari */
+  transition-duration: 0.3s;
 }
 
-.sendeplan button:hover {
+.toggleWeek:hover {
   cursor: pointer;
+  background-color: #222;
+  color: white;
 }
 
-.fullTable {
-  overflow: auto;
-  border-left: 1px solid #BBB;
-  border-right: 1px solid #BBB;
+@media screen and (min-width: 1997px) {
+  .fullTable {
+    border-left: none;
+    border-right: none;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sendeplan table {
+    align-self: center;
+  }
+}
+
+.live {
+  font-weight: bold;
 }

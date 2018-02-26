@@ -24,3 +24,16 @@
 .name {
   text-align: center;
 }
+
+.logoImage {
+  height: 315px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 1020px) {
+  .logoImage {
+    height: auto;
+  }
+}

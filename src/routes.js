@@ -1,3 +1,5 @@
+/* global System */
+// TOOD: Remove global system when upgrading webpack
 import { getAsyncInjectors } from 'utils/asyncInjectors';
 import asyncComponent from 'utils/asyncComponent';
 
@@ -100,6 +102,23 @@ export default function createRoutes(store) {
         ])
           .then(([reducer, sagas, component]) => {
             injectReducer('sendeplan', reducer.default);
+            injectSagas(sagas.default);
+            return component;
+          })
+          .catch(errorLoading),
+      ),
+    },
+    {
+      path: '/plainpost/:slug',
+      name: 'plainpost',
+      component: asyncComponent(() =>
+        Promise.all([
+          System.import('components/Post/reducer'),
+          System.import('components/Post/sagas'),
+          System.import('components/Post'),
+        ])
+          .then(([reducer, sagas, component]) => {
+            injectReducer('post', reducer.default);
             injectSagas(sagas.default);
             return component;
           })

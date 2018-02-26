@@ -77,9 +77,7 @@ const About = () => (
       I 2013 endret Mediastud AS navn til Studentmediene i Trondheim AS, som i
       dag er eid av Studentersamfundet og Studentsamskipnaden i Trondheim (SiT)
       i fellesskap, og gjengene Radio Revolt, Under Dusken og Student-TV ble
-      slått sammen. Samme år ble også <a href="http://dusken.no">
-        dusken.no
-      </a>{' '}
+      slått sammen. Samme år ble også <a href="http://dusken.no">dusken.no</a>{' '}
       lansert, som en felles nettside for medieinnholdet fra Studentmediene.
     </p>
     <p>

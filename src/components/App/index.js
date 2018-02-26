@@ -25,16 +25,20 @@ import { playLive } from 'components/Player/actions';
 class App extends React.Component {
   static propTypes = {
     routes: PropTypes.array.isRequired,
+    location: PropTypes.shape({
+      pathname: PropTypes.string,
+    }),
   };
   render() {
+    const plain = this.props.location.pathname.startsWith('/plainpost');
     return (
       <div className={styles.container}>
-        <Header />
+        {!plain && <Header />}
         <div className={styles.content}>
           <Switch>{this.props.routes}</Switch>
         </div>
-        <Footer />
-        <Player />
+        {!plain && <Footer />}
+        {!plain && <Player />}
       </div>
     );
   }
