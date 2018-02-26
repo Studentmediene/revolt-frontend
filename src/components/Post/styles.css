@@ -2,6 +2,10 @@
   margin: 0 auto;
 }
 
+.post a {
+  background: transparent !important;
+}
+
 .title {
   margin-bottom: 0;
 }
