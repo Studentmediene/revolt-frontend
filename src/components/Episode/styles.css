@@ -12,6 +12,7 @@
   margin-bottom: 2rem;
   display: flex;
   flex-direction: row;
+  border-width: 0;
 }
 
 .playButton {

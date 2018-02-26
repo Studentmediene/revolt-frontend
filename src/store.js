@@ -1,3 +1,5 @@
+/* global System */
+// TOOD: Remove global system when upgrading webpack
 import { createStore, applyMiddleware, compose } from 'redux';
 import { fromJS } from 'immutable';
 import { routerMiddleware } from 'react-router-redux';

@@ -157,12 +157,14 @@ export class EpisodeAdmin extends React.Component {
             this.handleOnDemandEpisodeChange(
               event,
               this.props.digasOnDemandEpisodes,
-            )}
+            )
+          }
           onPodcastEpisodeChange={event =>
             this.handlePodcastEpisodeChange(
               event,
               this.props.digasPodcastEpisodes,
-            )}
+            )
+          }
           title={this.state.title}
           lead={this.state.lead}
           shows={shows}

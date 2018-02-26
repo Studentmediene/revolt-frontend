@@ -5,6 +5,10 @@
   margin-right: 15px;
 }
 
+.audioControls button {
+  border-width: 0;
+}
+
 .backButton {
   transform: rotate(180deg);
   padding-left: 11px;

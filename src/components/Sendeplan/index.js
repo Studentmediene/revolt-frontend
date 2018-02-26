@@ -4,6 +4,7 @@
  *
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import moment from 'moment';
@@ -249,8 +250,8 @@ export class Sendeplan extends React.Component {
 }
 
 Sendeplan.propTypes = {
-  loadSendeplanDay: React.PropTypes.func.isRequired,
-  sendeplan: React.PropTypes.object,
+  loadSendeplanDay: PropTypes.func.isRequired,
+  sendeplan: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
