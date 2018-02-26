@@ -50,6 +50,11 @@ const selectPaused = () =>
     playerState.get('paused'),
   );
 
+const selectLiveTitle = () =>
+  createSelector(selectPlayerDomain(), playerState =>
+    playerState.get('liveTitle'),
+  );
+
 export {
   selectPlayerDomain,
   selectPlaylist,
@@ -61,4 +66,5 @@ export {
   selectPlayerLoading,
   selectPlayerError,
   selectPlayingTitle,
+  selectLiveTitle,
 };
