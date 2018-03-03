@@ -53,25 +53,11 @@ module.exports = require('./webpack.base.babel')({
     ],
   }),
   devtool: 'source-map',
+  mode: 'production',
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      children: true,
-      minChunks: 2,
-      async: true,
-    }),
-
     // OccurrenceOrderPlugin is needed for long-term caching to work properly.
     // See http://mxs.is/googmv
     new webpack.optimize.OccurrenceOrderPlugin(true),
-
-    // Minify and optimize the JavaScript
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false, // ...but do not show warnings in the console (there is a lot of them)
-      },
-    }),
 
     // Minify and optimize the index.html
     new HtmlWebpackPlugin({
@@ -120,6 +106,7 @@ module.exports = require('./webpack.base.babel')({
       // Allows automatic updating
       ServiceWorker: {
         events: true,
+        minify: false, // TODO: enable when OfflinePlugin supports webpack 4
       },
     }),
   ],

@@ -18,7 +18,8 @@
       "regenerator": true
     }],
     "transform-class-properties",
-    "transform-object-rest-spread"
+    "transform-object-rest-spread",
+    "syntax-dynamic-import"
   ],
   "env": {
     "production": {
@@ -31,6 +32,11 @@
     },
     "development": {
       "presets": ["react-hmre"]
+    },
+    "test": {
+      "plugins": [
+        "dynamic-import-node"
+      ]
     }
   }
 }

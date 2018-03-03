@@ -97,6 +97,7 @@
     }
   },
   "dependencies": {
+    "babel-plugin-dynamic-import-node": "^1.2.0",
     "babel-polyfill": "6.26.0",
     "chalk": "^2.3.1",
     "classnames": "^2.2.5",
@@ -133,6 +134,7 @@
     "babel-jest": "^22.4.1",
     "babel-loader": "7.1.2",
     "babel-plugin-module-resolver": "^3.1.0",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-plugin-transform-class-properties": "6.24.1",
     "babel-plugin-transform-es2015-destructuring": "6.23.0",
     "babel-plugin-transform-object-rest-spread": "6.26.0",
@@ -157,11 +159,11 @@
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-react": "^7.7.0",
     "eventsource-polyfill": "0.9.6",
-    "extract-text-webpack-plugin": "^3.0.2",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^1.1.9",
     "glob": "7.1.2",
     "html-loader": "^0.5.5",
-    "html-webpack-plugin": "^2.30.1",
+    "html-webpack-plugin": "^3.0.4",
     "http-proxy-middleware": "0.17.4",
     "husky": "0.14.3",
     "identity-obj-proxy": "3.0.0",
@@ -181,10 +183,10 @@
     "style-loader": "^0.20.2",
     "stylelint": "^9.1.1",
     "stylelint-config-standard": "^18.1.0",
-    "url-loader": "^0.6.2",
-    "webpack": "^3.11.0",
+    "url-loader": "^1.0.1",
+    "webpack": "^4.0.1",
     "webpack-cli": "^2.0.9",
-    "webpack-dev-middleware": "^2.0.6",
+    "webpack-dev-middleware": "^3.0.0",
     "webpack-hot-middleware": "^2.21.0",
     "whatwg-fetch": "^2.0.3"
   }
