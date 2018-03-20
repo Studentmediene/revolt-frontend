@@ -3,7 +3,7 @@ const path = require('path');
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OfflinePlugin = require('offline-plugin');
 
 module.exports = require('./webpack.base.babel')({
@@ -22,36 +22,34 @@ module.exports = require('./webpack.base.babel')({
   // We use ExtractTextPlugin so we get a seperate CSS file instead
   // of the CSS being in the JS and injected as a style tag
 
-  cssRules: ExtractTextPlugin.extract({
-    fallback: require.resolve('style-loader'),
-    use: [
-      {
-        loader: require.resolve('css-loader'),
-        options: {
-          modules: true,
-          localIdentName: '[hash:base64:6]',
-          importLoaders: 1,
-        },
+  cssRules: [
+    MiniCssExtractPlugin.loader,
+    {
+      loader: require.resolve('css-loader'),
+      options: {
+        modules: true,
+        localIdentName: '[hash:base64:6]',
+        importLoaders: 1,
       },
-      {
-        loader: require.resolve('postcss-loader'),
-        options: {
-          plugins: () => [
-            require('postcss-flexbugs-fixes'),
-            autoprefixer({
-              browsers: [
-                '>1%',
-                'last 4 versions',
-                'Firefox ESR',
-                'not ie < 9', // React doesn't support IE8 anyway
-              ],
-              flexbox: 'no-2009',
-            }),
-          ],
-        },
+    },
+    {
+      loader: require.resolve('postcss-loader'),
+      options: {
+        plugins: () => [
+          require('postcss-flexbugs-fixes'),
+          autoprefixer({
+            browsers: [
+              '>1%',
+              'last 4 versions',
+              'Firefox ESR',
+              'not ie < 9', // React doesn't support IE8 anyway
+            ],
+            flexbox: 'no-2009',
+          }),
+        ],
       },
-    ],
-  }),
+    },
+  ],
   devtool: 'source-map',
   mode: 'production',
   plugins: [
@@ -78,7 +76,9 @@ module.exports = require('./webpack.base.babel')({
     }),
 
     // Extract the CSS into a seperate file
-    new ExtractTextPlugin('css/[name].[contenthash].css'),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].[chunkhash].css',
+    }),
 
     // Put it in the end to capture all the HtmlWebpackPlugin's
     // assets manipulations and do leak its manipulations to HtmlWebpackPlugin
