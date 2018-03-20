@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 const OfflinePlugin = require('offline-plugin');
 
 module.exports = require('./webpack.base.babel')({
@@ -108,6 +109,9 @@ module.exports = require('./webpack.base.babel')({
         events: true,
         minify: false, // TODO: enable when OfflinePlugin supports webpack 4
       },
+    }),
+    new MomentLocalesPlugin({
+      localesToKeep: ['NB_no'],
     }),
   ],
 });
