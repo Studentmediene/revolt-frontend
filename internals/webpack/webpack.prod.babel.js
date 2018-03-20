@@ -107,7 +107,7 @@ module.exports = require('./webpack.base.babel')({
       // Allows automatic updating
       ServiceWorker: {
         events: true,
-        minify: false, // TODO: enable when OfflinePlugin supports webpack 4
+        minify: true,
       },
     }),
     new MomentLocalesPlugin({
