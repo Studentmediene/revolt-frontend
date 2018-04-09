@@ -78,7 +78,7 @@ module.exports = require('./webpack.base.babel')({
 
     // Extract the CSS into a seperate file
     new MiniCssExtractPlugin({
-      filename: 'css/[name].[chunkhash].css',
+      filename: 'css/[name].[contenthash].css',
     }),
 
     // Put it in the end to capture all the HtmlWebpackPlugin's
@@ -97,7 +97,7 @@ module.exports = require('./webpack.base.babel')({
         // All chunks marked as `additional`, loaded after main section
         // and do not prevent SW to install. Change to `optional` if
         // do not want them to be preloaded at all (cached only when first loaded)
-        additional: ['*.chunk.js'],
+        additional: ['js/*.chunk.js'],
       },
 
       // Removes warning for about `additional` section usage
