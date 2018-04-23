@@ -1,9 +1,11 @@
-language: node_js
-sudo: true
-dist: xenial
-node_js:
-- '8.3'
-script: npm run build
+language: generic
+sudo: required
+serivices:
+  - docker
+script:
+  - docker-compose run test npm run lint:js
+  - docker-compose run test npm run test
+  - docker-compose run test npm run build
 notifications:
   email:
     on_failure: change
