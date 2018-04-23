@@ -1,5 +1,3 @@
-/* global System */
-// TOOD: Remove global system when upgrading webpack
 import { createStore, applyMiddleware, compose } from 'redux';
 import { fromJS } from 'immutable';
 import { routerMiddleware } from 'react-router-redux';
@@ -33,7 +31,7 @@ export default function configureStore(initialState = {}, history) {
   // Make reducers hot reloadable, see http://mxs.is/googmo
   /* istanbul ignore next */
   if (module.hot) {
-    System.import('./reducers').then(reducerModule => {
+    import('./reducers').then(reducerModule => {
       const createReducers = reducerModule.default;
       const nextReducers = createReducers(store.asyncReducers);
 

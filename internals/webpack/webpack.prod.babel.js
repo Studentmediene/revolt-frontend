@@ -3,7 +3,8 @@ const path = require('path');
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 const OfflinePlugin = require('offline-plugin');
 
 module.exports = require('./webpack.base.babel')({
@@ -22,56 +23,40 @@ module.exports = require('./webpack.base.babel')({
   // We use ExtractTextPlugin so we get a seperate CSS file instead
   // of the CSS being in the JS and injected as a style tag
 
-  cssRules: ExtractTextPlugin.extract({
-    fallback: require.resolve('style-loader'),
-    use: [
-      {
-        loader: require.resolve('css-loader'),
-        options: {
-          modules: true,
-          localIdentName: '[hash:base64:6]',
-          importLoaders: 1,
-        },
+  cssRules: [
+    MiniCssExtractPlugin.loader,
+    {
+      loader: require.resolve('css-loader'),
+      options: {
+        modules: true,
+        localIdentName: '[hash:base64:6]',
+        importLoaders: 1,
       },
-      {
-        loader: require.resolve('postcss-loader'),
-        options: {
-          plugins: () => [
-            require('postcss-flexbugs-fixes'),
-            autoprefixer({
-              browsers: [
-                '>1%',
-                'last 4 versions',
-                'Firefox ESR',
-                'not ie < 9', // React doesn't support IE8 anyway
-              ],
-              flexbox: 'no-2009',
-            }),
-          ],
-        },
+    },
+    {
+      loader: require.resolve('postcss-loader'),
+      options: {
+        plugins: () => [
+          require('postcss-flexbugs-fixes'),
+          autoprefixer({
+            browsers: [
+              '>1%',
+              'last 4 versions',
+              'Firefox ESR',
+              'not ie < 9', // React doesn't support IE8 anyway
+            ],
+            flexbox: 'no-2009',
+          }),
+        ],
       },
-    ],
-  }),
+    },
+  ],
   devtool: 'source-map',
+  mode: 'production',
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      children: true,
-      minChunks: 2,
-      async: true,
-    }),
-
     // OccurrenceOrderPlugin is needed for long-term caching to work properly.
     // See http://mxs.is/googmv
     new webpack.optimize.OccurrenceOrderPlugin(true),
-
-    // Minify and optimize the JavaScript
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false, // ...but do not show warnings in the console (there is a lot of them)
-      },
-    }),
 
     // Minify and optimize the index.html
     new HtmlWebpackPlugin({
@@ -92,7 +77,9 @@ module.exports = require('./webpack.base.babel')({
     }),
 
     // Extract the CSS into a seperate file
-    new ExtractTextPlugin('css/[name].[contenthash].css'),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].[contenthash].css',
+    }),
 
     // Put it in the end to capture all the HtmlWebpackPlugin's
     // assets manipulations and do leak its manipulations to HtmlWebpackPlugin
@@ -110,7 +97,7 @@ module.exports = require('./webpack.base.babel')({
         // All chunks marked as `additional`, loaded after main section
         // and do not prevent SW to install. Change to `optional` if
         // do not want them to be preloaded at all (cached only when first loaded)
-        additional: ['*.chunk.js'],
+        additional: ['js/*.chunk.js'],
       },
 
       // Removes warning for about `additional` section usage
@@ -120,7 +107,11 @@ module.exports = require('./webpack.base.babel')({
       // Allows automatic updating
       ServiceWorker: {
         events: true,
+        minify: true,
       },
+    }),
+    new MomentLocalesPlugin({
+      localesToKeep: ['NB_no'],
     }),
   ],
 });
