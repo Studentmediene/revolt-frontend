@@ -194,7 +194,7 @@ export class Sendeplan extends React.Component {
       </tr>
     ));
 
-    const today = moment().day() - 1;
+    const today = moment().isoWeekday() - 1;
     const now = makeSendelisteComponents(today, sendeliste);
     const rowToday = times.map((time, index) => (
       <tr key={times.index}>

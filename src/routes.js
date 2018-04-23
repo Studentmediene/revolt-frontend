@@ -1,5 +1,3 @@
-/* global System */
-// TOOD: Remove global system when upgrading webpack
 import { getAsyncInjectors } from 'utils/asyncInjectors';
 import asyncComponent from 'utils/asyncComponent';
 
@@ -18,9 +16,9 @@ export default function createRoutes(store) {
       exact: true,
       component: asyncComponent(() =>
         Promise.all([
-          System.import('components/FrontPage/reducer'),
-          System.import('components/FrontPage/sagas'),
-          System.import('components/FrontPage'),
+          import('components/FrontPage/reducer'),
+          import('components/FrontPage/sagas'),
+          import('components/FrontPage'),
         ])
           .then(([reducer, sagas, component]) => {
             injectReducer('frontPage', reducer.default);
@@ -35,7 +33,7 @@ export default function createRoutes(store) {
       name: 'about',
       exact: true,
       component: asyncComponent(() =>
-        System.import('components/About').catch(errorLoading),
+        import('components/About').catch(errorLoading),
       ),
     },
 
@@ -45,9 +43,9 @@ export default function createRoutes(store) {
       exact: true,
       component: asyncComponent(() =>
         Promise.all([
-          System.import('components/Shows/reducer'),
-          System.import('components/Shows/sagas'),
-          System.import('components/Shows'),
+          import('components/Shows/reducer'),
+          import('components/Shows/sagas'),
+          import('components/Shows'),
         ])
           .then(([reducer, sagas, component]) => {
             injectReducer('shows', reducer.default);
@@ -62,9 +60,9 @@ export default function createRoutes(store) {
       name: 'post',
       component: asyncComponent(() =>
         Promise.all([
-          System.import('components/Post/reducer'),
-          System.import('components/Post/sagas'),
-          System.import('components/Post'),
+          import('components/Post/reducer'),
+          import('components/Post/sagas'),
+          import('components/Post'),
         ])
           .then(([reducer, sagas, component]) => {
             injectReducer('post', reducer.default);
@@ -79,9 +77,9 @@ export default function createRoutes(store) {
       name: 'show',
       component: asyncComponent(() =>
         Promise.all([
-          System.import('components/Show/reducer'),
-          System.import('components/Show/sagas'),
-          System.import('components/Show'),
+          import('components/Show/reducer'),
+          import('components/Show/sagas'),
+          import('components/Show'),
         ])
           .then(([reducer, sagas, component]) => {
             injectReducer('show', reducer.default);
@@ -96,9 +94,9 @@ export default function createRoutes(store) {
       name: 'sendeplan',
       component: asyncComponent(() =>
         Promise.all([
-          System.import('components/Sendeplan/reducer'),
-          System.import('components/Sendeplan/sagas'),
-          System.import('components/Sendeplan'),
+          import('components/Sendeplan/reducer'),
+          import('components/Sendeplan/sagas'),
+          import('components/Sendeplan'),
         ])
           .then(([reducer, sagas, component]) => {
             injectReducer('sendeplan', reducer.default);
@@ -113,9 +111,9 @@ export default function createRoutes(store) {
       name: 'plainpost',
       component: asyncComponent(() =>
         Promise.all([
-          System.import('components/Post/reducer'),
-          System.import('components/Post/sagas'),
-          System.import('components/Post'),
+          import('components/Post/reducer'),
+          import('components/Post/sagas'),
+          import('components/Post'),
         ])
           .then(([reducer, sagas, component]) => {
             injectReducer('post', reducer.default);
@@ -129,7 +127,7 @@ export default function createRoutes(store) {
       path: '*',
       name: 'notfound',
       component: asyncComponent(() =>
-        System.import('components/NotFoundPage').catch(errorLoading),
+        import('components/NotFoundPage').catch(errorLoading),
       ),
     },
   ];

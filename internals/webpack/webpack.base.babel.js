@@ -109,6 +109,7 @@ module.exports = options => ({
     mainFields: ['module', 'main'],
   },
   devtool: options.devtool,
+  mode: options.mode,
   target: 'web', // Make web variables accessible to webpack, e.g. window
   performance: options.performance,
 });
