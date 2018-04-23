@@ -7,3 +7,7 @@ RUN apk add --update --no-cache git openssh
 COPY package.json .
 COPY package-lock.json .
 RUN npm install
+
+COPY .babelrc .
+COPY .eslintrc.js .
+COPY .stylelintrc.js .
