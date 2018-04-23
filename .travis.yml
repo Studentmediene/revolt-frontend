@@ -3,6 +3,7 @@ sudo: true
 dist: xenial
 node_js:
 - '8.3'
+before_script: npm install -U npm
 script: npm run build
 notifications:
   email:
