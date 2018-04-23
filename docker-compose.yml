@@ -3,4 +3,6 @@ services:
   test:
     build: .
     volumes:
-      - .:/srv/app
+      - ./src:/srv/app/src
+      - ./internals:/srv/app/internals
+      - ./server:/srv/app/server
