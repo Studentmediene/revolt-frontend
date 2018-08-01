@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { selectShows, selectShowsLoading, selectShowsError } from './selectors';
 import styles from './styles.css';
 import { loadShows } from './actions';
+import Loader from 'components/Loader';
 
 import ShowPreviewList from 'components/ShowPreviewList';
 
@@ -37,6 +38,8 @@ export class Shows extends React.Component {
           toggleArchivedShows={this.toggleArchivedShows}
         />
       );
+    } else {
+      return <Loader />;
     }
 
     return <div className={styles.shows}>{showPreviewList}</div>;

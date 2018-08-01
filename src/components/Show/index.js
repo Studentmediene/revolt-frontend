@@ -19,6 +19,7 @@ import {
 import Episode from 'components/Episode';
 import PostPreview from 'components/PostPreview';
 import ShowHeader from 'components/Show/ShowHeader';
+import Loader from 'components/Loader';
 
 export class Show extends React.Component {
   componentWillMount() {
@@ -31,7 +32,7 @@ export class Show extends React.Component {
       this.props.show === null ||
       this.props.loading
     ) {
-      return <div />;
+      return <Loader />;
     }
     const episodes = this.props.episodes.map(e => ({
       ...e,

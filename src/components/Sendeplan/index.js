@@ -15,6 +15,8 @@ import {
 } from './selectors';
 import { loadSendeplan } from './actions';
 
+import Loader from 'components/Loader';
+
 import styles from './styles.css';
 
 export class Sendeplan extends React.Component {
@@ -138,7 +140,7 @@ export class Sendeplan extends React.Component {
       this.props.sendeplan.saturday === undefined ||
       this.props.sendeplan.sunday === undefined
     ) {
-      return <p> Sendeplanen lastes inn... </p>;
+      return <Loader />;
     }
     makeSendeliste(this.props.sendeplan.monday);
     makeSendeliste(this.props.sendeplan.tuesday);

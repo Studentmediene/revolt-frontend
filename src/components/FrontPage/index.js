@@ -12,6 +12,7 @@ import {
 } from './selectors';
 import { loadFrontPagePosts } from './actions';
 
+import Loader from 'components/Loader';
 import PostPreviewList from 'components/PostPreviewList';
 
 export class FrontPage extends React.Component {
@@ -28,6 +29,8 @@ export class FrontPage extends React.Component {
         moment(postB.publishAt).diff(postA.publishAt),
       );
       posts = <PostPreviewList posts={this.props.posts} />;
+    } else {
+      return <Loader />;
     }
     return <div className={styles.frontPage}>{posts}</div>;
   }
