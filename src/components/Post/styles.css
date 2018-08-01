@@ -2,6 +2,12 @@
   margin: 0 auto;
 }
 
+.post a {
+  background: transparent !important;
+  color: black;
+  text-decoration-color: #ECB61C;
+}
+
 .title {
   margin-bottom: 0;
 }
