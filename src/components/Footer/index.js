@@ -14,7 +14,7 @@ const Footer = () => {
         <p>Uautorisert lenking, videreføring eller kopiering er ulovlig.</p>
         <br />
         <p>Radioredaktør: Paulina Dubkov</p>
-        <p>Ansvarlig redaktør: Håkon Pedersen</p>
+        <p>Ansvarlig redaktør: Hanna Jarstø Ervik</p>
         <br />
         <p>
           <a
