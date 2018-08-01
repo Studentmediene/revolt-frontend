@@ -135,7 +135,6 @@ function* updateLiveTitleTimer() {
 }
 
 function* liveUpdater() {
-  yield take(PLAY_LIVE_PENDING);
   yield fork(updateLiveTitleTimer);
 }
 
