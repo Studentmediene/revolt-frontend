@@ -20,8 +20,6 @@ import Loader from 'components/Loader';
 import styles from './styles.css';
 
 export class Sendeplan extends React.Component {
-  // eslint-disable-line react/prefer-stateless-function
-
   constructor(props) {
     super(props);
     this.state = {
@@ -158,7 +156,7 @@ export class Sendeplan extends React.Component {
       }
       return sendeplan
         .slice(daynumber * 17, (daynumber + 1) * 17)
-        .map(program => {
+        .map((program, index) => {
           let className = null;
           /* Adds a class 'live' to the shows that are not reruns
           to make it bold in the table */
@@ -166,7 +164,7 @@ export class Sendeplan extends React.Component {
             className = styles.live;
           }
           return (
-            <td key={program.index} className={className}>
+            <td key={daynumber * 17 + index} className={className}>
               {program}
             </td>
           );
@@ -182,7 +180,7 @@ export class Sendeplan extends React.Component {
     const sun = makeSendelisteComponents(6, sendeliste);
 
     const row = times.map((time, index) => (
-      <tr key={times.index}>
+      <tr key={index}>
         {times[index]}
         {mon[index]}
         {tue[index]}
@@ -197,7 +195,7 @@ export class Sendeplan extends React.Component {
     const today = moment().isoWeekday() - 1;
     const now = makeSendelisteComponents(today, sendeliste);
     const rowToday = times.map((time, index) => (
-      <tr key={times.index}>
+      <tr key={index}>
         {times[index]}
         {now[index]}
       </tr>
