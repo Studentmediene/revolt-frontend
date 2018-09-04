@@ -19,7 +19,14 @@ exports[`<HeaderPlayButton /> renders correctly 1`] = `
     <div
       className="buttonText"
     >
-      Lytt direkte!
+      <div
+        className="largeText"
+      >
+        Lytt direkte!
+      </div>
+      <div
+        className="smallText"
+      />
     </div>
   </button>
 </div>
