@@ -29,7 +29,9 @@ export function* loadFrontPageArticles() {
   }`;
   try {
     const result = yield call(getGraphQL, query);
-    yield put(frontPagePostsLoaded(result.data.paginatedPosts.objects.map(postFormat)));
+    yield put(
+      frontPagePostsLoaded(result.data.paginatedPosts.objects.map(postFormat)),
+    );
   } catch (error) {
     yield put(frontPagePostsError());
   }

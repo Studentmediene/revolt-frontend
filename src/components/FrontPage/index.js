@@ -30,7 +30,12 @@ export class FrontPage extends React.Component {
     } else {
       return <Loader />;
     }
-    return <div>{posts}</div>;
+    return (
+      <div className={styles.frontPage}>
+        {posts}
+        <button>Last inn flere artikler</button>
+      </div>
+    );
   }
 }
 
