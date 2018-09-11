@@ -29,6 +29,11 @@ const Footer = () => {
             Om oss
           </Link>
         </p>
+        <p>
+          <Link className={styles.footerLink} to="/personvern">
+            Personvern
+          </Link>
+        </p>
         <p>2018 © Radio Revolt</p>
       </div>
     </div>
