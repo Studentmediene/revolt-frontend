@@ -7,27 +7,29 @@ import { postFormat } from 'utils/dataFormatters';
 // Individual exports for testing
 export function* loadFrontPageArticles() {
   const query = `query {
-    frontPagePosts {
-      id,
-      title,
-      slug,
-      croppedImages {
-        large,
-        medium,
-        small
-      },
-      lead,
-      publishAt,
-      categories {
-        name,
-        textColor,
-        backgroundColor
+    paginatedPosts(page: 1) {
+      objects {
+        id,
+        title,
+        slug,
+        croppedImages {
+          large,
+          medium,
+          small
+        },
+        lead,
+        publishAt,
+        categories {
+          name,
+          textColor,
+          backgroundColor
+        }
       }
     }
   }`;
   try {
     const result = yield call(getGraphQL, query);
-    yield put(frontPagePostsLoaded(result.data.frontPagePosts.map(postFormat)));
+    yield put(frontPagePostsLoaded(result.data.paginatedPosts.objects.map(postFormat)));
   } catch (error) {
     yield put(frontPagePostsError());
   }
