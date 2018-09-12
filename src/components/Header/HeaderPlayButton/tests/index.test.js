@@ -5,6 +5,7 @@ import configureStore from 'redux-mock-store';
 
 import ConnectedHeaderPlayButton, { HeaderPlayButton } from '../';
 import { playLive } from 'components/Player/actions';
+import { fromJS } from 'immutable';
 
 describe('<HeaderPlayButton />', () => {
   it('renders correctly', () => {
@@ -26,7 +27,14 @@ describe('<HeaderPlayButton />', () => {
 
   it('dispatches action when clicked', () => {
     const mockStore = configureStore();
-    const store = mockStore({});
+    const store = mockStore(
+      fromJS({
+        player: {
+          liveTitle: 'mockTitle',
+        },
+      }),
+    );
+
     const tree = mount(
       <Provider store={store}>
         <ConnectedHeaderPlayButton />
@@ -39,7 +47,13 @@ describe('<HeaderPlayButton />', () => {
 
   it('dispatches action on keyPress', () => {
     const mockStore = configureStore();
-    const store = mockStore({});
+    const store = mockStore(
+      fromJS({
+        player: {
+          liveTitle: 'mockTitle',
+        },
+      }),
+    );
     const tree = mount(
       <Provider store={store}>
         <ConnectedHeaderPlayButton />

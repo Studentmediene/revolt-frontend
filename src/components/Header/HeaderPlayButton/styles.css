@@ -12,13 +12,14 @@
   align-items: center;
   padding: 0;
   height: 6em;
-  width: 16em;
+  min-width: 16em;
   font-family: inherit;
   border-width: 0;
 }
 
 .playIcon {
   height: 1em;
+  padding-left: 2em;
   padding-right: 2em;
   display: flex;
   align-items: center;
@@ -33,8 +34,20 @@
 }
 
 .buttonText {
-  font-size: 1.2em;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  text-align: start;
   color: #DDD;
+  padding-right: 2em;
+}
+
+.largeText {
+  font-size: 1.2em;
+}
+
+.smallText {
+  font-size: 0.8em;
 }
 
 /* Hide button on smaller screens */

@@ -4,11 +4,13 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import styles from './styles.css';
+import { selectLiveTitle } from './selectors';
 import { playLive } from 'components/Player/actions';
 
 export class HeaderPlayButton extends React.Component {
   static propTypes = {
     playLive: PropTypes.func.isRequired,
+    nowPlaying: PropTypes.string,
   };
 
   render() {
@@ -22,14 +24,19 @@ export class HeaderPlayButton extends React.Component {
           <div className={styles.playIcon}>
             <div className={styles.playIconInner} />
           </div>
-          <div className={styles.buttonText}>Lytt direkte!</div>
+          <div className={styles.buttonText}>
+            <div className={styles.largeText}>Lytt direkte!</div>
+            <div className={styles.smallText}>{this.props.nowPlaying}</div>
+          </div>
         </button>
       </div>
     );
   }
 }
 
-const mapStateToProps = createStructuredSelector({});
+const mapStateToProps = createStructuredSelector({
+  nowPlaying: selectLiveTitle(),
+});
 
 function mapDispatchToProps(dispatch) {
   return {
