@@ -10,23 +10,14 @@
   margin-left: -131px;
 }
 
-.fullTable table tr td:nth-child(1),
-.fullTable table tr th:nth-child(1) {
-  position: absolute;
-  left: 0;
-  width: 45px;
+.sendeplan td {
+  border: 1px #AAA solid;
+  padding: 6px;
+  width: 20px;
 }
 
 .sendeplan table td {
   background-color: #F5F5F5;
-}
-
-/* z-index is set to 1 due to the first columns border
-overlaps the th-border because it's set to position: absolute
-in fullTable */
-.sendeplan table tr th:nth-child(1) {
-  width: 45px;
-  z-index: 1;
 }
 
 .sendeplan {
@@ -43,12 +34,6 @@ in fullTable */
 .simpleTable table {
   table-layout: fixed;
   width: 200px;
-}
-
-.sendeplan td {
-  border: 1px #AAA solid;
-  padding: 6px;
-  width: 20px;
 }
 
 .sendeplan th {
@@ -92,4 +77,19 @@ in fullTable */
 
 .live {
   font-weight: bold;
+}
+
+/* z-index is set to 1 due to the first columns border
+overlaps the th-border because it's set to position: absolute
+in fullTable */
+.sendeplan table tr th:nth-child(1) {
+  width: 45px;
+  z-index: 1;
+}
+
+.fullTable table tr td:nth-child(1),
+.fullTable table tr th:nth-child(1) {
+  position: absolute;
+  left: 0;
+  width: 45px;
 }
