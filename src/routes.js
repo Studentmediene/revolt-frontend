@@ -36,7 +36,14 @@ export default function createRoutes(store) {
         import('components/About').catch(errorLoading),
       ),
     },
-
+    {
+      path: '/personvern',
+      name: 'privacypolicy',
+      exact: true,
+      component: asyncComponent(() =>
+        import('components/PrivacyPolicy').catch(errorLoading),
+      ),
+    },
     {
       path: '/programmer',
       name: 'shows',
