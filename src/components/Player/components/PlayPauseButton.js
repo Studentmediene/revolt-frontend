@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import styles from './AudioControls.css';
+import styles from './PlayPauseButton.css';
 
 const PlayPauseButton = ({ togglePlayPause, paused }) => (
   <button
