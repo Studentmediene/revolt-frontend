@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import PlayPauseButton from './PlayPauseButton';
 import styles from './AudioControls.css';
 
 const AudioControls = ({ playNext, playPrevious, togglePlayPause, paused }) => (
@@ -15,20 +15,7 @@ const AudioControls = ({ playNext, playPrevious, togglePlayPause, paused }) => (
         <div className={styles.line} />
       </div>
     </button>
-    <button
-      className={classNames(styles.playPauseButton, {
-        [styles.paused]: paused,
-      })}
-      onClick={togglePlayPause}
-      onKeyPress={togglePlayPause}
-    >
-      <div className={styles.playPauseButtonInner}>
-        <div className={styles.left} />
-        <div className={styles.right} />
-        <div className={styles.triangle1} />
-        <div className={styles.triangle2} />
-      </div>
-    </button>
+    <PlayPauseButton paused={paused} togglePlayPause={togglePlayPause} />
     <button
       className={styles.forwardButton}
       onClick={playNext}
