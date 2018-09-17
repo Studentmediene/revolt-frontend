@@ -4,31 +4,30 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import styles from './styles.css';
-import { selectLiveTitle } from './selectors';
-import { playLive } from 'components/Player/actions';
+import { togglePlayPause } from 'components/Player/actions';
+import PlayPauseButton from 'components/Player/components/PlayPauseButton';
+import { selectLiveTitle, selectPaused } from 'components/Player/selectors';
 
 export class HeaderPlayButton extends React.Component {
   static propTypes = {
-    playLive: PropTypes.func.isRequired,
+    togglePlayPause: PropTypes.func.isRequired,
     nowPlaying: PropTypes.string,
+    paused: PropTypes.bool,
   };
 
   render() {
     return (
       <div className={styles.container}>
-        <button
-          className={styles.playButton}
-          onClick={() => this.props.playLive()}
-          onKeyPress={() => this.props.playLive()}
-        >
-          <div className={styles.playIcon}>
-            <div className={styles.playIconInner} />
-          </div>
+        <div className={styles.playButton}>
+          <PlayPauseButton
+            paused={this.props.paused}
+            togglePlayPause={this.props.togglePlayPause}
+          />
           <div className={styles.buttonText}>
             <div className={styles.largeText}>Lytt direkte!</div>
             <div className={styles.smallText}>{this.props.nowPlaying}</div>
           </div>
-        </button>
+        </div>
       </div>
     );
   }
@@ -36,11 +35,12 @@ export class HeaderPlayButton extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
   nowPlaying: selectLiveTitle(),
+  paused: selectPaused(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    playLive: (offset = 0) => dispatch(playLive(offset)),
+    togglePlayPause: () => dispatch(togglePlayPause()),
   };
 }
 
