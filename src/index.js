@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ReactGA from 'react-ga';
 import moment from 'moment';
 import { Provider } from 'react-redux';
 import { Route } from 'react-router-dom';
@@ -34,13 +33,6 @@ import 'sanitize.css/sanitize.css';
 const initialState = {};
 const history = createHistory();
 const store = configureStore(initialState, history);
-
-// Set up Google Analytics
-ReactGA.initialize('UA-4404225-6');
-history.listen(location => {
-  ReactGA.set({ page: location.pathname });
-  ReactGA.pageview(location.pathname);
-});
 
 const routes = createRoutes(store).map(route => (
   <Route
