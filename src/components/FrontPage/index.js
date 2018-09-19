@@ -8,6 +8,7 @@ import {
   selectFrontPagePosts,
   selectFrontPagePostsLoading,
   selectFrontPagePostsError,
+  selectPageNumber,
 } from './selectors';
 import { loadFrontPagePosts } from './actions';
 
@@ -16,7 +17,7 @@ import PostPreviewList from 'components/PostPreviewList';
 
 export class FrontPage extends React.Component {
   componentWillMount() {
-    this.props.loadPosts();
+    this.props.loadPosts(this.props.pageNumber);
   }
 
   render() {
@@ -33,7 +34,9 @@ export class FrontPage extends React.Component {
     return (
       <div className={styles.frontPage}>
         {posts}
-        <button>Last inn flere artikler</button>
+        <button onClick={() => this.props.loadPosts(this.props.pageNumber)}>
+          Last inn flere artikler
+        </button>
       </div>
     );
   }
@@ -44,17 +47,19 @@ FrontPage.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.bool,
   loadPosts: PropTypes.func,
+  pageNumber: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
   posts: selectFrontPagePosts(),
   loading: selectFrontPagePostsLoading(),
   error: selectFrontPagePostsError(),
+  pageNumber: selectPageNumber(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    loadPosts: () => dispatch(loadFrontPagePosts()),
+    loadPosts: pageNumber => dispatch(loadFrontPagePosts(pageNumber)),
     dispatch,
   };
 }

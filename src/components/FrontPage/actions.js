@@ -10,9 +10,10 @@ import {
   LOAD_FRONT_PAGE_POSTS_FAILED,
 } from './constants';
 
-export function loadFrontPagePosts() {
+export function loadFrontPagePosts(pageNumber) {
   return {
     type: LOAD_FRONT_PAGE_POSTS_PENDING,
+    pageNumber,
   };
 }
 
