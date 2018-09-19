@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { withRouter } from 'react-router-dom';
 import moment from 'moment';
-import styles from './styles.css';
 import {
   selectFrontPagePosts,
   selectFrontPagePostsLoading,
@@ -16,7 +15,6 @@ import Loader from 'components/Loader';
 import PostPreviewList from 'components/PostPreviewList';
 
 export class FrontPage extends React.Component {
-  // eslint-disable-line react/prefer-stateless-function
   componentWillMount() {
     this.props.loadPosts();
   }
@@ -32,7 +30,7 @@ export class FrontPage extends React.Component {
     } else {
       return <Loader />;
     }
-    return <div className={styles.frontPage}>{posts}</div>;
+    return <div>{posts}</div>;
   }
 }
 

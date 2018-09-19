@@ -19,3 +19,8 @@
 .createdBy {
   margin-right: 0.3rem;
 }
+
+img {
+  height: auto;
+  width: 100%;
+}
