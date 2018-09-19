@@ -34,9 +34,14 @@ export class FrontPage extends React.Component {
     return (
       <div className={styles.frontPage}>
         {posts}
-        <button onClick={() => this.props.loadPosts(this.props.pageNumber)}>
-          Last inn flere artikler
-        </button>
+        <div className={styles.buttonWrap}>
+          <button
+            className={styles.loadMore}
+            onClick={() => this.props.loadPosts(this.props.pageNumber)}
+          >
+            Last inn flere artikler
+          </button>
+        </div>
       </div>
     );
   }

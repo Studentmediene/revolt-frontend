@@ -1,0 +1,19 @@
+.buttonWrap {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.loadMore {
+  border: 1px #222 solid;
+  border-radius: 2px;
+  padding: 10px;
+  transition-duration: 0.3s;
+}
+
+.loadMore:hover {
+  background-color: #222;
+  color: white;
+  cursor: pointer;
+}
