@@ -10,7 +10,7 @@ import { getOnDemandPlaylist } from 'components/Player/actions';
 import { loadPost } from './actions';
 import Episode from 'components/Episode';
 
-import './summernote-video-attributes.css';
+import './editor.css';
 import styles from './styles.css';
 
 export class Post extends React.Component {
