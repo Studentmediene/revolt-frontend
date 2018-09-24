@@ -11,6 +11,7 @@ import {
   selectPageNumber,
 } from './selectors';
 import { loadFrontPagePosts } from './actions';
+import styles from './styles.css';
 
 import Loader from 'components/Loader';
 import PostPreviewList from 'components/PostPreviewList';
