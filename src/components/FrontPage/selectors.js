@@ -24,9 +24,15 @@ const selectFrontPagePostsLoading = () =>
 const selectFrontPagePostsError = () =>
   createSelector(selectFrontPageDomain(), frontPage => frontPage.get('error'));
 
+const selectPageNumber = () =>
+  createSelector(selectFrontPageDomain(), frontPage => {
+    return frontPage.get('pageNumber');
+  });
+
 export {
   selectFrontPageDomain,
   selectFrontPagePosts,
   selectFrontPagePostsLoading,
   selectFrontPagePostsError,
+  selectPageNumber,
 };

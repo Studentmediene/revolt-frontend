@@ -15,6 +15,7 @@ const initialState = fromJS({
   loading: false,
   error: false,
   posts: false,
+  pageNumber: 1,
 });
 
 function frontPageReducer(state = initialState, action) {
@@ -25,7 +26,8 @@ function frontPageReducer(state = initialState, action) {
       return state
         .set('loading', false)
         .set('error', false)
-        .set('posts', action.posts);
+        .set('posts', [...state.get('posts'), ...action.posts])
+        .set('pageNumber', state.get('pageNumber') + 1);
     case LOAD_FRONT_PAGE_POSTS_FAILED:
       return state.set('loading', false).set('error', true);
     default:

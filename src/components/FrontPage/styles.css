@@ -1,0 +1,16 @@
+.buttonWrap {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.loadMore {
+  background-color: #ECB61C;
+  border: 0;
+  padding: 10px;
+}
+
+.loadMore:hover {
+  cursor: pointer;
+}
