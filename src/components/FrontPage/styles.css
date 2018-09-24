@@ -6,14 +6,11 @@
 }
 
 .loadMore {
-  border: 1px #222 solid;
-  border-radius: 2px;
+  background-color: #ECB61C;
+  border: 0;
   padding: 10px;
-  transition-duration: 0.3s;
 }
 
 .loadMore:hover {
-  background-color: #222;
-  color: white;
   cursor: pointer;
 }
