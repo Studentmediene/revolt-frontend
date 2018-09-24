@@ -8,7 +8,7 @@ import { postFormat } from 'utils/dataFormatters';
 export function* loadFrontPageArticles({ pageNumber }) {
   const query = `query {
     paginatedPosts(page: ${pageNumber}) {
-      objects {
+      posts {
         id,
         title,
         slug,
@@ -30,7 +30,7 @@ export function* loadFrontPageArticles({ pageNumber }) {
   try {
     const result = yield call(getGraphQL, query);
     yield put(
-      frontPagePostsLoaded(result.data.paginatedPosts.objects.map(postFormat)),
+      frontPagePostsLoaded(result.data.paginatedPosts.posts.map(postFormat)),
     );
   } catch (error) {
     yield put(frontPagePostsError());
