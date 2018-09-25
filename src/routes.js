@@ -99,6 +99,7 @@ export default function createRoutes(store) {
     {
       path: '/sendeplan',
       name: 'sendeplan',
+      exact: true,
       component: asyncComponent(() =>
         Promise.all([
           import('components/Sendeplan/reducer'),
