@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Footer /> renders correctly 1`] = `
+<div
+  className="footer"
+>
+  <div
+    className="content"
+  >
+    <p>
+      Denne tjenesten tilbys av Studentmediene i Trondheim AS. Musikken er gjengitt med tilatelse fra TONO/NCB.
+    </p>
+    <p>
+      Uautorisert lenking, videreføring eller kopiering er ulovlig.
+    </p>
+    <br />
+    <p>
+      Radioredaktør: Paulina Dubkov
+    </p>
+    <p>
+      Ansvarlig redaktør: Hanna Jarstø Ervik
+    </p>
+    <br />
+    <p>
+      <a
+        className="footerLink"
+        href="mailto:redaktor@radiorevolt.no"
+      >
+        Kontakt oss
+      </a>
+    </p>
+    <p>
+      <Link
+        className="footerLink"
+        replace={false}
+        to="/om"
+      >
+        Om oss
+      </Link>
+    </p>
+    <p>
+      <Link
+        className="footerLink"
+        replace={false}
+        to="/personvern"
+      >
+        Personvern
+      </Link>
+    </p>
+    <p>
+      2018 © Radio Revolt
+    </p>
+  </div>
+</div>
+`;

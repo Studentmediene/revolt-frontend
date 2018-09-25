@@ -99,6 +99,7 @@ export default function createRoutes(store) {
     {
       path: '/sendeplan',
       name: 'sendeplan',
+      exact: true,
       component: asyncComponent(() =>
         Promise.all([
           import('components/Sendeplan/reducer'),
@@ -134,7 +135,7 @@ export default function createRoutes(store) {
       path: '*',
       name: 'notfound',
       component: asyncComponent(() =>
-        import('components/NotFoundPage').catch(errorLoading),
+        import('components/NotFound').catch(errorLoading),
       ),
     },
   ];

@@ -10,7 +10,9 @@ import App from 'components/App';
 import configureStore from 'store';
 import createRoutes from 'routes';
 
+import ScrollToTop from 'utils/scrollToTopComponent';
 import { initializeErrorReporting } from 'utils/errorReporting';
+
 if (process.env.NODE_ENV === 'production') {
   initializeErrorReporting();
 }
@@ -35,12 +37,11 @@ const history = createHistory();
 const store = configureStore(initialState, history);
 
 const routes = createRoutes(store).map(route => (
-  <Route
-    path={route.path}
-    component={route.component}
-    key={route.path}
-    exact={route.exact}
-  />
+  <Route path={route.path} key={route.path} exact={route.exact}>
+    <ScrollToTop>
+      <route.component />
+    </ScrollToTop>
+  </Route>
 ));
 
 ReactDOM.render(
