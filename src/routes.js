@@ -135,7 +135,7 @@ export default function createRoutes(store) {
       path: '*',
       name: 'notfound',
       component: asyncComponent(() =>
-        import('components/NotFoundPage').catch(errorLoading),
+        import('components/NotFound').catch(errorLoading),
       ),
     },
   ];
