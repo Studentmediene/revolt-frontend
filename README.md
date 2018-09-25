@@ -5,7 +5,7 @@ Frontend for radiorevolt.no
 
 ## Setup
 
-This project requires [Node](https://nodejs.org/en/download/ "Node download") v8.1.0+ and npm v5.3.0. npm comes bundled with Node.
+This project requires [Node](https://nodejs.org/en/download/ "Node download") v10.11.0+ and npm v6.4.1.
 
 To install all dependencies run
 ```
