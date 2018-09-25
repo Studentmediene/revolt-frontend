@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 
 export class ScrollToTop extends React.Component {
   static propTypes = {
-    children: PropTypes.array.isRequired,
+    children: PropTypes.any.isRequired,
     location: PropTypes.object.isRequired,
   };
   componentDidUpdate(prevProps) {
