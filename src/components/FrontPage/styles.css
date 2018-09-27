@@ -28,7 +28,8 @@
   }
 }
 
-.facebookLogo, .instagramLogo {
+.facebookLogo,
+.instagramLogo {
   float: left;
   width: 3em;
 }
