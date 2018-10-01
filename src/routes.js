@@ -48,10 +48,20 @@ export default function createRoutes(store) {
     },
     {
       path: '/personvern',
-      name: 'privacypolicy',
+      name: 'privacyPolicy',
       exact: true,
       component: asyncComponent(() =>
-        import('components/PrivacyPolicy').catch(errorLoading),
+        Promise.all([
+          import('components/PrivacyPolicy/reducer'),
+          import('components/PrivacyPolicy/sagas'),
+          import('components/PrivacyPolicy'),
+        ])
+          .then(([reducer, sagas, component]) => {
+            injectReducer('privacyPolicy', reducer.default);
+            injectSagas(sagas.default);
+            return component;
+          })
+          .catch(errorLoading),
       ),
     },
     {
