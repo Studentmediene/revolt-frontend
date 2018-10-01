@@ -33,7 +33,17 @@ export default function createRoutes(store) {
       name: 'about',
       exact: true,
       component: asyncComponent(() =>
-        import('components/About').catch(errorLoading),
+        Promise.all([
+          import('components/About/reducer'),
+          import('components/About/sagas'),
+          import('components/About'),
+        ])
+          .then(([reducer, sagas, component]) => {
+            injectReducer('about', reducer.default);
+            injectSagas(sagas.default);
+            return component;
+          })
+          .catch(errorLoading),
       ),
     },
     {
