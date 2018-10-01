@@ -14,3 +14,30 @@
 .loadMore:hover {
   cursor: pointer;
 }
+
+.socialMedia {
+  position: fixed;
+  left: 75%;
+  margin-left: 10px;
+  bottom: 50px;
+  margin-bottom: 10px;
+  visibility: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+@media screen and (min-width: 1500px) {
+  .socialMedia {
+    visibility: visible;
+  }
+}
+
+.facebookLogo,
+.instagramLogo {
+  width: 3em;
+}
+
+.facebookLogo {
+  margin-right: 10px;
+}

@@ -11,6 +11,8 @@ import {
 } from './selectors';
 import { loadFrontPagePosts } from './actions';
 import styles from './styles.css';
+import facebookLogo from './Assets/facebook.svg';
+import instagramLogo from './Assets/instagram.svg';
 
 import Loader from 'components/Loader';
 import PostPreviewList from 'components/PostPreviewList';
@@ -44,6 +46,30 @@ export class FrontPage extends React.Component {
       return (
         <div className={styles.frontPage}>
           {posts}
+          <div className={styles.socialMedia}>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.facebook.com/radiorevolt.no/"
+            >
+              <img
+                src={facebookLogo}
+                alt="Facebook"
+                className={styles.facebookLogo}
+              />
+            </a>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.instagram.com/radiorevolt/"
+            >
+              <img
+                src={instagramLogo}
+                alt="Instagram"
+                className={styles.instagramLogo}
+              />
+            </a>
+          </div>
           <div className={styles.buttonWrap}>
             <button
               className={styles.loadMore}
