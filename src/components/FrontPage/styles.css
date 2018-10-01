@@ -16,10 +16,15 @@
 }
 
 .socialMedia {
-  bottom: 7%;
   position: fixed;
-  right: 18%;
+  left: 75%;
+  margin-left: 10px;
+  bottom: 50px;
+  margin-bottom: 10px;
   visibility: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 }
 
 @media screen and (min-width: 1500px) {
@@ -30,7 +35,6 @@
 
 .facebookLogo,
 .instagramLogo {
-  float: left;
   width: 3em;
 }
 
