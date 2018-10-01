@@ -1,0 +1,3 @@
+export const LOAD_FOOTER_PENDING = 'app/Footer/LOAD_FOOTER_PENDING';
+export const LOAD_FOOTER_SUCCESS = 'app/Footer/LOAD_FOOTER_SUCCESS';
+export const LOAD_FOOTER_FAILED = 'app/Footer/LOAD_FOOTER_FAILED';
