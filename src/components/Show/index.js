@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import moment from 'moment';
+import styles from './styles.css';
 import {
   selectShow,
   selectShowEpisodes,
@@ -91,7 +92,7 @@ export class Show extends React.Component {
     });
     return (
       <div>
-        {categories}
+        <div className={styles.meta}>{categories}</div>
         <ShowHeader show={this.props.show} />
         <div>{elements}</div>
       </div>
