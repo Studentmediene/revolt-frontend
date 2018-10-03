@@ -26,6 +26,10 @@ export function* loadShow(slug) {
         lead,
         publishAt,
       },
+      categories {
+        id,
+        name
+      },
       posts {
         id,
         title,
