@@ -34,6 +34,24 @@ export class Show extends React.Component {
     ) {
       return <Loader />;
     }
+
+    let categories;
+    if (this.props.show.categories && this.props.show.categories.length > 0) {
+      categories = this.props.show.categories.map((category, index) => {
+        if (index === this.props.show.categories.length - 1) {
+          return <span key={category.name}>{category.name}</span>;
+        } else {
+          return <span key={category.name}>{category.name}, </span>;
+        }
+      });
+      categories = (
+        <div>
+          <span>Kategorier: </span>
+          {categories}
+        </div>
+      );
+    }
+
     const episodes = this.props.episodes.map(e => ({
       ...e,
       date: e.publishAt,
@@ -71,9 +89,9 @@ export class Show extends React.Component {
         </div>
       );
     });
-
     return (
       <div>
+        {categories}
         <ShowHeader show={this.props.show} />
         <div>{elements}</div>
       </div>
