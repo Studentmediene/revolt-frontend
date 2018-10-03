@@ -27,8 +27,9 @@ export function* loadShow(slug) {
         publishAt,
       },
       categories {
-        id,
-        name
+        name,
+        textColor,
+        backgroundColor
       },
       posts {
         id,
