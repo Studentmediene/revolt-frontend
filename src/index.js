@@ -1,20 +1,27 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import moment from 'moment';
+import ReactGA from 'react-ga';
+import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Route } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
 
 import App from 'components/App';
-import configureStore from 'store';
 import createRoutes from 'routes';
-
+import configureStore from 'store';
 import ScrollToTop from 'utils/scrollToTopComponent';
 import { initializeErrorReporting } from 'utils/errorReporting';
 
 if (process.env.NODE_ENV === 'production') {
   initializeErrorReporting();
+
+  ReactGA.initialize('UA-4404225-6', {
+    gaOptions: {
+      anonymizeIp: true,
+    },
+  });
+  ReactGA.pageview(window.location.pathname + window.location.search);
 }
 
 // Set global locales for moment
