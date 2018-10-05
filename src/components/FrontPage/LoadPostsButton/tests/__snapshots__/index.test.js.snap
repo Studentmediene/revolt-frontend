@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LoadPostsButton /> renders correctly 1`] = `
+<button
+  className="loadMore"
+  onClick={[MockFunction]}
+>
+  Last inn flere artikler
+  <img
+    alt="Arrow"
+    className="arrow"
+    src="arrow_down.svg"
+  />
+</button>
+`;

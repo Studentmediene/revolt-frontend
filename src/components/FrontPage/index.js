@@ -15,6 +15,7 @@ import facebookLogo from './Assets/facebook.svg';
 import instagramLogo from './Assets/instagram.svg';
 
 import Loader from 'components/Loader';
+import LoadPostsButton from './LoadPostsButton';
 import PostPreviewList from 'components/PostPreviewList';
 
 export class FrontPage extends React.Component {
@@ -32,58 +33,58 @@ export class FrontPage extends React.Component {
 
   render() {
     let posts;
-    if (this.props.loading) {
-      return <Loader />;
-    } else if (this.props.error) {
+    let socialMedia;
+    let loader = (
+      <LoadPostsButton
+        loadPosts={() => this.props.loadPosts(this.props.pageNumber)}
+      />
+    );
+    if (this.props.error) {
       return <div>Kunne ikke laste inn forsiden.</div>;
-    } else if (this.props.posts !== false) {
-      // Sort the posts so that the latest posts is first
+    }
+    if (this.props.loading) {
+      loader = <Loader />;
+    }
+    if (this.props.posts !== false) {
+      // Sort the posts so that the last published posts are first
       posts = this.props.posts.sort((postA, postB) =>
         moment(postB.publishAt).diff(postA.publishAt),
       );
       posts = <PostPreviewList posts={this.props.posts} />;
-
-      return (
-        <div className={styles.frontPage}>
-          {posts}
-          <div className={styles.socialMedia}>
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.facebook.com/radiorevolt.no/"
-            >
-              <img
-                src={facebookLogo}
-                alt="Facebook"
-                className={styles.facebookLogo}
-              />
-            </a>
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.instagram.com/radiorevolt/"
-            >
-              <img
-                src={instagramLogo}
-                alt="Instagram"
-                className={styles.instagramLogo}
-              />
-            </a>
-          </div>
-          <div className={styles.buttonWrap}>
-            <button
-              className={styles.loadMore}
-              onClick={() => this.props.loadPosts(this.props.pageNumber)}
-            >
-              Last inn flere artikler
-            </button>
-          </div>
+      socialMedia = (
+        <div className={styles.socialMedia}>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.facebook.com/radiorevolt.no/"
+          >
+            <img
+              src={facebookLogo}
+              alt="Facebook"
+              className={styles.facebookLogo}
+            />
+          </a>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.instagram.com/radiorevolt/"
+          >
+            <img
+              src={instagramLogo}
+              alt="Instagram"
+              className={styles.instagramLogo}
+            />
+          </a>
         </div>
       );
-    } else {
-      // Render loading component before load actually starts.
-      return <Loader />;
     }
+    return (
+      <div>
+        {posts}
+        {socialMedia}
+        <div className={styles.loaderWrapper}>{loader}</div>
+      </div>
+    );
   }
 }
 

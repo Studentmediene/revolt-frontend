@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<FrontPage /> renders correctly 1`] = `
-<div
-  className="frontPage"
->
+<div>
   <PostPreviewList
     posts={Array []}
   />
@@ -34,14 +32,11 @@ exports[`<FrontPage /> renders correctly 1`] = `
     </a>
   </div>
   <div
-    className="buttonWrap"
+    className="loaderWrapper"
   >
-    <button
-      className="loadMore"
-      onClick={[Function]}
-    >
-      Last inn flere artikler
-    </button>
+    <LoadPostsButton
+      loadPosts={[Function]}
+    />
   </div>
 </div>
 `;
@@ -52,4 +47,12 @@ exports[`<FrontPage /> renders correctly on error 1`] = `
 </div>
 `;
 
-exports[`<FrontPage /> renders correctly while loading 1`] = `<Loader />`;
+exports[`<FrontPage /> renders correctly while loading 1`] = `
+<div>
+  <div
+    className="loaderWrapper"
+  >
+    <Loader />
+  </div>
+</div>
+`;

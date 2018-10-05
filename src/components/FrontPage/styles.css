@@ -1,18 +1,8 @@
-.buttonWrap {
-  align-items: center;
+.loaderWrapper {
   display: flex;
+  align-items: center;
   flex-direction: column;
   width: 100%;
-}
-
-.loadMore {
-  background-color: #ECB61C;
-  border: 0;
-  padding: 10px;
-}
-
-.loadMore:hover {
-  cursor: pointer;
 }
 
 .socialMedia {
