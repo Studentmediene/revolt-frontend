@@ -8,6 +8,7 @@ import {
   selectFrontPagePostsLoading,
   selectFrontPagePostsError,
   selectPageNumber,
+  selectHasLoaded,
 } from './selectors';
 import { loadFrontPagePosts } from './actions';
 import styles from './styles.css';
@@ -25,10 +26,13 @@ export class FrontPage extends React.Component {
     error: PropTypes.bool.isRequired,
     loadPosts: PropTypes.func.isRequired,
     pageNumber: PropTypes.number.isRequired,
+    hasLoaded: PropTypes.bool.isRequired,
   };
 
   componentWillMount() {
-    this.props.loadPosts(this.props.pageNumber);
+    if (!this.props.hasLoaded) {
+      this.props.loadPosts(this.props.pageNumber);
+    }
   }
 
   render() {
@@ -93,6 +97,7 @@ const mapStateToProps = createStructuredSelector({
   loading: selectFrontPagePostsLoading(),
   error: selectFrontPagePostsError(),
   pageNumber: selectPageNumber(),
+  hasLoaded: selectHasLoaded(),
 });
 
 function mapDispatchToProps(dispatch) {
