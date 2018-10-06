@@ -10,7 +10,6 @@ const PostPreviewList = props => {
       <PostPreview {...post} />
     </div>
   ));
-
   return <div className={styles.postPreviewList}>{posts}</div>;
 };
 

@@ -1,17 +1,6 @@
 import { createSelector } from 'reselect';
 
-/**
- * Direct selector to the frontPage state domain
- */
 const selectFrontPageDomain = () => state => state.get('frontPage');
-
-/**
- * Other specific selectors
- */
-
-/**
- * Default selector used by FrontPage
- */
 
 const selectFrontPagePosts = () =>
   createSelector(selectFrontPageDomain(), frontPage => frontPage.get('posts'));
@@ -29,10 +18,15 @@ const selectPageNumber = () =>
     return frontPage.get('pageNumber');
   });
 
+const selectHasLoaded = () =>
+  createSelector(selectFrontPageDomain(), frontPage => {
+    return frontPage.get('hasLoaded');
+  });
+
 export {
-  selectFrontPageDomain,
   selectFrontPagePosts,
   selectFrontPagePostsLoading,
   selectFrontPagePostsError,
   selectPageNumber,
+  selectHasLoaded,
 };

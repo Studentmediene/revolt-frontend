@@ -11,6 +11,7 @@ describe('<FrontPage />', () => {
       error: false,
       pageNumber: 1,
       loadPosts: jest.fn(),
+      hasLoaded: false,
     };
 
     const tree = shallow(<FrontPage {...props} />);
@@ -23,6 +24,7 @@ describe('<FrontPage />', () => {
       error: false,
       pageNumber: 1,
       loadPosts: jest.fn(),
+      hasLoaded: false,
     };
 
     const tree = shallow(<FrontPage {...props} />);
@@ -35,6 +37,7 @@ describe('<FrontPage />', () => {
       error: true,
       pageNumber: 1,
       loadPosts: jest.fn(),
+      hasLoaded: false,
     };
 
     const tree = shallow(<FrontPage {...props} />);

@@ -1,9 +1,3 @@
-/*
- *
- * FrontPage reducer
- *
- */
-
 import { fromJS } from 'immutable';
 import {
   LOAD_FRONT_PAGE_POSTS_PENDING,
@@ -16,6 +10,7 @@ const initialState = fromJS({
   error: false,
   posts: false,
   pageNumber: 1,
+  hasLoaded: false,
 });
 
 function frontPageReducer(state = initialState, action) {
@@ -27,6 +22,7 @@ function frontPageReducer(state = initialState, action) {
         .set('loading', false)
         .set('error', false)
         .set('posts', [...state.get('posts'), ...action.posts])
+        .set('hasLoaded', true)
         .set('pageNumber', state.get('pageNumber') + 1);
     case LOAD_FRONT_PAGE_POSTS_FAILED:
       return state.set('loading', false).set('error', true);
