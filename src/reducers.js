@@ -8,6 +8,7 @@ import { combineReducers } from 'redux-immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
 
 import playerReducer from 'components/Player/reducer';
+import footerReducer from 'components/Footer/reducer';
 
 /*
  * routeReducer
@@ -36,6 +37,7 @@ export default function createReducer(asyncReducers) {
   return combineReducers({
     router: routeReducer,
     player: playerReducer,
+    footer: footerReducer,
     ...asyncReducers,
   });
 }

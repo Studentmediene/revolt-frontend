@@ -4,6 +4,7 @@ import { routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
 import createReducer from './reducers';
 import playerSagas from 'components/Player/sagas';
+import footerSagas from 'components/Footer/sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 const devtools = window.devToolsExtension || (() => noop => noop);
@@ -27,6 +28,9 @@ export default function configureStore(initialState = {}, history) {
 
   // Run global player saga
   playerSagas.map(sagaMiddleware.run);
+
+  // Run global footer saga
+  footerSagas.map(sagaMiddleware.run);
 
   // Make reducers hot reloadable, see http://mxs.is/googmo
   /* istanbul ignore next */

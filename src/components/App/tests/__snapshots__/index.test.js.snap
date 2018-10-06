@@ -10,7 +10,7 @@ exports[`<App /> renders correctly 1`] = `
   >
     <Switch />
   </div>
-  <Footer />
+  <Connect(Footer) />
   <Connect(Player) />
 </div>
 `;
