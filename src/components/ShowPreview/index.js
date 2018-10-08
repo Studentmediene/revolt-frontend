@@ -8,12 +8,11 @@ import styles from './styles.css';
 const ShowPreview = props => {
   let categories;
   if (props.categories && props.categories.length > 0) {
-    categories = props.categories.map((category, index) => (
+    categories = props.categories.map(category => (
       <div
         key={category.name}
         className={styles.category}
         style={{
-          marginTop: `-${(index + 1) * 2}em`,
           backgroundColor: `${category.backgroundColor}`,
           color: `${category.textColor}`,
         }}
@@ -25,6 +24,7 @@ const ShowPreview = props => {
 
   return (
     <div className={styles.container}>
+      {categories}
       <div className={styles.logoImage}>
         <Link className={styles.imageLink} to={`/programmer/${props.slug}`}>
           <LazyLoad height={300} offset={100} once>
@@ -34,7 +34,6 @@ const ShowPreview = props => {
               alt={props.title}
             />
           </LazyLoad>
-          {categories}
         </Link>
       </div>
       <Link className={styles.nameLink} to={`/programmer/${props.slug}`}>
