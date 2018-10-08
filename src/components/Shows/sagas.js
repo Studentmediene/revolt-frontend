@@ -13,7 +13,12 @@ export function* getShows() {
       image,
       lead,
       slug,
-      archived
+      archived,
+      categories {
+        name,
+        textColor,
+        backgroundColor
+      }
     }
   }`;
   try {
