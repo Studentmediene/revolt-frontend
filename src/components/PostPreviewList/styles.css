@@ -1,5 +1,13 @@
 .postPreviewList {
+  display: grid;
+  grid-template-columns: 48% 48%;
+  grid-column-gap: 4%;
   margin: 0 auto;
+}
+
+.postPreviewList > div:first-child {
+  grid-column-start: 1;
+  grid-column-end: 3;
 }
 
 .post {
