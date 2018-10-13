@@ -41,8 +41,6 @@ export class Show extends React.Component {
       categories = this.props.show.categories.map((category, index) => {
         if (index === this.props.show.categories.length - 1) {
           return <span key={category.name}>{category.name}</span>;
-        } else {
-          return <span key={category.name}>{category.name}, </span>;
         }
       });
       categories = (
