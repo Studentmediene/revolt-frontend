@@ -92,8 +92,8 @@ export class Show extends React.Component {
     });
     return (
       <div>
-        <div className={styles.meta}>{categories}</div>
         <ShowHeader show={this.props.show} />
+        <div className={styles.meta}>{categories}</div>
         <div>{elements}</div>
       </div>
     );

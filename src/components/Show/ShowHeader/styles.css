@@ -1,12 +1,12 @@
 .container {
-  width: 80%;
   margin: 0 auto;
+  width: 80%;
 }
 
 .showInfo {
+  align-items: flex-start;
   display: flex;
   flex-flow: row wrap;
-  align-items: flex-start;
   margin-bottom: 2rem;
 }
 
@@ -20,7 +20,7 @@
 
 @media (min-width: 1000px) {
   .container {
-    width: 70%;
+    width: 100%;
   }
 
   .showInfo {
@@ -33,11 +33,11 @@
   }
 
   .image {
-    width: 30%;
+    width: 50%;
   }
 
   .showText {
-    width: 70%;
     padding-left: 2rem;
+    width: 50%;
   }
 }
