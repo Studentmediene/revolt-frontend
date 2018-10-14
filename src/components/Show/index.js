@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import moment from 'moment';
-import styles from './styles.css';
 import {
   selectShow,
   selectShowEpisodes,
@@ -34,21 +33,6 @@ export class Show extends React.Component {
       this.props.loading
     ) {
       return <Loader />;
-    }
-
-    let categories;
-    if (this.props.show.categories && this.props.show.categories.length > 0) {
-      categories = this.props.show.categories.map((category, index) => {
-        if (index === this.props.show.categories.length - 1) {
-          return <span key={category.name}>{category.name}</span>;
-        }
-      });
-      categories = (
-        <div>
-          <span>Kategorier: </span>
-          {categories}
-        </div>
-      );
     }
 
     const episodes = this.props.episodes.map(e => ({
@@ -91,7 +75,6 @@ export class Show extends React.Component {
     return (
       <div>
         <ShowHeader show={this.props.show} />
-        <div className={styles.meta}>{categories}</div>
         <div>{elements}</div>
       </div>
     );
