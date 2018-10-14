@@ -45,16 +45,16 @@ const store = configureStore(initialState, history);
 
 const routes = createRoutes(store).map(route => (
   <Route path={route.path} key={route.path} exact={route.exact}>
-    <ScrollToTop>
-      <route.component />
-    </ScrollToTop>
+    <route.component />
   </Route>
 ));
 
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <App routes={routes} />
+      <ScrollToTop>
+        <App routes={routes} />
+      </ScrollToTop>
     </ConnectedRouter>
   </Provider>,
   document.getElementById('app'),
