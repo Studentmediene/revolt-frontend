@@ -34,6 +34,7 @@ export class Show extends React.Component {
     ) {
       return <Loader />;
     }
+
     const episodes = this.props.episodes.map(e => ({
       ...e,
       date: e.publishAt,
@@ -71,7 +72,6 @@ export class Show extends React.Component {
         </div>
       );
     });
-
     return (
       <div>
         <ShowHeader show={this.props.show} />

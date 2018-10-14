@@ -3,14 +3,14 @@
 }
 
 .title {
-  text-align: center;
-  margin-top: 0.7rem;
   margin-bottom: 0.5rem;
+  margin-top: 0.7rem;
+  text-align: center;
 }
 
 .titleLink {
-  text-decoration: none;
   color: inherit;
+  text-decoration: none;
 }
 
 .titleLink:hover {
@@ -18,9 +18,9 @@
 }
 
 .createdBy {
-  text-align: center;
   color: gray;
   font-size: smaller;
+  text-align: center;
 }
 
 .lead {
@@ -28,8 +28,8 @@
 }
 
 .category {
-  position: absolute;
+  border-radius: 0.3em;
   margin-left: -0.5em;
   padding: 0.1em 0.5em;
-  border-radius: 0.3em;
+  position: absolute;
 }

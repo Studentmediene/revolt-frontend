@@ -1,11 +1,11 @@
 .container {
-  width: 20rem;
-  margin: 1rem;
   background-color: #FFF;
-  padding: 1rem;
-  box-shadow: -1px 0 2px 0 rgba(0, 0, 0, 0.12), 1px 0 2px 0 rgba(0, 0, 0, 0.12), 0 1px 1px 0 rgba(0, 0, 0, 0.24);
   border-radius: 1px;
   border-top: 3px solid #EBB71F;
+  box-shadow: -1px 0 2px 0 rgba(0, 0, 0, 0.12), 1px 0 2px 0 rgba(0, 0, 0, 0.12), 0 1px 1px 0 rgba(0, 0, 0, 0.24);
+  margin: 1rem;
+  padding: 1rem;
+  width: 20rem;
 }
 
 .image {
@@ -13,8 +13,8 @@
 }
 
 .nameLink {
-  text-decoration: none;
   color: inherit;
+  text-decoration: none;
 }
 
 .nameLink:hover {
@@ -26,9 +26,9 @@
 }
 
 .logoImage {
-  height: 315px;
   display: flex;
   flex-direction: column;
+  height: 315px;
   justify-content: center;
 }
 
@@ -36,4 +36,12 @@
   .logoImage {
     height: auto;
   }
+}
+
+.category {
+  border-radius: 0.3em;
+  margin-left: -1.5em;
+  margin-top: -0.5em;
+  padding: 0.1em 0.5em;
+  position: absolute;
 }

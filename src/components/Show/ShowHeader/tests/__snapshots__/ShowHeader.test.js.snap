@@ -1,33 +1,50 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<NavBar /> renders correctly 1`] = `
+exports[`<ShowHeader /> renders correctly 1`] = `
 <div
   className="container"
 >
   <div
-    className="showInfo"
+    className="imageWrapper"
   >
     <img
       alt="Title"
       className="image"
       src="Image url"
     />
-    <div
-      className="showText"
+  </div>
+  <div
+    className="showText"
+  >
+    <h2
+      className="title"
     >
-      <h2
-        className="title"
-      >
-        Title
-      </h2>
-      <div
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "<p>Content</p>",
-          }
+      Title
+    </h2>
+    <div
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<p>Content</p>",
         }
-      />
-    </div>
+      }
+    />
+  </div>
+  <div
+    className="categories"
+  >
+    <span>
+      Kategorier: 
+    </span>
+    <span
+      key="0"
+    >
+      category1
+    </span>
+    <span
+      key="1"
+    >
+      category2
+    </span>
   </div>
 </div>
 `;
