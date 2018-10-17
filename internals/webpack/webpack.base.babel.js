@@ -28,7 +28,7 @@ module.exports = options => ({
       },
       {
         // Transform our own .css files with PostCSS and CSS-modules
-        test: /\.css$/,
+        test: [/\.css$/, /\.scss$/],
         exclude: /node_modules/,
         use: options.cssRules,
       },
@@ -47,6 +47,7 @@ module.exports = options => ({
           /\.html$/,
           /\.(js|jsx)$/,
           /\.css$/,
+          /\.scss$/,
           /\.json$/,
           /\.bmp$/,
           /\.gif$/,
