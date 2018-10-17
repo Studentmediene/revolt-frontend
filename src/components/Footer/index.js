@@ -12,7 +12,7 @@ import {
   selectFooterError,
 } from './selectors';
 
-import styles from './styles.css';
+import styles from './styles.scss';
 
 export class Footer extends React.Component {
   static propTypes = {

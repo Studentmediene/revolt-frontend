@@ -1,8 +1,9 @@
 import React from 'react';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import moment from 'moment';
+
 import {
   selectFrontPagePosts,
   selectFrontPagePostsLoading,
@@ -11,7 +12,9 @@ import {
   selectHasLoaded,
 } from './selectors';
 import { loadFrontPagePosts } from './actions';
-import styles from './styles.css';
+
+import styles from './styles.scss';
+
 import facebookLogo from './Assets/facebook.svg';
 import instagramLogo from './Assets/instagram.svg';
 

@@ -1,6 +1,8 @@
+@import 'variables.scss';
+
 .episode {
-  background-color: #222;
-  color: #DDD;
+  background-color: $color-radiorevolt-lightgrey;
+  color: $color-text-light;
   cursor: pointer;
   padding: 1rem;
   width: 100%;
@@ -46,5 +48,5 @@
 .lead {
   margin-top: 0.3rem;
   text-align: left;
-  color: gray;
+  color: $color-text-dark;
 }

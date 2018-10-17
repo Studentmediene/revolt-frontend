@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import LazyLoad from 'react-lazyload';
 
-import styles from './styles.css';
+import styles from './styles.scss';
 
 const ShowPreview = props => {
   let categories;

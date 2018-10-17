@@ -1,0 +1,19 @@
+@import 'variables.scss';
+
+.container {
+  padding-top: 1em;
+  background-color: $color-radiorevolt-white;
+  color: $color-radiorevolt-darkgrey;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.content {
+  width: 95%;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: $breakpoint-large) {
+  .content {
+    max-width: $breakpoint-large;
+  }
+}

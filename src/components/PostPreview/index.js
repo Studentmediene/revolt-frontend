@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import LazyLoad from 'react-lazyload';
 import { Link } from 'react-router-dom';
 
-import styles from './styles.css';
+import styles from './styles.scss';
 
 const PostPreview = props => {
   let categories;

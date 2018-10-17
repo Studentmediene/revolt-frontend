@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import styles from './styles.css';
+import styles from './styles.scss';
 
 const Episode = props => {
   if (props.digasBroadcastId === 0) {

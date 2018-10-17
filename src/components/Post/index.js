@@ -11,7 +11,7 @@ import { loadPost } from './actions';
 import Episode from 'components/Episode';
 
 import './editor.css';
-import styles from './styles.css';
+import styles from './styles.scss';
 
 export class Post extends React.Component {
   componentWillMount() {

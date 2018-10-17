@@ -1,20 +1,22 @@
-.footer { /* stylelint-disable */
-  background-color: #222;
+@import 'variables.scss';
+
+.footer {
+  background-color: $color-radiorevolt-lightgrey;
   width: 100%;
   min-height: 10rem;
   margin-top: 5rem;
   padding: 3rem 0;
-  color: #D7D7D7;
+  color: $color-text-light;
 }
 
 .content {
-  width: 80%;
+  width: 95%;
   margin: 0 auto;
   text-align: center;
 }
 
 .footerLink {
-  color: #D7D7D7;
+  color: $color-text-light;
   text-decoration: none;
 }
 
@@ -22,14 +24,8 @@
   text-decoration: underline;
 }
 
-@media (min-width: 800px) {
+@media screen and (min-width: $breakpoint-large) {
   .content {
-    width: 70%;
-  }
-}
-
-@media (min-width: 1200px) {
-  .content {
-    width: 60%;
+    max-width: $breakpoint-large;
   }
 }

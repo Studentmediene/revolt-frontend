@@ -1,7 +1,9 @@
+@import 'variables.scss';
+
 .container {
   background-color: #FFF;
   border-radius: 1px;
-  border-top: 3px solid #EBB71F;
+  border-top: 3px solid $color-radiorevolt-orange;
   box-shadow: -1px 0 2px 0 rgba(0, 0, 0, 0.12), 1px 0 2px 0 rgba(0, 0, 0, 0.12), 0 1px 1px 0 rgba(0, 0, 0, 0.24);
   margin: 1rem;
   padding: 1rem;
@@ -30,12 +32,6 @@
   flex-direction: column;
   height: 315px;
   justify-content: center;
-}
-
-@media only screen and (max-width: 1020px) {
-  .logoImage {
-    height: auto;
-  }
 }
 
 .category {

@@ -33,6 +33,6 @@
 }
 
 .archivedShowsHidden {
-  height: 0;
+  display: none;
   overflow: hidden;
 }

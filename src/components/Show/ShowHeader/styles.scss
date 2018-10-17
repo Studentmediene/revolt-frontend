@@ -1,3 +1,5 @@
+@import 'variables.scss';
+
 .container {
   display: flex;
   flex-direction: column;
@@ -27,7 +29,7 @@
   text-align: center;
 }
 
-@media (min-width: 1000px) {
+@media screen and (min-width: $breakpoint-large) {
   .container {
     flex-direction: row;
     flex-wrap: wrap;
