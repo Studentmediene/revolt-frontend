@@ -1,16 +1,24 @@
+@import 'variables.scss';
+
 .postPreviewList {
   display: grid;
-  grid-template-columns: 48% 48%;
-  grid-column-gap: 4%;
+  grid-template-columns: 100%;
   grid-row-gap: 1.5rem;
-}
-
-.postLarge {
-  grid-column-start: 1;
-  grid-column-end: 3;
 }
 
 .post {
   border-bottom: 1px solid lightgray;
   padding-bottom: 1.5rem;
+}
+
+@media screen and (min-width: $breakpoint-large) {
+  .postPreviewList {
+    grid-template-columns: 48% 48%;
+    grid-column-gap: 4%;
+  }
+
+  .postLarge {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
 }
