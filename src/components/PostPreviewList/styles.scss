@@ -2,16 +2,15 @@
   display: grid;
   grid-template-columns: 48% 48%;
   grid-column-gap: 4%;
-  margin: 0 auto;
+  grid-row-gap: 1.5rem;
 }
 
-.postPreviewList > div:first-child {
+.postLarge {
   grid-column-start: 1;
   grid-column-end: 3;
 }
 
 .post {
   border-bottom: 1px solid lightgray;
-  margin-bottom: 1.5rem;
   padding-bottom: 1.5rem;
 }

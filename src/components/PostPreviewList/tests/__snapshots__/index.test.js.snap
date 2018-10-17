@@ -5,8 +5,8 @@ exports[`<PostPreviewList /> renders correctly with posts 1`] = `
   className="postPreviewList"
 >
   <div
-    className="post"
-    key="post-0"
+    className="post postLarge"
+    key="0"
   >
     <PostPreview
       categories={
@@ -32,7 +32,7 @@ exports[`<PostPreviewList /> renders correctly with posts 1`] = `
   </div>
   <div
     className="post"
-    key="post-1"
+    key="1"
   >
     <PostPreview
       categories={Array []}
