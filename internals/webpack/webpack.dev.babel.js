@@ -70,6 +70,9 @@ module.exports = require('./webpack.base.babel')({
         ],
       },
     },
+    {
+      loader: 'sass-loader',
+    },
   ],
 
   // Emit a source map for easier debugging

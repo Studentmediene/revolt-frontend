@@ -1,0 +1,16 @@
+@import 'variables.scss';
+
+.header {
+  margin: 1em auto 2em;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
+  max-width: $breakpoint-large;
+}
+
+@media screen and (min-width: $breakpoint-large) {
+  .header {
+    flex-direction: row;
+  }
+}

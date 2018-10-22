@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import styles from './styles.css';
+import styles from './styles.scss';
 import { togglePlayPause } from 'components/Player/actions';
 import PlayPauseButton from 'components/Player/components/PlayPauseButton';
 import { selectLiveTitle, selectPaused } from 'components/Player/selectors';

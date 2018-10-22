@@ -1,3 +1,5 @@
+@import 'variables.scss';
+
 .navbarList {
   flex: 1;
   display: flex;
@@ -28,7 +30,7 @@
 }
 
 /* Vertical navbar for very small displays */
-@media (max-width: 300px) {
+@media screen and (max-width: 330px) {
   .navbarList {
     flex-direction: column;
     margin: 0;

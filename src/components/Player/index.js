@@ -20,7 +20,7 @@ import {
   selectPaused,
   selectUrl,
 } from './selectors';
-import styles from './styles.css';
+import styles from './styles.scss';
 
 class Player extends React.Component {
   constructor(props) {

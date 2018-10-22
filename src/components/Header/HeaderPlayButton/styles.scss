@@ -1,6 +1,8 @@
+@import 'variables.scss';
+
 .container {
   flex: 1;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
 }
@@ -35,8 +37,8 @@
 }
 
 /* Hide button on smaller screens */
-@media (max-width: 1000px) {
+@media screen and (min-width: $breakpoint-large) {
   .container {
-    display: none;
+    display: flex;
   }
 }

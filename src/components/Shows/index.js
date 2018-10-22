@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
 import { withRouter } from 'react-router-dom';
-import { selectShows, selectShowsLoading, selectShowsError } from './selectors';
-import styles from './styles.css';
+import { createStructuredSelector } from 'reselect';
+
 import { loadShows } from './actions';
 import Loader from 'components/Loader';
-
 import ShowPreviewList from 'components/ShowPreviewList';
+import { selectShows, selectShowsLoading, selectShowsError } from './selectors';
 
 export class Shows extends React.Component {
   state = {
@@ -42,7 +41,7 @@ export class Shows extends React.Component {
       return <Loader />;
     }
 
-    return <div className={styles.shows}>{showPreviewList}</div>;
+    return <div>{showPreviewList}</div>;
   }
 }
 

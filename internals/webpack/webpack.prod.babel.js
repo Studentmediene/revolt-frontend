@@ -50,6 +50,9 @@ module.exports = require('./webpack.base.babel')({
         ],
       },
     },
+    {
+      loader: 'sass-loader',
+    },
   ],
   devtool: 'source-map',
   mode: 'production',
