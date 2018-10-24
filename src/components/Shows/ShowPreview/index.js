@@ -25,8 +25,8 @@ const ShowPreview = props => {
   return (
     <div className={styles.container}>
       {categories}
-      <div className={styles.logoImage}>
-        <Link className={styles.imageLink} to={`/programmer/${props.slug}`}>
+      <div className={styles.imageWrapper}>
+        <Link to={`/programmer/${props.slug}`}>
           <LazyLoad height={300} offset={100} once>
             <img
               className={styles.image}
@@ -36,10 +36,10 @@ const ShowPreview = props => {
           </LazyLoad>
         </Link>
       </div>
-      <Link className={styles.nameLink} to={`/programmer/${props.slug}`}>
-        <h2 className={styles.name}>{props.title}</h2>
+      <Link className={styles.title} to={`/programmer/${props.slug}`}>
+        <h2>{props.title}</h2>
       </Link>
-      <div className={styles.lead}>{props.lead}</div>
+      <div>{props.lead}</div>
     </div>
   );
 };
