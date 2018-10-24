@@ -1,0 +1,15 @@
+.showMoreButton {
+  font-size: 24px;
+  padding: 14px 0;
+  border-width: 0;
+  cursor: pointer;
+}
+
+.arrow {
+  width: 20px;
+  transition: 100ms linear all;
+}
+
+.rotated {
+  transform: rotate(180deg);
+}

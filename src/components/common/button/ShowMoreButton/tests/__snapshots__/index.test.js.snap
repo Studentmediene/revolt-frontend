@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ShowMoreButton /> renders correctly when active 1`] = `
+<button
+  className="showMoreButton"
+  onClick={[MockFunction]}
+>
+  text 
+  <img
+    alt="Arrow"
+    className="arrow rotated"
+    src="arrow-down.svg"
+  />
+</button>
+`;
+
+exports[`<ShowMoreButton /> renders correctly when inactive 1`] = `
+<button
+  className="showMoreButton"
+  onClick={[MockFunction]}
+>
+  text 
+  <img
+    alt="Arrow"
+    className="arrow"
+    src="arrow-down.svg"
+  />
+</button>
+`;
