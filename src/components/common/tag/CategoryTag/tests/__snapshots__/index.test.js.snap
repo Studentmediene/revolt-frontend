@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CategoryTag /> renders correctly on bottom 1`] = `
+<div
+  className="category"
+  style={
+    Object {
+      "backgroundColor": "#FFFFFF",
+      "color": "#FFFFFF",
+      "marginTop": "-2em",
+    }
+  }
+>
+  categoryName
+</div>
+`;
+
+exports[`<CategoryTag /> renders correctly on top 1`] = `
+<div
+  className="category"
+  style={
+    Object {
+      "backgroundColor": "#FFFFFF",
+      "color": "#FFFFFF",
+      "marginTop": "0.4em",
+    }
+  }
+>
+  categoryName
+</div>
+`;

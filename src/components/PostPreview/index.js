@@ -4,22 +4,18 @@ import LazyLoad from 'react-lazyload';
 import { Link } from 'react-router-dom';
 
 import styles from './styles.scss';
+import CategoryTag from 'components/common/tag/CategoryTag';
 
 const PostPreview = props => {
   let categories;
   if (props.categories && props.categories.length > 0) {
     categories = props.categories.map((category, index) => (
-      <div
-        key={category.name}
-        className={styles.category}
-        style={{
-          marginTop: `-${(index + 1) * 2}em`,
-          backgroundColor: `${category.backgroundColor}`,
-          color: `${category.textColor}`,
-        }}
-      >
-        {category.name}
-      </div>
+      <CategoryTag
+        {...category}
+        index={index}
+        position={'bottom'}
+        key={index}
+      />
     ));
   }
 
