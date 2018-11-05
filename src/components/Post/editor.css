@@ -5,6 +5,9 @@
  * The contents of the file MUST be identical to `editor.css` used in various components
  * in the frontend repo.
 */
+body {
+  font-family: 'Open Sans', sans-serif;
+}
 
 a {
   background: transparent !important;
@@ -14,7 +17,7 @@ a {
 
 img {
   height: auto;
-  width: 100%;
+  max-width: 100%;
 }
 
 /**
