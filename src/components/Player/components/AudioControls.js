@@ -4,7 +4,14 @@ import PlayPauseButton from './PlayPauseButton';
 import styles from './AudioControls.css';
 import classNames from 'classnames';
 
-const AudioControls = ({ playNext, playPrevious, togglePlayPause, paused, live, url }) => (
+const AudioControls = ({
+  playNext,
+  playPrevious,
+  togglePlayPause,
+  paused,
+  live,
+  url,
+}) => (
   <div className={styles.audioControls}>
     <button
       disabled={live || !url}
@@ -44,6 +51,7 @@ AudioControls.propTypes = {
   togglePlayPause: PropTypes.func.isRequired,
   paused: PropTypes.bool.isRequired,
   live: PropTypes.bool.isRequired,
+  url: PropTypes.bool,
 };
 
 export default AudioControls;
