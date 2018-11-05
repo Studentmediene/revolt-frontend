@@ -1,0 +1,14 @@
+@import 'variables.scss';
+
+.sidebar {
+  position: fixed;
+  left: calc(50% + #{$breakpoint-large} / 2);
+  display: none;
+  bottom: $player-height;
+}
+
+@media screen and (min-width: $social-media-button-breakpoint) {
+  .sidebar {
+    display: block;
+  }
+}

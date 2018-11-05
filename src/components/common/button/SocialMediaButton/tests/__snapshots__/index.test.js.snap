@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SocialMediaButton /> renders correctly 1`] = `
+<a
+  href="link"
+  rel="noopener noreferrer"
+  target="_blank"
+>
+  <img
+    alt="text"
+    className="socialMediaButton"
+    src="image"
+  />
+</a>
+`;

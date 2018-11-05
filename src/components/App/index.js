@@ -13,6 +13,7 @@ import { Switch, withRouter } from 'react-router-dom';
 import styles from './styles.scss';
 
 import Header from 'components/Header';
+import Sidebar from 'components/Sidebar';
 import Footer from 'components/Footer';
 import Player from 'components/Player';
 
@@ -31,6 +32,7 @@ export class App extends React.Component {
         <div className={styles.content}>
           <Switch>{this.props.routes}</Switch>
         </div>
+        {!plain && <Sidebar />}
         {!plain && <Footer />}
         {!plain && <Player />}
       </div>

@@ -1,39 +1,8 @@
 @import 'variables.scss';
 
-$social-media-button-width: 50px;
-$social-media-button-margin: 10px;
-
-$social-media-button-sidebar: 2 * (2 * $social-media-button-width + 3 * $social-media-button-margin);
-
 .loaderWrapper {
   display: flex;
   align-items: center;
   flex-direction: column;
   width: 100%;
-}
-
-.facebookLogo,
-.instagramLogo {
-  width: $social-media-button-width;
-}
-
-.facebookLogo {
-  margin-right: $social-media-button-margin;
-}
-
-.socialMedia {
-  position: fixed;
-  left: calc(50% + #{$breakpoint-large} / 2);
-  margin-left: $social-media-button-margin;
-  bottom: $player-height;
-  margin-bottom: $social-media-button-margin;
-  display: none;
-  flex-direction: row;
-  justify-content: flex-start;
-}
-
-@media screen and (min-width: $breakpoint-large + $social-media-button-sidebar) {
-  .socialMedia {
-    display: flex;
-  }
 }

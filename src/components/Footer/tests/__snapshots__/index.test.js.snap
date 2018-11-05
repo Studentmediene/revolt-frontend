@@ -7,48 +7,48 @@ exports[`<Footer /> renders correctly 1`] = `
   <div
     className="content"
   >
-    <p>
+    <div>
       Denne tjenesten tilbys av Studentmediene i Trondheim AS. Musikken er gjengitt med tilatelse fra TONO/NCB.
-    </p>
-    <p>
+    </div>
+    <div>
       Uautorisert lenking, videreføring eller kopiering er ulovlig.
-    </p>
+    </div>
     <br />
-    <p>
+    <div>
       Radioredaktør: 
       radioEditor
-    </p>
-    <p>
+    </div>
+    <div>
       Ansvarlig redaktør: 
       chiefEditor
-    </p>
+    </div>
     <br />
-    <p>
-      <a
-        className="footerLink"
-        href="mailto:redaktor@radiorevolt.no"
-      >
-        Kontakt oss
-      </a>
-    </p>
-    <p>
-      <Link
-        className="footerLink"
-        replace={false}
-        to="/om"
-      >
-        Om oss
-      </Link>
-    </p>
-    <p>
-      <Link
-        className="footerLink"
-        replace={false}
-        to="/personvern"
-      >
-        Personvern
-      </Link>
-    </p>
+    <div
+      className="socialMediaLinks"
+    >
+      <SocialMediaContainer />
+      <br />
+    </div>
+    <a
+      className="footerLink"
+      href="mailto:redaktor@radiorevolt.no"
+    >
+      Kontakt oss
+    </a>
+    <Link
+      className="footerLink"
+      replace={false}
+      to="/om"
+    >
+      Om oss
+    </Link>
+    <Link
+      className="footerLink"
+      replace={false}
+      to="/personvern"
+    >
+      Personvern
+    </Link>
     <p>
       2018
        © Radio Revolt
@@ -64,48 +64,48 @@ exports[`<Footer /> renders correctly on error 1`] = `
   <div
     className="content"
   >
-    <p>
+    <div>
       Denne tjenesten tilbys av Studentmediene i Trondheim AS. Musikken er gjengitt med tilatelse fra TONO/NCB.
-    </p>
-    <p>
+    </div>
+    <div>
       Uautorisert lenking, videreføring eller kopiering er ulovlig.
-    </p>
+    </div>
     <br />
-    <p>
+    <div>
       Radioredaktør: 
       Feil ved innlasting, prøv igjen senere
-    </p>
-    <p>
+    </div>
+    <div>
       Ansvarlig redaktør: 
       Feil ved innlasting, prøv igjen senere
-    </p>
+    </div>
     <br />
-    <p>
-      <a
-        className="footerLink"
-        href="mailto:redaktor@radiorevolt.no"
-      >
-        Kontakt oss
-      </a>
-    </p>
-    <p>
-      <Link
-        className="footerLink"
-        replace={false}
-        to="/om"
-      >
-        Om oss
-      </Link>
-    </p>
-    <p>
-      <Link
-        className="footerLink"
-        replace={false}
-        to="/personvern"
-      >
-        Personvern
-      </Link>
-    </p>
+    <div
+      className="socialMediaLinks"
+    >
+      <SocialMediaContainer />
+      <br />
+    </div>
+    <a
+      className="footerLink"
+      href="mailto:redaktor@radiorevolt.no"
+    >
+      Kontakt oss
+    </a>
+    <Link
+      className="footerLink"
+      replace={false}
+      to="/om"
+    >
+      Om oss
+    </Link>
+    <Link
+      className="footerLink"
+      replace={false}
+      to="/personvern"
+    >
+      Personvern
+    </Link>
     <p>
       2018
        © Radio Revolt
@@ -121,48 +121,48 @@ exports[`<Footer /> renders correctly while loading 1`] = `
   <div
     className="content"
   >
-    <p>
+    <div>
       Denne tjenesten tilbys av Studentmediene i Trondheim AS. Musikken er gjengitt med tilatelse fra TONO/NCB.
-    </p>
-    <p>
+    </div>
+    <div>
       Uautorisert lenking, videreføring eller kopiering er ulovlig.
-    </p>
+    </div>
     <br />
-    <p>
+    <div>
       Radioredaktør: 
       Laster inn...
-    </p>
-    <p>
+    </div>
+    <div>
       Ansvarlig redaktør: 
       Laster inn...
-    </p>
+    </div>
     <br />
-    <p>
-      <a
-        className="footerLink"
-        href="mailto:redaktor@radiorevolt.no"
-      >
-        Kontakt oss
-      </a>
-    </p>
-    <p>
-      <Link
-        className="footerLink"
-        replace={false}
-        to="/om"
-      >
-        Om oss
-      </Link>
-    </p>
-    <p>
-      <Link
-        className="footerLink"
-        replace={false}
-        to="/personvern"
-      >
-        Personvern
-      </Link>
-    </p>
+    <div
+      className="socialMediaLinks"
+    >
+      <SocialMediaContainer />
+      <br />
+    </div>
+    <a
+      className="footerLink"
+      href="mailto:redaktor@radiorevolt.no"
+    >
+      Kontakt oss
+    </a>
+    <Link
+      className="footerLink"
+      replace={false}
+      to="/om"
+    >
+      Om oss
+    </Link>
+    <Link
+      className="footerLink"
+      replace={false}
+      to="/personvern"
+    >
+      Personvern
+    </Link>
     <p>
       2018
        © Radio Revolt
