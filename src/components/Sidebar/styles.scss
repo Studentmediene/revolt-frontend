@@ -1,20 +1,14 @@
 @import 'variables.scss';
 
-$social-media-button-sidebar: 2 * (2 * $social-media-button-width + 6 * $social-media-button-margin);
-
 .sidebar {
   position: fixed;
   left: calc(50% + #{$breakpoint-large} / 2);
-  bottom: $player-height;
-  margin-bottom: $social-media-button-margin;
-  margin-left: 5px;
   display: none;
-  flex-direction: row;
-  justify-content: flex-start;
+  bottom: $player-height;
 }
 
-@media screen and (min-width: $breakpoint-large + $social-media-button-sidebar) {
+@media screen and (min-width: $social-media-button-breakpoint) {
   .sidebar {
-    display: flex;
+    display: block;
   }
 }

@@ -13,6 +13,7 @@ import {
 } from './selectors';
 
 import styles from './styles.scss';
+import SocialMediaContainer from 'components/common/container/SocialMediaContainer';
 
 export class Footer extends React.Component {
   static propTypes = {
@@ -42,33 +43,33 @@ export class Footer extends React.Component {
     return (
       <div className={styles.footer}>
         <div className={styles.content}>
-          <p>
+          <div>
             Denne tjenesten tilbys av Studentmediene i Trondheim AS. Musikken er
             gjengitt med tilatelse fra TONO/NCB.
-          </p>
-          <p>Uautorisert lenking, videreføring eller kopiering er ulovlig.</p>
+          </div>
+          <div>
+            Uautorisert lenking, videreføring eller kopiering er ulovlig.
+          </div>
           <br />
-          <p>Radioredaktør: {radioEditor}</p>
-          <p>Ansvarlig redaktør: {chiefEditor}</p>
+          <div>Radioredaktør: {radioEditor}</div>
+          <div>Ansvarlig redaktør: {chiefEditor}</div>
           <br />
-          <p>
-            <a
-              className={styles.footerLink}
-              href="mailto:redaktor@radiorevolt.no"
-            >
-              Kontakt oss
-            </a>
-          </p>
-          <p>
-            <Link className={styles.footerLink} to="/om">
-              Om oss
-            </Link>
-          </p>
-          <p>
-            <Link className={styles.footerLink} to="/personvern">
-              Personvern
-            </Link>
-          </p>
+          <div className={styles.socialMediaLinks}>
+            <SocialMediaContainer />
+            <br />
+          </div>
+          <a
+            className={styles.footerLink}
+            href="mailto:redaktor@radiorevolt.no"
+          >
+            Kontakt oss
+          </a>
+          <Link className={styles.footerLink} to="/om">
+            Om oss
+          </Link>
+          <Link className={styles.footerLink} to="/personvern">
+            Personvern
+          </Link>
           <p>{new Date().getFullYear()} © Radio Revolt</p>
         </div>
       </div>

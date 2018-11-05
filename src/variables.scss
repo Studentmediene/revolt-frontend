@@ -14,3 +14,4 @@ $player-height: 50px;
 
 $social-media-button-width: 50px;
 $social-media-button-margin: 5px;
+$social-media-button-breakpoint: $breakpoint-large + 2 * (2 * $social-media-button-width + 7 * $social-media-button-margin);

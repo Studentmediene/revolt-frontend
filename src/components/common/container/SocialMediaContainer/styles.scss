@@ -1,0 +1,8 @@
+@import 'variables.scss';
+
+.socialMediaContainer {
+  margin: $social-media-button-margin;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
