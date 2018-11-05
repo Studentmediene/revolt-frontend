@@ -6,12 +6,12 @@ import { createStructuredSelector } from 'reselect';
 
 import { loadShows } from './actions';
 import Loader from 'components/Loader';
-import ShowPreviewList from 'components/ShowPreviewList';
+import ShowPreviewList from './ShowPreviewList';
 import { selectShows, selectShowsLoading, selectShowsError } from './selectors';
 
 export class Shows extends React.Component {
   state = {
-    hideArchivedShows: true,
+    showArchivedShows: false,
   };
 
   componentWillMount() {
@@ -22,7 +22,7 @@ export class Shows extends React.Component {
   toggleArchivedShows(event) {
     event.preventDefault();
     this.setState(prevState => ({
-      hideArchivedShows: !prevState.hideArchivedShows,
+      showArchivedShows: !prevState.showArchivedShows,
     }));
   }
 
@@ -33,7 +33,7 @@ export class Shows extends React.Component {
       showPreviewList = (
         <ShowPreviewList
           shows={this.props.shows}
-          hideArchivedShows={this.state.hideArchivedShows}
+          showArchivedShows={this.state.showArchivedShows}
           toggleArchivedShows={this.toggleArchivedShows}
         />
       );
@@ -41,7 +41,7 @@ export class Shows extends React.Component {
       return <Loader />;
     }
 
-    return <div>{showPreviewList}</div>;
+    return <React.Fragment>{showPreviewList}</React.Fragment>;
   }
 }
 
@@ -67,7 +67,6 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     loadShow: () => dispatch(loadShows()),
-    dispatch,
   };
 }
 

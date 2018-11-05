@@ -25,32 +25,22 @@ exports[`<PostPreview /> renders correctly with categories 1`] = `
         srcSet="large_image 1024w, medium_image 768w, small_image 300w"
       />
     </LazyLoad>
-    <div
-      className="category"
-      key="categoryName1"
-      style={
-        Object {
-          "backgroundColor": "#FFFFFF",
-          "color": "#000000",
-          "marginTop": "-2em",
-        }
-      }
-    >
-      categoryName1
-    </div>
-    <div
-      className="category"
-      key="categoryName1"
-      style={
-        Object {
-          "backgroundColor": "#FFFFFF",
-          "color": "#000000",
-          "marginTop": "-4em",
-        }
-      }
-    >
-      categoryName1
-    </div>
+    <CategoryTag
+      backgroundColor="#FFFFFF"
+      index={0}
+      key="0"
+      name="categoryName1"
+      position="bottom"
+      textColor="#000000"
+    />
+    <CategoryTag
+      backgroundColor="#FFFFFF"
+      index={1}
+      key="1"
+      name="categoryName1"
+      position="bottom"
+      textColor="#000000"
+    />
   </Link>
   <Link
     className="titleLink"
