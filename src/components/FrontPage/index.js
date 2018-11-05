@@ -14,10 +14,6 @@ import {
 import { loadFrontPagePosts } from './actions';
 
 import styles from './styles.scss';
-
-import facebookLogo from './Assets/facebook.svg';
-import instagramLogo from './Assets/instagram.svg';
-
 import Loader from 'components/Loader';
 import LoadPostsButton from './LoadPostsButton';
 import PostPreviewList from 'components/PostPreviewList';
@@ -40,7 +36,6 @@ export class FrontPage extends React.Component {
 
   render() {
     let posts;
-    let socialMedia;
     let loader = (
       <LoadPostsButton
         loadPosts={() => this.props.loadPosts(this.props.pageNumber)}
@@ -58,37 +53,10 @@ export class FrontPage extends React.Component {
         moment(postB.publishAt).diff(postA.publishAt),
       );
       posts = <PostPreviewList posts={this.props.posts} />;
-      socialMedia = (
-        <div className={styles.socialMedia}>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://www.facebook.com/radiorevolt.no/"
-          >
-            <img
-              src={facebookLogo}
-              alt="Facebook"
-              className={styles.facebookLogo}
-            />
-          </a>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://www.instagram.com/radiorevolt/"
-          >
-            <img
-              src={instagramLogo}
-              alt="Instagram"
-              className={styles.instagramLogo}
-            />
-          </a>
-        </div>
-      );
     }
     return (
       <div>
         {posts}
-        {socialMedia}
         <div className={styles.loaderWrapper}>{loader}</div>
       </div>
     );

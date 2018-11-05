@@ -6,32 +6,6 @@ exports[`<FrontPage /> renders correctly 1`] = `
     posts={Array []}
   />
   <div
-    className="socialMedia"
-  >
-    <a
-      href="https://www.facebook.com/radiorevolt.no/"
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      <img
-        alt="Facebook"
-        className="facebookLogo"
-        src="facebook.svg"
-      />
-    </a>
-    <a
-      href="https://www.instagram.com/radiorevolt/"
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      <img
-        alt="Instagram"
-        className="instagramLogo"
-        src="instagram.svg"
-      />
-    </a>
-  </div>
-  <div
     className="loaderWrapper"
   >
     <LoadPostsButton

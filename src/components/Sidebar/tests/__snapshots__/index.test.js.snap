@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Sidebar /> renders correctly 1`] = `
+<div
+  className="sidebar"
+>
+  <SocialMediaButton
+    image="facebook.svg"
+    link="https://www.facebook.com/radiorevolt.no/"
+    text="Facebook"
+  />
+  <SocialMediaButton
+    image="instagram.svg"
+    link="https://www.instagram.com/radiorevolt/"
+    text="Instagram"
+  />
+</div>
+`;
