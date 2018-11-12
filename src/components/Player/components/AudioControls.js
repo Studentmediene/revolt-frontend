@@ -15,9 +15,8 @@ const AudioControls = ({
   <div className={styles.audioControls}>
     <button
       disabled={live || !url}
-      className={classNames({
-        [styles.backButtonDisabled]: live || !url,
-        [styles.backButton]: !live,
+      className={classNames(styles.backButton, {
+        [styles.disabled]: live || !url,
       })}
       onClick={playPrevious}
       onKeyPress={playPrevious}
@@ -30,9 +29,8 @@ const AudioControls = ({
     <PlayPauseButton paused={paused} togglePlayPause={togglePlayPause} />
     <button
       disabled={live || !url}
-      className={classNames({
-        [styles.forwardButtonDisabled]: live || !url,
-        [styles.forwardButton]: !live,
+      className={classNames(styles.forwardButton, {
+        [styles.disabled]: live || !url,
       })}
       onClick={playNext}
       onKeyPress={playNext}
@@ -51,7 +49,7 @@ AudioControls.propTypes = {
   togglePlayPause: PropTypes.func.isRequired,
   paused: PropTypes.bool.isRequired,
   live: PropTypes.bool.isRequired,
-  url: PropTypes.bool,
+  url: PropTypes.string,
 };
 
 export default AudioControls;

@@ -23,19 +23,13 @@
   height: 50px;
 }
 
-.backButtonDisabled {
-  transform: rotate(180deg);
-  padding-left: 11px;
-  padding-right: 11px;
-  margin-left: 4px;
-  margin-right: 4px;
-  align-self: center;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  height: 50px;
+.disabled {
   opacity: 0.2;
   cursor: default;
+}
+
+.disabled:focus {
+  outline: 0;
 }
 
 .backButtonInner {
@@ -62,25 +56,6 @@
   justify-content: center;
   flex-direction: column;
   height: 50px;
-}
-
-.forwardButtonDisabled {
-  padding-left: 11px;
-  padding-right: 11px;
-  margin-left: 4px;
-  margin-right: 4px;
-  align-self: center;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  height: 50px;
-  opacity: 0.2;
-  cursor: default;
-}
-
-.forwardButtonDisabled:focus,
-.backButtonDisabled:focus {
-  outline: 0;
 }
 
 .forwardButtonInner {
