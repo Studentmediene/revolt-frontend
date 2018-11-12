@@ -2,11 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PlayPauseButton from './PlayPauseButton';
 import styles from './AudioControls.css';
+import classNames from 'classnames';
 
-const AudioControls = ({ playNext, playPrevious, togglePlayPause, paused }) => (
+const AudioControls = ({
+  playNext,
+  playPrevious,
+  togglePlayPause,
+  paused,
+  live,
+  url,
+}) => (
   <div className={styles.audioControls}>
     <button
-      className={styles.backButton}
+      disabled={live || !url}
+      className={classNames(styles.backButton, {
+        [styles.disabled]: live || !url,
+      })}
       onClick={playPrevious}
       onKeyPress={playPrevious}
     >
@@ -17,7 +28,10 @@ const AudioControls = ({ playNext, playPrevious, togglePlayPause, paused }) => (
     </button>
     <PlayPauseButton paused={paused} togglePlayPause={togglePlayPause} />
     <button
-      className={styles.forwardButton}
+      disabled={live || !url}
+      className={classNames(styles.forwardButton, {
+        [styles.disabled]: live || !url,
+      })}
       onClick={playNext}
       onKeyPress={playNext}
     >
@@ -34,6 +48,8 @@ AudioControls.propTypes = {
   playPrevious: PropTypes.func.isRequired,
   togglePlayPause: PropTypes.func.isRequired,
   paused: PropTypes.bool.isRequired,
+  live: PropTypes.bool.isRequired,
+  url: PropTypes.string,
 };
 
 export default AudioControls;

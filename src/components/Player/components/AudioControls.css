@@ -23,6 +23,15 @@
   height: 50px;
 }
 
+.disabled {
+  opacity: 0.2;
+  cursor: default;
+}
+
+.disabled:focus {
+  outline: 0;
+}
+
 .backButtonInner {
   display: flex;
   flex-direction: row;

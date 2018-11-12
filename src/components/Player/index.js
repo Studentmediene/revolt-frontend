@@ -64,7 +64,6 @@ class Player extends React.Component {
 
   render() {
     const { position } = this.state;
-
     return (
       <div className={styles.container} title={this.props.playingTitle}>
         <SoundManager
@@ -97,6 +96,8 @@ class Player extends React.Component {
           }}
           togglePlayPause={() => this.props.togglePlayPause()}
           paused={this.props.paused}
+          live={this.props.live}
+          url={this.props.url}
         />
         <AudioProgress
           displayText={this.props.playingTitle}
