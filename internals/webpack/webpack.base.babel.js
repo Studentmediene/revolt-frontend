@@ -4,6 +4,7 @@
 
 const path = require('path');
 const webpack = require('webpack');
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = options => ({
   entry: options.entry,
@@ -103,6 +104,7 @@ module.exports = options => ({
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
       },
     }),
+    new CopyWebpackPlugin(['public/'], { debug: 'info' })
   ]),
   resolve: {
     modules: ['src', 'node_modules'],
