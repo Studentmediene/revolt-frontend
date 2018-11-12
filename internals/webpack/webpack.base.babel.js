@@ -104,7 +104,7 @@ module.exports = options => ({
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
       },
     }),
-    new CopyWebpackPlugin(['public/'], { debug: 'info' })
+    new CopyWebpackPlugin(['public/'])
   ]),
   resolve: {
     modules: ['src', 'node_modules'],
