@@ -50,7 +50,7 @@ exports[`<Footer /> renders correctly 1`] = `
       Personvern
     </Link>
     <p>
-      2018
+      2019
        © Radio Revolt
     </p>
   </div>
@@ -107,7 +107,7 @@ exports[`<Footer /> renders correctly on error 1`] = `
       Personvern
     </Link>
     <p>
-      2018
+      2019
        © Radio Revolt
     </p>
   </div>
@@ -164,7 +164,7 @@ exports[`<Footer /> renders correctly while loading 1`] = `
       Personvern
     </Link>
     <p>
-      2018
+      2019
        © Radio Revolt
     </p>
   </div>
