@@ -16,7 +16,6 @@ export function* loadFrontPageArticles({ postOffset }) {
         medium,
         small
       },
-      lead,
       publishAt,
       categories {
         name,

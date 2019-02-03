@@ -53,11 +53,6 @@ exports[`<PostPreview /> renders correctly with categories 1`] = `
       title
     </h2>
   </Link>
-  <p
-    className="lead"
-  >
-    Lead
-  </p>
 </div>
 `;
 
@@ -98,10 +93,5 @@ exports[`<PostPreview /> renders correctly without categories 1`] = `
       title
     </h2>
   </Link>
-  <p
-    className="lead"
-  >
-    Lead
-  </p>
 </div>
 `;
