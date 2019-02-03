@@ -10,7 +10,7 @@ const PostPreviewList = props => {
     <div
       className={classNames({
         [styles.post]: true,
-        [styles.postLarge]: index % 5 === 0,
+        [styles.postLarge]: index % 8 === 0 || index % 8 === 3,
       })}
       key={index}
     >

@@ -8,7 +8,7 @@ import {
   selectFrontPagePosts,
   selectFrontPagePostsLoading,
   selectFrontPagePostsError,
-  selectPageNumber,
+  selectPostOffset,
   selectHasLoaded,
 } from './selectors';
 import { loadFrontPagePosts } from './actions';
@@ -24,13 +24,13 @@ export class FrontPage extends React.Component {
     loading: PropTypes.bool.isRequired,
     error: PropTypes.bool.isRequired,
     loadPosts: PropTypes.func.isRequired,
-    pageNumber: PropTypes.number.isRequired,
+    postOffset: PropTypes.number.isRequired,
     hasLoaded: PropTypes.bool.isRequired,
   };
 
   componentWillMount() {
     if (!this.props.hasLoaded) {
-      this.props.loadPosts(this.props.pageNumber);
+      this.props.loadPosts(this.props.postOffset);
     }
   }
 
@@ -38,7 +38,7 @@ export class FrontPage extends React.Component {
     let posts;
     let loader = (
       <LoadPostsButton
-        loadPosts={() => this.props.loadPosts(this.props.pageNumber)}
+        loadPosts={() => this.props.loadPosts(this.props.postOffset)}
       />
     );
     if (this.props.error) {
@@ -67,13 +67,13 @@ const mapStateToProps = createStructuredSelector({
   posts: selectFrontPagePosts(),
   loading: selectFrontPagePostsLoading(),
   error: selectFrontPagePostsError(),
-  pageNumber: selectPageNumber(),
+  postOffset: selectPostOffset(),
   hasLoaded: selectHasLoaded(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    loadPosts: pageNumber => dispatch(loadFrontPagePosts(pageNumber)),
+    loadPosts: postOffset => dispatch(loadFrontPagePosts(postOffset)),
   };
 }
 
