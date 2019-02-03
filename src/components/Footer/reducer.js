@@ -8,6 +8,7 @@ import {
 const initialState = fromJS({
   chiefEditor: '',
   radioEditor: '',
+  musicProducer: '',
   loading: false,
   error: false,
 });
@@ -21,7 +22,8 @@ function footerReducer(state = initialState, action) {
         .set('loading', false)
         .set('error', false)
         .set('chiefEditor', action.chiefEditor)
-        .set('radioEditor', action.radioEditor);
+        .set('radioEditor', action.radioEditor)
+        .set('musicProducer', action.musicProducer);
     case LOAD_FOOTER_FAILED:
       return state.set('loading', false).set('error', true);
     default:

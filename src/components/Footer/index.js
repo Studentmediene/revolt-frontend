@@ -8,6 +8,7 @@ import { loadFooter } from './actions';
 import {
   selectChiefEditor,
   selectRadioEditor,
+  selectMusicProducer,
   selectFooterLoading,
   selectFooterError,
 } from './selectors';
@@ -19,6 +20,7 @@ export class Footer extends React.Component {
   static propTypes = {
     radioEditor: PropTypes.string.isRequired,
     chiefEditor: PropTypes.string.isRequired,
+    musicProducer: PropTypes.string.isRequired,
     loading: PropTypes.bool.isRequired,
     error: PropTypes.bool.isRequired,
     loadFooter: PropTypes.func.isRequired,
@@ -29,16 +31,7 @@ export class Footer extends React.Component {
   }
 
   render() {
-    let radioEditor = this.props.radioEditor;
-    let chiefEditor = this.props.chiefEditor;
-
-    if (this.props.loading) {
-      radioEditor = 'Laster inn...';
-      chiefEditor = 'Laster inn...';
-    } else if (this.props.error) {
-      radioEditor = 'Feil ved innlasting, prøv igjen senere';
-      chiefEditor = 'Feil ved innlasting, prøv igjen senere';
-    }
+    let { radioEditor, chiefEditor, musicProducer } = this.props;
 
     return (
       <div className={styles.footer}>
@@ -51,19 +44,30 @@ export class Footer extends React.Component {
             Uautorisert lenking, videreføring eller kopiering er ulovlig.
           </div>
           <br />
-          <div>Radioredaktør: {radioEditor}</div>
-          <div>Ansvarlig redaktør: {chiefEditor}</div>
+          <div className={styles.bold}>Kontakt oss</div>
+          <a
+            className={styles.footerLink}
+            href="mailto:redaktor@radiorevolt.no"
+          >
+            Radioredaktør: {radioEditor}
+          </a>
+          <a
+            className={styles.footerLink}
+            href="mailto:ansvarligredaktor@studentmediene.no"
+          >
+            Ansvarlig redaktør: {chiefEditor}
+          </a>
+          <a
+            className={styles.footerLink}
+            href="mailto:musikkprodusent@studentmediene.no"
+          >
+            Musikkprodusent: {musicProducer}
+          </a>
           <br />
           <div className={styles.socialMediaLinks}>
             <SocialMediaContainer />
             <br />
           </div>
-          <a
-            className={styles.footerLink}
-            href="mailto:redaktor@radiorevolt.no"
-          >
-            Kontakt oss
-          </a>
           <Link className={styles.footerLink} to="/om">
             Om oss
           </Link>
@@ -80,6 +84,7 @@ export class Footer extends React.Component {
 const mapStateToProps = createStructuredSelector({
   chiefEditor: selectChiefEditor(),
   radioEditor: selectRadioEditor(),
+  musicProducer: selectMusicProducer(),
   loading: selectFooterLoading(),
   error: selectFooterError(),
 });

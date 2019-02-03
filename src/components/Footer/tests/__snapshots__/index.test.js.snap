@@ -14,14 +14,32 @@ exports[`<Footer /> renders correctly 1`] = `
       Uautorisert lenking, videreføring eller kopiering er ulovlig.
     </div>
     <br />
-    <div>
+    <div
+      className="bold"
+    >
+      Kontakt oss
+    </div>
+    <a
+      className="footerLink"
+      href="mailto:redaktor@radiorevolt.no"
+    >
       Radioredaktør: 
       radioEditor
-    </div>
-    <div>
+    </a>
+    <a
+      className="footerLink"
+      href="mailto:ansvarligredaktor@studentmediene.no"
+    >
       Ansvarlig redaktør: 
       chiefEditor
-    </div>
+    </a>
+    <a
+      className="footerLink"
+      href="mailto:musikkprodusent@studentmediene.no"
+    >
+      Musikkprodusent: 
+      musicProducer
+    </a>
     <br />
     <div
       className="socialMediaLinks"
@@ -29,12 +47,6 @@ exports[`<Footer /> renders correctly 1`] = `
       <SocialMediaContainer />
       <br />
     </div>
-    <a
-      className="footerLink"
-      href="mailto:redaktor@radiorevolt.no"
-    >
-      Kontakt oss
-    </a>
     <Link
       className="footerLink"
       replace={false}
@@ -50,7 +62,7 @@ exports[`<Footer /> renders correctly 1`] = `
       Personvern
     </Link>
     <p>
-      2018
+      2019
        © Radio Revolt
     </p>
   </div>
@@ -71,14 +83,32 @@ exports[`<Footer /> renders correctly on error 1`] = `
       Uautorisert lenking, videreføring eller kopiering er ulovlig.
     </div>
     <br />
-    <div>
+    <div
+      className="bold"
+    >
+      Kontakt oss
+    </div>
+    <a
+      className="footerLink"
+      href="mailto:redaktor@radiorevolt.no"
+    >
       Radioredaktør: 
-      Feil ved innlasting, prøv igjen senere
-    </div>
-    <div>
+      radioEditor
+    </a>
+    <a
+      className="footerLink"
+      href="mailto:ansvarligredaktor@studentmediene.no"
+    >
       Ansvarlig redaktør: 
-      Feil ved innlasting, prøv igjen senere
-    </div>
+      chiefEditor
+    </a>
+    <a
+      className="footerLink"
+      href="mailto:musikkprodusent@studentmediene.no"
+    >
+      Musikkprodusent: 
+      musicProducer
+    </a>
     <br />
     <div
       className="socialMediaLinks"
@@ -86,12 +116,6 @@ exports[`<Footer /> renders correctly on error 1`] = `
       <SocialMediaContainer />
       <br />
     </div>
-    <a
-      className="footerLink"
-      href="mailto:redaktor@radiorevolt.no"
-    >
-      Kontakt oss
-    </a>
     <Link
       className="footerLink"
       replace={false}
@@ -107,7 +131,7 @@ exports[`<Footer /> renders correctly on error 1`] = `
       Personvern
     </Link>
     <p>
-      2018
+      2019
        © Radio Revolt
     </p>
   </div>
@@ -128,14 +152,32 @@ exports[`<Footer /> renders correctly while loading 1`] = `
       Uautorisert lenking, videreføring eller kopiering er ulovlig.
     </div>
     <br />
-    <div>
+    <div
+      className="bold"
+    >
+      Kontakt oss
+    </div>
+    <a
+      className="footerLink"
+      href="mailto:redaktor@radiorevolt.no"
+    >
       Radioredaktør: 
-      Laster inn...
-    </div>
-    <div>
+      radioEditor
+    </a>
+    <a
+      className="footerLink"
+      href="mailto:ansvarligredaktor@studentmediene.no"
+    >
       Ansvarlig redaktør: 
-      Laster inn...
-    </div>
+      chiefEditor
+    </a>
+    <a
+      className="footerLink"
+      href="mailto:musikkprodusent@studentmediene.no"
+    >
+      Musikkprodusent: 
+      musicProducer
+    </a>
     <br />
     <div
       className="socialMediaLinks"
@@ -143,12 +185,6 @@ exports[`<Footer /> renders correctly while loading 1`] = `
       <SocialMediaContainer />
       <br />
     </div>
-    <a
-      className="footerLink"
-      href="mailto:redaktor@radiorevolt.no"
-    >
-      Kontakt oss
-    </a>
     <Link
       className="footerLink"
       replace={false}
@@ -164,7 +200,7 @@ exports[`<Footer /> renders correctly while loading 1`] = `
       Personvern
     </Link>
     <p>
-      2018
+      2019
        © Radio Revolt
     </p>
   </div>
