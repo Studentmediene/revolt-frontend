@@ -9,7 +9,8 @@ export function* loadFooter() {
   const query = `query {
     settings {
       chiefEditor,
-      radioEditor
+      radioEditor,
+      musicProducer
     }
   }`;
   try {

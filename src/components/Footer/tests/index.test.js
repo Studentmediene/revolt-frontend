@@ -8,6 +8,7 @@ describe('<Footer />', () => {
     const props = {
       chiefEditor: 'chiefEditor',
       radioEditor: 'radioEditor',
+      musicProducer: 'musicProducer',
       loading: false,
       error: false,
       loadFooter: jest.fn(),
@@ -20,6 +21,7 @@ describe('<Footer />', () => {
     const props = {
       chiefEditor: 'chiefEditor',
       radioEditor: 'radioEditor',
+      musicProducer: 'musicProducer',
       loading: true,
       error: false,
       loadFooter: jest.fn(),
@@ -32,6 +34,7 @@ describe('<Footer />', () => {
     const props = {
       chiefEditor: 'chiefEditor',
       radioEditor: 'radioEditor',
+      musicProducer: 'musicProducer',
       loading: false,
       error: true,
       loadFooter: jest.fn(),
