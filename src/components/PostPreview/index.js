@@ -37,7 +37,6 @@ const PostPreview = props => {
       <Link className={styles.titleLink} to={`/post/${props.slug}`}>
         <h2 className={styles.title}>{props.title}</h2>
       </Link>
-      <p className={styles.lead}>{props.lead}</p>
     </div>
   );
 };
@@ -45,7 +44,6 @@ const PostPreview = props => {
 PostPreview.propTypes = {
   title: PropTypes.string.isRequired,
   slug: PropTypes.string.isRequired,
-  lead: PropTypes.string.isRequired,
   croppedImages: PropTypes.shape({
     small: PropTypes.string,
     medium: PropTypes.string,

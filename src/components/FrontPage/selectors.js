@@ -13,9 +13,9 @@ const selectFrontPagePostsLoading = () =>
 const selectFrontPagePostsError = () =>
   createSelector(selectFrontPageDomain(), frontPage => frontPage.get('error'));
 
-const selectPageNumber = () =>
+const selectPostOffset = () =>
   createSelector(selectFrontPageDomain(), frontPage => {
-    return frontPage.get('pageNumber');
+    return frontPage.get('postOffset');
   });
 
 const selectHasLoaded = () =>
@@ -27,6 +27,6 @@ export {
   selectFrontPagePosts,
   selectFrontPagePostsLoading,
   selectFrontPagePostsError,
-  selectPageNumber,
+  selectPostOffset,
   selectHasLoaded,
 };

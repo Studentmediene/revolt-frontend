@@ -9,7 +9,7 @@ describe('<FrontPage />', () => {
       posts: [],
       loading: false,
       error: false,
-      pageNumber: 1,
+      postOffset: 0,
       loadPosts: jest.fn(),
       hasLoaded: false,
     };
@@ -22,7 +22,7 @@ describe('<FrontPage />', () => {
       posts: false,
       loading: true,
       error: false,
-      pageNumber: 1,
+      postOffset: 0,
       loadPosts: jest.fn(),
       hasLoaded: false,
     };
@@ -35,7 +35,7 @@ describe('<FrontPage />', () => {
       posts: false,
       loading: false,
       error: true,
-      pageNumber: 1,
+      postOffset: 0,
       loadPosts: jest.fn(),
       hasLoaded: false,
     };

@@ -1,37 +1,32 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { frontPagePostsLoaded, frontPagePostsError } from './actions';
-import { LOAD_FRONT_PAGE_POSTS_PENDING } from './constants';
+import { LOAD_FRONT_PAGE_POSTS_PENDING, POSTS_PER_PAGE } from './constants';
 import { getGraphQL } from 'utils/api';
 import { postFormat } from 'utils/dataFormatters';
 
 // Individual exports for testing
-export function* loadFrontPageArticles({ pageNumber }) {
+export function* loadFrontPageArticles({ postOffset }) {
   const query = `query {
-    paginatedPosts(page: ${pageNumber}) {
-      posts {
-        id,
-        title,
-        slug,
-        croppedImages {
-          large,
-          medium,
-          small
-        },
-        lead,
-        publishAt,
-        categories {
-          name,
-          textColor,
-          backgroundColor
-        }
+    allPosts(offset: ${postOffset}, count: ${POSTS_PER_PAGE}) {
+      id,
+      title,
+      slug,
+      croppedImages {
+        large,
+        medium,
+        small
+      },
+      publishAt,
+      categories {
+        name,
+        textColor,
+        backgroundColor
       }
     }
   }`;
   try {
     const result = yield call(getGraphQL, query);
-    yield put(
-      frontPagePostsLoaded(result.data.paginatedPosts.posts.map(postFormat)),
-    );
+    yield put(frontPagePostsLoaded(result.data.allPosts.map(postFormat)));
   } catch (error) {
     yield put(frontPagePostsError());
   }
