@@ -1,44 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<NavBar /> renders correctly 1`] = `
-<ul
-  className="navbarList"
+<div
+  className="navbar"
 >
-  <li
-    className="navbarItem"
-    key="/"
+  <ul
+    className="navbarList"
   >
-    <Link
-      className="navbarLink"
-      replace={false}
-      to="/"
+    <li
+      className="navbarItem"
+      key="/programmer"
     >
-      Hjem
-    </Link>
-  </li>
-  <li
-    className="navbarItem"
-    key="/programmer"
-  >
-    <Link
-      className="navbarLink"
-      replace={false}
-      to="/programmer"
+      <Link
+        className="navbarLink"
+        replace={false}
+        to="/programmer"
+      >
+        Programmer
+      </Link>
+    </li>
+    <li
+      className="navbarItem"
+      key="/sendeplan"
     >
-      Programmer
-    </Link>
-  </li>
-  <li
-    className="navbarItem"
-    key="/sendeplan"
-  >
-    <Link
-      className="navbarLink"
-      replace={false}
-      to="/sendeplan"
-    >
-      Sendeplan
-    </Link>
-  </li>
-</ul>
+      <Link
+        className="navbarLink"
+        replace={false}
+        to="/sendeplan"
+      >
+        Sendeplan
+      </Link>
+    </li>
+  </ul>
+</div>
 `;

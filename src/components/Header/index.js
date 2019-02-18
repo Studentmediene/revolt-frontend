@@ -10,9 +10,11 @@ class Header extends React.Component {
   render() {
     return (
       <header className={styles.header}>
-        <NavBar />
-        <Logo />
-        <HeaderPlayButton />
+        <div className={styles.headerContent}>
+          <NavBar />
+          <Logo />
+          <HeaderPlayButton />
+        </div>
       </header>
     );
   }
