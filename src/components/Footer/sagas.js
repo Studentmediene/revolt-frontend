@@ -14,11 +14,14 @@ export function* loadFooter() {
     }
   }`;
   try {
-    const result = yield call(getGraphQL, query);
+    const {
+      data: { settings: { chiefEditor, radioEditor, musicProducer } },
+    } = yield call(getGraphQL, query);
     yield put(
       footerLoaded({
-        chiefEditor: result.data.settings.chiefEditor,
-        radioEditor: result.data.settings.radioEditor,
+        chiefEditor,
+        radioEditor,
+        musicProducer,
       }),
     );
   } catch (error) {
