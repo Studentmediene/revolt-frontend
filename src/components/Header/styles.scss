@@ -1,16 +1,30 @@
 @import 'variables.scss';
 
 .header {
-  margin: 1em auto 2em;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: row;
   justify-content: center;
+
+  flex: 1;
+  height: $header-height + 15px;
+  
+
+  color: $color-text-light;
+  background-color: $color-radiorevolt-lightgrey;
+}
+
+.headerContent {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
+  
+  flex: 1;
   max-width: $breakpoint-large;
 }
 
 @media screen and (min-width: $breakpoint-large) {
-  .header {
-    flex-direction: row;
+  .headerContent {
+    // display hamburger menu
   }
 }

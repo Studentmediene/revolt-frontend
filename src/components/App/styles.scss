@@ -1,14 +1,14 @@
 @import 'variables.scss';
 
 .container {
-  padding-top: 1em;
   background-color: $color-radiorevolt-white;
-  color: $color-radiorevolt-darkgrey;
+  color: #111;
   font-family: 'Open Sans', sans-serif;
 }
 
 .content {
   width: 95%;
+  padding-top: 1em;
   min-height: 100vh;
   margin: 0 auto;
 }

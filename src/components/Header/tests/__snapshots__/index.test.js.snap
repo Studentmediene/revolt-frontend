@@ -4,8 +4,12 @@ exports[`<Header /> renders correctly 1`] = `
 <header
   className="header"
 >
-  <NavBar />
-  <Logo />
-  <Connect(HeaderPlayButton) />
+  <div
+    className="headerContent"
+  >
+    <NavBar />
+    <Logo />
+    <Connect(HeaderPlayButton) />
+  </div>
 </header>
 `;
