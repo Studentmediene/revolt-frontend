@@ -47,7 +47,7 @@ export class Footer extends React.Component {
           <div className={styles.bold}>Kontakt oss</div>
           <a
             className={styles.footerLink}
-            href="mailto:redaktor@radiorevolt.no"
+            href="mailto:radioredaktor@studentmediene.no"
           >
             Radioredaktør: {radioEditor}
           </a>

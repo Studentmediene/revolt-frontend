@@ -21,7 +21,7 @@ exports[`<Footer /> renders correctly 1`] = `
     </div>
     <a
       className="footerLink"
-      href="mailto:redaktor@radiorevolt.no"
+      href="mailto:radioredaktor@studentmediene.no"
     >
       Radioredaktør: 
       radioEditor
@@ -90,7 +90,7 @@ exports[`<Footer /> renders correctly on error 1`] = `
     </div>
     <a
       className="footerLink"
-      href="mailto:redaktor@radiorevolt.no"
+      href="mailto:radioredaktor@studentmediene.no"
     >
       Radioredaktør: 
       radioEditor
@@ -159,7 +159,7 @@ exports[`<Footer /> renders correctly while loading 1`] = `
     </div>
     <a
       className="footerLink"
-      href="mailto:redaktor@radiorevolt.no"
+      href="mailto:radioredaktor@studentmediene.no"
     >
       Radioredaktør: 
       radioEditor
