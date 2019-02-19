@@ -6,7 +6,7 @@
   justify-content: center;
 
   flex: 1;
-  height: $header-height + 15px;
+  height: $header-height;
   
 
   color: $color-text-light;
@@ -21,10 +21,4 @@
   
   flex: 1;
   max-width: $breakpoint-large;
-}
-
-@media screen and (min-width: $breakpoint-large) {
-  .headerContent {
-    // display hamburger menu
-  }
 }
