@@ -6,26 +6,3 @@
   justify-content: center;
   align-items: center;
 }
-
-.headerPlayButtonContainer {
-  flex: 1;
-  display: none;
-  justify-content: center;
-  align-items: center;
-}
-
-.navigationListContainer {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-@media screen and (min-width: $breakpoint-medium) {
-  .headerPlayButtonContainer {
-    display: flex;
-  }
-  .navigationListContainer {
-    display: none;
-  }
-}

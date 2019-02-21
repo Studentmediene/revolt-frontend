@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import styles from './styles.scss';
+import hamburgerIcon from './assets/hamburger-menu.svg';
 import { togglePlayPause } from 'components/Player/actions';
-import { hamburgerIcon } from './assets/hamburger-menu.svg';
 
 export class HamburgerMenu extends React.Component {
   static propTypes = {
@@ -14,7 +14,8 @@ export class HamburgerMenu extends React.Component {
   render() {
     return (
       <div className={styles.container}>
-        <img src={hamburgerIcon}/>
+        <img src={hamburgerIcon} className={styles.hamburgerIcon} />
+        <div className={styles.hamburgerText}>Meny</div>
       </div>
     );
   }
