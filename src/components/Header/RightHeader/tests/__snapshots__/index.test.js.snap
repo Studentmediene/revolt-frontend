@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RightHeader /> renders correctly 1`] = `
+<div
+  className="container"
+>
+  <div
+    className="headerPlayButtonContainer"
+  >
+    <Connect(HeaderPlayButton) />
+  </div>
+  <div
+    className="navigationListContainer"
+  >
+    <NavList
+      links={
+        Array [
+          Object {
+            "path": "/sendeplan",
+            "title": "Sendeplan",
+          },
+        ]
+      }
+    />
+  </div>
+</div>
+`;

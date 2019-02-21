@@ -1,0 +1,30 @@
+@import 'variables.scss';
+
+.navbarList {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 0;
+}
+
+.navbarItem {
+  list-style: none;
+  display: block;
+  font-size: 21px;
+}
+
+.navbarItem:hover {
+  text-decoration: underline;
+}
+
+.navbarLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+@media screen and (min-width: $breakpoint-medium) {
+  .navbarItem {
+    padding: 0px 20px;
+  }
+}
