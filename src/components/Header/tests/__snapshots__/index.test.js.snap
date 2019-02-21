@@ -7,9 +7,9 @@ exports[`<Header /> renders correctly 1`] = `
   <div
     className="headerContent"
   >
-    <NavBar />
+    <LeftHeader />
     <Logo />
-    <Connect(HeaderPlayButton) />
+    <RightHeader />
   </div>
 </header>
 `;

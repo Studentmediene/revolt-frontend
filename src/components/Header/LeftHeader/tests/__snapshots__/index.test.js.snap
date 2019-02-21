@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LeftHeader /> renders correctly 1`] = `
+<div
+  className="container"
+>
+  <div
+    className="largeNavListContainer"
+  >
+    <NavList
+      links={
+        Array [
+          Object {
+            "path": "/programmer",
+            "title": "Programmer",
+          },
+          Object {
+            "path": "/sendeplan",
+            "title": "Sendeplan",
+          },
+        ]
+      }
+    />
+  </div>
+  <div
+    className="smallNavListContainer"
+  >
+    <NavList
+      links={
+        Array [
+          Object {
+            "path": "/programmer",
+            "title": "Programmer",
+          },
+        ]
+      }
+    />
+  </div>
+</div>
+`;

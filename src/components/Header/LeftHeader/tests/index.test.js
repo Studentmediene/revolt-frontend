@@ -1,11 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import NavBar from '../';
+import { LeftHeader } from '../';
 
-describe('<NavBar />', () => {
+describe('<LeftHeader />', () => {
   it('renders correctly', () => {
-    const tree = shallow(<NavBar />);
+    const tree = shallow(<LeftHeader />);
     expect(tree).toMatchSnapshot();
   });
 });

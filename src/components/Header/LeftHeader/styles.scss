@@ -1,0 +1,31 @@
+@import 'variables.scss';
+
+.container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.largeNavListContainer {
+  flex: 1;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.smallNavListContainer {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (min-width: $breakpoint-medium) {
+  .largeNavListContainer {
+    display: flex;
+  }
+  .smallNavListContainer {
+    display: none;
+  }
+}

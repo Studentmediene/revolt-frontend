@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<NavBar /> renders correctly 1`] = `
+exports[`<NavList /> renders correctly 1`] = `
 <div
   className="navbar"
 >
@@ -9,26 +9,26 @@ exports[`<NavBar /> renders correctly 1`] = `
   >
     <li
       className="navbarItem"
-      key="/programmer"
+      key="/link1"
     >
       <Link
         className="navbarLink"
         replace={false}
-        to="/programmer"
+        to="/link1"
       >
-        Programmer
+        Link1
       </Link>
     </li>
     <li
       className="navbarItem"
-      key="/sendeplan"
+      key="/link2"
     >
       <Link
         className="navbarLink"
         replace={false}
-        to="/sendeplan"
+        to="/link2"
       >
-        Sendeplan
+        Link2
       </Link>
     </li>
   </ul>
