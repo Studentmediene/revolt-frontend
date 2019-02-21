@@ -1,37 +1,24 @@
 @import 'variables.scss';
 
 .container {
-  flex: 1;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+
+  cursor: pointer;
+
+  padding: 10px;
+  margin-left: 20px;
+  border-radius: 10px;
+  background-color: $color-radiorevolt-darkgrey;
 }
 
-.playButton {
-  display: flex;
-  background-color: #333;
-  justify-content: center;
-  align-items: center;
-  padding: 0 1em;
-  height: 5em;
-  min-width: 16em;
-  font-family: inherit;
-  border-width: 0;
+.hamburgerIcon {
+  
+  height: 32px;
+  padding: 0 10px 0 0;
 }
 
-.buttonText {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  text-align: start;
-  color: #FFF;
-  padding-right: 2em;
-}
-
-.largeText {
-  font-size: 1.2em;
-}
-
-.smallText {
-  font-size: 0.8em;
+.hamburgerText {
+  font-size: 21px;
 }

@@ -2,6 +2,7 @@ import React from 'react';
 
 import styles from './styles.scss';
 import { NavList } from 'components/Header/NavList';
+import HamburgerMenu from 'components/Header/HamburgerMenu';
 
 const smallNavbarLinks = [
   {
@@ -19,14 +20,14 @@ const largeNavbarLinks = [
 ]
 
 export const LeftHeader = () => (
-  <div className={styles.container}>
-    <div className={styles.largeNavListContainer}>
+  <React.Fragment>
+    <div className={styles.largeNavContainer}>
       <NavList links={largeNavbarLinks} />
     </div>
-    <div className={styles.smallNavListContainer}>
-      <NavList links={smallNavbarLinks} />
+    <div className={styles.smallNavContainer}>
+      <HamburgerMenu />
     </div>
-  </div>
+  </React.Fragment>
 );
 
 export default LeftHeader;
