@@ -16,11 +16,12 @@
 
 .hamburgerIcon {
   height: 32px;
-  padding: 0 10px 0 0;
 }
 
 .hamburgerText {
+  display: none;
   font-size: 21px;
+  padding: 0 0 0 10px;
 }
 
 .overlay {
@@ -36,4 +37,10 @@
 
 .active {
   display: block;
+}
+
+@media screen and (min-width: $breakpoint-small) {
+  .hamburgerText {
+    display: block;
+  }
 }
