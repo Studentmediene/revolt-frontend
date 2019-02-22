@@ -2,34 +2,54 @@
 
 .container {
   flex: 1;
+
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: flex-end;
   align-items: center;
+
+  margin-right: 20px;
 }
 
 .playButton {
   display: flex;
-  background-color: #333;
+  background-color: $color-radiorevolt-darkgrey;
   justify-content: center;
   align-items: center;
-  padding: 0 1em;
-  height: 5em;
-  font-family: inherit;
-  border-width: 0;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .buttonText {
   flex: 1;
   display: flex;
   flex-direction: column;
-  text-align: start;
+  align-items: flex-start;
   color: #FFF;
 }
 
 .largeText {
-  font-size: 1.2em;
+  display: none;
+  font-size: 21px;
 }
 
 .smallText {
+  display: none;
   font-size: 0.8em;
+}
+
+@media screen and (min-width: $breakpoint-small) {
+  .largeText {
+    display: block;
+  }
+}
+
+@media screen and (min-width: $breakpoint-medium) {
+  .container {
+    justify-content: center;
+    margin: 0;
+  }
+  .smallText {
+    display: block;
+  }
 }
