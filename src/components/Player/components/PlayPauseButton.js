@@ -1,27 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import styles from './PlayPauseButton.css';
+
+import styles from './PlayPauseButton.scss';
 
 const PlayPauseButton = ({ togglePlayPause, paused }) => (
   <button
-    className={classNames(styles.playPauseButton, {
-      [styles.paused]: paused,
-    })}
+    className={styles.playPauseButton}
     onClick={togglePlayPause}
     onKeyPress={togglePlayPause}
   >
-    <div className={styles.playPauseButtonInner}>
-      <div className={styles.left} />
-      <div className={styles.right} />
-      <div className={styles.triangle1} />
-      <div className={styles.triangle2} />
-    </div>
+    <div className={classNames(styles.left, {
+      [styles.paused]: paused,
+    })} />
+    <div className={classNames(styles.right, {
+      [styles.paused]: paused,
+    })} />
   </button>
 );
 
 PlayPauseButton.propTypes = {
-  togglePlayPause: PropTypes.func.isRequired,
+  togglePlayPause: PropTypes.func,
   paused: PropTypes.bool.isRequired,
 };
 

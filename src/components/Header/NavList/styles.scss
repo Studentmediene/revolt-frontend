@@ -11,7 +11,11 @@
 .navbarItem {
   list-style: none;
   display: block;
+  padding: 10px;
   font-size: 21px;
+
+  border-radius: 10px;
+  background-color: $color-radiorevolt-darkgrey;
 }
 
 .navbarItem:hover {
@@ -25,6 +29,6 @@
 
 @media screen and (min-width: $breakpoint-medium) {
   .navbarItem {
-    padding: 0px 20px;
+    margin: 0px 10px;
   }
 }

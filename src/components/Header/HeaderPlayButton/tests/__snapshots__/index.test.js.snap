@@ -3,26 +3,22 @@
 exports[`<HeaderPlayButton /> renders correctly 1`] = `
 <div
   className="container"
+  onClick={[MockFunction]}
 >
+  <PlayPauseButton
+    paused={true}
+  />
   <div
-    className="playButton"
+    className="buttonText"
   >
-    <PlayPauseButton
-      paused={true}
-      togglePlayPause={[MockFunction]}
-    />
     <div
-      className="buttonText"
+      className="largeText"
     >
-      <div
-        className="largeText"
-      >
-        Lytt direkte!
-      </div>
-      <div
-        className="smallText"
-      />
+      Lytt direkte!
     </div>
+    <div
+      className="smallText"
+    />
   </div>
 </div>
 `;

@@ -26,7 +26,9 @@ const AudioControls = ({
         <div className={styles.line} />
       </div>
     </button>
-    <PlayPauseButton paused={paused} togglePlayPause={togglePlayPause} />
+    <div className={styles.audioControlContainer}>
+      <PlayPauseButton paused={paused} togglePlayPause={togglePlayPause} />
+    </div>
     <button
       disabled={live || !url}
       className={classNames(styles.forwardButton, {

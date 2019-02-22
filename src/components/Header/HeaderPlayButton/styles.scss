@@ -1,31 +1,25 @@
 @import 'variables.scss';
 
 .container {
-  flex: 1;
-
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-
-  margin-right: 20px;
-}
-
-.playButton {
-  display: flex;
-  background-color: $color-radiorevolt-darkgrey;
   justify-content: center;
   align-items: center;
+
+  background-color: $color-radiorevolt-darkgrey;
+
+  cursor: pointer;
+  margin-right: 20px;
   padding: 10px;
   border-radius: 10px;
 }
 
 .buttonText {
-  flex: 1;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: flex-start;
   color: #FFF;
+  padding: 0 0 0 10px;
 }
 
 .largeText {
@@ -39,6 +33,9 @@
 }
 
 @media screen and (min-width: $breakpoint-small) {
+  .buttonText {
+    display: flex;
+  }
   .largeText {
     display: block;
   }
@@ -46,8 +43,7 @@
 
 @media screen and (min-width: $breakpoint-medium) {
   .container {
-    justify-content: center;
-    margin: 0;
+    margin-right: 0;
   }
   .smallText {
     display: block;
