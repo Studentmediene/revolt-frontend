@@ -44,6 +44,7 @@
 @media screen and (min-width: $breakpoint-medium) {
   .container {
     margin-right: 0;
+    background-color: $color-radiorevolt-lightgrey;
   }
   .smallText {
     display: block;
