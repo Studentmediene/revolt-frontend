@@ -23,7 +23,7 @@ exports[`<LeftHeader /> renders correctly 1`] = `
   <div
     className="smallNavContainer"
   >
-    <Connect(HamburgerMenu) />
+    <HamburgerMenu />
   </div>
 </Fragment>
 `;

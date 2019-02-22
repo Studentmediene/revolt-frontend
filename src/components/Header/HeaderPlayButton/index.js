@@ -17,16 +17,13 @@ export class HeaderPlayButton extends React.Component {
 
   render() {
     return (
-      <div className={styles.container}>
-        <div className={styles.playButton}>
-          <PlayPauseButton
-            paused={this.props.paused}
-            togglePlayPause={this.props.togglePlayPause}
-          />
-          <div className={styles.buttonText}>
-            <div className={styles.largeText}>Lytt direkte!</div>
-            <div className={styles.smallText}>{this.props.nowPlaying}</div>
-          </div>
+      <div className={styles.container} onClick={this.props.togglePlayPause}>
+        <PlayPauseButton
+          paused={this.props.paused}
+        />
+        <div className={styles.buttonText}>
+          <div className={styles.largeText}>Lytt direkte!</div>
+          <div className={styles.smallText}>{this.props.nowPlaying}</div>
         </div>
       </div>
     );

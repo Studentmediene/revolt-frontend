@@ -1,13 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
 
 import styles from './styles.scss';
-import hamburgerIcon from './assets/hamburger-menu.svg';
 import NavDrawer from 'components/Header/NavDrawer';
-import { togglePlayPause } from 'components/Player/actions';
+import hamburgerIcon from './assets/hamburger-menu.svg';
 
 const navLinks = [
   {
@@ -57,13 +53,4 @@ export class HamburgerMenu extends React.Component {
   }
 }
 
-const mapStateToProps = createStructuredSelector({
-});
-
-function mapDispatchToProps(dispatch) {
-  return {
-    togglePlayPause: () => dispatch(togglePlayPause()),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(HamburgerMenu);
+export default HamburgerMenu;
