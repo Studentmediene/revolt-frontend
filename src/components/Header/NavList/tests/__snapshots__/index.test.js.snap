@@ -1,36 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<NavList /> renders correctly 1`] = `
-<div
-  className="navbar"
+<ul
+  className="navbarList"
 >
-  <ul
-    className="navbarList"
+  <li
+    className="navbarItem"
+    key="/link1"
   >
-    <li
-      className="navbarItem"
-      key="/link1"
+    <Link
+      className="navbarLink"
+      replace={false}
+      to="/link1"
     >
-      <Link
-        className="navbarLink"
-        replace={false}
-        to="/link1"
-      >
-        Link1
-      </Link>
-    </li>
-    <li
-      className="navbarItem"
-      key="/link2"
+      Link1
+    </Link>
+  </li>
+  <li
+    className="navbarItem"
+    key="/link2"
+  >
+    <Link
+      className="navbarLink"
+      replace={false}
+      to="/link2"
     >
-      <Link
-        className="navbarLink"
-        replace={false}
-        to="/link2"
-      >
-        Link2
-      </Link>
-    </li>
-  </ul>
-</div>
+      Link2
+    </Link>
+  </li>
+</ul>
 `;

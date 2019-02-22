@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import styles from './styles.scss';
@@ -16,5 +17,9 @@ export const NavList = (props) => (
     {navbarComponents(props.links)}
   </ul>
 );
+
+NavList.propTypes = {
+  links: PropTypes.array.isRequired,
+}
 
 export default NavList;

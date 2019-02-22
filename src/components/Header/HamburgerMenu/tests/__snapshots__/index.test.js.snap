@@ -3,7 +3,39 @@
 exports[`<HamburgerMenu /> renders correctly 1`] = `
 <div
   className="container"
+  onClick={[Function]}
 >
-  <img />
+  <img
+    className="hamburgerIcon"
+    src="hamburger-menu.svg"
+  />
+  <div
+    className="hamburgerText"
+  >
+    Meny
+  </div>
+  <div
+    className="overlay"
+  />
+  <withRouter(NavDrawer)
+    links={
+      Array [
+        Object {
+          "path": "/",
+          "title": "Forside",
+        },
+        Object {
+          "path": "/programmer",
+          "title": "Programmer",
+        },
+        Object {
+          "path": "/sendeplan",
+          "title": "Sendeplan",
+        },
+      ]
+    }
+    onNavigation={[Function]}
+    open={false}
+  />
 </div>
 `;
