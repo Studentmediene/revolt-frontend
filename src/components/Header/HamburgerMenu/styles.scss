@@ -2,6 +2,7 @@
 
 .container {
   display: flex;
+  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
 
@@ -14,11 +15,25 @@
 }
 
 .hamburgerIcon {
-  
   height: 32px;
   padding: 0 10px 0 0;
 }
 
 .hamburgerText {
   font-size: 21px;
+}
+
+.overlay {
+  top: 0;
+  left: 0;
+  display: none;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.67);
+  z-index: 100;
+}
+
+.active {
+  display: block;
 }

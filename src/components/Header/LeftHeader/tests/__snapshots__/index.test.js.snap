@@ -1,11 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<LeftHeader /> renders correctly 1`] = `
-<div
-  className="container"
->
+<Fragment>
   <div
-    className="largeNavListContainer"
+    className="largeNavContainer"
   >
     <NavList
       links={
@@ -23,18 +21,9 @@ exports[`<LeftHeader /> renders correctly 1`] = `
     />
   </div>
   <div
-    className="smallNavListContainer"
+    className="smallNavContainer"
   >
-    <NavList
-      links={
-        Array [
-          Object {
-            "path": "/programmer",
-            "title": "Programmer",
-          },
-        ]
-      }
-    />
+    <Connect(HamburgerMenu) />
   </div>
-</div>
+</Fragment>
 `;
