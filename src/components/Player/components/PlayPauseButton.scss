@@ -4,17 +4,25 @@ $pause-button-width: 11px;
 $animation-effect: 0.3s ease;
 
 .playPauseButton {
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+}
+
+.buttonContainer {
+  // <button> elements shrink to the size of its content,
+  // and we must therefore wrap the content with a fixed-size div
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   position: relative;
 
+
+  padding: 0;
   width: $button-length;
   height: $button-length;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  background: transparent;
+
 }
 
 .left {
