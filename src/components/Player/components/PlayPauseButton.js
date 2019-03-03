@@ -10,12 +10,14 @@ const PlayPauseButton = ({ togglePlayPause, paused }) => (
     onClick={togglePlayPause}
     onKeyPress={togglePlayPause}
   >
-    <div className={classNames(styles.left, {
-      [styles.paused]: paused,
-    })} />
-    <div className={classNames(styles.right, {
-      [styles.paused]: paused,
-    })} />
+    <div className={styles.buttonContainer}>
+      <div className={classNames(styles.left, {
+        [styles.paused]: paused,
+      })} />
+      <div className={classNames(styles.right, {
+        [styles.paused]: paused,
+      })} />
+    </div>
   </button>
 );
 
