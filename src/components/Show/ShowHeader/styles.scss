@@ -3,7 +3,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  padding-bottom: 2rem;
+  padding-bottom: 32px;
   width: 100%;
 }
 
@@ -29,14 +29,15 @@
   text-align: center;
 }
 
-@media screen and (min-width: $breakpoint-large) {
+@media screen and (min-width: $breakpoint-small) {
   .container {
     flex-direction: row;
     flex-wrap: wrap;
+    align-items: center;
   }
 
   .imageWrapper {
-    padding-right: 1rem;
+    padding-right: 16px;
     width: 35%;
   }
 
