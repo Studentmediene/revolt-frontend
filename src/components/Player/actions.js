@@ -12,7 +12,7 @@ import {
   GET_PODCAST_PLAYLIST_FAIELD,
   GET_ON_DEMAND_PLAYLIST_PENDING,
   GET_ON_DEMAND_PLAYLIST_SUCCESS,
-  GET_ON_DEMAND_PLAYLIST_FAIELD,
+  GET_ON_DEMAND_PLAYLIST_FAILED,
   GET_LIVE_TITLE,
   TOGGLE_PLAY_PAUSE,
   RESUME,
@@ -78,7 +78,7 @@ export function onDemandPlaylistLoaded(playlist) {
 
 export function onDemandPlaylistError() {
   return {
-    type: GET_ON_DEMAND_PLAYLIST_FAIELD,
+    type: GET_ON_DEMAND_PLAYLIST_FAILED,
   };
 }
 

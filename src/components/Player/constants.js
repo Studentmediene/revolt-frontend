@@ -1,8 +1,3 @@
-/*
- *
- * Player constants
- *
- */
 
 export const PLAY_LIVE = 'app/Player/PLAY_LIVE';
 export const PLAY_LIVE_PENDING = 'app/Player/PLAY_LIVE_PENDING';
@@ -18,8 +13,8 @@ export const GET_ON_DEMAND_PLAYLIST_PENDING =
   'app/Player/GET_ON_DEMAND_PLAYLIST_PENDING';
 export const GET_ON_DEMAND_PLAYLIST_SUCCESS =
   'app/Player/GET_ON_DEMAND_PLAYLIST_SUCCESS';
-export const GET_ON_DEMAND_PLAYLIST_FAIELD =
-  'app/Player/GET_ON_DEMAND_PLAYLIST_FAIELD';
+export const GET_ON_DEMAND_PLAYLIST_FAILED =
+  'app/Player/GET_ON_DEMAND_PLAYLIST_FAILED';
 
 export const GET_LIVE_TITLE = 'app/Player/GET_LIVE_TITLE';
 
