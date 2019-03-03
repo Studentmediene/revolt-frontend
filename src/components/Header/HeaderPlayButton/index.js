@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import styles from './styles.scss';
-import { togglePlayPause } from 'components/Player/actions';
+import { togglePlayPause, playLive } from 'components/Player/actions';
 import PlayPauseButton from 'components/Player/components/PlayPauseButton';
-import { selectLiveTitle, selectPaused } from 'components/Player/selectors';
+import { selectLiveTitle, selectPaused, selectLive } from 'components/Player/selectors';
 
 export class HeaderPlayButton extends React.Component {
   static propTypes = {
@@ -16,10 +16,26 @@ export class HeaderPlayButton extends React.Component {
   };
 
   render() {
+
+    let isCurrentlyLive = false;
+
+    if (!this.props.paused && this.props.isLive) {
+      isCurrentlyLive = true;
+    }
+
+    const buttonClicked = event => {
+      event.preventDefault();
+      if (this.props.isLive) {
+        this.props.togglePlayPause();
+      } else {
+        this.props.playLive();
+      }
+    }
+
     return (
-      <div className={styles.container} onClick={this.props.togglePlayPause}>
+      <div className={styles.container} onClick={buttonClicked}>
         <PlayPauseButton
-          paused={this.props.paused}
+          paused={!isCurrentlyLive}
         />
         <div className={styles.buttonText}>
           <div className={styles.largeText}>Lytt direkte!</div>
@@ -33,11 +49,13 @@ export class HeaderPlayButton extends React.Component {
 const mapStateToProps = createStructuredSelector({
   nowPlaying: selectLiveTitle(),
   paused: selectPaused(),
+  isLive: selectLive(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     togglePlayPause: () => dispatch(togglePlayPause()),
+    playLive: () => dispatch(playLive()),
   };
 }
 

@@ -3,7 +3,7 @@
 exports[`<HeaderPlayButton /> renders correctly 1`] = `
 <div
   className="container"
-  onClick={[MockFunction]}
+  onClick={[Function]}
 >
   <PlayPauseButton
     paused={true}
