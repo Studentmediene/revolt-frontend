@@ -1,17 +1,8 @@
 import { createSelector } from 'reselect';
 
-/**
- * Direct selector to the player state domain
- */
+
 const selectPlayerDomain = () => state => state.get('player');
 
-/**
- * Other specific selectors
- */
-
-/**
- * Default selector used by Player
- */
 
 const selectPlaylist = () =>
   createSelector(selectPlayerDomain(), playerState =>
@@ -41,6 +32,10 @@ const selectPlayingTitle = () =>
   createSelector(selectPlayerDomain(), playerState =>
     playerState.get('playingTitle'),
   );
+const selectEpisodeId = () =>
+  createSelector(selectPlayerDomain(), playerState =>
+    playerState.get('episodeId'),
+  );
 
 const selectUrl = () =>
   createSelector(selectPlayerDomain(), playerState => playerState.get('url'));
@@ -62,6 +57,7 @@ export {
   selectOffset,
   selectLive,
   selectPaused,
+  selectEpisodeId,
   selectUrl,
   selectPlayerLoading,
   selectPlayerError,

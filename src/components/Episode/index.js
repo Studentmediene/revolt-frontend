@@ -1,41 +1,70 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import styles from './styles.scss';
+import { togglePlayPause } from 'components/Player/actions';
+import PlayPauseButton from 'components/Player/components/PlayPauseButton';
+import { selectEpisodeId, selectPaused } from 'components/Player/selectors';
 
-const Episode = props => {
-  if (props.digasBroadcastId === 0) {
-    return null;
+export class Episode extends React.Component {
+  static propTypes = {
+    digasBroadcastId: PropTypes.number,
+    id: PropTypes.number,
+    title: PropTypes.string,
+    lead: PropTypes.string,
+    playOnDemand: PropTypes.func,
   }
 
-  const playOnDemand = e => {
-    e.preventDefault();
-    props.playOnDemand(props.id);
+  render() {
+    if (this.props.digasBroadcastId === 0) {
+      return null;
+    }
+
+    let isCurrentlyPlaying = false;
+  
+    if (this.props.playingEpisodeId === this.props.id && !this.props.paused) {
+      isCurrentlyPlaying = true;
+    }
+
+    const playOnDemand = event => {
+      event.preventDefault();
+      if(this.props.playingEpisodeId === this.props.id) {
+        this.props.togglePlayPause()
+      } else {
+        this.props.playOnDemand(this.props.id);
+      }
+    };
+
+    return (
+      <div
+        className={styles.episode}
+        onClick={playOnDemand}
+        onKeyPress={playOnDemand}
+      >
+        <PlayPauseButton
+          paused={!isCurrentlyPlaying}
+        />
+        <div className={styles.meta}>
+          <div className={styles.title}>{this.props.title}</div>
+          <div className={styles.lead}>{this.props.lead}</div>
+        </div>
+      </div>
+    );
+  }
+};
+
+const mapStateToProps = createStructuredSelector({
+  playingEpisodeId: selectEpisodeId(),
+  paused: selectPaused(),
+});
+
+function mapDispatchToProps(dispatch) {
+  return {
+    togglePlayPause: () => dispatch(togglePlayPause()),
   };
+}
 
-  return (
-    <button
-      className={styles.episode}
-      onClick={playOnDemand}
-      onKeyPress={playOnDemand}
-    >
-      <div className={styles.playButton}>
-        <div className={styles.playButtonInner} />
-      </div>
-      <div className={styles.meta}>
-        <div className={styles.title}>{props.title}</div>
-        <div className={styles.lead}>{props.lead}</div>
-      </div>
-    </button>
-  );
-};
+export default connect(mapStateToProps, mapDispatchToProps)(Episode);
 
-Episode.propTypes = {
-  digasBroadcastId: PropTypes.number,
-  id: PropTypes.number,
-  title: PropTypes.string,
-  lead: PropTypes.string,
-  playOnDemand: PropTypes.func,
-};
-
-export default Episode;

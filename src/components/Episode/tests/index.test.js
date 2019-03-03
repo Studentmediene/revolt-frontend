@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 
-import Episode from '../';
+import { Episode } from '../';
 
 describe('<Episode />', () => {
   it('renders correctly', () => {
@@ -23,8 +23,6 @@ describe('<Episode />', () => {
     const tree = shallow(<Episode {...mockProps} />);
     expect(tree).toMatchSnapshot();
 
-    const nullEpisode = Episode(mockProps);
-    expect(nullEpisode).toBeNull();
   });
 
   it('calls playOnDemand when clicked', () => {

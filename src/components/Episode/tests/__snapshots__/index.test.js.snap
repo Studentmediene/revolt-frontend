@@ -1,18 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Episode /> renders correctly 1`] = `
-<button
+<div
   className="episode"
   onClick={[Function]}
   onKeyPress={[Function]}
 >
-  <div
-    className="playButton"
-  >
-    <div
-      className="playButtonInner"
-    />
-  </div>
+  <PlayPauseButton
+    paused={true}
+  />
   <div
     className="meta"
   >
@@ -27,7 +23,7 @@ exports[`<Episode /> renders correctly 1`] = `
       Episode lead
     </div>
   </div>
-</button>
+</div>
 `;
 
 exports[`<Episode /> should return null on invalid digasBroadcastId 1`] = `""`;
