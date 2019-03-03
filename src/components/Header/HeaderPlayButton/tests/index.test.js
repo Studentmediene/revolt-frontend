@@ -6,7 +6,6 @@ import { HeaderPlayButton } from '../';
 describe('<HeaderPlayButton />', () => {
   it('renders correctly', () => {
     const mockProps = {
-      togglePlayPause: jest.fn(),
       paused: true,
     };
     const tree = shallow(<HeaderPlayButton {...mockProps} />);
