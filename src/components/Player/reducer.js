@@ -12,7 +12,7 @@ import {
   GET_PODCAST_PLAYLIST_FAIELD,
   GET_ON_DEMAND_PLAYLIST_PENDING,
   GET_ON_DEMAND_PLAYLIST_SUCCESS,
-  GET_ON_DEMAND_PLAYLIST_FAIELD,
+  GET_ON_DEMAND_PLAYLIST_FAILED,
   GET_LIVE_TITLE,
   PLAYER_STATUS,
   PLAY_ON_DEMAND_EPISODE,
@@ -31,6 +31,7 @@ const initialState = fromJS({
   playingTitle: 'Radio Revolt',
   liveTitle: '',
   paused: true,
+  episodeId: null,
   url: null,
 });
 
@@ -41,6 +42,7 @@ function playerReducer(state = initialState, action) {
         .set('live', true)
         .set('url', action.url)
         .set('paused', false)
+        .set('episodeId', null)
         .set('offset', action.offset);
     case GET_PODCAST_PLAYLIST_PENDING:
       return state.set('loading', true).set('error', false);
@@ -59,6 +61,7 @@ function playerReducer(state = initialState, action) {
         .set('loading', true)
         .set('error', false)
         .set('paused', false)
+        .set('episodeId', action.episodeId)
         .set('url', blankmp3);
     case GET_ON_DEMAND_PLAYLIST_SUCCESS:
       return state
@@ -77,10 +80,16 @@ function playerReducer(state = initialState, action) {
         .set('index', action.index)
         .set('offset', action.offset)
         .set('url', episode.url)
+        .set('episodeId', episode.id)
         .set('playingTitle', `${episode.show}: ${episode.title}`);
     }
-    case GET_ON_DEMAND_PLAYLIST_FAIELD:
-      return state.set('loading', false).set('error', true);
+    case GET_ON_DEMAND_PLAYLIST_FAILED:
+      return state
+        .set('loading', false)
+        .set('error', true)
+        .set('paused', true)
+        .set('episodeId', null)
+        .set('url', null);
     case GET_LIVE_TITLE: {
       state = state.set('liveTitle', action.liveTitle);
       if (!state.get('live')) {
