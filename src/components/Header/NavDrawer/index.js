@@ -9,7 +9,7 @@ import styles from './styles.scss';
 export class NavDrawer extends React.Component {
   static propTypes = {
     open: PropTypes.bool.isRequired,
-    links: PropTypes.object.isRequired,
+    links: PropTypes.array.isRequired,
     onNavigation: PropTypes.func.isRequired,
   };
 
