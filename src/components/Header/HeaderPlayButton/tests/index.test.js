@@ -7,6 +7,8 @@ describe('<HeaderPlayButton />', () => {
   it('renders correctly', () => {
     const mockProps = {
       paused: true,
+      nowPlaying: ' Current show',
+      togglePlayPause: jest.fn()
     };
     const tree = shallow(<HeaderPlayButton {...mockProps} />);
     expect(tree).toMatchSnapshot();
