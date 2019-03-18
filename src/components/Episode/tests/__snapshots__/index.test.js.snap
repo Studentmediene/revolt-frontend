@@ -19,9 +19,12 @@ exports[`<Episode /> renders correctly 1`] = `
     </div>
     <div
       className="lead"
-    >
-      Episode lead
-    </div>
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "Episode lead",
+        }
+      }
+    />
   </div>
 </div>
 `;
