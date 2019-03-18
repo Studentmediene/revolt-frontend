@@ -48,7 +48,7 @@ export class Episode extends React.Component {
         />
         <div className={styles.meta}>
           <div className={styles.title}>{this.props.title}</div>
-          <div className={styles.lead}>{this.props.lead}</div>
+          <div className={styles.lead} dangerouslySetInnerHTML={{ __html: this.props.lead }} />
         </div>
       </div>
     );
