@@ -18,7 +18,9 @@ exports[`<HeaderPlayButton /> renders correctly 1`] = `
     </div>
     <div
       className="smallText"
-    />
+    >
+       Current show
+    </div>
   </div>
 </div>
 `;
