@@ -12,6 +12,7 @@
   padding: 16px;
   width: 100%;
   margin-bottom: 2em;
+  cursor: pointer;
 }
 
 .meta {
@@ -27,7 +28,7 @@
   text-align: left;
   color: $color-text-dark;
 
-  & > p {
+  & > * {
     margin: 0;
   }
 }
