@@ -9,6 +9,13 @@ import PlayPauseButton from 'components/Player/components/PlayPauseButton';
 import { selectEpisodeId, selectPaused } from 'components/Player/selectors';
 
 export class Episode extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      expanded: false,
+    }
+  }
   static propTypes = {
     digasBroadcastId: PropTypes.number,
     id: PropTypes.number,

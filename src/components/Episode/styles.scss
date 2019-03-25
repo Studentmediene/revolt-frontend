@@ -26,4 +26,8 @@
   margin-top: 4px;
   text-align: left;
   color: $color-text-dark;
+
+  & > p {
+    margin: 0;
+  }
 }
