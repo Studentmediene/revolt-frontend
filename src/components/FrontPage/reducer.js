@@ -10,6 +10,7 @@ const initialState = fromJS({
   loading: false,
   error: false,
   posts: false,
+  highlightedPosts: [],
   postOffset: 0,
   hasLoaded: false,
 });
@@ -23,6 +24,7 @@ function frontPageReducer(state = initialState, action) {
         .set('loading', false)
         .set('error', false)
         .set('posts', [...state.get('posts'), ...action.posts])
+        .set('highlightedPosts', action.highlightedPosts)
         .set('hasLoaded', true)
         .set('postOffset', state.get('postOffset') + POSTS_PER_PAGE);
     case LOAD_FRONT_PAGE_POSTS_FAILED:
