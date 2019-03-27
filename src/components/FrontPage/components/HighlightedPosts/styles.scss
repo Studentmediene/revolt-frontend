@@ -1,0 +1,63 @@
+@import 'variables.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  // Negative margins to force element to take full width of container
+  margin: 0 -2.6%;
+  padding: 2.5% 0;
+  color: $color-text-light;
+  background-color: $color-radiorevolt-lightgrey;
+}
+
+.title {
+  margin: 0 0 10px 2.5%;
+}
+
+.image {
+  width: 100%;
+}
+
+.postContainer {
+  display: flex;
+  flex-direction: row;
+
+  overflow-x: scroll;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.endPadding {
+  width: 2.5%;
+  height: 10px;
+  padding-right: 2.5%;
+}
+
+.highlightedPost {
+  display: inline-block;
+  margin: 0 1.25%;
+  background-color: pink;
+  width: 70%;
+  flex-shrink: 0;
+
+  &:first-child {
+    margin: 0 1.25% 0 2.5%;
+  }
+
+  &:last-of-type {
+    margin: 0 0 0 1.25%;
+  }
+}
+
+@media screen and (min-width: $breakpoint-large) {
+  .container {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+}

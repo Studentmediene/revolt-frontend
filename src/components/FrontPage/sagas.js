@@ -4,7 +4,6 @@ import { LOAD_FRONT_PAGE_POSTS_PENDING, POSTS_PER_PAGE } from './constants';
 import { getGraphQL } from 'utils/api';
 import { postFormat } from 'utils/dataFormatters';
 
-// Individual exports for testing
 export function* loadFrontPageArticles({ postOffset }) {
   const query = `query {
     allPosts(offset: ${postOffset}, count: ${POSTS_PER_PAGE}) {
@@ -23,10 +22,32 @@ export function* loadFrontPageArticles({ postOffset }) {
         backgroundColor
       }
     }
+    highlightedPosts {
+      id,
+      title,
+      slug,
+      croppedImages {
+        large,
+        medium,
+        small
+      },
+    }
   }`;
   try {
-    const result = yield call(getGraphQL, query);
-    yield put(frontPagePostsLoaded(result.data.allPosts.map(postFormat)));
+    const { data: { allPosts, highlightedPosts } } = yield call(
+      getGraphQL,
+      query,
+    );
+    const formattedPosts = allPosts.map(postFormat);
+    const formattedHighlightedPosts = highlightedPosts.map(postFormat);
+    console.log(formattedHighlightedPosts);
+
+    yield put(
+      frontPagePostsLoaded({
+        posts: formattedPosts,
+        highlightedPosts: formattedHighlightedPosts,
+      }),
+    );
   } catch (error) {
     yield put(frontPagePostsError());
   }
