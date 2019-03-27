@@ -6,6 +6,7 @@ import { createStructuredSelector } from 'reselect';
 
 import {
   selectFrontPagePosts,
+  selectHighlightedPosts,
   selectFrontPagePostsLoading,
   selectFrontPagePostsError,
   selectPostOffset,
@@ -15,12 +16,13 @@ import { loadFrontPagePosts } from './actions';
 
 import styles from './styles.scss';
 import Loader from 'components/Loader';
-import LoadPostsButton from './LoadPostsButton';
+import LoadPostsButton from './components/LoadPostsButton';
 import PostPreviewList from 'components/PostPreviewList';
 
 export class FrontPage extends React.Component {
   static propTypes = {
     posts: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]).isRequired,
+    highlightedPosts: PropTypes.array.isRequired,
     loading: PropTypes.bool.isRequired,
     error: PropTypes.bool.isRequired,
     loadPosts: PropTypes.func.isRequired,
@@ -52,19 +54,25 @@ export class FrontPage extends React.Component {
       posts = this.props.posts.sort((postA, postB) =>
         moment(postB.publishAt).diff(postA.publishAt),
       );
-      posts = <PostPreviewList posts={this.props.posts} />;
+      posts = (
+        <PostPreviewList
+          posts={this.props.posts}
+          highlightedPosts={this.props.highlightedPosts}
+        />
+      );
     }
     return (
-      <div>
+      <React.Fragment>
         {posts}
         <div className={styles.loaderWrapper}>{loader}</div>
-      </div>
+      </React.Fragment>
     );
   }
 }
 
 const mapStateToProps = createStructuredSelector({
   posts: selectFrontPagePosts(),
+  highlightedPosts: selectHighlightedPosts(),
   loading: selectFrontPagePostsLoading(),
   error: selectFrontPagePostsError(),
   postOffset: selectPostOffset(),

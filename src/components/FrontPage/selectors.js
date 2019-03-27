@@ -5,6 +5,11 @@ const selectFrontPageDomain = () => state => state.get('frontPage');
 const selectFrontPagePosts = () =>
   createSelector(selectFrontPageDomain(), frontPage => frontPage.get('posts'));
 
+const selectHighlightedPosts = () =>
+  createSelector(selectFrontPageDomain(), frontPage =>
+    frontPage.get('highlightedPosts'),
+  );
+
 const selectFrontPagePostsLoading = () =>
   createSelector(selectFrontPageDomain(), frontPage =>
     frontPage.get('loading'),
@@ -25,6 +30,7 @@ const selectHasLoaded = () =>
 
 export {
   selectFrontPagePosts,
+  selectHighlightedPosts,
   selectFrontPagePostsLoading,
   selectFrontPagePostsError,
   selectPostOffset,

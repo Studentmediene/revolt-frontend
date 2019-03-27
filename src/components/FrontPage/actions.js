@@ -1,9 +1,3 @@
-/*
- *
- * FrontPage actions
- *
- */
-
 import {
   LOAD_FRONT_PAGE_POSTS_PENDING,
   LOAD_FRONT_PAGE_POSTS_SUCCESS,
@@ -17,9 +11,10 @@ export function loadFrontPagePosts(postOffset) {
   };
 }
 
-export function frontPagePostsLoaded(posts) {
+export function frontPagePostsLoaded({ highlightedPosts, posts }) {
   return {
     type: LOAD_FRONT_PAGE_POSTS_SUCCESS,
+    highlightedPosts,
     posts,
   };
 }
