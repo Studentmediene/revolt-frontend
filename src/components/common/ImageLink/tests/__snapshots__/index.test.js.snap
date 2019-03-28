@@ -2,6 +2,7 @@
 
 exports[`<ImageLink /> renders correctly 1`] = `
 <Link
+  className="nonSelectable"
   replace={false}
   to="/link/to/resource"
 >
@@ -16,7 +17,7 @@ exports[`<ImageLink /> renders correctly 1`] = `
   >
     <img
       alt=" img description"
-      className="image"
+      className="image nonSelectable"
       src="/large.jpg"
       srcSet="/large.jpg 1024w, /medium.jpg 768w, /small.jpg 300w"
     />
