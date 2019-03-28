@@ -10,7 +10,7 @@ const initialState = fromJS({
   loading: false,
   error: false,
   posts: false,
-  highlightedPosts: [],
+  highlightedPosts: false,
   postOffset: 0,
   hasLoaded: false,
 });
