@@ -8,10 +8,10 @@ import styles from './styles.scss';
 const ImageLink = props => {
   const { small, medium, large } = props.images;
   return (
-    <Link to={props.link}>
+    <Link to={props.link} className={styles.nonSelectable}>
       <LazyLoad height={350} offset={100} once>
         <img
-          className={styles.image}
+          className={`${styles.image} ${styles.nonSelectable}`}
           srcSet={`${large} 1024w, ${medium} 768w, ${small} 300w`}
           src={large}
           alt={props.imageDescription}
