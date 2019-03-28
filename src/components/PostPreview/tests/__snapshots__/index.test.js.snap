@@ -4,27 +4,17 @@ exports[`<PostPreview /> renders correctly with categories 1`] = `
 <div
   className="postPreview"
 >
-  <Link
-    className="imageLink"
-    replace={false}
-    to="/post/slug"
+  <ImageLink
+    imageDescription="title"
+    images={
+      Object {
+        "large": "large_image",
+        "medium": "medium_image",
+        "small": "small_image",
+      }
+    }
+    link="/post/slug"
   >
-    <LazyLoad
-      height={350}
-      offset={100}
-      once={true}
-      overflow={false}
-      resize={false}
-      scroll={true}
-      unmountIfInvisible={false}
-    >
-      <img
-        alt="title"
-        className="image"
-        src="large_image"
-        srcSet="large_image 1024w, medium_image 768w, small_image 300w"
-      />
-    </LazyLoad>
     <CategoryTag
       backgroundColor="#FFFFFF"
       index={0}
@@ -41,7 +31,7 @@ exports[`<PostPreview /> renders correctly with categories 1`] = `
       position="bottom"
       textColor="#000000"
     />
-  </Link>
+  </ImageLink>
   <Link
     className="titleLink"
     replace={false}
@@ -60,28 +50,17 @@ exports[`<PostPreview /> renders correctly without categories 1`] = `
 <div
   className="postPreview"
 >
-  <Link
-    className="imageLink"
-    replace={false}
-    to="/post/slug"
-  >
-    <LazyLoad
-      height={350}
-      offset={100}
-      once={true}
-      overflow={false}
-      resize={false}
-      scroll={true}
-      unmountIfInvisible={false}
-    >
-      <img
-        alt="title"
-        className="image"
-        src="large_image"
-        srcSet="large_image 1024w, medium_image 768w, small_image 300w"
-      />
-    </LazyLoad>
-  </Link>
+  <ImageLink
+    imageDescription="title"
+    images={
+      Object {
+        "large": "large_image",
+        "medium": "medium_image",
+        "small": "small_image",
+      }
+    }
+    link="/post/slug"
+  />
   <Link
     className="titleLink"
     replace={false}
