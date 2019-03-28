@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ImageLink from '../ImageLink';
+import ImageLink from 'components/common/ImageLink';
 import styles from './styles.scss';
 
 const HighlightedPosts = props => {
