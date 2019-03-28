@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<HighlightedPosts /> renders correctly 1`] = `
+<div
+  className="container"
+>
+  <h2
+    className="title"
+  >
+    Anbefalte saker
+  </h2>
+  <div
+    className="postContainer"
+  >
+    <div
+      className="highlightedPost"
+      key="364"
+    >
+      <ImageLink
+        imageDescription="title1"
+        images={
+          Object {
+            "large": "/large1.jpg",
+            "medium": "/medium1.jpg",
+            "small": "/small1.jpg",
+          }
+        }
+        link="/post/slug1"
+      >
+        <div
+          className="imageText"
+        >
+          title1
+        </div>
+      </ImageLink>
+    </div>
+    <div
+      className="highlightedPost"
+      key="362"
+    >
+      <ImageLink
+        imageDescription="title2"
+        images={
+          Object {
+            "large": "/large2.jpg",
+            "medium": "/medium2.jpg",
+            "small": "/small2.jpg",
+          }
+        }
+        link="/post/slug2"
+      >
+        <div
+          className="imageText"
+        >
+          title2
+        </div>
+      </ImageLink>
+    </div>
+    <span
+      className="endPadding"
+      key="padding"
+    />
+  </div>
+</div>
+`;
+
+exports[`<HighlightedPosts /> renders correctly when empty 1`] = `""`;
