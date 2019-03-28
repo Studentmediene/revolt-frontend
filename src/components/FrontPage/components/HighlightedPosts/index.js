@@ -42,7 +42,7 @@ class HighlightedPosts extends React.Component {
     this.initialContainerScroll = this.postContainerRef.current.scrollLeft;
   }
   render() {
-    if (this.props.posts) {
+    if (this.props.posts && this.props.posts.length > 0) {
       const posts = this.props.posts.map(post => {
         return (
           <div
