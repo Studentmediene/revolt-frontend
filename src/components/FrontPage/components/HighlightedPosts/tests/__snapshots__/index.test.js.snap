@@ -67,3 +67,5 @@ exports[`<HighlightedPosts /> renders correctly 1`] = `
 `;
 
 exports[`<HighlightedPosts /> renders correctly when empty 1`] = `""`;
+
+exports[`<HighlightedPosts /> renders correctly when there are no posts 1`] = `""`;

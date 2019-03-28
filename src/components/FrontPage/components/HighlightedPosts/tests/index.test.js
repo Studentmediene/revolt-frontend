@@ -13,6 +13,15 @@ describe('<HighlightedPosts />', () => {
     expect(tree).toMatchSnapshot();
   });
 
+  const noPostsProps = {
+    posts: [],
+  };
+
+  it('renders correctly when there are no posts', () => {
+    const tree = shallow(<HighlightedPosts {...noPostsProps} />);
+    expect(tree).toMatchSnapshot();
+  });
+
   const props = {
     posts: [
       {
