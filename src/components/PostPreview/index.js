@@ -4,6 +4,7 @@ import LazyLoad from 'react-lazyload';
 import { Link } from 'react-router-dom';
 
 import styles from './styles.scss';
+import ImageLink from 'components/common/ImageLink';
 import CategoryTag from 'components/common/tag/CategoryTag';
 
 const PostPreview = props => {
@@ -19,21 +20,15 @@ const PostPreview = props => {
     ));
   }
 
-  const { small, medium, large } = props.croppedImages;
-
   return (
     <div className={styles.postPreview}>
-      <Link className={styles.imageLink} to={`/post/${props.slug}`}>
-        <LazyLoad height={350} offset={100} once>
-          <img
-            className={styles.image}
-            srcSet={`${large} 1024w, ${medium} 768w, ${small} 300w`}
-            src={large}
-            alt={props.title}
-          />
-        </LazyLoad>
+      <ImageLink
+        images={props.croppedImages}
+        link={`/post/${props.slug}`}
+        imageDescription={props.title}
+      >
         {categories}
-      </Link>
+      </ImageLink>
       <Link className={styles.titleLink} to={`/post/${props.slug}`}>
         <h2 className={styles.title}>{props.title}</h2>
       </Link>
