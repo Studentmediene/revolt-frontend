@@ -7,6 +7,7 @@ describe('<FrontPage />', () => {
   it('renders correctly', () => {
     const props = {
       posts: [],
+      highlightedPosts: [],
       loading: false,
       error: false,
       postOffset: 0,
@@ -20,6 +21,7 @@ describe('<FrontPage />', () => {
   it('renders correctly while loading', () => {
     const props = {
       posts: false,
+      highlightedPosts: false,
       loading: true,
       error: false,
       postOffset: 0,
@@ -33,6 +35,7 @@ describe('<FrontPage />', () => {
   it('renders correctly on error', () => {
     const props = {
       posts: false,
+      highlightedPosts: false,
       loading: false,
       error: true,
       postOffset: 0,

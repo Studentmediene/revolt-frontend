@@ -40,7 +40,6 @@ export function* loadFrontPageArticles({ postOffset }) {
     );
     const formattedPosts = allPosts.map(postFormat);
     const formattedHighlightedPosts = highlightedPosts.map(postFormat);
-    console.log(formattedHighlightedPosts);
 
     yield put(
       frontPagePostsLoaded({

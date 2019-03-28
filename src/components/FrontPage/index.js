@@ -22,7 +22,8 @@ import PostPreviewList from 'components/PostPreviewList';
 export class FrontPage extends React.Component {
   static propTypes = {
     posts: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]).isRequired,
-    highlightedPosts: PropTypes.array.isRequired,
+    highlightedPosts: PropTypes.oneOfType([PropTypes.bool, PropTypes.array])
+      .isRequired,
     loading: PropTypes.bool.isRequired,
     error: PropTypes.bool.isRequired,
     loadPosts: PropTypes.func.isRequired,

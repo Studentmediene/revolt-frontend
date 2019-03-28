@@ -9,8 +9,7 @@ import HighlightedPosts from 'components/FrontPage/components/HighlightedPosts';
 const PostPreviewList = props => {
   const posts = props.posts.map((post, index) => (
     <div
-      className={classNames({
-        [styles.post]: true,
+      className={classNames(styles.post, {
         [styles.postLarge]: index % 8 === 0 || index % 8 === 3,
       })}
       key={index}
@@ -20,7 +19,14 @@ const PostPreviewList = props => {
   ));
   if (props.highlightedPosts) {
     // Insert highlighted posts after element 3
-    posts.splice(3, 0, <HighlightedPosts posts={props.highlightedPosts} />);
+    posts.splice(
+      3,
+      0,
+      <HighlightedPosts
+        posts={props.highlightedPosts}
+        key={'highlightedPosts'}
+      />,
+    );
   }
 
   return <div className={styles.postPreviewList}>{posts}</div>;
@@ -28,7 +34,7 @@ const PostPreviewList = props => {
 
 PostPreviewList.propTypes = {
   posts: PropTypes.array.isRequired,
-  highlightedPosts: PropTypes.array.isRequired,
+  highlightedPosts: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
 };
 
 export default PostPreviewList;
