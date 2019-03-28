@@ -11,6 +11,8 @@ exports[`<HighlightedPosts /> renders correctly 1`] = `
   </h2>
   <div
     className="postContainer"
+    onDrag={[Function]}
+    onDragStart={[Function]}
   >
     <div
       className="highlightedPost"
