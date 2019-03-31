@@ -64,7 +64,7 @@ class HighlightedPosts extends React.Component {
       posts.push(<span className={styles.endPadding} key={'padding'} />);
       return (
         <div className={styles.container}>
-          <h2 className={styles.title}>Anbefalte saker</h2>
+          <h2 className={styles.title}>Vi anbefaler</h2>
           <div
             className={styles.postContainer}
             ref={this.postContainerRef}
