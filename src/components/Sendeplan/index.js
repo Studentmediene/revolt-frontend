@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import moment from 'moment';
+import classNames from 'classnames';
 import {
   selectSendeplan,
   selectSendeplanLoading,
@@ -17,7 +18,7 @@ import { loadSendeplan } from './actions';
 
 import Loader from 'components/Loader';
 
-import styles from './styles.css';
+import styles from './styles.scss';
 
 export class Sendeplan extends React.Component {
   constructor(props) {
@@ -28,222 +29,107 @@ export class Sendeplan extends React.Component {
   }
 
   componentDidMount() {
-    const dayOfWeek = moment().day(1);
+    const today = moment();
     this.props.loadSendeplanDay(
-      dayOfWeek.year(),
-      dayOfWeek.month(),
-      dayOfWeek.date(),
-      'monday',
+      today.year(),
+      today.month(),
+      today.date(),
+      moment.weekdays(today.day()),
     );
-    dayOfWeek.add(1, 'days');
+
+    const tomorrow = today.add(1, 'days');
     this.props.loadSendeplanDay(
-      dayOfWeek.year(),
-      dayOfWeek.month(),
-      dayOfWeek.date(),
-      'tuesday',
-    );
-    dayOfWeek.add(1, 'days');
-    this.props.loadSendeplanDay(
-      dayOfWeek.year(),
-      dayOfWeek.month(),
-      dayOfWeek.date(),
-      'wednesday',
-    );
-    dayOfWeek.add(1, 'days');
-    this.props.loadSendeplanDay(
-      dayOfWeek.year(),
-      dayOfWeek.month(),
-      dayOfWeek.date(),
-      'thursday',
-    );
-    dayOfWeek.add(1, 'days');
-    this.props.loadSendeplanDay(
-      dayOfWeek.year(),
-      dayOfWeek.month(),
-      dayOfWeek.date(),
-      'friday',
-    );
-    dayOfWeek.add(1, 'days');
-    this.props.loadSendeplanDay(
-      dayOfWeek.year(),
-      dayOfWeek.month(),
-      dayOfWeek.date(),
-      'saturday',
-    );
-    dayOfWeek.add(1, 'days');
-    this.props.loadSendeplanDay(
-      dayOfWeek.year(),
-      dayOfWeek.month(),
-      dayOfWeek.date(),
-      'sunday',
+      tomorrow.year(),
+      tomorrow.month(),
+      tomorrow.date(),
+      moment.weekdays(tomorrow.day()),
     );
   }
 
-  makeSendePlanWeek() {
-    this.setState({
-      showAll: true,
-    });
+  makeSendePlanDay(showStart, isToday) {
+    const showTable = [];
+    let lastShowName = 'Nattmusikk';
+    let currentHour = moment().hour();
+    showTable.push(<div className={styles.headerCell}>Program</div>);
+    for (let hour = 7; hour < 24; hour++) {
+      const isNow = isToday && isBetween(currentHour, hour, hour + 1);
+      if (showStart[hour]) {
+        let r = '(R)';
+        lastShowName = showStart[hour];
+        let isRerun = lastShowName.includes(r);
+        if (!isRerun) {
+          lastShowName = <b>{lastShowName}</b>;
+        }
+      }
+      showTable.push(
+        <div
+          className={classNames(styles.tableCell, {
+            [styles.activeNow]: isNow,
+          })}
+        >
+          {lastShowName}
+        </div>,
+      );
+    }
+    return showTable;
+  }
+  makeShowStarts(sendeplanDay) {
+    const showStarts = {};
+    for (let show of sendeplanDay) {
+      showStarts[moment(show.starttime).hour()] = show.title;
+    }
+    return showStarts;
+  }
+
+  makeTimeTableDay(date, isToday) {
+    const timeTable = [];
+    let currentHour = moment().hour();
+    timeTable.push(<div className={styles.headerCell}>Tid</div>);
+    for (let hour = 7; hour < 24; hour++) {
+      const isNow = isToday && isBetween(currentHour, hour, hour + 1);
+      const hourString = String(hour).padStart(2, '0');
+      const time = (
+        <div
+          className={classNames(styles.tableCell, {
+            [styles.activeNow]: isNow,
+          })}
+        >
+          {hourString}:00
+        </div>
+      );
+      timeTable.push(time);
+    }
+    return timeTable;
   }
 
   render() {
     // Creates an array of all time-stamps for the table.
-    let times = [];
-    for (let i = 7; i < 24; i++) {
-      if (i < 10) {
-        times.push(`0${i}:00`);
-      } else {
-        times.push(`${i}:00`);
-      }
-    }
-
-    const sendeliste = [];
-
-    function makeSendeliste(json) {
-      if (json.length === 0) {
-        for (let k = 0; k < 24; k++) {
-          sendeliste.push('Ikke tilgjengelig');
-        }
-      }
-      for (let i = 0; i < json.length; i++) {
-        for (let j = 0; j < findDiff(json[i]); j++) {
-          if (json[i].title !== 'Nattmusikk') {
-            sendeliste.push(json[i].title);
-          }
-        }
-      }
-    }
-
-    /* Finds the difference in hours of the start time and end time of a show
-    and returns the difference so that it can be added into the sendeplan
-    this amount of times. */
-    function findDiff(json) {
-      let diff =
-        Number(json.endtime.slice(11, 13)) -
-        Number(json.starttime.slice(11, 13));
-      if (
-        Number(json.endtime.slice(14, 16)) >
-        Number(json.starttime.slice(14, 16))
-      ) {
-        diff += 1;
-      }
-      return diff;
-    }
-
-    if (
-      this.props.sendeplan.monday === undefined ||
-      this.props.sendeplan.tuesday === undefined ||
-      this.props.sendeplan.wednesday === undefined ||
-      this.props.sendeplan.thursday === undefined ||
-      this.props.sendeplan.friday === undefined ||
-      this.props.sendeplan.saturday === undefined ||
-      this.props.sendeplan.sunday === undefined
-    ) {
-      return <Loader />;
-    }
-    makeSendeliste(this.props.sendeplan.monday);
-    makeSendeliste(this.props.sendeplan.tuesday);
-    makeSendeliste(this.props.sendeplan.wednesday);
-    makeSendeliste(this.props.sendeplan.thursday);
-    makeSendeliste(this.props.sendeplan.friday);
-    makeSendeliste(this.props.sendeplan.saturday);
-    makeSendeliste(this.props.sendeplan.sunday);
-
-    times = times.map(time => <td key={time}>{time}</td>);
-
-    function makeSendelisteComponents(daynumber, sendeplan) {
-      if (!sendeplan) {
-        return null;
-      }
-      return sendeplan
-        .slice(daynumber * 17, (daynumber + 1) * 17)
-        .map((program, index) => {
-          let className = null;
-          /* Adds a class 'live' to the shows that are not reruns
-          to make it bold in the table */
-          if (!program.includes('(R)')) {
-            className = styles.live;
-          }
-          return (
-            <td key={daynumber * 17 + index} className={className}>
-              {program}
-            </td>
-          );
-        });
-    }
-
-    const mon = makeSendelisteComponents(0, sendeliste);
-    const tue = makeSendelisteComponents(1, sendeliste);
-    const wed = makeSendelisteComponents(2, sendeliste);
-    const thu = makeSendelisteComponents(3, sendeliste);
-    const fri = makeSendelisteComponents(4, sendeliste);
-    const sat = makeSendelisteComponents(5, sendeliste);
-    const sun = makeSendelisteComponents(6, sendeliste);
-
-    const row = times.map((time, index) => (
-      <tr key={index}>
-        {times[index]}
-        {mon[index]}
-        {tue[index]}
-        {wed[index]}
-        {thu[index]}
-        {fri[index]}
-        {sat[index]}
-        {sun[index]}
-      </tr>
-    ));
-
-    const today = moment().isoWeekday() - 1;
-    const now = makeSendelisteComponents(today, sendeliste);
-    const rowToday = times.map((time, index) => (
-      <tr key={index}>
-        {times[index]}
-        {now[index]}
-      </tr>
-    ));
+    const firstDayTimeTable = this.makeTimeTableDay(moment(), true);
+    const secondDayTimeTable = this.makeTimeTableDay(
+      moment().add(1, 'days'),
+      false,
+    );
+    const firstDayShowStarts = this.makeShowStarts(
+      this.props.sendeplan[moment.weekdays(moment().day())],
+    );
+    const secondDayShowStarts = this.makeShowStarts(
+      this.props.sendeplan[
+        moment.weekdays(
+          moment()
+            .add(1, 'days')
+            .day(),
+        )
+      ],
+    );
+    const firstDayShows = this.makeSendePlanDay(firstDayShowStarts, true);
+    const secondDayShows = this.makeSendePlanDay(secondDayShowStarts, false);
 
     return (
-      <div className={styles.sendeplan}>
-        <h2>Sendeplan for Radio Revolt</h2>
-        {this.state.showAll ? (
-          <div className={styles.fullTable}>
-            <table>
-              <tbody>
-                <tr>
-                  <th>Tid</th>
-                  <th>Mandag</th>
-                  <th>Tirsdag</th>
-                  <th>Onsdag</th>
-                  <th>Torsdag</th>
-                  <th>Fredag</th>
-                  <th>Lørdag</th>
-                  <th>Søndag</th>
-                </tr>
-                {row}
-              </tbody>
-            </table>
-          </div>
-        ) : (
-          <div>
-            <div className={styles.simpleTable}>
-              <button
-                className={styles.toggleWeek}
-                onClick={() => this.makeSendePlanWeek()}
-              >
-                Klikk her for å se program for hele uken
-              </button>
-              <h3> Sendeplanen for i dag: </h3>
-              <table>
-                <tbody>
-                  <tr>
-                    <th>Tid</th>
-                    <th>Program</th>
-                  </tr>
-                  {rowToday}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        )}
+      <div className={styles.wrapper}>
+        <div className={styles.timeTable}>{firstDayTimeTable}</div>
+        <div className={styles.titles}>{firstDayShows}</div>
+        <div className={styles.timeTable}>{secondDayTimeTable}</div>
+        <div className={styles.titles}>{secondDayShows}</div>
       </div>
     );
   }
@@ -267,4 +153,10 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
+function isBetween(currentHour, first, last) {
+  if (first <= currentHour && currentHour < last) {
+    return true;
+  }
+  return false;
+}
 export default connect(mapStateToProps, mapDispatchToProps)(Sendeplan);

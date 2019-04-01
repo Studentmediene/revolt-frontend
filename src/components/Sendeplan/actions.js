@@ -1,9 +1,3 @@
-/*
- *
- * Sendeplan actions
- *
- */
-
 import {
   LOAD_SENDEPLAN_PENDING,
   LOAD_SENDEPLAN_SUCCESS,
