@@ -16,8 +16,6 @@ import {
 } from './selectors';
 import { loadSendeplan } from './actions';
 
-import Loader from 'components/Loader';
-
 import styles from './styles.scss';
 
 export class Sendeplan extends React.Component {
@@ -46,13 +44,28 @@ export class Sendeplan extends React.Component {
     );
   }
 
-  makeSendePlanDay(showStart, isToday) {
+  makeSendePlanDay(showStart, date, isToday) {
     const showTable = [];
     let lastShowName = 'Nattmusikk';
     let currentHour = moment().hour();
+    showTable.push(<div className={styles.headerCell}>Tid</div>);
     showTable.push(<div className={styles.headerCell}>Program</div>);
     for (let hour = 7; hour < 24; hour++) {
       const isNow = isToday && isBetween(currentHour, hour, hour + 1);
+      const hourString = String(hour).padStart(2, '0');
+      const time = (
+        <div
+          className={classNames(
+            styles.tableCell,
+            {
+              [styles.activeNow]: isNow,
+            },
+            styles.time,
+          )}
+        >
+          {hourString}:00
+        </div>
+      );
       if (showStart[hour]) {
         let r = '(R)';
         lastShowName = showStart[hour];
@@ -62,12 +75,15 @@ export class Sendeplan extends React.Component {
         }
       }
       showTable.push(
-        <div
-          className={classNames(styles.tableCell, {
-            [styles.activeNow]: isNow,
-          })}
-        >
-          {lastShowName}
+        <div className={styles.row}>
+          {time}
+          <div
+            className={classNames(styles.tableCell, {
+              [styles.activeNow]: isNow,
+            })}
+          >
+            {lastShowName}
+          </div>
         </div>,
       );
     }
@@ -81,34 +97,7 @@ export class Sendeplan extends React.Component {
     return showStarts;
   }
 
-  makeTimeTableDay(date, isToday) {
-    const timeTable = [];
-    let currentHour = moment().hour();
-    timeTable.push(<div className={styles.headerCell}>Tid</div>);
-    for (let hour = 7; hour < 24; hour++) {
-      const isNow = isToday && isBetween(currentHour, hour, hour + 1);
-      const hourString = String(hour).padStart(2, '0');
-      const time = (
-        <div
-          className={classNames(styles.tableCell, {
-            [styles.activeNow]: isNow,
-          })}
-        >
-          {hourString}:00
-        </div>
-      );
-      timeTable.push(time);
-    }
-    return timeTable;
-  }
-
   render() {
-    // Creates an array of all time-stamps for the table.
-    const firstDayTimeTable = this.makeTimeTableDay(moment(), true);
-    const secondDayTimeTable = this.makeTimeTableDay(
-      moment().add(1, 'days'),
-      false,
-    );
     const firstDayShowStarts = this.makeShowStarts(
       this.props.sendeplan[moment.weekdays(moment().day())],
     );
@@ -121,15 +110,29 @@ export class Sendeplan extends React.Component {
         )
       ],
     );
-    const firstDayShows = this.makeSendePlanDay(firstDayShowStarts, true);
-    const secondDayShows = this.makeSendePlanDay(secondDayShowStarts, false);
+    const firstDayShows = this.makeSendePlanDay(
+      firstDayShowStarts,
+      moment(),
+      true,
+    );
+    const secondDayShows = this.makeSendePlanDay(
+      secondDayShowStarts,
+      moment().add(1, 'days'),
+      false,
+    );
 
     return (
       <div className={styles.wrapper}>
-        <div className={styles.timeTable}>{firstDayTimeTable}</div>
-        <div className={styles.titles}>{firstDayShows}</div>
-        <div className={styles.timeTable}>{secondDayTimeTable}</div>
-        <div className={styles.titles}>{secondDayShows}</div>
+        <button className={styles.button}>&lt; Forrige dag</button>
+        <div className={styles.day}>
+          <div className={styles.date}>I dag</div>
+          <div className={styles.titles}>{firstDayShows}</div>
+        </div>
+        <div className={styles.day}>
+          <div className={styles.date}>I morgen</div>
+          <div className={styles.titles}>{secondDayShows}</div>
+        </div>
+        <button className={styles.button}>Neste dag &gt;</button>
       </div>
     );
   }
