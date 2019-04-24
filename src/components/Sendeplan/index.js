@@ -13,9 +13,10 @@ import {
   selectSendeplan,
   selectSendeplanLoading,
   selectSendeplanError,
+  selectSendeplanCurrentDay,
+  selectSendeplanNextDay,
 } from './selectors';
-import { loadSendeplan } from './actions';
-
+import { loadSendeplan, getNextDay, getPrevDay } from './actions';
 import styles from './styles.scss';
 
 export class Sendeplan extends React.Component {
@@ -28,44 +29,25 @@ export class Sendeplan extends React.Component {
 
   componentDidMount() {
     const today = moment();
-    this.props.loadSendeplanDay(
-      today.year(),
-      today.month(),
-      today.date(),
-      moment.weekdays(today.day()),
-    );
+    this.props.loadSendeplanDay(today);
 
     const tomorrow = today.add(1, 'days');
-    this.props.loadSendeplanDay(
-      tomorrow.year(),
-      tomorrow.month(),
-      tomorrow.date(),
-      moment.weekdays(tomorrow.day()),
-    );
+    this.props.loadSendeplanDay(tomorrow);
   }
 
   makeSendePlanDay(showStart, date, isToday) {
     const showTable = [];
     let lastShowName = 'Nattmusikk';
     let currentHour = moment().hour();
-    showTable.push(<div className={styles.headerCell}>Tid</div>);
-    showTable.push(<div className={styles.headerCell}>Program</div>);
+    showTable.push(
+      <div className={classNames(styles.row, styles.headerCell)}>
+        <div className={styles.time}>Tid</div>{' '}
+        <div className={styles.title}>Program</div>
+      </div>,
+    );
     for (let hour = 7; hour < 24; hour++) {
       const isNow = isToday && isBetween(currentHour, hour, hour + 1);
       const hourString = String(hour).padStart(2, '0');
-      const time = (
-        <div
-          className={classNames(
-            styles.tableCell,
-            {
-              [styles.activeNow]: isNow,
-            },
-            styles.time,
-          )}
-        >
-          {hourString}:00
-        </div>
-      );
       if (showStart[hour]) {
         let r = '(R)';
         lastShowName = showStart[hour];
@@ -75,15 +57,13 @@ export class Sendeplan extends React.Component {
         }
       }
       showTable.push(
-        <div className={styles.row}>
-          {time}
-          <div
-            className={classNames(styles.tableCell, {
-              [styles.activeNow]: isNow,
-            })}
-          >
-            {lastShowName}
-          </div>
+        <div
+          className={classNames(styles.row, {
+            [styles.activeNow]: isNow,
+          })}
+        >
+          <div className={styles.time}>{hourString}:00</div>
+          <div className={styles.title}>{lastShowName}</div>
         </div>,
       );
     }
@@ -98,41 +78,66 @@ export class Sendeplan extends React.Component {
   }
 
   render() {
+    if (!this.props.sendeplan) {
+      return <div>Loading sendeplan</div>;
+    }
+    if (this.props.loading) {
+      return <div>Loading sendeplan</div>;
+    }
+    /*
     const firstDayShowStarts = this.makeShowStarts(
-      this.props.sendeplan[moment.weekdays(moment().day())],
+      this.props.sendeplan[
+        `${this.props.firstDay.year()}.${this.props.firstDay.month() +
+          1}.${this.props.firstDay.date()}`
+      ],
     );
     const secondDayShowStarts = this.makeShowStarts(
       this.props.sendeplan[
-        moment.weekdays(
-          moment()
-            .add(1, 'days')
-            .day(),
-        )
+        `${this.props.secondDay.year()}.${this.props.secondDay.month() +
+          1}.${this.props.secondDay.date()}`
       ],
-    );
-    const firstDayShows = this.makeSendePlanDay(
+    );*/
+    const firstDayShows = []; /*this.makeSendePlanDay(
       firstDayShowStarts,
       moment(),
       true,
-    );
-    const secondDayShows = this.makeSendePlanDay(
+    );*/
+    const secondDayShows = []; /*this.makeSendePlanDay(
       secondDayShowStarts,
       moment().add(1, 'days'),
       false,
-    );
+    );*/
 
     return (
       <div className={styles.wrapper}>
-        <button className={styles.button}>&lt; Forrige dag</button>
+        <button
+          className={styles.button}
+          onClick={() => this.props.getPrevDay(this.props.firstDay)}
+        >
+          &lt;
+        </button>
         <div className={styles.day}>
-          <div className={styles.date}>I dag</div>
-          <div className={styles.titles}>{firstDayShows}</div>
+          <div className={styles.date}>
+            I dag{' '}
+            {`${this.props.firstDay.year()}.${this.props.firstDay.month() +
+              1}.${this.props.firstDay.date()}`}
+          </div>
+          <div>{firstDayShows}</div>
         </div>
         <div className={styles.day}>
-          <div className={styles.date}>I morgen</div>
-          <div className={styles.titles}>{secondDayShows}</div>
+          <div className={styles.date}>
+            I morgen{' '}
+            {`${this.props.secondDay.year()}.${this.props.secondDay.month() +
+              1}.${this.props.secondDay.date()}`}
+          </div>
+          <div>{secondDayShows}</div>
         </div>
-        <button className={styles.button}>Neste dag &gt;</button>
+        <button
+          className={styles.button}
+          onClick={() => this.props.getNextDay(this.props.secondDay)}
+        >
+          &gt;
+        </button>
       </div>
     );
   }
@@ -141,18 +146,27 @@ export class Sendeplan extends React.Component {
 Sendeplan.propTypes = {
   loadSendeplanDay: PropTypes.func.isRequired,
   sendeplan: PropTypes.object,
+  loading: PropTypes.bool.isRequired,
+  error: PropTypes.bool.isRequired,
+  firstDay: PropTypes.object,
+  secondDay: PropTypes.object,
+  getNextDay: PropTypes.func.isRequired,
+  getPrevDay: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
   sendeplan: selectSendeplan(),
   loading: selectSendeplanLoading(),
   error: selectSendeplanError(),
+  firstDay: selectSendeplanCurrentDay(),
+  secondDay: selectSendeplanNextDay(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    loadSendeplanDay: (year, month, day, weekDay) =>
-      dispatch(loadSendeplan(year, month, day, weekDay)),
+    loadSendeplanDay: timestamp => dispatch(loadSendeplan(timestamp)),
+    getNextDay: timestamp => dispatch(getNextDay(timestamp)),
+    getPrevDay: timestamp => dispatch(getPrevDay(timestamp)),
   };
 }
 
