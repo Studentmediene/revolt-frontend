@@ -10,12 +10,10 @@ import { getSendeplan } from 'utils/api';
 // Individual exports for testing
 export function* loadSendeplan(action) {
   try {
-    //console.log(action.timestamp.format('DD.MM.YY'));
     const year = action.timestamp.year();
     const month = action.timestamp.month() + 1;
     const date = action.timestamp.date();
     const result = yield call(getSendeplan, year, month, date);
-    console.log(year, month, date);
     yield put(sendeplanSuccess(result, year, month, date));
   } catch (error) {
     yield put(sendeplanError());
@@ -35,4 +33,4 @@ export function* getPrevDayWatcher() {
 }
 
 // All sagas to be loaded
-export default [loadSendeplanWatcher];
+export default [loadSendeplanWatcher, getNextDayWatcher, getPrevDayWatcher];

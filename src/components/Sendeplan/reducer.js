@@ -1,9 +1,3 @@
-/*
- *
- * Sendeplan reducer
- *
- */
-
 import { fromJS } from 'immutable';
 import {
   LOAD_SENDEPLAN_PENDING,
@@ -37,7 +31,6 @@ function sendeplanReducer(state = initialState, action) {
     case LOAD_SENDEPLAN_FAILED:
       return state.set('loading', false).set('error', true);
     case GET_NEXT_DAY:
-      console.log(state.get('currentDay'));
       return state
         .set(
           'currentDay',
@@ -52,7 +45,10 @@ function sendeplanReducer(state = initialState, action) {
             .get('nextDay')
             .clone()
             .add(1, 'days'),
-        );
+        )
+        .set('loading', true)
+        .set('error', false);
+
     case GET_PREV_DAY:
       return state
         .set(
@@ -68,7 +64,9 @@ function sendeplanReducer(state = initialState, action) {
             .get('nextDay')
             .clone()
             .subtract(1, 'days'),
-        );
+        )
+        .set('loading', true)
+        .set('error', false);
     default:
       return state;
   }
