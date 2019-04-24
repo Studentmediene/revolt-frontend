@@ -1,14 +1,11 @@
-/*
- *
- * Sendeplan
- *
- */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import moment from 'moment';
 import classNames from 'classnames';
+
+import Loader from 'components/Loader';
 import {
   selectSendeplan,
   selectSendeplanLoading,
@@ -35,8 +32,13 @@ export class Sendeplan extends React.Component {
     this.props.loadSendeplanDay(tomorrow);
   }
 
-  makeSendePlanDay(showStart, date, isToday) {
+  makeSendePlanDay(showStart, date) {
     const showTable = [];
+    const today = moment();
+    const isToday =
+      date.isSame(today, 'year') &&
+      date.isSame(today, 'month') &&
+      date.isSame(today, 'day');
     let lastShowName = 'Nattmusikk';
     let currentHour = moment().hour();
     showTable.push(
@@ -71,20 +73,50 @@ export class Sendeplan extends React.Component {
   }
   makeShowStarts(sendeplanDay) {
     const showStarts = {};
+    if (!sendeplanDay) {
+      return showStarts;
+    }
     for (let show of sendeplanDay) {
       showStarts[moment(show.starttime).hour()] = show.title;
     }
     return showStarts;
   }
 
+  makeDayTitle(date) {
+    const today = moment();
+    const isToday =
+      date.isSame(today, 'year') &&
+      date.isSame(today, 'month') &&
+      date.isSame(today, 'day');
+
+    const tomorrow = today.add(1, 'days');
+    const isTomorrow =
+      date.isSame(tomorrow, 'year') &&
+      date.isSame(tomorrow, 'month') &&
+      date.isSame(tomorrow, 'day');
+
+    if (isToday) {
+      return <div className={styles.date}>I dag</div>;
+    }
+    if (isTomorrow) {
+      return <div className={styles.date}>I morgen</div>;
+    } else {
+      return <div className={styles.date}>{date.format('DD.MM.YYYY')}</div>;
+    }
+  }
+
   render() {
-    if (!this.props.sendeplan) {
+    if (this.props.loading) {
+      return <Loader />;
+    }
+
+    if (this.props.sendeplan.isEmpty && this.props.sendeplan.isEmpty()) {
       return <div>Loading sendeplan</div>;
     }
     if (this.props.loading) {
       return <div>Loading sendeplan</div>;
     }
-    /*
+
     const firstDayShowStarts = this.makeShowStarts(
       this.props.sendeplan[
         `${this.props.firstDay.year()}.${this.props.firstDay.month() +
@@ -96,48 +128,46 @@ export class Sendeplan extends React.Component {
         `${this.props.secondDay.year()}.${this.props.secondDay.month() +
           1}.${this.props.secondDay.date()}`
       ],
-    );*/
-    const firstDayShows = []; /*this.makeSendePlanDay(
+    );
+    const firstDayShows = this.makeSendePlanDay(
       firstDayShowStarts,
-      moment(),
-      true,
-    );*/
-    const secondDayShows = []; /*this.makeSendePlanDay(
+      this.props.firstDay,
+    );
+    const secondDayShows = this.makeSendePlanDay(
       secondDayShowStarts,
-      moment().add(1, 'days'),
-      false,
-    );*/
+      this.props.secondDay,
+    );
 
     return (
       <div className={styles.wrapper}>
-        <button
-          className={styles.button}
-          onClick={() => this.props.getPrevDay(this.props.firstDay)}
-        >
-          &lt;
-        </button>
-        <div className={styles.day}>
-          <div className={styles.date}>
-            I dag{' '}
-            {`${this.props.firstDay.year()}.${this.props.firstDay.month() +
-              1}.${this.props.firstDay.date()}`}
-          </div>
-          <div>{firstDayShows}</div>
+        <div className={styles.buttonWrapper}>
+          <button
+            className={styles.button}
+            onClick={() => this.props.getPrevDay(this.props.firstDay)}
+          >
+            &lt;
+          </button>
         </div>
         <div className={styles.day}>
-          <div className={styles.date}>
-            I morgen{' '}
-            {`${this.props.secondDay.year()}.${this.props.secondDay.month() +
-              1}.${this.props.secondDay.date()}`}
+          <div>
+            {this.makeDayTitle(this.props.firstDay)}
+            {firstDayShows}
           </div>
-          <div>{secondDayShows}</div>
         </div>
-        <button
-          className={styles.button}
-          onClick={() => this.props.getNextDay(this.props.secondDay)}
-        >
-          &gt;
-        </button>
+        <div className={classNames(styles.day, styles.secondDay)}>
+          <div>
+            {this.makeDayTitle(this.props.secondDay)}
+            {secondDayShows}
+          </div>
+        </div>
+        <div className={styles.buttonWrapper}>
+          <button
+            className={styles.button}
+            onClick={() => this.props.getNextDay(this.props.secondDay)}
+          >
+            &gt;
+          </button>
+        </div>
       </div>
     );
   }
