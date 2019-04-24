@@ -1,16 +1,22 @@
 import { createSelector } from 'reselect';
 
-const selectSendeplanDomain = () => state => state.get('sendeplan');
+export const selectSendeplanDomain = () => state => state.get('sendeplan');
 
-const selectSendeplan = () =>
+export const selectSendeplan = () =>
   createSelector(selectSendeplanDomain(), substate =>
     substate.get('sendeplan'),
   );
 
-const selectSendeplanLoading = () =>
+export const selectSendeplanLoading = () =>
   createSelector(selectSendeplanDomain(), substate => substate.get('loading'));
 
-const selectSendeplanError = () =>
+export const selectSendeplanError = () =>
   createSelector(selectSendeplanDomain(), substate => substate.get('error'));
 
-export { selectSendeplan, selectSendeplanLoading, selectSendeplanError };
+export const selectSendeplanNextDay = () =>
+  createSelector(selectSendeplanDomain(), substate => substate.get('nextDay'));
+
+export const selectSendeplanCurrentDay = () =>
+  createSelector(selectSendeplanDomain(), substate =>
+    substate.get('currentDay'),
+  );
