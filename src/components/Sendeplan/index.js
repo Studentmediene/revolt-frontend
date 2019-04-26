@@ -48,12 +48,7 @@ export class Sendeplan extends React.Component {
       date.isSame(today, 'day');
     let lastShowName = 'Nattmusikk';
     let currentHour = moment().hour();
-    showTable.push(
-      <div key="header" className={classNames(styles.row, styles.headerCell)}>
-        <div className={styles.time}>Tid</div>{' '}
-        <div className={styles.title}>Program</div>
-      </div>,
-    );
+   
     for (let hour = 7; hour < 24; hour++) {
       const isNow = isToday && isBetween(currentHour, hour, hour + 1);
       const hourString = String(hour).padStart(2, '0');
