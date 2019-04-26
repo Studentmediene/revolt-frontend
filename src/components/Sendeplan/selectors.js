@@ -1,25 +1,22 @@
 import { createSelector } from 'reselect';
 
-/**
- * Direct selector to the sendeplan state domain
- */
-const selectSendeplanDomain = () => state => state.get('sendeplan');
+export const selectSendeplanDomain = () => state => state.get('sendeplan');
 
-/**
- * Other specific selectors
- */
-
-/**
- * Default selector used by Sendeplan
- */
-
-const selectSendeplan = () =>
+export const selectSendeplan = () =>
   createSelector(selectSendeplanDomain(), substate =>
     substate.get('sendeplan'),
   );
-const selectSendeplanLoading = () =>
+
+export const selectSendeplanLoading = () =>
   createSelector(selectSendeplanDomain(), substate => substate.get('loading'));
-const selectSendeplanError = () =>
+
+export const selectSendeplanError = () =>
   createSelector(selectSendeplanDomain(), substate => substate.get('error'));
 
-export { selectSendeplan, selectSendeplanLoading, selectSendeplanError };
+export const selectSendeplanNextDay = () =>
+  createSelector(selectSendeplanDomain(), substate => substate.get('nextDay'));
+
+export const selectSendeplanCurrentDay = () =>
+  createSelector(selectSendeplanDomain(), substate =>
+    substate.get('currentDay'),
+  );
