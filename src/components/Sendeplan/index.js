@@ -49,7 +49,7 @@ export class Sendeplan extends React.Component {
     let lastShowName = 'Nattmusikk';
     let currentHour = moment().hour();
     showTable.push(
-      <div className={classNames(styles.row, styles.headerCell)}>
+      <div key="header" className={classNames(styles.row, styles.headerCell)}>
         <div className={styles.time}>Tid</div>{' '}
         <div className={styles.title}>Program</div>
       </div>,
@@ -66,7 +66,7 @@ export class Sendeplan extends React.Component {
         }
       }
       showTable.push(
-        <div
+        <div key={hourString}
           className={classNames(styles.row, {
             [styles.activeNow]: isNow,
           })}
