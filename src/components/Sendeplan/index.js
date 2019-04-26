@@ -33,6 +33,13 @@ export class Sendeplan extends React.Component {
   }
 
   makeSendePlanDay(showStart, date) {
+    if (Object.entries(showStart).length === 0) {
+      return [
+        <div key="notAvailable" className={styles.notAvailable}>
+          Ikke tilgjengelig
+        </div>,
+      ];
+    }
     const showTable = [];
     const today = moment();
     const isToday =
