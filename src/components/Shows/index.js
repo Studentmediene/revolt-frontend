@@ -8,6 +8,8 @@ import { loadShows } from './actions';
 import Loader from 'components/Loader';
 import ShowPreviewList from './ShowPreviewList';
 import { selectShows, selectShowsLoading, selectShowsError } from './selectors';
+import styles from './styles.scss';
+import classNames from 'classnames';
 
 export class Shows extends React.Component {
   state = {
@@ -41,7 +43,25 @@ export class Shows extends React.Component {
       return <Loader />;
     }
 
-    return <React.Fragment>{showPreviewList}</React.Fragment>;
+    return (
+      <div>
+        <div className={styles.buttonWrapper}>
+          <button className={classNames(styles.kultur, styles.button)}>
+            Kultur
+          </button>
+          <button className={classNames(styles.morgen, styles.button)}>
+            Morgen
+          </button>
+          <button className={classNames(styles.musikk, styles.button)}>
+            Musikk
+          </button>
+          <button className={classNames(styles.underholdning, styles.button)}>
+            Underholdning
+          </button>
+        </div>
+        <React.Fragment>{showPreviewList}</React.Fragment>
+      </div>
+    );
   }
 }
 

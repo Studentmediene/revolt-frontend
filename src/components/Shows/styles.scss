@@ -1,0 +1,28 @@
+@import 'variables.scss';
+
+.buttonWrapper {
+  display: flex;
+
+  justify-content: center;
+}
+
+.button {
+  border-radius: 6px;
+  margin: 0 7px 15px 7px;
+}
+
+.kultur {
+  border-color: #179639;
+}
+
+.morgen {
+  border-color: #ecb61c;
+}
+
+.musikk {
+  border-color: #cc3d27;
+}
+
+.underholdning {
+  border-color: #2d86ec;
+}
