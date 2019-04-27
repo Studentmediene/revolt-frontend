@@ -21,18 +21,15 @@ const PostPreview = props => {
   }
 
   return (
-    <div className={styles.postPreview}>
-      <ImageLink
-        images={props.croppedImages}
-        link={`/post/${props.slug}`}
-        imageDescription={props.title}
-      >
-        {categories}
-      </ImageLink>
-      <Link className={styles.titleLink} to={`/post/${props.slug}`}>
-        <h2 className={styles.title}>{props.title}</h2>
-      </Link>
-    </div>
+    <ImageLink
+      images={props.croppedImages}
+      link={`/post/${props.slug}`}
+      imageDescription=""
+      className={styles.link}
+    >
+      {categories}
+      <h2 className={styles.title}>{props.title}</h2>
+    </ImageLink>
   );
 };
 

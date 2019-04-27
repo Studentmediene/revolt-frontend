@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styles from './styles.scss';
 
 const SocialMediaButton = props => (
-  <a target="_blank" rel="noopener noreferrer" href={props.link}>
+  <a target="_blank" rel="noopener noreferrer" href={props.link} className={styles.link}>
     <img
       src={props.image}
       alt={props.text}

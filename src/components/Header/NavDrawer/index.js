@@ -22,7 +22,9 @@ export class NavDrawer extends React.Component {
 
   navigate(e, destination) {
     this.props.onNavigation(e);
-    this.props.history.push(destination)
+    this.props.history.push(destination);
+    // Stop browser from acting on the link click
+    return false;
   }
 
   preventInteraction(e) {
@@ -31,14 +33,15 @@ export class NavDrawer extends React.Component {
 
   render() {
     const navbarComponents = links => links.map(link => (
-      <div 
+      <a
+        href={link.path}
         key={link.path}
         className={styles.navItem}
         onClick={(e) => this.navigate(e, link.path)}
       >
         {link.title}
-      </div>
-    ))
+      </a>
+    ));
 
     return (
       <div className={
@@ -47,9 +50,9 @@ export class NavDrawer extends React.Component {
           [styles.open]: this.props.open,
         })}
         onClick={this.preventInteraction}>
-        <div className={styles.logoRow}>
-          <img src={logo} className={styles.logo} onClick={(e) => this.navigate(e, '/')} />
-        </div>
+        <a href="/" className={styles.logoRow} onClick={(e) => this.navigate(e, '/')}>
+          <img src={logo} className={styles.logo} />
+        </a>
         {navbarComponents(this.props.links)}
       </div>
     

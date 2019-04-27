@@ -18,18 +18,16 @@ const ShowPreview = props => {
     <div className={styles.container}>
       {categories}
       <div className={styles.padding}>
-        <div className={styles.imageWrapper}>
-          <Link to={`/programmer/${props.slug}`}>
+        <Link className={styles.link} to={`/programmer/${props.slug}`}>
+          <div className={styles.imageWrapper}>
             <LazyLoad height={300} offset={100} once>
               <img
                 className={styles.image}
                 src={props.logoImageUrl}
-                alt={props.title}
+                alt=""
               />
             </LazyLoad>
-          </Link>
-        </div>
-        <Link className={styles.title} to={`/programmer/${props.slug}`}>
+          </div>
           <h2>{props.title}</h2>
         </Link>
         <div>{props.lead}</div>
