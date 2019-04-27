@@ -14,6 +14,7 @@ import classNames from 'classnames';
 export class Shows extends React.Component {
   state = {
     showArchivedShows: false,
+    filteredShows: false,
   };
 
   componentWillMount() {
@@ -28,13 +29,38 @@ export class Shows extends React.Component {
     }));
   }
 
+  filterCategory(a) {
+    let list = [];
+    for (let i of this.props.shows) {
+      if (
+        i.categories &&
+        i.categories.length > 0 &&
+        a == i.categories[0].name
+      ) {
+        list.push(i);
+      }
+    }
+    console.log('hei');
+    console.log(list);
+    this.setState({
+      filteredShows: list,
+    });
+  }
+
   render() {
+    // const hei = this.filterCategory();
+
     let showPreviewList = null;
+    let showsToDisplay = this.state.filteredShows;
+
+    if (!showsToDisplay) {
+      showsToDisplay = this.props.shows;
+    }
 
     if (this.props.shows !== false) {
       showPreviewList = (
         <ShowPreviewList
-          shows={this.props.shows}
+          shows={showsToDisplay}
           showArchivedShows={this.state.showArchivedShows}
           toggleArchivedShows={this.toggleArchivedShows}
         />
@@ -46,16 +72,28 @@ export class Shows extends React.Component {
     return (
       <div>
         <div className={styles.buttonWrapper}>
-          <button className={classNames(styles.kultur, styles.button)}>
+          <button
+            onClick={() => this.filterCategory('Kultur')}
+            className={classNames(styles.kultur, styles.button)}
+          >
             Kultur
           </button>
-          <button className={classNames(styles.morgen, styles.button)}>
+          <button
+            onClick={() => this.filterCategory('Morgen')}
+            className={classNames(styles.morgen, styles.button)}
+          >
             Morgen
           </button>
-          <button className={classNames(styles.musikk, styles.button)}>
+          <button
+            onClick={() => this.filterCategory('Musikk')}
+            className={classNames(styles.musikk, styles.button)}
+          >
             Musikk
           </button>
-          <button className={classNames(styles.underholdning, styles.button)}>
+          <button
+            onClick={() => this.filterCategory('Underholdning')}
+            className={classNames(styles.underholdning, styles.button)}
+          >
             Underholdning
           </button>
         </div>
