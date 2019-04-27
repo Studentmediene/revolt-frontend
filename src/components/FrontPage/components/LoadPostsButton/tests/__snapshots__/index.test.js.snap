@@ -7,7 +7,7 @@ exports[`<LoadPostsButton /> renders correctly 1`] = `
 >
   Last inn flere artikler
   <img
-    alt="Arrow"
+    alt=""
     className="arrow"
     src="arrow_down.svg"
   />

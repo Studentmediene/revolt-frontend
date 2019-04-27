@@ -32,12 +32,12 @@ $image-height: $max-width - 2 * $padding;
   max-height: $image-height;
 }
 
-.title {
+.link {
   color: inherit;
   text-decoration: none;
   text-align: center;
 
-  &:hover {
+  &:hover, &:focus {
     text-decoration: underline;
   }
 }

@@ -33,7 +33,7 @@ export class HeaderPlayButton extends React.Component {
     }
 
     return (
-      <div className={styles.container} onClick={buttonClicked}>
+      <button className={styles.container} onClick={buttonClicked}>
         <PlayPauseButton
           paused={!isCurrentlyLive}
         />
@@ -41,7 +41,7 @@ export class HeaderPlayButton extends React.Component {
           <div className={styles.largeText}>Lytt direkte!</div>
           <div className={styles.smallText}>{this.props.nowPlaying}</div>
         </div>
-      </div>
+      </button>
     );
   }
 }

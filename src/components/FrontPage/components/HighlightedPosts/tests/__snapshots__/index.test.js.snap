@@ -20,6 +20,7 @@ exports[`<HighlightedPosts /> renders correctly 1`] = `
     >
       <ImageLink
         imageDescription="title1"
+        imageProps={Object {}}
         images={
           Object {
             "large": "/large1.jpg",
@@ -42,6 +43,7 @@ exports[`<HighlightedPosts /> renders correctly 1`] = `
     >
       <ImageLink
         imageDescription="title2"
+        imageProps={Object {}}
         images={
           Object {
             "large": "/large2.jpg",

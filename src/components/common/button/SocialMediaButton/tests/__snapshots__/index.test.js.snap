@@ -2,6 +2,7 @@
 
 exports[`<SocialMediaButton /> renders correctly 1`] = `
 <a
+  className="link"
   href="link"
   rel="noopener noreferrer"
   target="_blank"

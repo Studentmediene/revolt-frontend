@@ -8,6 +8,10 @@ $animation-effect: 0.3s ease;
   border: none;
   cursor: pointer;
   background: transparent;
+
+  &:focus {
+    outline-color: white;
+  }
 }
 
 .buttonContainer {

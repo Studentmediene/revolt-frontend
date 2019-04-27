@@ -15,13 +15,13 @@
   font-size: 21px;
 }
 
-.navbarItem:hover {
-  text-decoration: underline;
-}
-
 .navbarLink {
   text-decoration: none;
   color: inherit;
+
+  &:hover, &:focus {
+    text-decoration: underline;
+  }
 }
 
 @media screen and (min-width: $breakpoint-medium) {

@@ -40,7 +40,7 @@ export class HamburgerMenu extends React.Component {
 
   render() {
     return (
-      <div className={styles.container} onClick={this.toggleMenu}>
+      <button className={styles.container} onClick={this.toggleMenu}>
         <img src={hamburgerIcon} className={styles.hamburgerIcon} />
         <div className={styles.hamburgerText}>Meny</div>
         <div className={classNames({
@@ -48,7 +48,7 @@ export class HamburgerMenu extends React.Component {
           [styles.active]: this.state.isOpen,
         })}></div>
         <NavDrawer links={navLinks} open={this.state.isOpen} onNavigation={this.toggleMenu}/>
-      </div>
+      </button>
     );
   }
 }

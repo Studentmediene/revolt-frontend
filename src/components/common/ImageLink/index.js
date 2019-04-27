@@ -2,22 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import LazyLoad from 'react-lazyload';
 import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 
 import styles from './styles.scss';
 
-const ImageLink = props => {
-  const { small, medium, large } = props.images;
+const ImageLink = ({images, link, imageDescription, children, imageProps, ...restProps}) => {
+  const { small, medium, large } = images;
+  const { className: customImageClassName, ...restImageProps} = imageProps;
   return (
-    <Link to={props.link} className={styles.nonSelectable}>
+    <Link to={link} {...restProps}>
       <LazyLoad height={350} offset={100} once>
         <img
-          className={`${styles.image} ${styles.nonSelectable}`}
+          className={classNames(styles.image, customImageClassName)}
           srcSet={`${large} 1024w, ${medium} 768w, ${small} 300w`}
           src={large}
-          alt={props.imageDescription}
+          alt={imageDescription}
+          {...restImageProps}
         />
       </LazyLoad>
-      {props.children}
+      {children}
     </Link>
   );
 };
@@ -31,6 +34,12 @@ ImageLink.propTypes = {
   link: PropTypes.string.isRequired,
   imageDescription: PropTypes.string.isRequired,
   children: PropTypes.node,
+  className: PropTypes.string,
+  imageProps: PropTypes.object,
+};
+
+ImageLink.defaultProps = {
+  imageProps: {},
 };
 
 export default ImageLink;

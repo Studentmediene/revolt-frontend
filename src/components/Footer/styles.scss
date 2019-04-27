@@ -10,6 +10,14 @@
   margin-top: 5rem;
   padding: 3rem 0;
   color: $color-text-light;
+
+
+  // Change to light color for outline, due to dark background
+  a, button {
+    &:focus {
+      outline-color: white;
+    }
+  }
 }
 
 .content {
@@ -24,10 +32,10 @@
 .footerLink {
   color: $color-text-light;
   text-decoration: none;
-}
 
-.footerLink:hover {
-  text-decoration: underline;
+  &:hover, &:focus {
+    text-decoration: underline;
+  }
 }
 
 .socialMediaLinks {

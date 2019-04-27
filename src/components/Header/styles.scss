@@ -11,6 +11,13 @@
 
   color: $color-text-light;
   background-color: $color-radiorevolt-lightgrey;
+
+  // Change to light color for outline, due to dark background
+  a, button {
+    &:focus {
+      outline-color: white;
+    }
+  }
 }
 
 .headerContent {

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<HamburgerMenu /> renders correctly 1`] = `
-<div
+<button
   className="container"
   onClick={[Function]}
 >
@@ -37,5 +37,5 @@ exports[`<HamburgerMenu /> renders correctly 1`] = `
     onNavigation={[Function]}
     open={false}
   />
-</div>
+</button>
 `;

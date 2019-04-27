@@ -46,9 +46,11 @@
   font-size: 21px;
   border-top: 1px solid $color-radiorevolt-darkgrey;
   border-bottom: 1px solid $color-radiorevolt-darkgrey;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
 
-  &:hover {
-    cursor: pointer;
+  &:hover, &:focus {
     background-color: $color-radiorevolt-darkgrey;
   }
 }
