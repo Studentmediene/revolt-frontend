@@ -37,7 +37,7 @@
     "precommit": "lint-staged && npm run test",
     "lint": "npm run lint:js && npm run lint:css",
     "lint:js": "eslint src/",
-    "lint:css": "stylelint ./src/**/*.css",
+    "lint:css": "stylelint ./src/**/*css",
     "test": "jest src/"
   },
   "lint-staged": {
