@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { withRouter } from 'react-router-dom';
+import moment from 'moment';
 
 import { getNormalizedDateString } from 'utils/dateUtils';
 import { selectPost, selectPostLoading, selectPostError } from './selectors';
@@ -24,6 +25,7 @@ export class Post extends React.Component {
     }
     const { episodes } = this.props.post;
     const time = getNormalizedDateString(this.props.post.publishAt);
+    const machineReadableTime = moment(this.props.post.publishAt).toISOString();
 
     let categories;
     if (this.props.post.categories && this.props.post.categories.length > 0) {
@@ -43,11 +45,13 @@ export class Post extends React.Component {
     }
 
     return (
-      <div className={styles.post}>
+      <article className={styles.post}>
         <h1 className={styles.title}>{this.props.post.title}</h1>
         <div className={styles.meta}>
           {categories}
-          <div className={styles.createdAt}>{time}</div>
+          <time className={styles.createdAt} dateTime={machineReadableTime}>
+            {time}
+          </time>
         </div>
         <p
           className={styles.body}
@@ -61,7 +65,7 @@ export class Post extends React.Component {
               playOnDemand={this.props.playOnDemand}
             />
           ))}
-      </div>
+      </article>
     );
   }
 }

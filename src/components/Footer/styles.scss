@@ -11,9 +11,9 @@
   padding: 3rem 0;
   color: $color-text-light;
 
-
   // Change to light color for outline, due to dark background
-  a, button {
+  a,
+  button {
     &:focus {
       outline-color: white;
     }
@@ -33,7 +33,8 @@
   color: $color-text-light;
   text-decoration: none;
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     text-decoration: underline;
   }
 }
@@ -42,8 +43,9 @@
   display: block;
 }
 
-.bold {
-  font-weight: bold;
+.contactHeader {
+  font-size: inherit;
+  margin-bottom: 0;
 }
 
 @media screen and (min-width: $social-media-button-breakpoint) {

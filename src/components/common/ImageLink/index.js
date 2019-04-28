@@ -6,9 +6,16 @@ import classNames from 'classnames';
 
 import styles from './styles.scss';
 
-const ImageLink = ({images, link, imageDescription, children, imageProps, ...restProps}) => {
+const ImageLink = ({
+  images,
+  link,
+  imageDescription,
+  children,
+  imageProps,
+  ...restProps
+}) => {
   const { small, medium, large } = images;
-  const { className: customImageClassName, ...restImageProps} = imageProps;
+  const { className: customImageClassName, ...restImageProps } = imageProps;
   return (
     <Link to={link} {...restProps}>
       <LazyLoad height={350} offset={100} once>

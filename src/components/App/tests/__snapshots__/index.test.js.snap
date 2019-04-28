@@ -5,11 +5,11 @@ exports[`<App /> renders correctly 1`] = `
   className="container"
 >
   <Header />
-  <div
+  <main
     className="content"
   >
     <Switch />
-  </div>
+  </main>
   <Sidebar />
   <Connect(Footer) />
   <Connect(Player) />
@@ -20,10 +20,10 @@ exports[`<App /> renders plainpost correctly 1`] = `
 <div
   className="container"
 >
-  <div
+  <main
     className="content"
   >
     <Switch />
-  </div>
+  </main>
 </div>
 `;

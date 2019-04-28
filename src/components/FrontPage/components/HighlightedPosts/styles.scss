@@ -14,7 +14,8 @@
   background-color: $color-radiorevolt-lightgrey;
 
   // Lighter outline color, for contrast
-  a, button {
+  a,
+  button {
     &:focus {
       outline-color: white;
     }

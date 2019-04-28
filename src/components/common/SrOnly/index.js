@@ -10,9 +10,11 @@ const SrOnly = ({ children, element, ...restProps }) => {
   // JSX requires element names to be Capitalized
   const ElementToUse = element;
 
-  return <ElementToUse {...restProps} className={styles.srOnly}>
-    {children}
-  </ElementToUse>
+  return (
+    <ElementToUse {...restProps} className={styles.srOnly}>
+      {children}
+    </ElementToUse>
+  );
 };
 
 SrOnly.propTypes = {

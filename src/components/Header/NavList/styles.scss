@@ -19,13 +19,14 @@
   text-decoration: none;
   color: inherit;
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     text-decoration: underline;
   }
 }
 
 @media screen and (min-width: $breakpoint-medium) {
   .navbarItem {
-    margin: 0px 10px;
+    margin: 0 10px;
   }
 }

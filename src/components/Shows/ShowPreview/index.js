@@ -21,11 +21,7 @@ const ShowPreview = props => {
         <Link className={styles.link} to={`/programmer/${props.slug}`}>
           <div className={styles.imageWrapper}>
             <LazyLoad height={300} offset={100} once>
-              <img
-                className={styles.image}
-                src={props.logoImageUrl}
-                alt=""
-              />
+              <img className={styles.image} src={props.logoImageUrl} alt="" />
             </LazyLoad>
           </div>
           <h2>{props.title}</h2>
