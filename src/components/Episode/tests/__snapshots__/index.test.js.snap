@@ -25,6 +25,12 @@ exports[`<Episode /> renders correctly 1`] = `
         }
       }
     />
+    <div
+      className="lead publishedAt"
+    >
+      Publisert: 
+      08.09.2014
+    </div>
   </div>
 </div>
 `;
