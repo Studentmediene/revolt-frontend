@@ -21,7 +21,8 @@
 
 // Ensure consistent styling of outline, since we must change it sometimes to
 // ensure good enough contrast
-a, button {
+a,
+button {
   &:focus {
     outline: 1px dotted #212121;
   }

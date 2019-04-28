@@ -16,7 +16,6 @@ export class HeaderPlayButton extends React.Component {
   };
 
   render() {
-
     let isCurrentlyLive = false;
 
     if (!this.props.paused && this.props.isLive) {
@@ -30,13 +29,11 @@ export class HeaderPlayButton extends React.Component {
       } else {
         this.props.playLive();
       }
-    }
+    };
 
     return (
       <button className={styles.container} onClick={buttonClicked}>
-        <PlayPauseButton
-          paused={!isCurrentlyLive}
-        />
+        <PlayPauseButton paused={!isCurrentlyLive} />
         <div className={styles.buttonText}>
           <div className={styles.largeText}>Lytt direkte!</div>
           <div className={styles.smallText}>{this.props.nowPlaying}</div>

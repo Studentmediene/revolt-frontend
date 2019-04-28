@@ -43,11 +43,17 @@ export class HamburgerMenu extends React.Component {
       <button className={styles.container} onClick={this.toggleMenu}>
         <img src={hamburgerIcon} className={styles.hamburgerIcon} />
         <div className={styles.hamburgerText}>Meny</div>
-        <div className={classNames({
-          [styles.overlay]: true,
-          [styles.active]: this.state.isOpen,
-        })}></div>
-        <NavDrawer links={navLinks} open={this.state.isOpen} onNavigation={this.toggleMenu}/>
+        <div
+          className={classNames({
+            [styles.overlay]: true,
+            [styles.active]: this.state.isOpen,
+          })}
+        />
+        <NavDrawer
+          links={navLinks}
+          open={this.state.isOpen}
+          onNavigation={this.toggleMenu}
+        />
       </button>
     );
   }

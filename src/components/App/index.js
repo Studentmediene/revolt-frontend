@@ -29,9 +29,9 @@ export class App extends React.Component {
     return (
       <div className={styles.container}>
         {!plain && <Header />}
-        <div className={styles.content}>
+        <main className={styles.content}>
           <Switch>{this.props.routes}</Switch>
-        </div>
+        </main>
         {!plain && <Sidebar />}
         {!plain && <Footer />}
         {!plain && <Player />}

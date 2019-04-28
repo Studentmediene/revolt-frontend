@@ -34,17 +34,14 @@ export class Footer extends React.Component {
     let { radioEditor, chiefEditor, musicProducer } = this.props;
 
     return (
-      <div className={styles.footer}>
+      <footer className={styles.footer}>
         <div className={styles.content}>
-          <div>
+          <p>
             Denne tjenesten tilbys av Studentmediene i Trondheim AS. Musikken er
-            gjengitt med tilatelse fra TONO/NCB.
-          </div>
-          <div>
+            gjengitt med tillatelse fra TONO/NCB.<br />
             Uautorisert lenking, videreføring eller kopiering er ulovlig.
-          </div>
-          <br />
-          <div className={styles.bold}>Kontakt oss</div>
+          </p>
+          <h2 className={styles.contactHeader}>Kontakt oss</h2>
           <a
             className={styles.footerLink}
             href="mailto:radioredaktor@studentmediene.no"
@@ -76,7 +73,7 @@ export class Footer extends React.Component {
           </Link>
           <p>{new Date().getFullYear()} © Radio Revolt</p>
         </div>
-      </div>
+      </footer>
     );
   }
 }

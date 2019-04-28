@@ -37,7 +37,8 @@ $image-height: $max-width - 2 * $padding;
   text-decoration: none;
   text-align: center;
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     text-decoration: underline;
   }
 }

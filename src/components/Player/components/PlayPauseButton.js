@@ -10,23 +10,26 @@ const PlayPauseButton = ({ togglePlayPause, paused }) => {
   // Label for our screenreader friends
   const label = paused ? 'Spill av' : 'Pause';
 
-  const contents = <div className={styles.buttonContainer}>
-    <div className={classNames(styles.left, {
-      [styles.paused]: paused,
-    })} />
-    <div className={classNames(styles.right, {
-      [styles.paused]: paused,
-    })} />
-    <SrOnly>{label}</SrOnly>
-  </div>;
+  const contents = (
+    <div className={styles.buttonContainer}>
+      <div
+        className={classNames(styles.left, {
+          [styles.paused]: paused,
+        })}
+      />
+      <div
+        className={classNames(styles.right, {
+          [styles.paused]: paused,
+        })}
+      />
+      <SrOnly>{label}</SrOnly>
+    </div>
+  );
 
   // Use a <button> if we are interactive, else nothing
   if (togglePlayPause) {
     return (
-      <button
-        className={styles.playPauseButton}
-        onClick={togglePlayPause}
-      >
+      <button className={styles.playPauseButton} onClick={togglePlayPause}>
         {contents}
       </button>
     );
