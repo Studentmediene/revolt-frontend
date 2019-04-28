@@ -6,7 +6,6 @@
   justify-content: flex-start;
   align-items: center;
 
-
   background-color: $color-radiorevolt-darkgrey;
   color: $color-text-light;
   padding: 16px;
@@ -24,11 +23,15 @@
 }
 
 .lead {
-  margin-top: 4px;
+  padding-top: 4px;
   text-align: left;
   color: $color-text-dark;
 
   & > * {
     margin: 0;
   }
+}
+
+.publishedAt {
+  padding-top: 8px;
 }
