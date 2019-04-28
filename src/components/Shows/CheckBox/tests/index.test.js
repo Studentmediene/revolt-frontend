@@ -4,7 +4,11 @@ import { shallow } from 'enzyme';
 import CheckBox from '../';
 
 describe('<CheckBox />', () => {
-  const props = {};
+  const props = {
+    label: 'Kultur',
+    isSelected: true,
+    onCheckboxChange: () => 0,
+  };
 
   it('renders correctly', () => {
     const tree = shallow(<CheckBox {...props} />);

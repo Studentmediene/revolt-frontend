@@ -14,8 +14,7 @@ import {
   selectCategories,
 } from './selectors';
 import styles from './styles.scss';
-import classNames from 'classnames';
-import Checkbox from 'components/common/CheckBox';
+import Checkbox from './CheckBox';
 import { FadeLoader } from 'react-spinners';
 
 export class Shows extends React.Component {
@@ -35,9 +34,6 @@ export class Shows extends React.Component {
 
   handleCheckboxChange = changeEvent => {
     const { name } = changeEvent.target;
-
-    console.log(name);
-
     this.setState(
       prevState => ({
         selectedCategories: {
@@ -52,15 +48,17 @@ export class Shows extends React.Component {
   createCheckbox = category => (
     <Checkbox
       label={category.name}
-      isSelected={this.state.selectedCategories[category.name]}
+      isSelected={this.state.selectedCategories[category.name] || false}
       onCheckboxChange={this.handleCheckboxChange}
       key={category.name}
     />
   );
 
   createCheckboxes() {
-    if (this.props.categories) {
-      return this.props.categories.map(this.createCheckbox);
+    if (this.props.categories && this.props.categories.length > 0) {
+      return this.props.categories
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .map(this.createCheckbox);
     }
   }
 
@@ -77,11 +75,9 @@ export class Shows extends React.Component {
 
   filterCategory() {
     let list = [];
-
-    let activeOptions = Object.keys(this.state.checkboxes).filter(
-      key => this.state.checkboxes[key],
+    let activeOptions = Object.keys(this.state.selectedCategories).filter(
+      key => this.state.selectedCategories[key],
     );
-
     for (let i of this.props.shows) {
       for (let k of activeOptions) {
         if (
@@ -100,8 +96,6 @@ export class Shows extends React.Component {
   }
 
   render() {
-    console.log(this.props.categories);
-
     let showPreviewList = null;
     let showsToDisplay = this.state.filteredShows;
 
@@ -123,7 +117,7 @@ export class Shows extends React.Component {
 
     return (
       <div>
-        <div className="container">{this.createCheckboxes()}</div>
+        <div className={styles.container}>{this.createCheckboxes()}</div>
 
         <React.Fragment>{showPreviewList}</React.Fragment>
       </div>
@@ -136,6 +130,7 @@ Shows.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.bool,
   shows: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
+  categories: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
 };
 
 Shows.defaultProps = {

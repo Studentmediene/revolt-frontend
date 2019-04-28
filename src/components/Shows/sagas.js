@@ -28,7 +28,6 @@ export function* getShows() {
   }`;
   try {
     const result = yield call(getGraphQL, query);
-    console.log(result);
 
     yield put(
       showsLoaded(

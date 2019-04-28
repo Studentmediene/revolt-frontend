@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from './styles.scss';
 
-const Checkbox = ({ label: lab, isSelected, onCheckboxChange }) => (
-  <div className="form-check">
+const Checkbox = ({ label: lab, isSelected, onCheckboxChange, className }) => (
+  <div className={styles.checkbox}>
     <label>
       <input
+        className={styles.box}
         type="checkbox"
         name={lab}
         checked={isSelected}
         onChange={onCheckboxChange}
-        className="form-check-input"
       />
       {lab}
     </label>
