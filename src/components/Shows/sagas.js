@@ -1,4 +1,4 @@
-import { take, call, put } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import { showsLoaded, showsLoadedError } from 'components/Shows/actions';
 import { LOAD_SHOWS_PENDING } from './constants';
 import { getGraphQL } from 'utils/api';
@@ -20,19 +20,29 @@ export function* getShows() {
         backgroundColor
       }
     }
+    allCategories {
+      name
+      textColor
+      backgroundColor
+    }
   }`;
   try {
     const result = yield call(getGraphQL, query);
-    yield put(showsLoaded(result.data.allShows.map(showFormat)));
+    console.log(result);
+
+    yield put(
+      showsLoaded(
+        result.data.allShows.map(showFormat),
+        result.data.allCategories,
+      ),
+    );
   } catch (error) {
     yield put(showsLoadedError());
   }
 }
 
 export function* loadShowsWatcher() {
-  while (yield take(LOAD_SHOWS_PENDING)) {
-    yield call(getShows);
-  }
+  yield takeEvery(LOAD_SHOWS_PENDING, getShows);
 }
 
 // All sagas to be loaded

@@ -7,19 +7,65 @@ import { createStructuredSelector } from 'reselect';
 import { loadShows } from './actions';
 import Loader from 'components/Loader';
 import ShowPreviewList from './ShowPreviewList';
-import { selectShows, selectShowsLoading, selectShowsError } from './selectors';
+import {
+  selectShows,
+  selectShowsLoading,
+  selectShowsError,
+  selectCategories,
+} from './selectors';
 import styles from './styles.scss';
 import classNames from 'classnames';
+import Checkbox from 'components/common/CheckBox';
+import { FadeLoader } from 'react-spinners';
 
 export class Shows extends React.Component {
-  state = {
-    showArchivedShows: false,
-    filteredShows: false,
+  constructor(props) {
+    super(props);
+    this.state = {
+      showArchivedShows: false,
+      filteredShows: [],
+      selectedCategories: {},
+    };
+    this.createCheckbox = this.createCheckbox.bind(this);
+    this.createCheckboxes = this.createCheckboxes.bind(this);
+    this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
+    this.filterCategory = this.filterCategory.bind(this);
+    this.toggleArchivedShows = this.toggleArchivedShows.bind(this);
+  }
+
+  handleCheckboxChange = changeEvent => {
+    const { name } = changeEvent.target;
+
+    console.log(name);
+
+    this.setState(
+      prevState => ({
+        selectedCategories: {
+          ...prevState.selectedCategories,
+          [name]: !prevState.selectedCategories[name],
+        },
+      }),
+      this.filterCategory,
+    );
   };
 
+  createCheckbox = category => (
+    <Checkbox
+      label={category.name}
+      isSelected={this.state.selectedCategories[category.name]}
+      onCheckboxChange={this.handleCheckboxChange}
+      key={category.name}
+    />
+  );
+
+  createCheckboxes() {
+    if (this.props.categories) {
+      return this.props.categories.map(this.createCheckbox);
+    }
+  }
+
   componentWillMount() {
-    this.props.loadShow();
-    this.toggleArchivedShows = this.toggleArchivedShows.bind(this);
+    this.props.loadShows();
   }
 
   toggleArchivedShows(event) {
@@ -29,31 +75,37 @@ export class Shows extends React.Component {
     }));
   }
 
-  filterCategory(a) {
+  filterCategory() {
     let list = [];
+
+    let activeOptions = Object.keys(this.state.checkboxes).filter(
+      key => this.state.checkboxes[key],
+    );
+
     for (let i of this.props.shows) {
-      if (
-        i.categories &&
-        i.categories.length > 0 &&
-        a == i.categories[0].name
-      ) {
-        list.push(i);
+      for (let k of activeOptions) {
+        if (
+          i.categories &&
+          i.categories.length > 0 &&
+          k == i.categories[0].name
+        ) {
+          list.push(i);
+          break;
+        }
       }
     }
-    console.log('hei');
-    console.log(list);
     this.setState({
       filteredShows: list,
     });
   }
 
   render() {
-    // const hei = this.filterCategory();
+    console.log(this.props.categories);
 
     let showPreviewList = null;
     let showsToDisplay = this.state.filteredShows;
 
-    if (!showsToDisplay) {
+    if (showsToDisplay.length === 0) {
       showsToDisplay = this.props.shows;
     }
 
@@ -71,32 +123,8 @@ export class Shows extends React.Component {
 
     return (
       <div>
-        <div className={styles.buttonWrapper}>
-          <button
-            onClick={() => this.filterCategory('Kultur')}
-            className={classNames(styles.kultur, styles.button)}
-          >
-            Kultur
-          </button>
-          <button
-            onClick={() => this.filterCategory('Morgen')}
-            className={classNames(styles.morgen, styles.button)}
-          >
-            Morgen
-          </button>
-          <button
-            onClick={() => this.filterCategory('Musikk')}
-            className={classNames(styles.musikk, styles.button)}
-          >
-            Musikk
-          </button>
-          <button
-            onClick={() => this.filterCategory('Underholdning')}
-            className={classNames(styles.underholdning, styles.button)}
-          >
-            Underholdning
-          </button>
-        </div>
+        <div className="container">{this.createCheckboxes()}</div>
+
         <React.Fragment>{showPreviewList}</React.Fragment>
       </div>
     );
@@ -104,7 +132,7 @@ export class Shows extends React.Component {
 }
 
 Shows.propTypes = {
-  loadShow: PropTypes.func,
+  loadShows: PropTypes.func,
   loading: PropTypes.bool,
   error: PropTypes.bool,
   shows: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
@@ -118,13 +146,14 @@ Shows.defaultProps = {
 
 const mapStateToProps = createStructuredSelector({
   shows: selectShows(),
+  categories: selectCategories(),
   loading: selectShowsLoading(),
   error: selectShowsError(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    loadShow: () => dispatch(loadShows()),
+    loadShows: () => dispatch(loadShows()),
   };
 }
 
