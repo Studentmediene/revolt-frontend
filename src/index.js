@@ -32,6 +32,8 @@ moment.locale('NB_no', {
     nextDay: '[I morgen] HH:mm',
     sameElse: 'DD.MM.YY HH:mm',
   },
+  weekdaysShort: 'man_tirs_ons_tors_fre_lør_søn'.split('_'),
+  weekdays: 'mandag_tirsdag_onsdag_torsdag_fredag_lørdag_søndag'.split('_'),
 });
 
 // Import the CSS reset, which HtmlWebpackPlugin transfers to the build folder
