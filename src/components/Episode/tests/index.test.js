@@ -4,13 +4,20 @@ import { shallow, mount } from 'enzyme';
 import { Episode } from '../';
 
 describe('<Episode />', () => {
+  const defaultProps = {
+    digasBroadcastId: 123,
+    id: 123,
+    title: 'Episode title',
+    lead: 'Episode lead',
+    playOnDemand: jest.fn(),
+    togglePlayPause: jest.fn(),
+    publishAt: '2014-09-08T08:02:17-05:00',
+    paused: true,
+  };
+
   it('renders correctly', () => {
     const mockProps = {
-      digasBroadcastId: 123,
-      id: 123,
-      title: 'Episode title',
-      lead: 'Episode lead',
-      playOnDemand: jest.fn(),
+      ...defaultProps,
     };
     const tree = shallow(<Episode {...mockProps} />);
     expect(tree).toMatchSnapshot();
@@ -18,20 +25,16 @@ describe('<Episode />', () => {
 
   it('should return null on invalid digasBroadcastId', () => {
     const mockProps = {
+      ...defaultProps,
       digasBroadcastId: 0,
     };
     const tree = shallow(<Episode {...mockProps} />);
     expect(tree).toMatchSnapshot();
-
   });
 
   it('calls playOnDemand when clicked', () => {
     const mockProps = {
-      digasBroadcastId: 123,
-      id: 123,
-      title: 'Episode title',
-      lead: 'Episode lead',
-      playOnDemand: jest.fn(),
+      ...defaultProps,
     };
     const tree = mount(<Episode {...mockProps} />);
     tree.find('.episode').simulate('click');
@@ -40,11 +43,7 @@ describe('<Episode />', () => {
 
   it('calls playOnDemand on keyPress', () => {
     const mockProps = {
-      digasBroadcastId: 123,
-      id: 123,
-      title: 'Episode title',
-      lead: 'Episode lead',
-      playOnDemand: jest.fn(),
+      ...defaultProps,
     };
     const tree = mount(<Episode {...mockProps} />);
     tree.find('.episode').simulate('keypress');
