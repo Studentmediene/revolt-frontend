@@ -10,6 +10,8 @@ export const showFormat = ({
   slug,
   archived,
   categories,
+  isPodcast,
+  podcastUrl,
 }) => ({
   logoImageUrl: `${image}`,
   id,
@@ -19,6 +21,8 @@ export const showFormat = ({
   slug,
   archived,
   categories,
+  isPodcast,
+  podcastUrl,
 });
 
 export const episodeFormat = ({ id, title, showName, publishAt, lead }) => ({

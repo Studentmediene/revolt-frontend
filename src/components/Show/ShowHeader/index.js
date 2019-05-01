@@ -3,7 +3,20 @@ import PropTypes from 'prop-types';
 
 import styles from './styles.scss';
 
-const ShowHeader = ({ show: { title, content, logoImageUrl, categories } }) => {
+const ShowHeader = ({
+  show: { title, content, logoImageUrl, categories, podcastUrl },
+}) => {
+  let podcastLink;
+
+  if (podcastUrl) {
+    podcastLink = (
+      <div className={styles.podcastLink}>
+        Vi har også en podkast! Søk opp «{title}» i din podkastapp eller{' '}
+        <a href={podcastUrl}>legg inn RSS-feeden</a>.
+      </div>
+    );
+  }
+
   let categoryTags;
   if (categories && categories.length > 0) {
     categoryTags = (
@@ -24,6 +37,7 @@ const ShowHeader = ({ show: { title, content, logoImageUrl, categories } }) => {
         <h2 className={styles.title}>{title}</h2>
         <div dangerouslySetInnerHTML={{ __html: content }} />
       </div>
+      {podcastLink}
       {categoryTags}
     </div>
   );
