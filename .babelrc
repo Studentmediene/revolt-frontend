@@ -1,38 +1,36 @@
 {
   "presets": [
-    ["env", {
+    ["@babel/env", {
         "targets": {
           "browsers": ["last 2 versions"],
           "node": "current"
-        }
+        },
+        "useBuiltIns": "usage",
+        "corejs": 3
       }
     ],
-    "react"
+    "@babel/react"
   ],
   "plugins": [
     ["module-resolver", {
       "root": ["./src"]
     }],
-    ["transform-runtime", {
-      "polyfill": true,
+    ["@babel/transform-runtime", {
       "regenerator": true
     }],
-    "transform-class-properties",
-    "transform-object-rest-spread",
-    "syntax-dynamic-import"
+    "@babel/proposal-class-properties",
+    "@babel/proposal-object-rest-spread",
+    "@babel/syntax-dynamic-import"
   ],
   "env": {
     "production": {
       "plugins": [
-        "transform-es2015-destructuring",
-        "transform-react-constant-elements",
-        "transform-react-inline-elements",
+        "@babel/transform-destructuring",
+        "@babel/transform-react-constant-elements",
+        "@babel/transform-react-inline-elements",
         "transform-react-remove-prop-types",
         "emotion"
       ]
-    },
-    "development": {
-      "presets": ["react-hmre"]
     },
     "test": {
       "plugins": [

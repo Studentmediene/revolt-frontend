@@ -1,4 +1,5 @@
 import React from 'react';
+import Immutable from 'immutable';
 import PropTypes from 'prop-types';
 
 import styles from './styles.scss';
@@ -42,8 +43,8 @@ class HighlightedPosts extends React.Component {
     this.initialContainerScroll = this.postContainerRef.current.scrollLeft;
   }
   render() {
-    if (this.props.posts && this.props.posts.length > 0) {
-      const posts = this.props.posts.map(post => {
+    if (this.props.posts && !this.props.posts.isEmpty()) {
+      const posts = this.props.posts.toJS().map(post => {
         return (
           <div
             key={post.title}
@@ -82,21 +83,7 @@ class HighlightedPosts extends React.Component {
 }
 
 HighlightedPosts.propTypes = {
-  posts: PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.arrayOf(
-      PropTypes.shape({
-        croppedImages: PropTypes.shape({
-          small: PropTypes.string.isRequired,
-          medium: PropTypes.string.isRequired,
-          large: PropTypes.string.isRequired,
-        }).isRequired,
-        slug: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired,
-        id: PropTypes.number.isRequired,
-      }),
-    ),
-  ]).isRequired,
+  posts: PropTypes.instanceOf(Immutable.List).isRequired,
 };
 
 export default HighlightedPosts;

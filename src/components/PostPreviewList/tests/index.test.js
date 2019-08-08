@@ -1,12 +1,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import Immutable, { fromJS } from 'immutable'
 
 import PostPreviewList from '../';
 
 describe('<PostPreviewList />', () => {
   it('renders correctly with posts', () => {
     const mockProps = {
-      posts: [
+      posts: fromJS([
         {
           image: 'image',
           lead: 'Lead',
@@ -34,14 +35,16 @@ describe('<PostPreviewList />', () => {
           title: 'post2',
           categories: [],
         },
-      ],
+      ]),
+      highlightedPosts: Immutable.List(),
     };
     const tree = shallow(<PostPreviewList {...mockProps} />);
     expect(tree).toMatchSnapshot();
   });
   it('renders correctly without posts', () => {
     const mockProps = {
-      posts: [],
+      posts: Immutable.List(),
+      highlightedPosts: Immutable.List(),
     };
     const tree = shallow(<PostPreviewList {...mockProps} />);
     expect(tree).toMatchSnapshot();

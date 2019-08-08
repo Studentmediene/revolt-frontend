@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import Immutable from 'immutable'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -21,9 +22,8 @@ import PostPreviewList from 'components/PostPreviewList';
 
 export class FrontPage extends React.Component {
   static propTypes = {
-    posts: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]).isRequired,
-    highlightedPosts: PropTypes.oneOfType([PropTypes.bool, PropTypes.array])
-      .isRequired,
+    posts: PropTypes.instanceOf(Immutable.List).isRequired,
+    highlightedPosts: PropTypes.instanceOf(Immutable.List).isRequired,
     loading: PropTypes.bool.isRequired,
     error: PropTypes.bool.isRequired,
     loadPosts: PropTypes.func.isRequired,

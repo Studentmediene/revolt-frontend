@@ -40,10 +40,10 @@ class Canvas extends Component {
   gameStarted = false;
   tileSize = 40;
   windowOffset = 0;
-  player: null;
-  bugs: null;
-  coins: null;
-  edges: null;
+  player = null;
+  bugs = null;
+  coins = null;
+  edges = null;
   maxWindowOffsetX = -lvl1[0].length * this.tileSize +
     this.TILES_IN_VIEW_X * this.tileSize;
 

@@ -32,8 +32,8 @@ const PostPreview = props => {
 };
 
 PostPreview.propTypes = {
-  title: PropTypes.string.isRequired,
-  slug: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  slug: PropTypes.string,
   croppedImages: PropTypes.shape({
     small: PropTypes.string,
     medium: PropTypes.string,
