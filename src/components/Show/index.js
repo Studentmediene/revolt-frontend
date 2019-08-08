@@ -1,9 +1,10 @@
 import React from 'react';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
-import moment from 'moment';
+
 import {
   selectShow,
   selectShowEpisodes,
@@ -11,15 +12,15 @@ import {
   selectShowLoading,
   selectShowError,
 } from './selectors';
-import { loadShow } from './actions';
 import {
   getPodcastPlaylist,
   getOnDemandPlaylist,
 } from 'components/Player/actions';
+import { loadShow } from './actions';
+import Loader from 'components/Loader';
 import Episode from 'components/Episode';
 import PostPreview from 'components/PostPreview';
 import ShowHeader from 'components/Show/ShowHeader';
-import Loader from 'components/Loader';
 
 export class Show extends React.Component {
   componentWillMount() {

@@ -1,18 +1,18 @@
 import React from 'react';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom'
 import { createStructuredSelector } from 'reselect';
-import { withRouter } from 'react-router-dom';
-import moment from 'moment';
-
-import { getNormalizedDateString } from 'utils/dateUtils';
-import { selectPost, selectPostLoading, selectPostError } from './selectors';
-import { getOnDemandPlaylist } from 'components/Player/actions';
-import { loadPost } from './actions';
-import Episode from 'components/Episode';
 
 import './editor.css';
 import styles from './styles.scss';
+
+import { loadPost } from './actions';
+import Episode from 'components/Episode';
+import { getNormalizedDateString } from 'utils/dateUtils';
+import { getOnDemandPlaylist } from 'components/Player/actions';
+import { selectPost, selectPostLoading, selectPostError } from './selectors';
 
 export class Post extends React.Component {
   componentWillMount() {

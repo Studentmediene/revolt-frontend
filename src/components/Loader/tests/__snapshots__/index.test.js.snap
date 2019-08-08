@@ -5,12 +5,16 @@ exports[`<Loader /> renders correctly 1`] = `
   className="loading"
 >
   <onlyUpdateForKeys(Loader)
+    className=""
     color="#ECB61C"
     height={35}
+    heightUnit="px"
     loading={true}
     margin="2px"
     radius={2}
+    radiusUnit="px"
     width={4}
+    widthUnit="px"
   />
 </div>
 `;

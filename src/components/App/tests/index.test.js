@@ -7,9 +7,7 @@ describe('<App />', () => {
   it('renders correctly', () => {
     const props = {
       routes: [],
-      location: {
-        pathname: '/path',
-      },
+      pathname: '/path',
     };
 
     const tree = shallow(<App {...props} />);
@@ -19,9 +17,7 @@ describe('<App />', () => {
   it('renders plainpost correctly', () => {
     const props = {
       routes: [],
-      location: {
-        pathname: '/plainpost',
-      },
+      pathname: '/plainpost',
     };
 
     const tree = shallow(<App {...props} />);

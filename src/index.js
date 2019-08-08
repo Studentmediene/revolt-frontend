@@ -4,12 +4,12 @@ import ReactGA from 'react-ga';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Route } from 'react-router-dom';
-import { ConnectedRouter } from 'react-router-redux';
-import createHistory from 'history/createBrowserHistory';
+import { ConnectedRouter } from 'connected-react-router/immutable'
 
 import App from 'components/App';
-import createRoutes from 'routes';
-import configureStore from 'store';
+import createRoutes from './routes';
+import configureStore from './store';
+import { history } from 'utils/router/reducer';
 import ScrollToTop from 'utils/scrollToTopComponent';
 import { initializeErrorReporting } from 'utils/errorReporting';
 
@@ -40,9 +40,8 @@ moment.locale('NB_no', {
 import 'sanitize.css/sanitize.css';
 
 // Create redux store with history
-// this uses the singleton browserHistory provided by react-router-redux
+// this uses the singleton history used by connected-react-router
 const initialState = {};
-const history = createHistory();
 const store = configureStore(initialState, history);
 
 const routes = createRoutes(store).map(route => (
