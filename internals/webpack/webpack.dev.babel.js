@@ -24,7 +24,6 @@ const plugins = [
 module.exports = require('./webpack.base.babel')({
   // Add hot reloading in development
   entry: [
-    'eventsource-polyfill', // Necessary for hot reloading with IE
     'whatwg-fetch', // fetch polyfill
     'webpack-hot-middleware/client',
     path.join(process.cwd(), 'src/index.js'), // Start with src/index.js

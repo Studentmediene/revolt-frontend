@@ -9,8 +9,8 @@ import {
 const initialState = fromJS({
   loading: false,
   error: false,
-  posts: false,
-  highlightedPosts: false,
+  posts: [],
+  highlightedPosts: [],
   postOffset: 0,
   hasLoaded: false,
 });
@@ -23,8 +23,8 @@ function frontPageReducer(state = initialState, action) {
       return state
         .set('loading', false)
         .set('error', false)
-        .set('posts', [...state.get('posts'), ...action.posts])
-        .set('highlightedPosts', action.highlightedPosts)
+        .update('posts', posts => posts.push(...action.posts))
+        .set('highlightedPosts', fromJS(action.highlightedPosts))
         .set('hasLoaded', true)
         .set('postOffset', state.get('postOffset') + POSTS_PER_PAGE);
     case LOAD_FRONT_PAGE_POSTS_FAILED:

@@ -1,4 +1,5 @@
 import React from 'react';
+import Immutable from 'immutable';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -7,7 +8,7 @@ import PostPreview from 'components/PostPreview';
 import HighlightedPosts from 'components/FrontPage/components/HighlightedPosts';
 
 const PostPreviewList = props => {
-  const posts = props.posts.map((post, index) => (
+  const posts = props.posts.toJS().map((post, index) => (
     <div
       className={classNames(styles.post, {
         [styles.postLarge]: index % 8 === 0 || index % 8 === 3,
@@ -17,7 +18,7 @@ const PostPreviewList = props => {
       <PostPreview {...post} />
     </div>
   ));
-  if (props.highlightedPosts) {
+  if (!props.highlightedPosts.isEmpty()) {
     // Insert highlighted posts after element 3
     posts.splice(
       3,
@@ -33,8 +34,8 @@ const PostPreviewList = props => {
 };
 
 PostPreviewList.propTypes = {
-  posts: PropTypes.array.isRequired,
-  highlightedPosts: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
+  posts: PropTypes.instanceOf(Immutable.List).isRequired,
+  highlightedPosts: PropTypes.instanceOf(Immutable.List),
 };
 
 export default PostPreviewList;
