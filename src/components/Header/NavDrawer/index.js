@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { push } from 'connected-react-router'
+
+import styles from './styles.scss';
 
 import logo from 'components/Header/Logo/RR_logo.png';
-import styles from './styles.scss';
 
 export class NavDrawer extends React.Component {
   static propTypes = {
@@ -22,7 +24,7 @@ export class NavDrawer extends React.Component {
 
   navigate(e, destination) {
     this.props.onNavigation(e);
-    this.props.history.push(destination);
+    this.props.navigate(destination);
     // Stop browser from acting on the link click
     return false;
   }
@@ -65,4 +67,12 @@ export class NavDrawer extends React.Component {
   }
 }
 
-export default withRouter(NavDrawer);
+
+function mapDispatchToProps(dispatch) {
+  return {
+    navigate: destination => dispatch(push(destination)),
+  }
+}
+
+
+export default connect(null, mapDispatchToProps)(NavDrawer);

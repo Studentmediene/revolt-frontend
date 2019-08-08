@@ -1,7 +1,8 @@
-import { createStore, applyMiddleware, compose } from 'redux';
 import { fromJS } from 'immutable';
-import { routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { routerMiddleware } from 'connected-react-router/immutable'
+
 import createReducer from './reducers';
 import playerSagas from 'components/Player/sagas';
 import footerSagas from 'components/Footer/sagas';

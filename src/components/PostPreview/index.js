@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import LazyLoad from 'react-lazyload';
-import { Link } from 'react-router-dom';
 
 import styles from './styles.scss';
 import ImageLink from 'components/common/ImageLink';

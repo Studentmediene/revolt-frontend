@@ -8,24 +8,25 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Switch, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Switch } from 'react-router-dom';
+import { createStructuredSelector } from 'reselect';
 
 import styles from './styles.scss';
 
 import Header from 'components/Header';
-import Sidebar from 'components/Sidebar';
 import Footer from 'components/Footer';
 import Player from 'components/Player';
+import Sidebar from 'components/Sidebar';
+import { selectPathname } from 'utils/router/selectors';
 
 export class App extends React.Component {
   static propTypes = {
     routes: PropTypes.array.isRequired,
-    location: PropTypes.shape({
-      pathname: PropTypes.string,
-    }),
+    pathname: PropTypes.string.isRequired,
   };
   render() {
-    const plain = this.props.location.pathname.startsWith('/plainpost');
+    const plain = this.props.pathname.startsWith('/plainpost');
     return (
       <div className={styles.container}>
         {!plain && <Header />}
@@ -40,4 +41,8 @@ export class App extends React.Component {
   }
 }
 
-export default withRouter(App);
+const mapStateToProps = createStructuredSelector({
+  pathname: selectPathname(),
+});
+
+export default connect(mapStateToProps)(App);

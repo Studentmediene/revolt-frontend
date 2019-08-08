@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { selectLocation } from 'utils/router/selectors';
 
 export class ScrollToTop extends React.Component {
   static propTypes = {
@@ -18,4 +20,9 @@ export class ScrollToTop extends React.Component {
   }
 }
 
-export default withRouter(ScrollToTop);
+const mapStateToProps = createStructuredSelector({
+  location: selectLocation(),
+});
+
+export default connect(mapStateToProps)(ScrollToTop);
+

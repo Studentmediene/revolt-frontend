@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 
 import { loadShows } from './actions';
@@ -70,4 +69,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Shows));
+export default connect(mapStateToProps, mapDispatchToProps)(Shows);

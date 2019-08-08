@@ -17,7 +17,7 @@ exports[`<HamburgerMenu /> renders correctly 1`] = `
   <div
     className="overlay"
   />
-  <withRouter(NavDrawer)
+  <Connect(NavDrawer)
     links={
       Array [
         Object {
