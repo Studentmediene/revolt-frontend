@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 import { createStructuredSelector } from 'reselect';
 
-import './editor.css';
 import styles from './styles.scss';
+import 'components/common/styles/editor.css';
 
 import { loadPost } from './actions';
 import Episode from 'components/Episode';
