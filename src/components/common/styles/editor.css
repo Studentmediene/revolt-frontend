@@ -21,6 +21,28 @@ img {
 }
 
 /**
+* START Spotify CKEditor Plugin
+*/
+
+.spotify-playlist-wrapper.align-right {
+  float: right;
+}
+.spotify-playlist-wrapper.align-left {
+  float: left;
+}
+.spotify-playlist-wrapper.align-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+.spotify-playlist-wrapper > iframe.no-border {
+  border: none;
+}
+
+/**
+* END Spotify CKEditor Plugin
+*/
+
+/**
 * START: Old classes used by the old Summernote editor. Must be included to ensure
 * backwards compatibility of articles.
 */
