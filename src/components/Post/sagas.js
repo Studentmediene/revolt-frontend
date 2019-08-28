@@ -28,6 +28,7 @@ export function* loadPost(slug) {
         id,
         title,
         lead,
+        publishAt,
       }
     }
   }`;
