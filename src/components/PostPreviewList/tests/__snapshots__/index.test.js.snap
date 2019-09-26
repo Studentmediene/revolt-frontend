@@ -43,11 +43,18 @@ exports[`<PostPreviewList /> renders correctly with posts 1`] = `
       title="post2"
     />
   </div>
+  <HighlightedShows
+    key="highlightedShows"
+  />
 </div>
 `;
 
 exports[`<PostPreviewList /> renders correctly without posts 1`] = `
 <div
   className="postPreviewList"
-/>
+>
+  <HighlightedShows
+    key="highlightedShows"
+  />
+</div>
 `;
