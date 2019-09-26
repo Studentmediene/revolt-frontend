@@ -20,7 +20,7 @@ const Checkbox = ({
         onChange={onCheckboxChange}
       />
       <div
-        style={{ backgroundColor: backgroundColor, textColor: textColor }}
+        style={{ backgroundColor: backgroundColor, color: textColor }}
         className={styles.text}
       >
         {lab}
