@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import styles from './styles.scss';
 import PostPreview from 'components/PostPreview';
 import HighlightedPosts from 'components/FrontPage/components/HighlightedPosts';
+import HighlightedShows from 'components/FrontPage/components/HighlightedShows';
 
 const PostPreviewList = props => {
   const posts = props.posts.toJS().map((post, index) => (
@@ -18,6 +19,14 @@ const PostPreviewList = props => {
       <PostPreview {...post} />
     </div>
   ));
+  posts.splice(
+    2,
+    0,
+    <HighlightedShows
+      //shows={{"test1", "test2", "test3"}}
+      key={'highlightedShows'}
+    />,
+  );
   if (!props.highlightedPosts.isEmpty()) {
     // Insert highlighted posts after element 3
     posts.splice(
