@@ -48,6 +48,8 @@ export class Shows extends React.Component {
   createCheckbox = category => (
     <Checkbox
       label={category.name}
+      backgroundColor={category.backgroundColor}
+      textColor={category.textColor}
       isSelected={this.state.selectedCategories[category.name] || false}
       onCheckboxChange={this.handleCheckboxChange}
       key={category.name}

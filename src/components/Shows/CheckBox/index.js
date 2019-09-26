@@ -2,7 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './styles.scss';
 
-const Checkbox = ({ label: lab, isSelected, onCheckboxChange, className }) => (
+const Checkbox = ({
+  label: lab,
+  isSelected,
+  backgroundColor,
+  textColor,
+  onCheckboxChange,
+  className,
+}) => (
   <div className={styles.checkbox}>
     <label>
       <input
@@ -12,13 +19,19 @@ const Checkbox = ({ label: lab, isSelected, onCheckboxChange, className }) => (
         checked={isSelected}
         onChange={onCheckboxChange}
       />
-      {lab}
+      <div
+        style={{ backgroundColor: backgroundColor, textColor: textColor }}
+        className={styles.text}
+      >
+        {lab}
+      </div>
     </label>
   </div>
 );
 
 Checkbox.propTypes = {
   label: PropTypes.string.isRequired,
+
   isSelected: PropTypes.bool.isRequired,
   onCheckboxChange: PropTypes.func.isRequired,
 };
