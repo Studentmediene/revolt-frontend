@@ -15,15 +15,41 @@ class HighlightedShows extends React.Component {
     };
   }
 
+  startInterval() {
+    this.interval = setInterval(
+      () =>
+        this.setState({
+          selectedShowIndex:
+            this.state.selectedShowIndex === 2
+              ? 0
+              : this.state.selectedShowIndex + 1,
+        }),
+      6000,
+    );
+  }
+
+  componentDidMount() {
+    this.startInterval();
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
   mapShows() {
     return this.props.shows.map((show, index) => (
       <div
         className={classNames(styles.showImage, {
           [styles.selected]: index === this.state.selectedShowIndex,
+          [styles.unselected]: index != this.state.selectedShowIndex,
         })}
         key={index}
         onMouseEnter={() => {
+          clearInterval(this.interval);
           this.setState({ selectedShowIndex: index });
+        }}
+        onMouseLeave={() => {
+          this.startInterval();
         }}
       >
         <img src={show.imgUrl} alt={show.key} width="100%" />
@@ -32,17 +58,17 @@ class HighlightedShows extends React.Component {
   }
 
   render() {
+    const show = this.props.shows[this.state.selectedShowIndex];
     return (
       <div className={styles.container}>
-      <div className={styles.title}>De nyeste programmene</div>
-        <div className={styles.showsContainer}> {this.mapShows()} </div>
-      <div className={styles.playerContainer}>
-        <div className={styles.player}>
+        <div className={styles.title}>De nyeste programmene</div>
+        <div className={styles.showsContainer}>{this.mapShows()}</div>
+        <div className={styles.playerContainer}>
+          <div className={styles.player}>
             <Episode
-              title={this.props.shows[this.state.selectedShowIndex].title}
-              publishAt={
-                this.props.shows[this.state.selectedShowIndex].published
-              }
+              title={show.title}
+              publishAt={show.published}
+              id={show.id}
               key={'episode'}
             />
           </div>
