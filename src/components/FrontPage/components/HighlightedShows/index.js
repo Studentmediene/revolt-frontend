@@ -20,7 +20,7 @@ class HighlightedShows extends React.Component {
       () =>
         this.setState({
           selectedShowIndex:
-            this.state.selectedShowIndex === 2
+            this.state.selectedShowIndex === this.props.shows.length-1
               ? 0
               : this.state.selectedShowIndex + 1,
         }),
@@ -52,7 +52,12 @@ class HighlightedShows extends React.Component {
           this.startInterval();
         }}
       >
-        <img src={show.imgUrl} alt={show.key} width="100%" />
+        <img
+          className={styles.img}
+          src={show.imgUrl}
+          alt={show.key}
+          width="100%"
+        />
       </div>
     ));
   }

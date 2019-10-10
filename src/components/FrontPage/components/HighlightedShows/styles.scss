@@ -49,16 +49,24 @@
     display: flex;
     background-color: white;
     width: 100%;
-    /* height: 100%; */
     justify-content: center;
     align-content: center;
-    transition: all 0.7s linear;
-    
+    transition: all 0.4s linear;
+    img {
+      opacity: 0.4;
+      filter: alpha(opacity=40); /* For IE8 and earlier */
+      transition: all 0.4s linear;
+    }
   }
 
   .selected {
     outline: solid $color-radiorevolt-orange 7px;
     transform: scale(1.02);
+    img {
+      opacity: 1;
+      filter: alpha(opacity=100)
+    }
+
   }
   
    .unselected {
