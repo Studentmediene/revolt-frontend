@@ -2,12 +2,9 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 
 import { getGraphQL } from 'utils/api';
 import { postFormat } from 'utils/dataFormatters';
-<<<<<<< HEAD
 import { frontPagePostsLoaded, frontPagePostsError } from './actions';
 import { LOAD_FRONT_PAGE_POSTS_PENDING, POSTS_PER_PAGE } from './constants';
-=======
-import { episodeFormat } from '../../utils/dataFormatters';
->>>>>>> added newestShows in the frontpage graphql query in sagas
+import { newestEpisodesFormat } from '../../utils/dataFormatters';
 
 export function* loadFrontPageArticles({ postOffset }) {
   console.log('fetching frontpage');
@@ -42,10 +39,10 @@ export function* loadFrontPageArticles({ postOffset }) {
       id,
       title,
       show {
+        name
         image
       } 
       publishAt,
-      lead,
     }
   }`;
   try {
@@ -55,7 +52,7 @@ export function* loadFrontPageArticles({ postOffset }) {
     );
     const formattedPosts = allPosts.map(postFormat);
     const formattedHighlightedPosts = highlightedPosts.map(postFormat);
-    const formattedNewestEpisodes = allEpisodes.map(episodeFormat);
+    const formattedNewestEpisodes = allEpisodes.map(newestEpisodesFormat);
 
     yield put(
       frontPagePostsLoaded({

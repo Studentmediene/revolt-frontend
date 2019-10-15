@@ -11,7 +11,7 @@ class HighlightedShows extends React.Component {
     super(props);
     // test state
     this.state = {
-      selectedShowIndex: 1,
+      selectedShowIndex: 0,
     };
   }
 
@@ -54,8 +54,8 @@ class HighlightedShows extends React.Component {
       >
         <img
           className={styles.img}
-          src={show.imgUrl}
-          alt={show.key}
+          src={show.imgURL}
+          alt={show.name}
           width="100%"
         />
       </div>
@@ -72,9 +72,9 @@ class HighlightedShows extends React.Component {
           <div className={styles.player}>
             <Episode
               title={show.title}
-              publishAt={show.published}
+              publishAt={show.publishAt}
               id={show.id}
-              key={'episode'}
+              key={show.id}
             />
           </div>
         </div>
