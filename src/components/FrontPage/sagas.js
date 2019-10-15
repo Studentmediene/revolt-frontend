@@ -39,21 +39,23 @@ export function* loadFrontPageArticles({ postOffset }) {
       },
     }
     allEpisodes(count: 3) {
-      id
-      title
-      showName
-      publishAt
-      lead
+      id,
+      title,
+      show {
+        image
+      } 
+      publishAt,
+      lead,
     }
   }`;
   try {
-    const { data: { allPosts, highlightedPosts, newestEpisodes } } = yield call(
+    const { data: { allPosts, highlightedPosts, allEpisodes, } } = yield call(
       getGraphQL,
       query,
     );
     const formattedPosts = allPosts.map(postFormat);
     const formattedHighlightedPosts = highlightedPosts.map(postFormat);
-    const formattedNewestEpisodes = newestEpisodes.map(episodeFormat);
+    const formattedNewestEpisodes = allEpisodes.map(episodeFormat);
 
     yield put(
       frontPagePostsLoaded({

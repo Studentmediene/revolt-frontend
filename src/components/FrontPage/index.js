@@ -12,6 +12,7 @@ import {
   selectFrontPagePostsError,
   selectPostOffset,
   selectHasLoaded,
+  selectNewestEpisodes,
 } from './selectors';
 import Loader from 'components/Loader';
 import { loadFrontPagePosts } from './actions';
@@ -24,6 +25,7 @@ export class FrontPage extends React.Component {
   static propTypes = {
     posts: PropTypes.instanceOf(Immutable.List).isRequired,
     highlightedPosts: PropTypes.instanceOf(Immutable.List).isRequired,
+    newestEpisodes: PropTypes.instanceOf(Immutable.List).isRequired,
     loading: PropTypes.bool.isRequired,
     error: PropTypes.bool.isRequired,
     loadPosts: PropTypes.func.isRequired,
@@ -60,6 +62,7 @@ export class FrontPage extends React.Component {
         <PostPreviewList
           posts={this.props.posts}
           highlightedPosts={this.props.highlightedPosts}
+          newestEpisodes={this.props.newestEpisodes}
         />
       );
     }
@@ -79,6 +82,7 @@ const mapStateToProps = createStructuredSelector({
   error: selectFrontPagePostsError(),
   postOffset: selectPostOffset(),
   hasLoaded: selectHasLoaded(),
+  newestEpisodes: selectNewestEpisodes(),
 });
 
 function mapDispatchToProps(dispatch) {
