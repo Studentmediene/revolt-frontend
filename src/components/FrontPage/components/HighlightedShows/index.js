@@ -1,10 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import styles from './styles.scss';
 import classNames from 'classnames';
 import Episode from 'components/Episode';
-import PropTypes from 'prop-types';
+import { getOnDemandPlaylist } from 'components/Player/actions';
+import { createStructuredSelector } from 'reselect';
+import { selectNewestEpisodes } from '../../selectors.js';
 
-//import Feber_logo_profil from './TestImages/Feber_logo_profil.png';
 
 class HighlightedShows extends React.Component {
   constructor(props) {
@@ -16,16 +20,16 @@ class HighlightedShows extends React.Component {
   }
 
   startInterval() {
-    this.interval = setInterval(
-      () =>
-        this.setState({
-          selectedShowIndex:
-            this.state.selectedShowIndex === this.props.shows.length-1
-              ? 0
-              : this.state.selectedShowIndex + 1,
-        }),
-      6000,
-    );
+      this.interval = setInterval(
+        () =>
+          this.setState({
+            selectedShowIndex:
+              this.state.selectedShowIndex === this.props.shows.length-1
+                ? 0
+                : this.state.selectedShowIndex + 1,
+          }),
+        4000,
+      ); 
   }
 
   componentDidMount() {
@@ -46,10 +50,10 @@ class HighlightedShows extends React.Component {
         key={index}
         onMouseEnter={() => {
           clearInterval(this.interval);
-          this.setState({ selectedShowIndex: index });
+          this.setState({ selectedShowIndex: index});
         }}
         onMouseLeave={() => {
-          this.startInterval();
+            this.startInterval();
         }}
       >
         <img
@@ -66,15 +70,18 @@ class HighlightedShows extends React.Component {
     const show = this.props.shows[this.state.selectedShowIndex];
     return (
       <div className={styles.container}>
-        <div className={styles.title}>De nyeste programmene</div>
+        <div className={styles.title}>De nyeste episodene</div>
         <div className={styles.showsContainer}>{this.mapShows()}</div>
         <div className={styles.playerContainer}>
-          <div className={styles.player}>
+          <div className={styles.player} onClick={() => {
+          clearInterval(this.interval);
+        }}>
             <Episode
               title={show.title}
               publishAt={show.publishAt}
               id={show.id}
               key={show.id}
+              playOnDemand={this.props.playOnDemand}
             />
           </div>
         </div>
@@ -85,6 +92,18 @@ class HighlightedShows extends React.Component {
 
 HighlightedShows.propTypes = {
   shows: PropTypes.array,
+  playOnDemand: PropTypes.func,
 };
 
-export default HighlightedShows;
+const mapStateToProps = createStructuredSelector({
+  shows: selectNewestEpisodes(),
+});
+
+function mapDispatchToProps(dispatch) {
+  return {
+    playOnDemand: (episodeId, offset = 0) =>
+      dispatch(getOnDemandPlaylist(episodeId, offset)),
+  };
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HighlightedShows));
