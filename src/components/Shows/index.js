@@ -121,7 +121,7 @@ export class Shows extends React.Component {
       <div>
         <div className={styles.container}>{this.createCheckboxes()}</div>
 
-        <React.Fragment>{showPreviewList}</React.Fragment>
+        {showPreviewList}
       </div>
     );
   }

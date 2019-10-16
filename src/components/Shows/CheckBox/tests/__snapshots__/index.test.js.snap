@@ -12,7 +12,17 @@ exports[`<CheckBox /> renders correctly 1`] = `
       onChange={[Function]}
       type="checkbox"
     />
-    Kultur
+    <div
+      className="text"
+      style={
+        Object {
+          "backgroundColor": undefined,
+          "color": undefined,
+        }
+      }
+    >
+      Kultur
+    </div>
   </label>
 </div>
 `;
