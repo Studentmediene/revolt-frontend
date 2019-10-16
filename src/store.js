@@ -1,22 +1,22 @@
 import { fromJS } from 'immutable';
 import createSagaMiddleware from 'redux-saga';
 import { createStore, applyMiddleware, compose } from 'redux';
-import { routerMiddleware } from 'connected-react-router/immutable'
+// import { routerMiddleware } from 'connected-react-router/immutable';
 
 import createReducer from './reducers';
-import playerSagas from 'components/Player/sagas';
+// import playerSagas from 'components/Player/sagas';
 import footerSagas from 'components/Footer/sagas';
 
 const sagaMiddleware = createSagaMiddleware();
-const devtools = window.devToolsExtension || (() => noop => noop);
+// const devtools = window.devToolsExtension || (() => noop => noop);
 
-export default function configureStore(initialState = {}, history) {
+export default function configureStore(initialState = {}) {
   // Create the store with two middlewares
   // 1. sagaMiddleware: Makes redux-sagas work
   // 2. routerMiddleware: Syncs the location/URL path to the state
-  const middlewares = [sagaMiddleware, routerMiddleware(history)];
+  const middlewares = [sagaMiddleware];
 
-  const enhancers = [applyMiddleware(...middlewares), devtools()];
+  const enhancers = [applyMiddleware(...middlewares)];
 
   const store = createStore(
     createReducer(),
@@ -28,7 +28,7 @@ export default function configureStore(initialState = {}, history) {
   store.runSaga = sagaMiddleware.run;
 
   // Run global player saga
-  playerSagas.map(sagaMiddleware.run);
+  // playerSagas.map(sagaMiddleware.run);
 
   // Run global footer saga
   footerSagas.map(sagaMiddleware.run);

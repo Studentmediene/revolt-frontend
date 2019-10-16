@@ -5,7 +5,7 @@
 
 import { combineReducers } from 'redux-immutable';
 
-import routerReducer from 'utils/router/reducer';
+// import routerReducer from 'utils/router/reducer';
 import playerReducer from 'components/Player/reducer';
 import footerReducer from 'components/Footer/reducer';
 
@@ -14,7 +14,7 @@ import footerReducer from 'components/Footer/reducer';
  */
 export default function createReducer(asyncReducers) {
   return combineReducers({
-    router: routerReducer,
+    // router: routerReducer,
     player: playerReducer,
     footer: footerReducer,
     ...asyncReducers,

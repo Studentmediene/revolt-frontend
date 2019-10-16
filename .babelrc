@@ -1,23 +1,25 @@
 {
   "presets": [
-    ["@babel/env", {
-        "targets": {
-          "browsers": ["last 2 versions"],
-          "node": "current"
-        },
-        "useBuiltIns": "usage",
-        "corejs": 3
+    [
+      "next/babel",
+      {
+        "preset-env": { "targets": { "node": "current" } }
       }
-    ],
-    "@babel/react"
+    ]
   ],
   "plugins": [
-    ["module-resolver", {
-      "root": ["./src"]
-    }],
-    ["@babel/transform-runtime", {
-      "regenerator": true
-    }],
+    [
+      "module-resolver",
+      {
+        "root": ["./src"]
+      }
+    ],
+    [
+      "@babel/transform-runtime",
+      {
+        "regenerator": true
+      }
+    ],
     "@babel/proposal-class-properties",
     "@babel/proposal-object-rest-spread",
     "@babel/syntax-dynamic-import"
@@ -33,9 +35,7 @@
       ]
     },
     "test": {
-      "plugins": [
-        "dynamic-import-node"
-      ]
+      "plugins": ["dynamic-import-node"]
     }
   }
 }

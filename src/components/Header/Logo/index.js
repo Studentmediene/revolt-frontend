@@ -1,11 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 import styles from './styles.scss';
 import pngLogo from './RR_logo.png';
 
 const Logo = () => (
-  <Link to="/">
+  <Link href="/">
     <img src={pngLogo} alt="Logo" className={styles.logo} />
   </Link>
 );
