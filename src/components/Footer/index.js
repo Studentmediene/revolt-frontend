@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { createStructuredSelector } from 'reselect';
 
 import { loadFooter } from './actions';
@@ -38,7 +38,8 @@ export class Footer extends React.Component {
         <div className={styles.content}>
           <p>
             Denne tjenesten tilbys av Studentmediene i Trondheim AS. Musikken er
-            gjengitt med tillatelse fra TONO/NCB.<br />
+            gjengitt med tillatelse fra TONO/NCB.
+            <br />
             Uautorisert lenking, videreføring eller kopiering er ulovlig.
           </p>
           <h2 className={styles.contactHeader}>Kontakt oss</h2>
@@ -65,11 +66,15 @@ export class Footer extends React.Component {
             <SocialMediaContainer />
             <br />
           </div>
-          <Link className={styles.footerLink} to="/om">
-            Om oss
+          <Link href="/om">
+            <a className={styles.footerLink} href="/om">
+              Om oss
+            </a>
           </Link>
-          <Link className={styles.footerLink} to="/personvern">
-            Personvern
+          <Link href="/personvern">
+            <a className={styles.footerLink} href="/personvern">
+              Personvern
+            </a>
           </Link>
           <p>{new Date().getFullYear()} © Radio Revolt</p>
         </div>
@@ -92,4 +97,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Footer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Footer);

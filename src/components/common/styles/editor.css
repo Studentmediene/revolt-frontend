@@ -10,7 +10,7 @@ body {
 }
 
 a {
-  background: transparent !important;
+  background: transparent;
   color: black;
   text-decoration-color: black;
 }

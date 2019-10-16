@@ -38,7 +38,7 @@ class MyApp extends App {
             <Component {...pageProps} />
           </main>
           {!plain && <Sidebar />}
-          {/*!plain && <Footer />*/}
+          {!plain && <Footer />}
           {/* !plain && <Player />*/}
         </div>
       </Provider>

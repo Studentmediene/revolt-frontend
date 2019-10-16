@@ -7,8 +7,10 @@ import styles from './styles.scss';
 const navbarComponents = links =>
   links.map(link => (
     <li key={link.path} className={styles.navbarItem}>
-      <Link className={styles.navbarLink} href={link.path}>
-        {link.title}
+      <Link href={link.path}>
+        <a className={styles.navbarLink} href={link.path}>
+          {link.title}
+        </a>
       </Link>
     </li>
   ));
@@ -18,7 +20,7 @@ export const NavList = props => (
 );
 
 NavList.propTypes = {
-  links: PropTypes.array.isRequired,
+  links: PropTypes.array.isRequired
 };
 
 export default NavList;

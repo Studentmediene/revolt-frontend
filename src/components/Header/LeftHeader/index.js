@@ -8,7 +8,7 @@ const smallNavbarLinks = [
   {
     path: '/programmer',
     title: 'Programmer',
-  }
+  },
 ];
 
 const largeNavbarLinks = [
@@ -17,7 +17,7 @@ const largeNavbarLinks = [
     path: '/sendeplan',
     title: 'Sendeplan',
   },
-]
+];
 
 export const LeftHeader = () => (
   <React.Fragment>

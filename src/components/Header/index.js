@@ -11,7 +11,7 @@ class Header extends React.Component {
     return (
       <header className={styles.header}>
         <div className={styles.headerContent}>
-          {/*<LeftHeader />*/}
+          <LeftHeader />
           <Logo />
           <RightHeader />
         </div>
