@@ -4,7 +4,6 @@ import { getGraphQL } from 'utils/api';
 import { LOAD_PRIVACY_POLICY_PENDING } from './constants';
 import { privacyPolicyLoaded, privacyPolicyError } from './actions';
 
-// Individual exports for testing
 export function* loadPrivacyPolicy() {
   const query = `query {
     settings {
@@ -19,9 +18,4 @@ export function* loadPrivacyPolicy() {
   }
 }
 
-export function* loadPrivacyPolicyWatcher() {
-  yield takeEvery(LOAD_PRIVACY_POLICY_PENDING, loadPrivacyPolicy);
-}
-
-// All sagas to be loaded
-export default [loadPrivacyPolicyWatcher];
+export default [takeEvery(LOAD_PRIVACY_POLICY_PENDING, loadPrivacyPolicy)];

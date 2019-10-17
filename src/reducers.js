@@ -8,6 +8,7 @@ import { combineReducers } from 'redux-immutable';
 import playerReducer from 'components/Player/reducer';
 import footerReducer from 'components/Footer/reducer';
 import frontPageReducer from 'components/FrontPage/reducer';
+import privacyPolicyReducer from 'components/PrivacyPolicy/reducer';
 import aboutReducer from 'components/About/reducer';
 
 /**
@@ -18,6 +19,7 @@ export default function createReducer() {
     player: playerReducer,
     footer: footerReducer,
     frontPage: frontPageReducer,
+    privacyPolicy: privacyPolicyReducer,
     about: aboutReducer,
   });
 }
