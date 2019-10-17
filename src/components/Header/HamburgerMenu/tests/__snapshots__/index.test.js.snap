@@ -7,7 +7,7 @@ exports[`<HamburgerMenu /> renders correctly 1`] = `
 >
   <img
     className="hamburgerIcon"
-    src="hamburger-menu.svg"
+    src="/assets/hamburger-menu.svg"
   />
   <div
     className="hamburgerText"
@@ -17,7 +17,7 @@ exports[`<HamburgerMenu /> renders correctly 1`] = `
   <div
     className="overlay"
   />
-  <Connect(NavDrawer)
+  <withRouter(NavDrawer)
     links={
       Array [
         Object {

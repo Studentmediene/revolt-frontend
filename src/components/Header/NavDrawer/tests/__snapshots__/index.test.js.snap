@@ -11,8 +11,9 @@ exports[`<NavDrawer /> renders correctly 1`] = `
     onClick={[Function]}
   >
     <img
+      alt="Radio Revolt Logo"
       className="logo"
-      src="RR_logo.png"
+      src="/assets/RR_logo.png"
     />
   </a>
   <a

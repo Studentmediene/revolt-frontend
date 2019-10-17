@@ -6,7 +6,7 @@ import { About } from '../';
 describe('<About />', () => {
   it('renders correctly', () => {
     const props = {
-      about: '<p>about</p>',
+      content: '<p>about</p>',
       loading: false,
       error: false,
       loadAbout: jest.fn(),
@@ -17,7 +17,7 @@ describe('<About />', () => {
   });
   it('renders correctly while loading', () => {
     const props = {
-      about: '<p>about</p>',
+      content: '<p>about</p>',
       loading: true,
       error: false,
       loadAbout: jest.fn(),
@@ -28,7 +28,7 @@ describe('<About />', () => {
   });
   it('renders correctly on error', () => {
     const props = {
-      about: '<p>about</p>',
+      content: '<p>about</p>',
       loading: false,
       error: true,
       loadAbout: jest.fn(),

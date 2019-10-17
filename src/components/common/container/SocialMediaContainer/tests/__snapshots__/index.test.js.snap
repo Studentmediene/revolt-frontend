@@ -5,12 +5,12 @@ exports[`<SocialMediaContainer /> renders correctly 1`] = `
   className="socialMediaContainer"
 >
   <SocialMediaButton
-    image="facebook.svg"
+    image="/assets/facebook_logo.svg"
     link="https://www.facebook.com/radiorevolt.no/"
     text="Facebook"
   />
   <SocialMediaButton
-    image="instagram.svg"
+    image="/assets/instagram_logo.svg"
     link="https://www.instagram.com/radiorevolt/"
     text="Instagram"
   />

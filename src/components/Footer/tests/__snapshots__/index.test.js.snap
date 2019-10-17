@@ -46,18 +46,24 @@ exports[`<Footer /> renders correctly 1`] = `
       <br />
     </div>
     <Link
-      className="footerLink"
-      replace={false}
-      to="/om"
+      href="/om"
     >
-      Om oss
+      <a
+        className="footerLink"
+        href="/om"
+      >
+        Om oss
+      </a>
     </Link>
     <Link
-      className="footerLink"
-      replace={false}
-      to="/personvern"
+      href="/personvern"
     >
-      Personvern
+      <a
+        className="footerLink"
+        href="/personvern"
+      >
+        Personvern
+      </a>
     </Link>
     <p>
       2019
@@ -113,18 +119,24 @@ exports[`<Footer /> renders correctly on error 1`] = `
       <br />
     </div>
     <Link
-      className="footerLink"
-      replace={false}
-      to="/om"
+      href="/om"
     >
-      Om oss
+      <a
+        className="footerLink"
+        href="/om"
+      >
+        Om oss
+      </a>
     </Link>
     <Link
-      className="footerLink"
-      replace={false}
-      to="/personvern"
+      href="/personvern"
     >
-      Personvern
+      <a
+        className="footerLink"
+        href="/personvern"
+      >
+        Personvern
+      </a>
     </Link>
     <p>
       2019
@@ -180,18 +192,24 @@ exports[`<Footer /> renders correctly while loading 1`] = `
       <br />
     </div>
     <Link
-      className="footerLink"
-      replace={false}
-      to="/om"
+      href="/om"
     >
-      Om oss
+      <a
+        className="footerLink"
+        href="/om"
+      >
+        Om oss
+      </a>
     </Link>
     <Link
-      className="footerLink"
-      replace={false}
-      to="/personvern"
+      href="/personvern"
     >
-      Personvern
+      <a
+        className="footerLink"
+        href="/personvern"
+      >
+        Personvern
+      </a>
     </Link>
     <p>
       2019
