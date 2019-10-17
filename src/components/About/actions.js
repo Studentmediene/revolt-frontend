@@ -10,10 +10,10 @@ export function loadAbout() {
   };
 }
 
-export function aboutLoaded(about) {
+export function aboutLoaded(content) {
   return {
     type: LOAD_ABOUT_SUCCESS,
-    about,
+    content,
   };
 }
 

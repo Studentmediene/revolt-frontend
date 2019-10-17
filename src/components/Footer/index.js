@@ -10,7 +10,7 @@ import {
   selectRadioEditor,
   selectMusicProducer,
   selectFooterLoading,
-  selectFooterError,
+  selectFooterError
 } from './selectors';
 
 import styles from './styles.scss';
@@ -18,16 +18,21 @@ import SocialMediaContainer from 'components/common/container/SocialMediaContain
 
 export class Footer extends React.Component {
   static propTypes = {
-    radioEditor: PropTypes.string.isRequired,
-    chiefEditor: PropTypes.string.isRequired,
-    musicProducer: PropTypes.string.isRequired,
+    radioEditor: PropTypes.string,
+    chiefEditor: PropTypes.string,
+    musicProducer: PropTypes.string,
     loading: PropTypes.bool.isRequired,
     error: PropTypes.bool.isRequired,
-    loadFooter: PropTypes.func.isRequired,
+    loadFooter: PropTypes.func.isRequired
   };
 
-  componentDidMount() {
-    this.props.loadFooter();
+  static async getInitialProps(ctx) {
+    const { store, isServer } = ctx;
+    if (isServer) {
+      store.dispatch(loadFooter());
+    }
+
+    return { isServer };
   }
 
   render() {
@@ -88,16 +93,16 @@ const mapStateToProps = createStructuredSelector({
   radioEditor: selectRadioEditor(),
   musicProducer: selectMusicProducer(),
   loading: selectFooterLoading(),
-  error: selectFooterError(),
+  error: selectFooterError()
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    loadFooter: () => dispatch(loadFooter()),
+    loadFooter: () => dispatch(loadFooter())
   };
 }
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(Footer);

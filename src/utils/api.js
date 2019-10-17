@@ -1,3 +1,5 @@
+import 'isomorphic-unfetch';
+
 const GRAPHQL_URL = '/graphql';
 const API_URL = 'https://api.radiorevolt.no';
 export const MEDIA_URL = '/media/';
@@ -14,7 +16,8 @@ export const get = url =>
     .then(handleError)
     .then(res => res.json());
 
-export const getGraphQL = query => get(`${GRAPHQL_URL}?query=${query}`);
+export const getGraphQL = query =>
+  get(`http://localhost:3000${GRAPHQL_URL}?query=${query}`);
 
 export const getPodcasts = showId => `${API_URL}/v1/lyd/podcast/${showId}`;
 

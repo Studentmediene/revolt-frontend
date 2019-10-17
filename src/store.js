@@ -2,8 +2,8 @@ import { fromJS } from 'immutable';
 import createSagaMiddleware from 'redux-saga';
 import { createStore, applyMiddleware, compose } from 'redux';
 
+import rootSaga from './sagas';
 import createReducer from './reducers';
-import sagas from './sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -22,7 +22,7 @@ function configureStore(initialState = {}) {
     composeEnhancers(applyMiddleware(sagaMiddleware)),
   );
 
-  sagas.map(s => s.map(sagaMiddleware.run));
+  store.sagaTask = sagaMiddleware.run(rootSaga);
 
   // Make reducers hot reloadable, see http://mxs.is/googmo
   /* istanbul ignore next */
@@ -39,5 +39,4 @@ function configureStore(initialState = {}) {
   return store;
 }
 
-const initialState = {};
-export default configureStore(initialState);
+export default configureStore;

@@ -2,15 +2,17 @@ import React from 'react';
 import App from 'next/app';
 import moment from 'moment';
 import { Provider } from 'react-redux';
+import withRedux from 'next-redux-wrapper';
+import withReduxSaga from 'next-redux-saga';
 
 import styles from './styles.scss';
 
 import Header from 'components/Header';
+import Sidebar from 'components/Sidebar';
 import Footer from 'components/Footer';
 // import Player from 'components/Player';
-import Sidebar from 'components/Sidebar';
 
-import store from '../store';
+import configureStore from '../store';
 
 // Import the CSS reset, which HtmlWebpackPlugin transfers to the build folder
 import 'sanitize.css/sanitize.css';
@@ -28,9 +30,21 @@ moment.locale('NB_no', {
 });
 
 class RadioRevolt extends App {
+  static async getInitialProps({ Component, ctx }) {
+    let pageProps = {};
+    let footerProps = await Footer.getInitialProps(ctx);
+
+    if (Component.getInitialProps) {
+      pageProps = await Component.getInitialProps(ctx);
+    }
+
+    return { pageProps, footerProps };
+  }
+
   render() {
     const plain = false; // TODO: fix to render plain pages on apps
-    const { Component, pageProps } = this.props;
+
+    const { Component, pageProps, footerProps, store } = this.props;
     return (
       <Provider store={store}>
         <div className={styles.container}>
@@ -39,7 +53,7 @@ class RadioRevolt extends App {
             <Component {...pageProps} />
           </main>
           {!plain && <Sidebar />}
-          {!plain && <Footer />}
+          {!plain && <Footer {...footerProps} />}
           {/* !plain && <Player />*/}
         </div>
       </Provider>
@@ -47,4 +61,4 @@ class RadioRevolt extends App {
   }
 }
 
-export default RadioRevolt;
+export default withRedux(configureStore)(withReduxSaga(RadioRevolt));

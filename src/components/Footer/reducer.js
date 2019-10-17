@@ -2,15 +2,15 @@ import { fromJS } from 'immutable';
 import {
   LOAD_FOOTER_PENDING,
   LOAD_FOOTER_SUCCESS,
-  LOAD_FOOTER_FAILED,
+  LOAD_FOOTER_FAILED
 } from './constants';
 
 const initialState = fromJS({
-  chiefEditor: '',
-  radioEditor: '',
-  musicProducer: '',
+  chiefEditor: null,
+  radioEditor: null,
+  musicProducer: null,
   loading: false,
-  error: false,
+  error: false
 });
 
 function footerReducer(state = initialState, action) {
