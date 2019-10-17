@@ -11,24 +11,6 @@ export default function createRoutes(store) {
 
   return [
     {
-      path: '/programmer',
-      name: 'shows',
-      exact: true,
-      component: asyncComponent(() =>
-        Promise.all([
-          import('components/Shows/reducer'),
-          import('components/Shows/sagas'),
-          import('components/Shows'),
-        ])
-          .then(([reducer, sagas, component]) => {
-            injectReducer('shows', reducer.default);
-            injectSagas(sagas.default);
-            return component;
-          })
-          .catch(errorLoading),
-      ),
-    },
-    {
       path: '/post/:slug',
       name: 'post',
       component: asyncComponent(() =>
