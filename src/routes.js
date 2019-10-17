@@ -63,24 +63,6 @@ export default function createRoutes(store) {
       ),
     },
     {
-      path: '/sendeplan',
-      name: 'sendeplan',
-      exact: true,
-      component: asyncComponent(() =>
-        Promise.all([
-          import('components/Sendeplan/reducer'),
-          import('components/Sendeplan/sagas'),
-          import('components/Sendeplan'),
-        ])
-          .then(([reducer, sagas, component]) => {
-            injectReducer('sendeplan', reducer.default);
-            injectSagas(sagas.default);
-            return component;
-          })
-          .catch(errorLoading),
-      ),
-    },
-    {
       path: '/plainpost/:slug',
       name: 'plainpost',
       component: asyncComponent(() =>
