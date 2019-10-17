@@ -5,6 +5,7 @@ import { LOAD_ABOUT_PENDING } from './constants';
 import { aboutLoaded, aboutError } from './actions';
 
 export function* loadAbout() {
+  console.log('fetching about');
   const query = `query {
     settings {
       about

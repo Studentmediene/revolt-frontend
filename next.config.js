@@ -6,7 +6,7 @@ const config = {
   sassLoaderOptions: {
     includePaths: ['src'],
   },
-  webpack: (config, options) => {
+  webpack: config => {
     // access to webpack config here
     config.module.rules.push({
       test: [/\.mp3$/, /\.png$/, /\.svg$/],

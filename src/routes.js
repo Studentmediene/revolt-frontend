@@ -11,42 +11,6 @@ export default function createRoutes(store) {
 
   return [
     {
-      path: '/om',
-      name: 'about',
-      exact: true,
-      component: asyncComponent(() =>
-        Promise.all([
-          import('components/About/reducer'),
-          import('components/About/sagas'),
-          import('components/About')
-        ])
-          .then(([reducer, sagas, component]) => {
-            injectReducer('about', reducer.default);
-            injectSagas(sagas.default);
-            return component;
-          })
-          .catch(errorLoading)
-      )
-    },
-    {
-      path: '/personvern',
-      name: 'privacyPolicy',
-      exact: true,
-      component: asyncComponent(() =>
-        Promise.all([
-          import('components/PrivacyPolicy/reducer'),
-          import('components/PrivacyPolicy/sagas'),
-          import('components/PrivacyPolicy')
-        ])
-          .then(([reducer, sagas, component]) => {
-            injectReducer('privacyPolicy', reducer.default);
-            injectSagas(sagas.default);
-            return component;
-          })
-          .catch(errorLoading)
-      )
-    },
-    {
       path: '/programmer',
       name: 'shows',
       exact: true,
@@ -54,15 +18,15 @@ export default function createRoutes(store) {
         Promise.all([
           import('components/Shows/reducer'),
           import('components/Shows/sagas'),
-          import('components/Shows')
+          import('components/Shows'),
         ])
           .then(([reducer, sagas, component]) => {
             injectReducer('shows', reducer.default);
             injectSagas(sagas.default);
             return component;
           })
-          .catch(errorLoading)
-      )
+          .catch(errorLoading),
+      ),
     },
     {
       path: '/post/:slug',
@@ -71,15 +35,15 @@ export default function createRoutes(store) {
         Promise.all([
           import('components/Post/reducer'),
           import('components/Post/sagas'),
-          import('components/Post')
+          import('components/Post'),
         ])
           .then(([reducer, sagas, component]) => {
             injectReducer('post', reducer.default);
             injectSagas(sagas.default);
             return component;
           })
-          .catch(errorLoading)
-      )
+          .catch(errorLoading),
+      ),
     },
     {
       path: '/programmer/:slug',
@@ -88,15 +52,15 @@ export default function createRoutes(store) {
         Promise.all([
           import('components/Show/reducer'),
           import('components/Show/sagas'),
-          import('components/Show')
+          import('components/Show'),
         ])
           .then(([reducer, sagas, component]) => {
             injectReducer('show', reducer.default);
             injectSagas(sagas.default);
             return component;
           })
-          .catch(errorLoading)
-      )
+          .catch(errorLoading),
+      ),
     },
     {
       path: '/sendeplan',
@@ -106,15 +70,15 @@ export default function createRoutes(store) {
         Promise.all([
           import('components/Sendeplan/reducer'),
           import('components/Sendeplan/sagas'),
-          import('components/Sendeplan')
+          import('components/Sendeplan'),
         ])
           .then(([reducer, sagas, component]) => {
             injectReducer('sendeplan', reducer.default);
             injectSagas(sagas.default);
             return component;
           })
-          .catch(errorLoading)
-      )
+          .catch(errorLoading),
+      ),
     },
     {
       path: '/plainpost/:slug',
@@ -123,22 +87,22 @@ export default function createRoutes(store) {
         Promise.all([
           import('components/Post/reducer'),
           import('components/Post/sagas'),
-          import('components/Post')
+          import('components/Post'),
         ])
           .then(([reducer, sagas, component]) => {
             injectReducer('post', reducer.default);
             injectSagas(sagas.default);
             return component;
           })
-          .catch(errorLoading)
-      )
+          .catch(errorLoading),
+      ),
     },
     {
       path: '*',
       name: 'notfound',
       component: asyncComponent(() =>
-        import('components/NotFound').catch(errorLoading)
-      )
-    }
+        import('components/NotFound').catch(errorLoading),
+      ),
+    },
   ];
 }

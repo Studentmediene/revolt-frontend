@@ -13,9 +13,6 @@ const composeEnhancers =
   compose;
 
 function configureStore(initialState = {}) {
-  // Create the store with middlewares
-  // 1. sagaMiddleware: Makes redux-sagas work
-
   const store = createStore(
     createReducer(),
     fromJS(initialState),
@@ -24,18 +21,6 @@ function configureStore(initialState = {}) {
 
   store.sagaTask = sagaMiddleware.run(rootSaga);
 
-  // Make reducers hot reloadable, see http://mxs.is/googmo
-  /* istanbul ignore next */
-  if (module.hot) {
-    import('./reducers').then(reducerModule => {
-      const createReducers = reducerModule.default;
-      const nextReducers = createReducers(store.asyncReducers);
-
-      store.replaceReducer(nextReducers);
-    });
-  }
-
-  // Initialize it with no other reducers
   return store;
 }
 

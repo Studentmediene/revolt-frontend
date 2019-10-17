@@ -11,14 +11,14 @@ import {
   selectFrontPagePostsLoading,
   selectFrontPagePostsError,
   selectPostOffset,
-  selectHasLoaded
+  selectHasLoaded,
 } from './selectors';
+import Loader from 'components/Loader';
 import { loadFrontPagePosts } from './actions';
+import PostPreviewList from 'components/PostPreviewList';
+import LoadPostsButton from './components/LoadPostsButton';
 
 import styles from './styles.scss';
-import Loader from 'components/Loader';
-import LoadPostsButton from './components/LoadPostsButton';
-import PostPreviewList from 'components/PostPreviewList';
 
 export class FrontPage extends React.Component {
   static propTypes = {
@@ -28,23 +28,22 @@ export class FrontPage extends React.Component {
     error: PropTypes.bool.isRequired,
     loadPosts: PropTypes.func.isRequired,
     postOffset: PropTypes.number.isRequired,
-    hasLoaded: PropTypes.bool.isRequired
+    hasLoaded: PropTypes.bool.isRequired,
   };
 
-  componentDidMount() {
-    if (!this.props.hasLoaded) {
-      this.props.loadPosts(this.props.postOffset);
+  static async getInitialProps(ctx) {
+    const { store } = ctx;
+    if (!selectHasLoaded()(store.getState())) {
+      store.dispatch(loadFrontPagePosts(0));
     }
+    return {};
   }
 
   render() {
     let posts;
     let loader = (
       <LoadPostsButton
-        loadPosts={() => {
-          console.log('loading post button is loading posts');
-          this.props.loadPosts(this.props.postOffset);
-        }}
+        loadPosts={() => this.props.loadPosts(this.props.postOffset)}
       />
     );
     if (this.props.error) {
@@ -56,7 +55,7 @@ export class FrontPage extends React.Component {
     if (this.props.posts !== false) {
       // Sort the posts so that the last published posts are first
       posts = this.props.posts.sort((postA, postB) =>
-        moment(postB.publishAt).diff(postA.publishAt)
+        moment(postB.publishAt).diff(postA.publishAt),
       );
       posts = (
         <PostPreviewList
@@ -80,16 +79,16 @@ const mapStateToProps = createStructuredSelector({
   loading: selectFrontPagePostsLoading(),
   error: selectFrontPagePostsError(),
   postOffset: selectPostOffset(),
-  hasLoaded: selectHasLoaded()
+  hasLoaded: selectHasLoaded(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    loadPosts: postOffset => dispatch(loadFrontPagePosts(postOffset))
+    loadPosts: postOffset => dispatch(loadFrontPagePosts(postOffset)),
   };
 }
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(FrontPage);

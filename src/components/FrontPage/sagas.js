@@ -6,6 +6,7 @@ import { frontPagePostsLoaded, frontPagePostsError } from './actions';
 import { LOAD_FRONT_PAGE_POSTS_PENDING, POSTS_PER_PAGE } from './constants';
 
 export function* loadFrontPageArticles({ postOffset }) {
+  console.log('fetching frontpage');
   const query = `query {
     allPosts(offset: ${postOffset}, count: ${POSTS_PER_PAGE}) {
       id,

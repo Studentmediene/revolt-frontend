@@ -1,6 +1,7 @@
 import React from 'react';
 import App from 'next/app';
 import moment from 'moment';
+import ReactGA from 'react-ga';
 import { Provider } from 'react-redux';
 import withRedux from 'next-redux-wrapper';
 import withReduxSaga from 'next-redux-saga';
@@ -23,11 +24,24 @@ moment.locale('NB_no', {
     lastDay: '[I går] HH:mm',
     sameDay: '[I dag] HH:mm',
     nextDay: '[I morgen] HH:mm',
-    sameElse: 'DD.MM.YY HH:mm'
+    sameElse: 'DD.MM.YY HH:mm',
   },
   weekdaysShort: 'man_tirs_ons_tors_fre_lør_søn'.split('_'),
-  weekdays: 'mandag_tirsdag_onsdag_torsdag_fredag_lørdag_søndag'.split('_')
+  weekdays: 'mandag_tirsdag_onsdag_torsdag_fredag_lørdag_søndag'.split('_'),
 });
+
+import { initializeErrorReporting } from 'utils/errorReporting';
+
+if (process.env.NODE_ENV === 'production') {
+  initializeErrorReporting();
+
+  ReactGA.initialize('UA-4404225-6', {
+    gaOptions: {
+      anonymizeIp: true,
+    },
+  });
+  ReactGA.pageview(window.location.pathname + window.location.search);
+}
 
 class RadioRevolt extends App {
   static async getInitialProps({ Component, ctx }) {
