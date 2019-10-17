@@ -5,7 +5,6 @@ import { getGraphQL } from 'utils/api';
 import { postFormat } from 'utils/dataFormatters';
 
 export function* loadFrontPageArticles({ postOffset }) {
-  console.log('LOADING FRONTPAGE ARTICLES');
   const query = `query {
     allPosts(offset: ${postOffset}, count: ${POSTS_PER_PAGE}) {
       id,
@@ -36,7 +35,7 @@ export function* loadFrontPageArticles({ postOffset }) {
   }`;
   try {
     const {
-      data: { allPosts, highlightedPosts },
+      data: { allPosts, highlightedPosts }
     } = yield call(getGraphQL, query);
     const formattedPosts = allPosts.map(postFormat);
     const formattedHighlightedPosts = highlightedPosts.map(postFormat);
@@ -44,11 +43,10 @@ export function* loadFrontPageArticles({ postOffset }) {
     yield put(
       frontPagePostsLoaded({
         posts: formattedPosts,
-        highlightedPosts: formattedHighlightedPosts,
-      }),
+        highlightedPosts: formattedHighlightedPosts
+      })
     );
   } catch (error) {
-    console.log('LOADING FRONTPAGE FAILED');
     yield put(frontPagePostsError());
   }
 }

@@ -15,7 +15,7 @@ export class About extends React.Component {
     loadAbout: PropTypes.func.isRequired,
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.loadAbout();
   }
 
@@ -42,4 +42,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(About);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(About);

@@ -1,5 +1,5 @@
 const express = require('express');
-const logger = require('./server/logger');
+const logger = require('./logger');
 const next = require('next');
 
 const isDev = process.env.NODE_ENV !== 'production';

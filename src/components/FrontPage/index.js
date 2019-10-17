@@ -11,7 +11,7 @@ import {
   selectFrontPagePostsLoading,
   selectFrontPagePostsError,
   selectPostOffset,
-  selectHasLoaded
+  selectHasLoaded,
 } from './selectors';
 import { loadFrontPagePosts } from './actions';
 
@@ -28,12 +28,11 @@ export class FrontPage extends React.Component {
     error: PropTypes.bool.isRequired,
     loadPosts: PropTypes.func.isRequired,
     postOffset: PropTypes.number.isRequired,
-    hasLoaded: PropTypes.bool.isRequired
+    hasLoaded: PropTypes.bool.isRequired,
   };
 
   componentDidMount() {
     if (!this.props.hasLoaded) {
-      console.log("Component hasn't loaded, and is loading posts.");
       this.props.loadPosts(this.props.postOffset);
     }
   }
@@ -57,7 +56,7 @@ export class FrontPage extends React.Component {
     if (this.props.posts !== false) {
       // Sort the posts so that the last published posts are first
       posts = this.props.posts.sort((postA, postB) =>
-        moment(postB.publishAt).diff(postA.publishAt)
+        moment(postB.publishAt).diff(postA.publishAt),
       );
       posts = (
         <PostPreviewList
@@ -81,16 +80,16 @@ const mapStateToProps = createStructuredSelector({
   loading: selectFrontPagePostsLoading(),
   error: selectFrontPagePostsError(),
   postOffset: selectPostOffset(),
-  hasLoaded: selectHasLoaded()
+  hasLoaded: selectHasLoaded(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    loadPosts: postOffset => dispatch(loadFrontPagePosts(postOffset))
+    loadPosts: postOffset => dispatch(loadFrontPagePosts(postOffset)),
   };
 }
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(FrontPage);
