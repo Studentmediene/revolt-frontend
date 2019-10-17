@@ -26,7 +26,7 @@ export class Footer extends React.Component {
     loadFooter: PropTypes.func.isRequired,
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.loadFooter();
   }
 

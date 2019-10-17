@@ -9,10 +9,7 @@ import Footer from 'components/Footer';
 // import Player from 'components/Player';
 import Sidebar from 'components/Sidebar';
 
-import configureStore from '../store';
-
-const initialState = {};
-const store = configureStore(initialState);
+import store from '../store';
 
 class MyApp extends App {
   // Only uncomment this method if you have blocking data requirements for
@@ -28,7 +25,7 @@ class MyApp extends App {
   // }
 
   render() {
-    const plain = false;
+    const plain = false; // TODO: fix to render plain pages on apps
     const { Component, pageProps } = this.props;
     return (
       <Provider store={store}>

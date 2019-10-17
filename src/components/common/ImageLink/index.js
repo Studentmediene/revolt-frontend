@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import LazyLoad from 'react-lazyload';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import classNames from 'classnames';
 
 import styles from './styles.scss';
@@ -17,17 +17,19 @@ const ImageLink = ({
   const { small, medium, large } = images;
   const { className: customImageClassName, ...restImageProps } = imageProps;
   return (
-    <Link to={link} {...restProps}>
-      <LazyLoad height={350} offset={100} once>
-        <img
-          className={classNames(styles.image, customImageClassName)}
-          srcSet={`${large} 1024w, ${medium} 768w, ${small} 300w`}
-          src={large}
-          alt={imageDescription}
-          {...restImageProps}
-        />
-      </LazyLoad>
-      {children}
+    <Link href={link}>
+      <a href={link} {...restProps}>
+        <LazyLoad height={350} offset={100} once>
+          <img
+            className={classNames(styles.image, customImageClassName)}
+            srcSet={`${large} 1024w, ${medium} 768w, ${small} 300w`}
+            src={large}
+            alt={imageDescription}
+            {...restImageProps}
+          />
+        </LazyLoad>
+        {children}
+      </a>
     </Link>
   );
 };

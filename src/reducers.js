@@ -5,18 +5,17 @@
 
 import { combineReducers } from 'redux-immutable';
 
-// import routerReducer from 'utils/router/reducer';
 import playerReducer from 'components/Player/reducer';
 import footerReducer from 'components/Footer/reducer';
+import frontPageReducer from 'components/FrontPage/reducer';
 
 /**
  * Creates the root reducer with the asynchronously loaded ones
  */
-export default function createReducer(asyncReducers) {
+export default function createReducer() {
   return combineReducers({
-    // router: routerReducer,
     player: playerReducer,
     footer: footerReducer,
-    ...asyncReducers,
+    frontPage: frontPageReducer,
   });
 }

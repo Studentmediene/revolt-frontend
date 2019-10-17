@@ -1,37 +1,27 @@
 import { fromJS } from 'immutable';
 import createSagaMiddleware from 'redux-saga';
 import { createStore, applyMiddleware, compose } from 'redux';
-// import { routerMiddleware } from 'connected-react-router/immutable';
 
 import createReducer from './reducers';
-// import playerSagas from 'components/Player/sagas';
-import footerSagas from 'components/Footer/sagas';
+import sagas from './sagas';
 
 const sagaMiddleware = createSagaMiddleware();
-// const devtools = window.devToolsExtension || (() => noop => noop);
+const composeEnhancers =
+  (typeof window != 'undefined' &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+  compose;
 
-export default function configureStore(initialState = {}) {
-  // Create the store with two middlewares
+function configureStore(initialState = {}) {
+  // Create the store with middlewares
   // 1. sagaMiddleware: Makes redux-sagas work
-  // 2. routerMiddleware: Syncs the location/URL path to the state
-  const middlewares = [sagaMiddleware];
-
-  const enhancers = [applyMiddleware(...middlewares)];
 
   const store = createStore(
     createReducer(),
     fromJS(initialState),
-    compose(...enhancers),
+    composeEnhancers(applyMiddleware(sagaMiddleware)),
   );
 
-  // Create hook for async sagas
-  store.runSaga = sagaMiddleware.run;
-
-  // Run global player saga
-  // playerSagas.map(sagaMiddleware.run);
-
-  // Run global footer saga
-  footerSagas.map(sagaMiddleware.run);
+  sagas.map(s => s.map(sagaMiddleware.run));
 
   // Make reducers hot reloadable, see http://mxs.is/googmo
   /* istanbul ignore next */
@@ -45,6 +35,8 @@ export default function configureStore(initialState = {}) {
   }
 
   // Initialize it with no other reducers
-  store.asyncReducers = {};
   return store;
 }
+
+const initialState = {};
+export default configureStore(initialState);

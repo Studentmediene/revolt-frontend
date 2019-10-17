@@ -56,7 +56,11 @@ export class NavDrawer extends React.Component {
           className={styles.logoRow}
           onClick={e => this.navigate(e, '/')}
         >
-          <img src="/assets/RR_logo.png" className={styles.logo} />
+          <img
+            src="/assets/RR_logo.png"
+            className={styles.logo}
+            alt="Radio Revolt Logo"
+          />
         </a>
         {navbarComponents(this.props.links)}
       </div>

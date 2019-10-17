@@ -5,6 +5,7 @@ import {
 } from './constants';
 
 export function loadFrontPagePosts(postOffset) {
+  console.log('action created');
   return {
     type: LOAD_FRONT_PAGE_POSTS_PENDING,
     postOffset,
