@@ -1,11 +1,12 @@
-import { take, call, put } from 'redux-saga/effects';
-import { showsLoaded, showsLoadedError } from 'components/Shows/actions';
-import { LOAD_SHOWS_PENDING } from './constants';
-import { getGraphQL } from 'utils/api';
-import { showFormat } from 'utils/dataFormatters';
+import { takeEvery, call, put } from 'redux-saga/effects';
 
-// Individual exports for testing
+import { getGraphQL } from 'utils/api';
+import { LOAD_SHOWS_PENDING } from './constants';
+import { showFormat } from 'utils/dataFormatters';
+import { showsLoaded, showsLoadedError } from 'components/Shows/actions';
+
 export function* getShows() {
+  console.log('fetching shows');
   const query = `query {
     allShows {
       id,
@@ -29,11 +30,4 @@ export function* getShows() {
   }
 }
 
-export function* loadShowsWatcher() {
-  while (yield take(LOAD_SHOWS_PENDING)) {
-    yield call(getShows);
-  }
-}
-
-// All sagas to be loaded
-export default [loadShowsWatcher];
+export default [takeEvery(LOAD_SHOWS_PENDING, getShows)];

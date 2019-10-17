@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { fromJS } from 'immutable';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
@@ -9,13 +10,30 @@ import ShowPreviewList from './ShowPreviewList';
 import { selectShows, selectShowsLoading, selectShowsError } from './selectors';
 
 export class Shows extends React.Component {
-  state = {
-    showArchivedShows: false,
+  constructor(props) {
+    super(props);
+    this.state = {
+      showArchivedShows: false,
+    };
+    this.toggleArchivedShows = this.toggleArchivedShows.bind(this);
+  }
+
+  static propTypes = {
+    loading: PropTypes.bool,
+    error: PropTypes.bool,
+    shows: PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.object,
+      PropTypes.bool,
+    ]),
   };
 
-  componentWillMount() {
-    this.props.loadShow();
-    this.toggleArchivedShows = this.toggleArchivedShows.bind(this);
+  static async getInitialProps(ctx) {
+    const { store } = ctx;
+    if (!selectShows()(store.getState())) {
+      store.dispatch(loadShows());
+    }
+    return {};
   }
 
   toggleArchivedShows(event) {
@@ -26,36 +44,28 @@ export class Shows extends React.Component {
   }
 
   render() {
-    let showPreviewList = null;
-
-    if (this.props.shows !== false) {
-      showPreviewList = (
-        <ShowPreviewList
-          shows={this.props.shows}
-          showArchivedShows={this.state.showArchivedShows}
-          toggleArchivedShows={this.toggleArchivedShows}
-        />
-      );
-    } else {
+    if (this.props.loading) {
       return <Loader />;
-    }
+    } else if (this.props.error) {
+      return <div>Kunne ikke laste inn programmene.</div>;
+    } else {
+      let showPreviewList = null;
 
-    return <React.Fragment>{showPreviewList}</React.Fragment>;
+      const shows = fromJS(this.props.shows);
+
+      if (!shows.isEmpty()) {
+        showPreviewList = (
+          <ShowPreviewList
+            shows={shows}
+            showArchivedShows={this.state.showArchivedShows}
+            toggleArchivedShows={this.toggleArchivedShows}
+          />
+        );
+      }
+      return <React.Fragment>{showPreviewList}</React.Fragment>;
+    }
   }
 }
-
-Shows.propTypes = {
-  loadShow: PropTypes.func,
-  loading: PropTypes.bool,
-  error: PropTypes.bool,
-  shows: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
-};
-
-Shows.defaultProps = {
-  loading: false,
-  error: false,
-  shows: [],
-};
 
 const mapStateToProps = createStructuredSelector({
   shows: selectShows(),
@@ -63,10 +73,4 @@ const mapStateToProps = createStructuredSelector({
   error: selectShowsError(),
 });
 
-function mapDispatchToProps(dispatch) {
-  return {
-    loadShow: () => dispatch(loadShows()),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Shows);
+export default connect(mapStateToProps)(Shows);

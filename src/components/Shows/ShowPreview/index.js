@@ -1,10 +1,11 @@
 import React from 'react';
+import Link from 'next/link';
 import PropTypes from 'prop-types';
 import LazyLoad from 'react-lazyload';
-import { Link } from 'react-router-dom';
+
+import CategoryTag from 'components/common/tag/CategoryTag';
 
 import styles from './styles.scss';
-import CategoryTag from 'components/common/tag/CategoryTag';
 
 const ShowPreview = props => {
   let categories;
@@ -18,13 +19,15 @@ const ShowPreview = props => {
     <div className={styles.container}>
       {categories}
       <div className={styles.padding}>
-        <Link className={styles.link} to={`/programmer/${props.slug}`}>
-          <div className={styles.imageWrapper}>
-            <LazyLoad height={300} offset={100} once>
-              <img className={styles.image} src={props.logoImageUrl} alt="" />
-            </LazyLoad>
-          </div>
-          <h2>{props.title}</h2>
+        <Link href={`/programmer/${props.slug}`}>
+          <a className={styles.link} href={`/programmer/${props.slug}`}>
+            <div className={styles.imageWrapper}>
+              <LazyLoad height={300} offset={100} once>
+                <img className={styles.image} src={props.logoImageUrl} alt="" />
+              </LazyLoad>
+            </div>
+            <h2>{props.title}</h2>
+          </a>
         </Link>
         <div>{props.lead}</div>
       </div>

@@ -9,7 +9,7 @@ exports[`<ShowMoreButton /> renders correctly when active 1`] = `
   <img
     alt="Arrow"
     className="arrow rotated"
-    src="arrow-down.svg"
+    src="/assets/arrow_down.svg"
   />
 </button>
 `;
@@ -23,7 +23,7 @@ exports[`<ShowMoreButton /> renders correctly when inactive 1`] = `
   <img
     alt="Arrow"
     className="arrow"
-    src="arrow-down.svg"
+    src="/assets/arrow_down.svg"
   />
 </button>
 `;
