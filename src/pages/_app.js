@@ -52,23 +52,35 @@ class RadioRevolt extends App {
       pageProps = await Component.getInitialProps(ctx);
     }
 
-    return { pageProps, footerProps };
+    return { pageProps, footerProps, pathname: ctx.pathname };
   }
 
   render() {
-    const plain = false; // TODO: fix to render plain pages on apps
+    const { Component, pageProps, footerProps, store, pathname } = this.props;
+    const plain = pathname.includes('/plainpost/'); // TODO: fix to render plain pages on apps
 
-    const { Component, pageProps, footerProps, store } = this.props;
+    if (plain) {
+      return (
+        <Provider store={store}>
+          <div className={styles.container}>
+            <main className={styles.content}>
+              <Component {...pageProps} />
+            </main>
+          </div>
+        </Provider>
+      );
+    }
+
     return (
       <Provider store={store}>
         <div className={styles.container}>
-          {!plain && <Header />}
+          <Header />
           <main className={styles.content}>
             <Component {...pageProps} />
           </main>
-          {!plain && <Sidebar />}
-          {!plain && <Footer {...footerProps} />}
-          {/* !plain && <Player />*/}
+          <Sidebar />
+          <Footer {...footerProps} />
+          {/* <Player />*/}
         </div>
       </Provider>
     );

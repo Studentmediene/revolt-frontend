@@ -9,6 +9,7 @@ const config = {
   cssLoaderOptions: {
     importLoaders: 1,
     localIdentName: '[local]___[hash:base64:5]',
+    ignoreOrder: false,
   },
   webpack(config) {
     // access to webpack config here
