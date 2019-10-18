@@ -1,6 +1,5 @@
 const withSass = require('@zeit/next-sass');
 const withCss = require('@zeit/next-css');
-const withOffline = require('next-offline');
 const config = {
   cssModules: true,
   sassLoaderOptions: {
@@ -23,4 +22,4 @@ const config = {
   },
 };
 
-module.exports = withOffline(withCss(withSass(config)));
+module.exports = withCss(withSass(config));
