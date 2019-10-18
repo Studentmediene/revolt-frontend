@@ -7,6 +7,7 @@ import withRedux from 'next-redux-wrapper';
 import withReduxSaga from 'next-redux-saga';
 
 import styles from './styles.scss';
+import './sanitize.scss';
 
 import Header from 'components/Header';
 import Sidebar from 'components/Sidebar';
@@ -14,9 +15,6 @@ import Footer from 'components/Footer';
 // import Player from 'components/Player';
 
 import configureStore from '../store';
-
-// Import the CSS reset, which HtmlWebpackPlugin transfers to the build folder
-import 'sanitize.css/sanitize.css';
 
 // Set global locales for moment
 moment.locale('NB_no', {

@@ -7,7 +7,7 @@ import { withRouter } from 'next/router';
 import { createStructuredSelector } from 'reselect';
 
 import styles from './styles.scss';
-import 'components/common/styles/editor.css';
+import 'components/common/styles/editor.scss';
 
 import { loadPost } from './actions';
 import Episode from 'components/Episode';

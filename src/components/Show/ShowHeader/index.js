@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import styles from './styles.scss';
-import 'components/common/styles/editor.css';
+import 'components/common/styles/editor.scss';
 
 const ShowHeader = ({ show: { title, content, logoImageUrl, categories } }) => {
   let categoryTags;
@@ -31,7 +31,7 @@ const ShowHeader = ({ show: { title, content, logoImageUrl, categories } }) => {
 };
 
 ShowHeader.propTypes = {
-  show: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+  show: PropTypes.oneOfType([PropTypes.bool, PropTypes.object])
 };
 
 export default ShowHeader;
