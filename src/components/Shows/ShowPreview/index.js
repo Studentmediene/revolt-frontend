@@ -19,7 +19,7 @@ const ShowPreview = props => {
     <div className={styles.container}>
       {categories}
       <div className={styles.padding}>
-        <Link href={`/programmer/${props.slug}`}>
+        <Link href={`/programmer/[slug]`} as={`/programmer/${props.slug}`}>
           <a className={styles.link} href={`/programmer/${props.slug}`}>
             <div className={styles.imageWrapper}>
               <LazyLoad height={300} offset={100} once>

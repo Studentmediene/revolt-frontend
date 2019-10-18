@@ -7,7 +7,7 @@ const ngrok = isDev && process.env.ENABLE_TUNNEL ? require('ngrok') : false;
 
 /* eslint-disable no-console */
 
-const devProxy = {
+let devProxy = {
   '/graphql': {
     target: 'http://localhost:8000',
     changeOrigin: true,
@@ -17,6 +17,19 @@ const devProxy = {
     changeOrigin: true,
   },
 };
+
+if (process.env.PRODUCTION_API === 'true') {
+  devProxy = {
+    '/graphql': {
+      target: 'https://radiorevolt.no',
+      changeOrigin: true,
+    },
+    '/media': {
+      target: 'https://radiorevolt.no',
+      changeOrigin: true,
+    },
+  };
+}
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 const env = process.env.NODE_ENV;

@@ -8,7 +8,8 @@ import styles from './styles.scss';
 
 const ImageLink = ({
   images,
-  link,
+  href,
+  as,
   imageDescription,
   children,
   imageProps,
@@ -17,8 +18,8 @@ const ImageLink = ({
   const { small, medium, large } = images;
   const { className: customImageClassName, ...restImageProps } = imageProps;
   return (
-    <Link href={link}>
-      <a href={link} {...restProps}>
+    <Link href={href} as={as}>
+      <a href={as} {...restProps}>
         <LazyLoad height={350} offset={100} once>
           <img
             className={classNames(styles.image, customImageClassName)}
@@ -40,7 +41,8 @@ ImageLink.propTypes = {
     medium: PropTypes.string.isRequired,
     large: PropTypes.string.isRequired,
   }).isRequired,
-  link: PropTypes.string.isRequired,
+  href: PropTypes.string.isRequired,
+  as: PropTypes.string.isRequired,
   imageDescription: PropTypes.string.isRequired,
   children: PropTypes.node,
   className: PropTypes.string,

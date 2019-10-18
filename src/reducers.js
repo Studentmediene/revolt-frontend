@@ -4,6 +4,8 @@ import aboutReducer from 'components/About/reducer';
 import playerReducer from 'components/Player/reducer';
 import footerReducer from 'components/Footer/reducer';
 import showsReducer from 'components/Shows/reducer';
+import postReducer from 'components/Post/reducer';
+import showReducer from 'components/Show/reducer';
 import sendeplanReducer from 'components/Sendeplan/reducer';
 import frontPageReducer from 'components/FrontPage/reducer';
 import privacyPolicyReducer from 'components/PrivacyPolicy/reducer';
@@ -13,6 +15,8 @@ export default function createReducer() {
     player: playerReducer,
     footer: footerReducer,
     shows: showsReducer,
+    post: postReducer,
+    show: showReducer,
     sendeplan: sendeplanReducer,
     frontPage: frontPageReducer,
     privacyPolicy: privacyPolicyReducer,

@@ -2,7 +2,9 @@
 
 exports[`<PostPreview /> renders correctly with categories 1`] = `
 <ImageLink
+  as="/post/slug"
   className="link"
+  href="/post/[slug]"
   imageDescription=""
   imageProps={Object {}}
   images={
@@ -12,7 +14,6 @@ exports[`<PostPreview /> renders correctly with categories 1`] = `
       "small": "small_image",
     }
   }
-  link="/post/slug"
 >
   <CategoryTag
     backgroundColor="#FFFFFF"
@@ -40,7 +41,9 @@ exports[`<PostPreview /> renders correctly with categories 1`] = `
 
 exports[`<PostPreview /> renders correctly without categories 1`] = `
 <ImageLink
+  as="/post/slug"
   className="link"
+  href="/post/[slug]"
   imageDescription=""
   imageProps={Object {}}
   images={
@@ -50,7 +53,6 @@ exports[`<PostPreview /> renders correctly without categories 1`] = `
       "small": "small_image",
     }
   }
-  link="/post/slug"
 >
   <h2
     className="title"

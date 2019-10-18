@@ -7,6 +7,8 @@ import showsSagas from 'components/Shows/sagas';
 import privacyPolicySagas from 'components/PrivacyPolicy/sagas';
 import sendeplanSagas from 'components/Sendeplan/sagas';
 import aboutSagas from 'components/About/sagas';
+import postSagas from 'components/Post/sagas';
+import showSagas from 'components/Show/sagas';
 
 export default function* rootSaga() {
   yield all([
@@ -16,5 +18,7 @@ export default function* rootSaga() {
     ...privacyPolicySagas,
     ...sendeplanSagas,
     ...aboutSagas,
+    ...postSagas,
+    ...showSagas,
   ]);
 }

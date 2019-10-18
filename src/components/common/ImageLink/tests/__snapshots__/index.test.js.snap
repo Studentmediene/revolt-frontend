@@ -2,10 +2,11 @@
 
 exports[`<ImageLink /> renders correctly 1`] = `
 <Link
-  href="/link/to/resource"
+  as="/post/actualLink"
+  href="/post/[internalLink]"
 >
   <a
-    href="/link/to/resource"
+    href="/post/actualLink"
   >
     <LazyLoad
       height={350}

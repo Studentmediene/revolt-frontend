@@ -21,7 +21,8 @@ const PostPreview = props => {
   return (
     <ImageLink
       images={props.croppedImages}
-      link={`/post/${props.slug}`}
+      href={`/post/[slug]`}
+      as={`/post/${props.slug}`}
       imageDescription=""
       className={styles.link}
     >
