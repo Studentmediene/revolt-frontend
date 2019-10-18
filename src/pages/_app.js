@@ -55,7 +55,7 @@ class RadioRevolt extends App {
 
   render() {
     const { Component, pageProps, footerProps, store, pathname } = this.props;
-    const plain = pathname.includes('/plainpost/'); // TODO: fix to render plain pages on apps
+    const plain = pathname.includes('/plainpost/');
 
     if (plain) {
       return (

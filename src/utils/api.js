@@ -17,7 +17,7 @@ export const get = url =>
     .then(res => res.json());
 
 export const getGraphQL = query =>
-  get(`http://localhost:3000${GRAPHQL_URL}?query=${query}`);
+  get(`http://localhost:8000${GRAPHQL_URL}?query=${query}`);
 
 export const getPodcasts = showId => `${API_URL}/v1/lyd/podcast/${showId}`;
 

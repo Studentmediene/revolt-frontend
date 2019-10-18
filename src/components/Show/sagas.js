@@ -12,6 +12,7 @@ const formatShowQuery = ({ episodes, posts, ...show }) => ({
 });
 
 export function* loadShow({ slug }) {
+  console.log('fetching show', slug);
   const query = `query {
     show(slug:"${slug}") {
       id,

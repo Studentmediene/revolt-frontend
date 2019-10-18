@@ -56,7 +56,10 @@ app
     }
 
     // Default catch-all handler to allow Next.js to handle all other routes
-    server.all('*', (req, res) => handle(req, res));
+    server.all('*', (req, res) => {
+      console.log('got request', req.url);
+      return handle(req, res);
+    });
 
     server.listen(port, err => {
       if (err) {
@@ -66,13 +69,16 @@ app
         return logger.error(err.message);
       }
 
+      if (!dev) {
+        console.log('Now running production server.');
+      }
+
       // Connect to ngrok in dev mode
       if (ngrok) {
         ngrok.connect(port, (innerErr, url) => {
           if (innerErr) {
             return logger.error(innerErr);
           }
-
           logger.appStarted(port, url);
         });
       } else {

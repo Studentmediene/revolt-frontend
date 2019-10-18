@@ -29,7 +29,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development node server/index.js",
     "build": "next build",
-    "start:prod": "next start",
+    "start:prod": "cross-env NODE_ENV=production node server/index.js",
     "prebuild": "npm run test",
     "precommit": "lint-staged && npm run test",
     "lint": "npm run lint:js && npm run lint:css",
@@ -77,7 +77,6 @@
     }
   },
   "dependencies": {
-    "@zeit/next-css": "^1.0.1",
     "@zeit/next-sass": "^1.0.1",
     "chalk": "^2.3.2",
     "classnames": "^2.2.5",

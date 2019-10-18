@@ -5,6 +5,7 @@ import { LOAD_FOOTER_PENDING } from './constants';
 import { footerLoaded, footerError } from './actions';
 
 export function* loadFooter() {
+  console.log('fetching footer');
   const query = `query {
     settings {
       chiefEditor,

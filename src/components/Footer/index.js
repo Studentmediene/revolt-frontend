@@ -10,7 +10,7 @@ import {
   selectRadioEditor,
   selectMusicProducer,
   selectFooterLoading,
-  selectFooterError
+  selectFooterError,
 } from './selectors';
 
 import styles from './styles.scss';
@@ -23,7 +23,7 @@ export class Footer extends React.Component {
     musicProducer: PropTypes.string,
     loading: PropTypes.bool.isRequired,
     error: PropTypes.bool.isRequired,
-    loadFooter: PropTypes.func.isRequired
+    loadFooter: PropTypes.func.isRequired,
   };
 
   static async getInitialProps(ctx) {
@@ -93,16 +93,16 @@ const mapStateToProps = createStructuredSelector({
   radioEditor: selectRadioEditor(),
   musicProducer: selectMusicProducer(),
   loading: selectFooterLoading(),
-  error: selectFooterError()
+  error: selectFooterError(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    loadFooter: () => dispatch(loadFooter())
+    loadFooter: () => dispatch(loadFooter()),
   };
 }
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Footer);
