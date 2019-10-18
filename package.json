@@ -105,7 +105,8 @@
     "regenerator-runtime": "^0.13.3",
     "reselect": "^3.0.1",
     "sanitize.css": "^5.0.0",
-    "soundmanager2": "^2.97.20170602"
+    "soundmanager2": "^2.97.20170602",
+    "webpack": "^4.41.2"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.5.5",

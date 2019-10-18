@@ -40,7 +40,7 @@ if (process.env.NODE_ENV === 'production') {
       anonymizeIp: true,
     },
   });
-  ReactGA.pageview(window.location.pathname + window.location.search);
+  //ReactGA.pageview(window.location.pathname + window.location.search);
 }
 
 class RadioRevolt extends App {

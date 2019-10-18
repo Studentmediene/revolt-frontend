@@ -5,7 +5,12 @@ const config = {
   sassLoaderOptions: {
     includePaths: ['src'],
   },
-  webpack: config => {
+
+  cssLoaderOptions: {
+    importLoaders: 1,
+    localIdentName: '[local]___[hash:base64:5]',
+  },
+  webpack(config) {
     // access to webpack config here
     config.module.rules.push({
       test: [/\.mp3$/, /\.png$/, /\.svg$/],
