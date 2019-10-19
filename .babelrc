@@ -1,28 +1,12 @@
 {
-  "presets": [
-    [
-      "next/babel",
-      {
-        "preset-env": { "targets": { "node": "current" } }
-      }
-    ]
-  ],
+  "presets": ["next/babel"],
   "plugins": [
     [
       "module-resolver",
       {
         "root": ["./src"]
       }
-    ],
-    [
-      "@babel/transform-runtime",
-      {
-        "regenerator": true
-      }
-    ],
-    "@babel/proposal-class-properties",
-    "@babel/proposal-object-rest-spread",
-    "@babel/syntax-dynamic-import"
+    ]
   ],
   "env": {
     "production": {
@@ -30,8 +14,7 @@
         "@babel/transform-destructuring",
         "@babel/transform-react-constant-elements",
         "@babel/transform-react-inline-elements",
-        "transform-react-remove-prop-types",
-        "emotion"
+        "transform-react-remove-prop-types"
       ]
     },
     "test": {
