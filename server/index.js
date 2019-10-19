@@ -19,6 +19,7 @@ let devProxy = {
 };
 
 if (process.env.PRODUCTION_API === 'true') {
+  console.log('Enabling production API');
   devProxy = {
     '/graphql': {
       target: 'https://radiorevolt.no',
@@ -49,6 +50,7 @@ app
 
     // Set up the proxy.
     if (dev && devProxy) {
+      console.log('Enabling proxy middleware');
       const proxyMiddleware = require('http-proxy-middleware');
       Object.keys(devProxy).forEach(function(context) {
         server.use(proxyMiddleware(context, devProxy[context]));
