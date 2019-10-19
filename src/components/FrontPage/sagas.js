@@ -1,4 +1,4 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 
 import { getGraphQL } from 'utils/api';
 import { postFormat } from 'utils/dataFormatters';
@@ -54,5 +54,5 @@ export function* loadFrontPageArticles({ postOffset }) {
 }
 
 export default [
-  takeEvery(LOAD_FRONT_PAGE_POSTS_PENDING, loadFrontPageArticles),
+  takeLatest(LOAD_FRONT_PAGE_POSTS_PENDING, loadFrontPageArticles),
 ];

@@ -44,10 +44,10 @@ if (process.env.NODE_ENV === 'production') {
 class RadioRevolt extends App {
   static async getInitialProps({ Component, ctx }) {
     let pageProps = {};
-    let footerProps = await Footer.getInitialProps(ctx);
+    let footerProps = {}; //await Footer.getInitialProps(ctx);
 
     if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx);
+      pageProps = await Component.getInitialProps({ ctx });
     }
 
     return { pageProps, footerProps, pathname: ctx.pathname };

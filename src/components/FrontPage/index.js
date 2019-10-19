@@ -31,10 +31,13 @@ export class FrontPage extends React.Component {
     hasLoaded: PropTypes.bool.isRequired,
   };
 
-  static async getInitialProps(ctx) {
-    const { store } = ctx;
+  static async getInitialProps(props) {
+    const { store } = props.ctx;
+    console.log('frontpage getInitialProps called');
     if (!selectHasLoaded()(store.getState())) {
+      console.log('frontpage getInitialProps dispatching...');
       store.dispatch(loadFrontPagePosts(0));
+      console.log('frontpage getInitialProps dispatched');
     }
     return {};
   }
