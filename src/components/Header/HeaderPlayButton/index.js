@@ -6,7 +6,11 @@ import { createStructuredSelector } from 'reselect';
 import styles from './styles.scss';
 import { togglePlayPause, playLive } from 'components/Player/actions';
 import PlayPauseButton from 'components/Player/components/PlayPauseButton';
-import { selectLiveTitle, selectPaused, selectLive } from 'components/Player/selectors';
+import {
+  selectLiveTitle,
+  selectPaused,
+  selectLive,
+} from 'components/Player/selectors';
 
 export class HeaderPlayButton extends React.Component {
   static propTypes = {
@@ -56,4 +60,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderPlayButton);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(HeaderPlayButton);
