@@ -17,7 +17,7 @@ import Footer from 'components/Footer';
 import configureStore from '../store';
 
 // Set global locales for moment
-moment.locale('NB_no', {
+moment.updateLocale('NB_no', {
   calendar: {
     lastDay: '[I går] HH:mm',
     sameDay: '[I dag] HH:mm',
@@ -47,7 +47,7 @@ class RadioRevolt extends App {
     let footerProps = {}; //await Footer.getInitialProps(ctx);
 
     if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps({ ctx });
+      pageProps = await Component.getInitialProps(ctx);
     }
 
     return { pageProps, footerProps, pathname: ctx.pathname };

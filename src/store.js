@@ -1,22 +1,24 @@
 import { fromJS } from 'immutable';
+import { applyMiddleware, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import { createStore, applyMiddleware, compose } from 'redux';
 
 import rootSaga from './sagas';
 import createReducer from './reducers';
 
-const sagaMiddleware = createSagaMiddleware();
-
-const composeEnhancers =
-  (typeof window != 'undefined' &&
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
-  compose;
+const bindMiddleware = middleware => {
+  if (process.env.NODE_ENV !== 'production') {
+    const { composeWithDevTools } = require('redux-devtools-extension');
+    return composeWithDevTools(applyMiddleware(...middleware));
+  }
+  return applyMiddleware(...middleware);
+};
 
 function configureStore(initialState = {}) {
+  const sagaMiddleware = createSagaMiddleware();
   const store = createStore(
     createReducer(),
     fromJS(initialState),
-    composeEnhancers(applyMiddleware(sagaMiddleware)),
+    bindMiddleware([sagaMiddleware]),
   );
 
   store.sagaTask = sagaMiddleware.run(rootSaga);
