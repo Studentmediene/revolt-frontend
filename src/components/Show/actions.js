@@ -2,7 +2,6 @@ import {
   LOAD_SHOW_PENDING,
   LOAD_SHOW_SUCCESS,
   LOAD_SHOW_FAILED,
-  CLEAR_SHOW,
 } from './constants';
 
 export function loadShow(slug) {

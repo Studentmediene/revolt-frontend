@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
+import 'components/common/styles/editor.scss';
+
 import {
   selectContent,
   selectPrivacyPolicyLoading,
@@ -18,8 +20,7 @@ export class PrivacyPolicy extends React.Component {
     error: PropTypes.bool.isRequired,
   };
 
-  static async getInitialProps(ctx) {
-    const { store } = ctx;
+  static async getInitialProps({ store }) {
     if (!selectContent()(store.getState())) {
       store.dispatch(loadPrivacyPolicy());
     }

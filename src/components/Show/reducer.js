@@ -1,9 +1,3 @@
-/*
- *
- * Show reducer
- *
- */
-
 import { fromJS } from 'immutable';
 import {
   LOAD_SHOW_PENDING,

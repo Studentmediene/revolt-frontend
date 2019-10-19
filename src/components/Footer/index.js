@@ -26,8 +26,7 @@ export class Footer extends React.Component {
     loadFooter: PropTypes.func.isRequired,
   };
 
-  static async getInitialProps(ctx) {
-    const { store, isServer } = ctx;
+  static async getInitialProps({ store, isServer }) {
     if (isServer) {
       store.dispatch(loadFooter());
     }
