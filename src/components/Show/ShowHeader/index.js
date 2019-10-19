@@ -4,7 +4,11 @@ import PropTypes from 'prop-types';
 import styles from './styles.scss';
 import 'components/common/styles/editor.scss';
 
-const ShowHeader = ({ show: { title, content, logoImageUrl, categories } }) => {
+const ShowHeader = ({
+  show: {
+    show: { title, content, logoImageUrl, categories },
+  },
+}) => {
   let categoryTags;
   if (categories && categories.length > 0) {
     categoryTags = (
@@ -31,7 +35,7 @@ const ShowHeader = ({ show: { title, content, logoImageUrl, categories } }) => {
 };
 
 ShowHeader.propTypes = {
-  show: PropTypes.oneOfType([PropTypes.bool, PropTypes.object])
+  show: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
 };
 
 export default ShowHeader;

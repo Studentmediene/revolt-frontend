@@ -3,7 +3,7 @@ import { combineReducers } from 'redux-immutable';
 import aboutReducer from 'components/About/reducer';
 import playerReducer from 'components/Player/reducer';
 import footerReducer from 'components/Footer/reducer';
-import showsReducer from 'components/Shows/reducer';
+import showListReducer from 'components/ShowList/reducer';
 import postReducer from 'components/Post/reducer';
 import showReducer from 'components/Show/reducer';
 import sendeplanReducer from 'components/Sendeplan/reducer';
@@ -14,7 +14,7 @@ export default function createReducer() {
   return combineReducers({
     player: playerReducer,
     footer: footerReducer,
-    shows: showsReducer,
+    showList: showListReducer,
     post: postReducer,
     show: showReducer,
     sendeplan: sendeplanReducer,

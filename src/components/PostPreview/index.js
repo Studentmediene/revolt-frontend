@@ -17,7 +17,6 @@ const PostPreview = props => {
       />
     ));
   }
-
   return (
     <ImageLink
       images={props.croppedImages}

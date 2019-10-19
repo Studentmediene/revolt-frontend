@@ -3,7 +3,7 @@ import { takeEvery, call, put } from 'redux-saga/effects';
 import { getGraphQL } from 'utils/api';
 import { LOAD_SHOWS_PENDING } from './constants';
 import { showFormat } from 'utils/dataFormatters';
-import { showsLoaded, showsLoadedError } from 'components/Shows/actions';
+import { showsLoaded, showsLoadedError } from './actions';
 
 export function* getShows() {
   console.log('fetching shows');

@@ -1,3 +1,3 @@
-import Shows from 'components/Shows';
+import ShowList from 'components/ShowList';
 
-export default Shows;
+export default ShowList;

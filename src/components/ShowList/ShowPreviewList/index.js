@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import ShowPreview from 'components/Shows/ShowPreview';
+import ShowPreview from '../ShowPreview';
 import ShowMoreButton from 'components/common/button/ShowMoreButton';
 
 import styles from './styles.scss';
@@ -32,7 +32,7 @@ const ShowPreviewList = props => {
       />
       <div
         className={classNames(styles.shows, {
-          [styles.hidden]: !props.showArchivedShows
+          [styles.hidden]: !props.showArchivedShows,
         })}
       >
         {archivedShows}
@@ -44,7 +44,7 @@ const ShowPreviewList = props => {
 ShowPreviewList.propTypes = {
   shows: PropTypes.object.isRequired,
   showArchivedShows: PropTypes.bool.isRequired,
-  toggleArchivedShows: PropTypes.func.isRequired
+  toggleArchivedShows: PropTypes.func.isRequired,
 };
 
 export default ShowPreviewList;

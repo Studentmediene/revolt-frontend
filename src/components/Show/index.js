@@ -24,14 +24,14 @@ import PostPreview from 'components/PostPreview';
 import ShowHeader from 'components/Show/ShowHeader';
 
 export class Show extends React.Component {
-  static async getInitialProps(ctx) {
-    const { store, query } = ctx;
-    if (!selectShow()(store.getState())) {
-      const { slug } = query;
+  static async getInitialProps({ store, query: { slug } }) {
+    //console.log('slug', slug);
+    //console.log(selectShow()(store.getState()));
+    if (!selectShow()(store.getState()).get(slug)) {
       store.dispatch(loadShow(slug));
     }
 
-    return {};
+    return { slug };
   }
 
   render() {
@@ -43,23 +43,20 @@ export class Show extends React.Component {
       return <Loader />;
     }
 
-    const show = fromJS(this.props.show).toJS();
+    const show = fromJS(this.props.show).toJS()[this.props.slug];
+    //console.log('show', show);
 
-    const episodes = fromJS(this.props.episodes)
-      .toJS()
-      .map(e => ({
-        ...e,
-        date: e.publishAt,
-        episode: true,
-      }));
+    const episodes = show.episodes.map(e => ({
+      ...e,
+      date: e.publishAt,
+      episode: true,
+    }));
 
-    const posts = fromJS(this.props.posts)
-      .toJS()
-      .map(p => ({
-        ...p,
-        date: p.publishAt,
-        episode: false,
-      }));
+    const posts = show.posts.map(p => ({
+      ...p,
+      date: p.publishAt,
+      episode: false,
+    }));
 
     const elementList = posts.concat(episodes).sort((a, b) => {
       const dateA = moment(a.date);

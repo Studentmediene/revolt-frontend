@@ -1,9 +1,3 @@
-/*
- *
- * Shows actions
- *
- */
-
 import {
   LOAD_SHOWS_PENDING,
   LOAD_SHOWS_SUCCESS,

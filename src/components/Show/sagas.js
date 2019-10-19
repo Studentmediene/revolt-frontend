@@ -51,7 +51,7 @@ export function* loadShow({ slug }) {
   }`;
   try {
     let result = yield call(getGraphQL, query);
-    yield put(showLoaded(formatShowQuery(result.data.show)));
+    yield put(showLoaded(formatShowQuery(result.data.show), slug));
   } catch (error) {
     yield put(showError());
   }

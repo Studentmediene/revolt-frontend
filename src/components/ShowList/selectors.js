@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-const selectShowsDomain = () => state => state.get('shows');
+const selectShowsDomain = () => state => state.get('showList');
 
 const selectShows = () =>
   createSelector(

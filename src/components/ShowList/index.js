@@ -28,8 +28,7 @@ export class Shows extends React.Component {
     ]),
   };
 
-  static async getInitialProps(ctx) {
-    const { store } = ctx;
+  static async getInitialProps({ store }) {
     if (!selectShows()(store.getState())) {
       store.dispatch(loadShows());
     }
