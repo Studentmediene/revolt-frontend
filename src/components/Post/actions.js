@@ -17,10 +17,11 @@ export function loadPost(slug) {
   };
 }
 
-export function postLoaded(post) {
+export function postLoaded(post, slug) {
   return {
     type: LOAD_POST_SUCCESS,
     post,
+    slug,
   };
 }
 

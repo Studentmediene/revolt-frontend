@@ -35,7 +35,7 @@ export function* loadPost({ slug }) {
   }`;
   try {
     const result = yield call(getGraphQL, query);
-    yield put(postLoaded(postFormat(result.data.post)));
+    yield put(postLoaded(postFormat(result.data.post), slug));
   } catch (error) {
     yield put(postError());
   }

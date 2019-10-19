@@ -17,14 +17,12 @@ import { getOnDemandPlaylist } from 'components/Player/actions';
 import { selectPost, selectPostLoading, selectPostError } from './selectors';
 
 export class Post extends React.Component {
-  static async getInitialProps(ctx) {
-    const { store, query } = ctx;
-    if (!selectPost()(store.getState())) {
-      const { slug } = query;
+  static async getInitialProps({ store, query: { slug } }) {
+    if (!selectPost()(store.getState()).get(slug)) {
       store.dispatch(loadPost(slug));
     }
 
-    return {};
+    return { slug };
   }
 
   render() {
@@ -33,7 +31,7 @@ export class Post extends React.Component {
     } else if (this.props.error) {
       return <div>Kunne ikke laste inn artikkelen.</div>;
     }
-    const post = fromJS(this.props.post).toJS();
+    const post = fromJS(this.props.post).toJS()[this.props.slug];
 
     const { episodes } = post;
     const time = getNormalizedDateString(post.publishAt);
