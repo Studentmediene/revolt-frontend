@@ -12,6 +12,7 @@ import {
   togglePlayPause,
   playNext,
   playPrevious,
+  liveTitleUpdater,
 } from './actions';
 import {
   selectOffset,
@@ -35,6 +36,10 @@ class Player extends React.Component {
     // Duration of the audio (estimate)
     duration: 0,
   };
+
+  componentDidMount() {
+    this.props.updateLiveTitle();
+  }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.url != nextProps.url) {
@@ -141,6 +146,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
+    updateLiveTitle: () => dispatch(liveTitleUpdater()),
     togglePlayPause: () => dispatch(togglePlayPause()),
     resume: () => dispatch(resume()),
     pause: () => dispatch(pause()),

@@ -1,5 +1,14 @@
-import { select, take, call, put, fork, takeLatest } from 'redux-saga/effects';
-import { soundManager } from 'soundmanager2';
+import {
+  select,
+  call,
+  put,
+  fork,
+  take,
+  delay,
+  takeLatest,
+  takeEvery,
+} from 'redux-saga/effects';
+//import { soundManager } from 'soundmanager2';
 
 import {
   GET_PODCAST_PLAYLIST_PENDING,
@@ -7,6 +16,7 @@ import {
   PLAY_LIVE_PENDING,
   TOGGLE_PLAY_PAUSE,
   PLAY_NEXT,
+  LIVE_TITLE_UPDATER,
   PLAY_PREVIOUS,
 } from './constants';
 import {
@@ -102,19 +112,21 @@ export function* playOnDemand(episodeId, offset) {
   }
 }
 
-function canPlayOgg(oggUrl) {
-  return new Promise(resolve => {
-    soundManager.onready(() => {
-      resolve(soundManager.canPlayURL(oggUrl));
-    });
-  });
+async function canPlayOgg() {
+  console.log('checking if canPlayOgg');
+  if (document) {
+    const vid = document.createElement('video');
+    return vid.canPlayType('video/ogg; codecs="theora, vorbis"');
+  } else {
+    return false;
+  }
 }
 
 function* playLiveSaga() {
   const oggUrl = 'https://direkte.radiorevolt.no/revolt.ogg';
   const aacUrl = 'https://direkte.radiorevolt.no/revolt.aac';
 
-  const supportsOgg = yield call(canPlayOgg, oggUrl);
+  const supportsOgg = yield call(canPlayOgg);
   const url = supportsOgg ? oggUrl : aacUrl;
   yield put(playLiveURL(url));
   yield call(updateLiveTitle);
@@ -127,10 +139,10 @@ function* updateLiveTitle() {
 }
 
 function* updateLiveTitleTimer() {
-  const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+  yield take(LIVE_TITLE_UPDATER);
   while (true) {
     yield call(updateLiveTitle);
-    yield call(delay, 60000);
+    yield delay(60000);
   }
 }
 
@@ -139,19 +151,11 @@ function* liveUpdater() {
 }
 
 export function* playPodcastWatcher() {
-  // eslint-disable-next-line no-constant-condition
-  while (true) {
-    const { episodeId, offset } = yield take(GET_PODCAST_PLAYLIST_PENDING);
-    yield call(playPodcast, episodeId, offset);
-  }
+  yield takeEvery(GET_PODCAST_PLAYLIST_PENDING, playPodcast);
 }
 
 export function* playOnDemandWatcher() {
-  // eslint-disable-next-line no-constant-condition
-  while (true) {
-    const { episodeId, offset } = yield take(GET_ON_DEMAND_PLAYLIST_PENDING);
-    yield call(playOnDemand, episodeId, offset);
-  }
+  yield takeEvery(GET_ON_DEMAND_PLAYLIST_PENDING, playOnDemand);
 }
 
 export function* togglePlayPause() {
@@ -206,8 +210,8 @@ export function* playerSaga() {
 
 // All sagas to be loaded
 export default [
-  playerSaga,
-  playPodcastWatcher,
-  playOnDemandWatcher,
-  liveUpdater,
+  call(playerSaga),
+  call(playPodcastWatcher),
+  call(playOnDemandWatcher),
+  call(liveUpdater),
 ];
