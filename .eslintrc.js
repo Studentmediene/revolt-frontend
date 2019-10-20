@@ -14,11 +14,10 @@ module.exports = {
   ],
   plugins: ['react', 'prettier', 'jsx-a11y', 'jest'],
   parserOptions: {
-    ecmaVersion: 6,
+    ecmaVersion: 10,
     sourceType: 'module',
     ecmaFeatures: {
-      jsx: true,
-      experimentalObjectRestSpread: true
+      jsx: true
     }
   },
   rules: {
@@ -35,13 +34,13 @@ module.exports = {
   },
   settings: {
     react: {
-      version: '15.4.2'
+      version: '16.8.6'
     },
     'import/resolver': {
       'babel-module': {
         root: ['./src']
       }
     },
-    'import/ignore': ['.css$', '.png$', '.svg$', 'node_modules/*']
+    'import/ignore': ['node_modules/*']
   }
 };
