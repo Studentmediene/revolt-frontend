@@ -8,7 +8,6 @@ import {
   takeLatest,
   takeEvery,
 } from 'redux-saga/effects';
-//import { soundManager } from 'soundmanager2';
 
 import {
   GET_PODCAST_PLAYLIST_PENDING,

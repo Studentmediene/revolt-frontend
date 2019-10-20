@@ -1,9 +1,3 @@
-/*
- *
- * Player reducer
- *
- */
-
 import { fromJS } from 'immutable';
 import {
   PLAY_LIVE,
@@ -19,7 +13,6 @@ import {
   RESUME,
   PAUSE,
 } from './constants';
-import blankmp3 from './blank.mp3';
 
 const initialState = fromJS({
   live: false,
@@ -62,7 +55,7 @@ function playerReducer(state = initialState, action) {
         .set('error', false)
         .set('paused', false)
         .set('episodeId', action.episodeId)
-        .set('url', blankmp3);
+        .set('url', '/assets/blank.mp3');
     case GET_ON_DEMAND_PLAYLIST_SUCCESS:
       return state
         .set('loading', false)

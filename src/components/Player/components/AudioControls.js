@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import PlayPauseButton from './PlayPauseButton';
-import styles from './AudioControls.css';
+import styles from './AudioControls.scss';
 import classNames from 'classnames';
 
 const AudioControls = ({

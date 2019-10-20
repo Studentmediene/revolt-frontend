@@ -37,6 +37,10 @@ class Player extends React.Component {
     duration: 0,
   };
 
+  static async getInitialProps({ isServer }) {
+    return { isServer };
+  }
+
   componentDidMount() {
     this.props.updateLiveTitle();
   }
@@ -68,6 +72,9 @@ class Player extends React.Component {
   }
 
   render() {
+    if (this.props.isServer) {
+      return null;
+    }
     const { position } = this.state;
     return (
       <div className={styles.container} title={this.props.playingTitle}>

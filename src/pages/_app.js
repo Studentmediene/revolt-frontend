@@ -12,7 +12,7 @@ import './sanitize.scss';
 import Header from 'components/Header';
 import Sidebar from 'components/Sidebar';
 import Footer from 'components/Footer';
-// import Player from 'components/Player';
+import Player from 'components/Player';
 
 import configureStore from '../store';
 
@@ -78,7 +78,7 @@ class RadioRevolt extends App {
           </main>
           <Sidebar />
           <Footer {...footerProps} />
-          {/* <Player />*/}
+          <Player />
         </div>
       </Provider>
     );
