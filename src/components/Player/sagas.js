@@ -38,7 +38,7 @@ import {
 } from './selectors';
 import { getGraphQL, getCurrentShows } from 'utils/api';
 // Individual exports for testing
-export function* playPodcast(episodeId, offset) {
+export function* playPodcast({ episodeId, offset }) {
   const query = `query {
     episode(id:${episodeId}) {
       id,
@@ -75,7 +75,7 @@ export function* playPodcast(episodeId, offset) {
   }
 }
 
-export function* playOnDemand(episodeId, offset) {
+export function* playOnDemand({ episodeId, offset }) {
   const query = `query {
     episode(id:${episodeId}) {
       id,
@@ -112,7 +112,6 @@ export function* playOnDemand(episodeId, offset) {
 }
 
 async function canPlayOgg() {
-  console.log('checking if canPlayOgg');
   if (document) {
     const vid = document.createElement('video');
     return vid.canPlayType('video/ogg; codecs="theora, vorbis"');

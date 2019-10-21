@@ -25,8 +25,6 @@ import ShowHeader from 'components/Show/ShowHeader';
 
 export class Show extends React.Component {
   static async getInitialProps({ store, query: { slug } }) {
-    //console.log('slug', slug);
-    //console.log(selectShow()(store.getState()));
     if (!selectShow()(store.getState()).get(slug)) {
       store.dispatch(loadShow(slug));
     }
@@ -44,7 +42,6 @@ export class Show extends React.Component {
     }
 
     const show = fromJS(this.props.show).toJS()[this.props.slug];
-    //console.log('show', show);
 
     const episodes = show.episodes.map(e => ({
       ...e,
