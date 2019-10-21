@@ -49,7 +49,7 @@ app
     server = express();
 
     // Set up the proxy.
-    if (dev && devProxy) {
+    if ((dev && devProxy) || process.env.PRODUCTION_API) {
       console.log('Enabling proxy middleware');
       const proxyMiddleware = require('http-proxy-middleware');
       Object.keys(devProxy).forEach(function(context) {
