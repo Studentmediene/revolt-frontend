@@ -1,25 +1,15 @@
 import { createSelector } from 'reselect';
 
-/**
- * Direct selector to the shows state domain
- */
 const selectShowsDomain = () => state => state.get('shows');
 
-/**
- * Other specific selectors
- */
-
-/**
- * Default selector used by Shows
- */
-
-const selectShows = () =>
+export const selectShows = () =>
   createSelector(selectShowsDomain(), showState => showState.get('shows'));
 
-const selectShowsLoading = () =>
+export const selectCategories = () =>
+  createSelector(selectShowsDomain(), showState => showState.get('categories'));
+
+export const selectShowsLoading = () =>
   createSelector(selectShowsDomain(), showState => showState.get('loading'));
 
-const selectShowsError = () =>
+export const selectShowsError = () =>
   createSelector(selectShowsDomain(), showState => showState.get('error'));
-
-export { selectShowsDomain, selectShows, selectShowsLoading, selectShowsError };
