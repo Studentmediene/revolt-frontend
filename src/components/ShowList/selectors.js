@@ -2,22 +2,26 @@ import { createSelector } from 'reselect';
 
 const selectShowsDomain = () => state => state.get('showList');
 
-const selectShows = () =>
+export const selectShows = () =>
   createSelector(
     selectShowsDomain(),
-    showState => showState.get('shows')
+    showState => showState.get('shows'),
   );
 
-const selectShowsLoading = () =>
+export const selectCategories = () =>
   createSelector(
     selectShowsDomain(),
-    showState => showState.get('loading')
+    showState => showState.get('categories'),
   );
 
-const selectShowsError = () =>
+export const selectShowsLoading = () =>
   createSelector(
     selectShowsDomain(),
-    showState => showState.get('error')
+    showState => showState.get('loading'),
   );
 
-export { selectShows, selectShowsLoading, selectShowsError };
+export const selectShowsError = () =>
+  createSelector(
+    selectShowsDomain(),
+    showState => showState.get('error'),
+  );

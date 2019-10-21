@@ -11,13 +11,11 @@ const ShowPreviewList = props => {
   const compareShows = (showA, showB) => showA.title.localeCompare(showB.title);
 
   const activeShows = props.shows
-    .map(show => show.toJS())
     .filter(show => !show.archived)
     .sort(compareShows)
     .map((show, index) => <ShowPreview {...show} key={`active-${index}`} />);
 
   const archivedShows = props.shows
-    .map(show => show.toJS())
     .filter(show => show.archived)
     .sort(compareShows)
     .map((show, index) => <ShowPreview {...show} key={`archived-${index}`} />);
@@ -42,7 +40,7 @@ const ShowPreviewList = props => {
 };
 
 ShowPreviewList.propTypes = {
-  shows: PropTypes.object.isRequired,
+  shows: PropTypes.array.isRequired,
   showArchivedShows: PropTypes.bool.isRequired,
   toggleArchivedShows: PropTypes.func.isRequired,
 };

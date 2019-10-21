@@ -9,6 +9,7 @@ const initialState = fromJS({
   loading: false,
   error: false,
   shows: false,
+  categories: false,
 });
 
 function showsReducer(state = initialState, action) {
@@ -18,6 +19,7 @@ function showsReducer(state = initialState, action) {
     case LOAD_SHOWS_SUCCESS:
       return state
         .set('shows', action.shows)
+        .set('categories', action.categories)
         .set('loading', false)
         .set('error', false);
     case LOAD_SHOWS_FAILED:

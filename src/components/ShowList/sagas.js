@@ -21,10 +21,21 @@ export function* getShows() {
         backgroundColor
       }
     }
+    allCategories {
+      name
+      textColor
+      backgroundColor
+    }
   }`;
   try {
     const result = yield call(getGraphQL, query);
-    yield put(showsLoaded(result.data.allShows.map(showFormat)));
+
+    yield put(
+      showsLoaded(
+        result.data.allShows.map(showFormat),
+        result.data.allCategories,
+      ),
+    );
   } catch (error) {
     yield put(showsLoadedError());
   }

@@ -10,10 +10,11 @@ export function loadShows() {
   };
 }
 
-export function showsLoaded(shows) {
+export function showsLoaded(shows, categories) {
   return {
     type: LOAD_SHOWS_SUCCESS,
     shows,
+    categories,
   };
 }
 
