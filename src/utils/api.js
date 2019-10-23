@@ -1,7 +1,9 @@
 import 'isomorphic-unfetch';
 
 let domain = 'https://radiorevolt.no';
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.BETA === 'true') {
+  domain = 'https://beta.radiorevolt.no';
+} else if (process.env.NODE_ENV === 'development') {
   domain = 'http://localhost:3000';
 }
 

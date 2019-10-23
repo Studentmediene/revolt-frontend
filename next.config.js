@@ -4,6 +4,9 @@ const config = {
   sassLoaderOptions: {
     includePaths: ['src'],
   },
+  env: {
+    BETA: process.env.BETA,
+  },
   webpack(config) {
     // access to webpack config here
     config.module.rules.push({
