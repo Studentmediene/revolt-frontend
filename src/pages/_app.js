@@ -42,7 +42,7 @@ if (process.env.NODE_ENV === 'production') {
     ReactGA.pageview(window.location.pathname + window.location.search);
   }
 }
-
+import ErrorComponent from './_error';
 // Force CSS reloading in dev
 import Router from 'next/router';
 
@@ -59,7 +59,11 @@ Router.events.on('routeChangeComplete', () => {
 class RadioRevolt extends App {
   static async getInitialProps({ Component, ctx }) {
     let pageProps = {};
-    let footerProps = await Footer.getInitialProps(ctx);
+    let footerProps = {};
+
+    if (Component !== ErrorComponent) {
+      footerProps = await Footer.getInitialProps(ctx);
+    }
 
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
@@ -92,6 +96,7 @@ class RadioRevolt extends App {
             <Component {...pageProps} />
           </main>
           <Sidebar />
+
           <Footer {...footerProps} />
           <Player />
         </div>
