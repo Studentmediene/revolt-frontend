@@ -7,7 +7,8 @@ echo "Please enter the password for the current user:"
 sudo echo "Deploying kapina-frontend on branch $GIT_BRANCH..."
 git pull
 
-source env.sh
+# Read env variables from .env file
+export $(grep -v '^#' .env | xargs)
 
 npm run build
 sudo systemctl restart kapina-frontend.service
