@@ -1,8 +1,12 @@
 import 'isomorphic-unfetch';
 
-const GRAPHQL_URL = 'http://localhost:3000/graphql';
+let domain = 'https://radiorevolt.no';
+if (process.env.NODE_ENV !== 'production') {
+  domain = 'http://localhost:3000';
+}
+
+const GRAPHQL_URL = `${domain}/graphql`;
 const API_URL = 'https://api.radiorevolt.no';
-export const MEDIA_URL = '/media/';
 
 const handleError = res => {
   if (res.status < 300) return res;
