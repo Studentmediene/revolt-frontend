@@ -12,4 +12,4 @@ export $(grep -v '^#' .env | xargs)
 
 npm run build
 sudo systemctl restart kapina-frontend.service
-echo "Successfully deployed kapina-backend on branch $GIT_BRANCH."
+printf "\nSuccessfully deployed kapina-frontend on branch $GIT_BRANCH.\n"
