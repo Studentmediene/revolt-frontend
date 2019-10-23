@@ -21,7 +21,7 @@ $animation-effect: 0.3s ease;
   flex-direction: row;
   justify-content: space-between;
   position: relative;
-
+  flex-shrink: 0;
   padding: 0;
   width: $button-length;
   height: $button-length;
