@@ -1,4 +1,4 @@
-@import 'variables.scss';
+@import '../../../variables.scss';
 
 .container {
   // Reset browser button styles
@@ -22,7 +22,7 @@
   display: none;
   flex-direction: column;
   align-items: flex-start;
-  color: #FFF;
+  color: #fff;
   padding: 0 0 0 10px;
 }
 

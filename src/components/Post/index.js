@@ -1,36 +1,46 @@
 import React from 'react';
 import moment from 'moment';
+import { fromJS } from 'immutable';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'next/router';
 import { createStructuredSelector } from 'reselect';
 
 import styles from './styles.scss';
-import 'components/common/styles/editor.css';
+import 'components/common/styles/editor.scss';
 
 import { loadPost } from './actions';
 import Episode from 'components/Episode';
+import Loader from 'components/Loader';
 import { getNormalizedDateString } from 'utils/dateUtils';
 import { getOnDemandPlaylist } from 'components/Player/actions';
 import { selectPost, selectPostLoading, selectPostError } from './selectors';
 
 export class Post extends React.Component {
-  componentWillMount() {
-    this.props.loadPost(this.props.match.params.slug);
+  static async getInitialProps({ store, query: { slug } }) {
+    if (!selectPost()(store.getState()).get(slug)) {
+      store.dispatch(loadPost(slug));
+    }
+
+    return { slug };
   }
 
   render() {
-    if (this.props.loading || this.props.post === false) {
-      return <div />;
+    if (this.props.loading) {
+      return <Loader />;
+    } else if (this.props.error) {
+      return <div>Kunne ikke laste inn artikkelen.</div>;
     }
-    const { episodes } = this.props.post;
-    const time = getNormalizedDateString(this.props.post.publishAt);
-    const machineReadableTime = moment(this.props.post.publishAt).toISOString();
+    const post = fromJS(this.props.post).toJS()[this.props.slug];
+
+    const { episodes } = post;
+    const time = getNormalizedDateString(post.publishAt);
+    const machineReadableTime = moment(post.publishAt).toISOString();
 
     let categories;
-    if (this.props.post.categories && this.props.post.categories.length > 0) {
-      categories = this.props.post.categories.map((category, index) => {
-        if (index === this.props.post.categories.length - 1) {
+    if (post.categories && post.categories.length > 0) {
+      categories = post.categories.map((category, index) => {
+        if (index === post.categories.length - 1) {
           return <span key={category.name}>{category.name}</span>;
         } else {
           return <span key={category.name}>{category.name}, </span>;
@@ -43,19 +53,18 @@ export class Post extends React.Component {
         </div>
       );
     }
-
     return (
       <article className={styles.post}>
-        <h1 className={styles.title}>{this.props.post.title}</h1>
+        <h1 className={styles.title}>{post.title}</h1>
         <div className={styles.meta}>
           {categories}
           <time className={styles.createdAt} dateTime={machineReadableTime}>
             {time}
           </time>
         </div>
-        <p
+        <div
           className={styles.body}
-          dangerouslySetInnerHTML={{ __html: this.props.post.content }}
+          dangerouslySetInnerHTML={{ __html: post.content }}
         />
         {episodes &&
           episodes.map(element => (
@@ -73,7 +82,6 @@ export class Post extends React.Component {
 Post.propTypes = {
   post: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   match: PropTypes.object,
-  loadPost: PropTypes.func.isRequired,
   loading: PropTypes.bool,
   error: PropTypes.bool,
   playOnDemand: PropTypes.func,
@@ -87,11 +95,12 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    loadPost: slug => dispatch(loadPost(slug)),
-    dispatch,
     playOnDemand: (episodeId, offset = 0) =>
       dispatch(getOnDemandPlaylist(episodeId, offset)),
   };
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Post));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withRouter(Post));

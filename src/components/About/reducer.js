@@ -6,7 +6,7 @@ import {
 } from './constants';
 
 const initialState = fromJS({
-  about: '',
+  content: null,
   loading: false,
   error: false,
 });
@@ -19,7 +19,7 @@ function aboutReducer(state = initialState, action) {
       return state
         .set('loading', false)
         .set('error', false)
-        .set('about', action.about);
+        .set('content', action.content);
     case LOAD_ABOUT_FAILED:
       return state.set('loading', false).set('error', true);
     default:

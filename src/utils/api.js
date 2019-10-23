@@ -1,4 +1,6 @@
-const GRAPHQL_URL = '/graphql';
+import 'isomorphic-unfetch';
+
+const GRAPHQL_URL = 'http://localhost:3000/graphql';
 const API_URL = 'https://api.radiorevolt.no';
 export const MEDIA_URL = '/media/';
 

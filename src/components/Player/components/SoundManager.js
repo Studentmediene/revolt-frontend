@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import { soundManager } from 'soundmanager2';
 
 export default class SoundManager extends Component {
   constructor(props) {
@@ -9,19 +8,28 @@ export default class SoundManager extends Component {
     // Stores the soundmanager sound object
     this.soundObject = null;
     this.sound = null;
+    this.soundManager = null;
   }
 
-  componentWillMount() {
-    soundManager.setup({
-      preferFlash: false,
-      debugMode: false,
-      html5PollingInterval: 50,
-    });
+  static async getInitialProps({ isServer }) {
+    return { isServer };
+  }
+
+  async componentDidMount() {
+    if (!this.props.isServer) {
+      const soundManagerModule = await import('soundmanager2');
+      this.soundManager = soundManagerModule.soundManager;
+      this.soundManager.setup({
+        preferFlash: false,
+        debugMode: false,
+        html5PollingInterval: 50,
+      });
+    }
   }
 
   componentWillUnmount() {
     // stop the audio (we can't know when garbage collection will run)
-    soundManager.stopAll();
+    this.soundManager.stopAll();
   }
 
   componentDidUpdate(prevProps) {
@@ -95,7 +103,7 @@ export default class SoundManager extends Component {
     }
     // Create a new sound object
     const props = this.props;
-    this.soundObject = soundManager.createSound({
+    this.soundObject = this.soundManager.createSound({
       url: props.url,
       volume: props.volume,
       whileplaying() {
@@ -132,6 +140,7 @@ export default class SoundManager extends Component {
 
 // Inspired by https://www.npmjs.com/package/react-sound
 SoundManager.propTypes = {
+  isServer: PropTypes.bool,
   url: PropTypes.string,
   paused: PropTypes.bool.isRequired,
   position: PropTypes.number,

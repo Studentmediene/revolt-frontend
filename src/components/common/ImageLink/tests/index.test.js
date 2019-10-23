@@ -10,7 +10,8 @@ describe('<ImageLink />', () => {
       medium: '/medium.jpg',
       large: '/large.jpg',
     },
-    link: '/link/to/resource',
+    as: '/post/actualLink',
+    href: '/post/[internalLink]',
     imageDescription: ' img description',
     children: <div>Hello world!</div>,
   };

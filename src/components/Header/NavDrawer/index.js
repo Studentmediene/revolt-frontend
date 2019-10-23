@@ -1,12 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { connect } from 'react-redux';
-import { push } from 'connected-react-router'
+import { withRouter } from 'next/router';
 
 import styles from './styles.scss';
-
-import logo from 'components/Header/Logo/RR_logo.png';
 
 export class NavDrawer extends React.Component {
   static propTypes = {
@@ -24,7 +21,7 @@ export class NavDrawer extends React.Component {
 
   navigate(e, destination) {
     this.props.onNavigation(e);
-    this.props.navigate(destination);
+    this.props.router.push(destination);
     // Stop browser from acting on the link click
     return false;
   }
@@ -59,7 +56,11 @@ export class NavDrawer extends React.Component {
           className={styles.logoRow}
           onClick={e => this.navigate(e, '/')}
         >
-          <img src={logo} className={styles.logo} />
+          <img
+            src="/assets/RR_logo.png"
+            className={styles.logo}
+            alt="Radio Revolt Logo"
+          />
         </a>
         {navbarComponents(this.props.links)}
       </div>
@@ -67,12 +68,4 @@ export class NavDrawer extends React.Component {
   }
 }
 
-
-function mapDispatchToProps(dispatch) {
-  return {
-    navigate: destination => dispatch(push(destination)),
-  }
-}
-
-
-export default connect(null, mapDispatchToProps)(NavDrawer);
+export default withRouter(NavDrawer);

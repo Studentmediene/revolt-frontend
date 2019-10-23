@@ -7,9 +7,9 @@ exports[`<LoadPostsButton /> renders correctly 1`] = `
 >
   Last inn flere artikler
   <img
-    alt=""
+    alt="Pointing arrow"
     className="arrow"
-    src="arrow_down.svg"
+    src="/assets/arrow_down.svg"
   />
 </button>
 `;

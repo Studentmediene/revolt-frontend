@@ -1,12 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 import styles from './styles.scss';
-import pngLogo from './RR_logo.png';
 
 const Logo = () => (
-  <Link to="/">
-    <img src={pngLogo} alt="Logo" className={styles.logo} />
+  <Link href="/">
+    <img
+      src="/assets/RR_logo.png"
+      alt="Radio Revolt Logo"
+      className={styles.logo}
+    />
   </Link>
 );
 

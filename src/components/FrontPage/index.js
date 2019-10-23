@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import Immutable from 'immutable'
+import Immutable from 'immutable';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -13,12 +13,12 @@ import {
   selectPostOffset,
   selectHasLoaded,
 } from './selectors';
+import Loader from 'components/Loader';
 import { loadFrontPagePosts } from './actions';
+import PostPreviewList from 'components/PostPreviewList';
+import LoadPostsButton from './components/LoadPostsButton';
 
 import styles from './styles.scss';
-import Loader from 'components/Loader';
-import LoadPostsButton from './components/LoadPostsButton';
-import PostPreviewList from 'components/PostPreviewList';
 
 export class FrontPage extends React.Component {
   static propTypes = {
@@ -31,10 +31,11 @@ export class FrontPage extends React.Component {
     hasLoaded: PropTypes.bool.isRequired,
   };
 
-  componentWillMount() {
-    if (!this.props.hasLoaded) {
-      this.props.loadPosts(this.props.postOffset);
+  static async getInitialProps({ store }) {
+    if (!selectHasLoaded()(store.getState())) {
+      store.dispatch(loadFrontPagePosts(0));
     }
+    return {};
   }
 
   render() {
@@ -86,4 +87,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FrontPage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(FrontPage);

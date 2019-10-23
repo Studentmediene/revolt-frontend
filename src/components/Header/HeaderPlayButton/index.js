@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -6,7 +7,11 @@ import { createStructuredSelector } from 'reselect';
 import styles from './styles.scss';
 import { togglePlayPause, playLive } from 'components/Player/actions';
 import PlayPauseButton from 'components/Player/components/PlayPauseButton';
-import { selectLiveTitle, selectPaused, selectLive } from 'components/Player/selectors';
+import {
+  selectLiveTitle,
+  selectPaused,
+  selectLive,
+} from 'components/Player/selectors';
 
 export class HeaderPlayButton extends React.Component {
   static propTypes = {
@@ -33,6 +38,9 @@ export class HeaderPlayButton extends React.Component {
 
     return (
       <button className={styles.container} onClick={buttonClicked}>
+        <Head>
+          <title>Radio Revolt</title>
+        </Head>
         <PlayPauseButton paused={!isCurrentlyLive} />
         <div className={styles.buttonText}>
           <div className={styles.largeText}>Lytt direkte!</div>
@@ -56,4 +64,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderPlayButton);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(HeaderPlayButton);

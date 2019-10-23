@@ -6,20 +6,17 @@ import {
   GET_PREV_DAY,
 } from './constants';
 
-export function loadSendeplan(timestamp) {
+export function loadSendeplans(timestamps) {
   return {
     type: LOAD_SENDEPLAN_PENDING,
-    timestamp,
+    timestamps,
   };
 }
 
-export function sendeplanSuccess(sendeplan, year, month, date) {
+export function sendeplanSuccess(sendeplans) {
   return {
     type: LOAD_SENDEPLAN_SUCCESS,
-    sendeplan,
-    year,
-    month,
-    date,
+    sendeplans,
   };
 }
 
@@ -32,13 +29,13 @@ export function sendeplanError() {
 export function getNextDay(timestamp) {
   return {
     type: GET_NEXT_DAY,
-    timestamp: timestamp.clone().add(1, 'days'),
+    timestamps: [timestamp.clone().add(1, 'days')],
   };
 }
 
 export function getPrevDay(timestamp) {
   return {
     type: GET_PREV_DAY,
-    timestamp: timestamp.clone().subtract(1, 'days'),
+    timestamps: [timestamp.clone().subtract(1, 'days')],
   };
 }

@@ -1,7 +1,8 @@
-import { take, call, put } from 'redux-saga/effects';
+import { takeEvery, call, put } from 'redux-saga/effects';
+
+import { getGraphQL } from 'utils/api';
 import { LOAD_SHOW_PENDING } from './constants';
 import { showLoaded, showError } from './actions';
-import { getGraphQL } from 'utils/api';
 import { showFormat, episodeFormat, postFormat } from 'utils/dataFormatters';
 
 const formatShowQuery = ({ episodes, posts, ...show }) => ({
@@ -10,8 +11,8 @@ const formatShowQuery = ({ episodes, posts, ...show }) => ({
   posts: posts.map(postFormat),
 });
 
-// Individual exports for testing
-export function* loadShow(slug) {
+export function* loadShow({ slug }) {
+  console.log('fetching show', slug);
   const query = `query {
     show(slug:"${slug}") {
       id,
@@ -50,19 +51,10 @@ export function* loadShow(slug) {
   }`;
   try {
     let result = yield call(getGraphQL, query);
-    yield put(showLoaded(formatShowQuery(result.data.show)));
+    yield put(showLoaded(formatShowQuery(result.data.show), slug));
   } catch (error) {
     yield put(showError());
   }
 }
 
-export function* loadShowWatcher() {
-  // eslint-disable-next-line no-constant-condition
-  while (true) {
-    const { slug } = yield take(LOAD_SHOW_PENDING);
-    yield call(loadShow, slug);
-  }
-}
-
-// All sagas to be loaded
-export default [loadShowWatcher];
+export default [takeEvery(LOAD_SHOW_PENDING, loadShow)];

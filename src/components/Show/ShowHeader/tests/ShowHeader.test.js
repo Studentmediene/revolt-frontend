@@ -6,10 +6,12 @@ import ShowHeader from '../';
 describe('<ShowHeader />', () => {
   it('renders correctly', () => {
     const mockShow = {
-      title: 'Title',
-      content: '<p>Content</p>',
-      logoImageUrl: 'Image url',
-      categories: [{ name: 'category1' }, { name: 'category2' }],
+      show: {
+        title: 'Title',
+        content: '<p>Content</p>',
+        logoImageUrl: 'Image url',
+        categories: [{ name: 'category1' }, { name: 'category2' }],
+      },
     };
 
     const tree = shallow(<ShowHeader show={mockShow} />);

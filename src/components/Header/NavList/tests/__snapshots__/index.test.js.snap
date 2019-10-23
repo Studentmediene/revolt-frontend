@@ -9,11 +9,14 @@ exports[`<NavList /> renders correctly 1`] = `
     key="/link1"
   >
     <Link
-      className="navbarLink"
-      replace={false}
-      to="/link1"
+      href="/link1"
     >
-      Link1
+      <a
+        className="navbarLink"
+        href="/link1"
+      >
+        Link1
+      </a>
     </Link>
   </li>
   <li
@@ -21,11 +24,14 @@ exports[`<NavList /> renders correctly 1`] = `
     key="/link2"
   >
     <Link
-      className="navbarLink"
-      replace={false}
-      to="/link2"
+      href="/link2"
     >
-      Link2
+      <a
+        className="navbarLink"
+        href="/link2"
+      >
+        Link2
+      </a>
     </Link>
   </li>
 </ul>

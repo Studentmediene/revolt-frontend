@@ -1,8 +1,9 @@
 import React from 'react';
 import moment from 'moment';
 import PropTypes from 'prop-types';
+import { fromJS } from 'immutable';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter } from 'next/router';
 import { createStructuredSelector } from 'reselect';
 
 import {
@@ -23,8 +24,12 @@ import PostPreview from 'components/PostPreview';
 import ShowHeader from 'components/Show/ShowHeader';
 
 export class Show extends React.Component {
-  componentWillMount() {
-    this.props.loadShow(this.props.match.params.slug);
+  static async getInitialProps({ store, query: { slug } }) {
+    if (!selectShow()(store.getState()).get(slug)) {
+      store.dispatch(loadShow(slug));
+    }
+
+    return { slug };
   }
 
   render() {
@@ -36,13 +41,15 @@ export class Show extends React.Component {
       return <Loader />;
     }
 
-    const episodes = this.props.episodes.map(e => ({
+    const show = fromJS(this.props.show).toJS()[this.props.slug];
+
+    const episodes = show.episodes.map(e => ({
       ...e,
       date: e.publishAt,
       episode: true,
     }));
 
-    const posts = this.props.posts.map(p => ({
+    const posts = show.posts.map(p => ({
       ...p,
       date: p.publishAt,
       episode: false,
@@ -61,7 +68,7 @@ export class Show extends React.Component {
         return (
           <Episode
             {...element}
-            showName={this.props.show.title}
+            showName={show.title}
             key={index}
             playOnDemand={this.props.playOnDemand}
           />
@@ -75,7 +82,7 @@ export class Show extends React.Component {
     });
     return (
       <div>
-        <ShowHeader show={this.props.show} />
+        <ShowHeader show={show} />
         <div>{elements}</div>
       </div>
     );
@@ -104,7 +111,6 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    loadShow: slug => dispatch(loadShow(slug)),
     playPodcast: (episodeId, offset = 0) =>
       dispatch(getPodcastPlaylist(episodeId, offset)),
     playOnDemand: (episodeId, offset = 0) =>
@@ -112,4 +118,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Show));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withRouter(Show));

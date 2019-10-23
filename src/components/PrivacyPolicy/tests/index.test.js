@@ -6,7 +6,7 @@ import { PrivacyPolicy } from '../';
 describe('<PrivacyPolicy />', () => {
   it('renders correctly', () => {
     const props = {
-      privacyPolicy: '<p>privacyPolicy</p>',
+      content: '<p>privacyPolicy</p>',
       loading: false,
       error: false,
       loadPrivacyPolicy: jest.fn(),
@@ -17,7 +17,7 @@ describe('<PrivacyPolicy />', () => {
   });
   it('renders correctly while loading', () => {
     const props = {
-      privacyPolicy: '<p>privacyPolicy</p>',
+      content: '<p>privacyPolicy</p>',
       loading: true,
       error: false,
       loadPrivacyPolicy: jest.fn(),
@@ -28,7 +28,7 @@ describe('<PrivacyPolicy />', () => {
   });
   it('renders correctly on error', () => {
     const props = {
-      privacyPolicy: '<p>privacyPolicy</p>',
+      content: '<p>privacyPolicy</p>',
       loading: false,
       error: true,
       loadPrivacyPolicy: jest.fn(),

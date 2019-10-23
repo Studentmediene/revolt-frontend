@@ -1,0 +1,26 @@
+@import '../../../variables.scss';
+
+.shows {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-row-gap: 24px;
+  justify-items: center;
+}
+
+.hidden {
+  display: none;
+}
+
+@media screen and (min-width: $breakpoint-small) {
+  .shows {
+    grid-template-columns: 48% 48%;
+    grid-column-gap: 4%;
+  }
+}
+
+@media screen and (min-width: $breakpoint-medium) {
+  .shows {
+    grid-template-columns: 32% 32% 32%;
+    grid-column-gap: 2%;
+  }
+}
