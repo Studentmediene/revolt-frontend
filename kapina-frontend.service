@@ -1,0 +1,22 @@
+[Unit]
+Description = kapina-frontend
+After = network.target
+
+[Service]
+EnvironmentFile = /webapps/kapina-frontend/.env
+PermissionsStartOnly = true
+PIDFile = /run/kapina-frontend/kapina-frontend.pid
+User = kapina
+Group = kapina
+WorkingDirectory = /webapps/kapina-frontend
+ExecStartPre = /bin/mkdir /run/kapina-frontend
+ExecStartPre = /bin/chown -R kapina:kapina /run/kapina-frontend
+ExecStartPre = source ./env.sh
+ExecStart = /usr/bin/npm run start:prod --pid /run/kapina-frontend/kapina-frontend.pid
+ExecReload = /bin/kill -s HUP $MAINPID
+ExecStop = /bin/kill -s TERM $MAINPID
+ExecStopPost = /bin/rm -rf /run/kapina-frontend
+PrivateTmp = true
+
+[Install]
+WantedBy = multi-user.target
