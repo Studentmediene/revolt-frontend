@@ -11,7 +11,6 @@ Group = kapina
 WorkingDirectory = /webapps/kapina-frontend
 ExecStartPre = /bin/mkdir /run/kapina-frontend
 ExecStartPre = /bin/chown -R kapina:kapina /run/kapina-frontend
-ExecStartPre = source ./env.sh
 ExecStart = /usr/bin/npm run start:prod --pid /run/kapina-frontend/kapina-frontend.pid
 ExecReload = /bin/kill -s HUP $MAINPID
 ExecStop = /bin/kill -s TERM $MAINPID
