@@ -6,23 +6,29 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import {
+  loadSendeplans,
+  getNextDay,
+  getPrevDay,
+  setActiveDays,
+} from './actions';
+import {
   selectSendeplan,
   selectSendeplanLoading,
   selectSendeplanError,
   selectSendeplanCurrentDay,
-  selectSendeplanNextDay
+  selectSendeplanNextDay,
 } from './selectors';
 import Loader from 'components/Loader';
 import { timestampKey } from './utils';
 import SendeplanTable from './components/SendeplanTable';
 import SendeplanButton from './components/SendeplanButton';
-import { loadSendeplans, getNextDay, getPrevDay } from './actions';
 
 import styles from './styles.scss';
 
 export class Sendeplan extends React.Component {
   static async getInitialProps(ctx) {
     const { store } = ctx;
+    store.dispatch(setActiveDays(moment(), moment().add(1, 'days')));
     if (selectSendeplan()(store.getState()).isEmpty()) {
       const today = moment();
       const tomorrow = today.clone().add(1, 'days');
@@ -45,11 +51,11 @@ export class Sendeplan extends React.Component {
 
     const firstDay = moment(this.props.firstDay);
     const firstDayShows = sendeplan.get(
-      timestampKey(firstDay.year(), firstDay.month() + 1, firstDay.date())
+      timestampKey(firstDay.year(), firstDay.month() + 1, firstDay.date()),
     );
     const secondDay = moment(this.props.secondDay);
     const secondDayShows = sendeplan.get(
-      timestampKey(secondDay.year(), secondDay.month() + 1, secondDay.date())
+      timestampKey(secondDay.year(), secondDay.month() + 1, secondDay.date()),
     );
 
     return (
@@ -78,7 +84,7 @@ Sendeplan.propTypes = {
   firstDay: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   secondDay: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   getNextDay: PropTypes.func.isRequired,
-  getPrevDay: PropTypes.func.isRequired
+  getPrevDay: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -86,17 +92,17 @@ const mapStateToProps = createStructuredSelector({
   loading: selectSendeplanLoading(),
   error: selectSendeplanError(),
   firstDay: selectSendeplanCurrentDay(),
-  secondDay: selectSendeplanNextDay()
+  secondDay: selectSendeplanNextDay(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     getNextDay: timestamp => dispatch(getNextDay(timestamp)),
-    getPrevDay: timestamp => dispatch(getPrevDay(timestamp))
+    getPrevDay: timestamp => dispatch(getPrevDay(timestamp)),
   };
 }
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Sendeplan);

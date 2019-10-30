@@ -5,6 +5,7 @@ import {
   LOAD_SENDEPLAN_FAILED,
   GET_NEXT_DAY,
   GET_PREV_DAY,
+  SET_ACTIVE_DAYS,
 } from './constants';
 import moment from 'moment';
 
@@ -12,8 +13,8 @@ const initialState = fromJS({
   loading: false,
   error: false,
   sendeplan: {},
-  currentDay: moment(),
-  nextDay: moment().add(1, 'days'),
+  currentDay: false,
+  nextDay: false,
 });
 
 function sendeplanReducer(state = initialState, action) {
@@ -63,6 +64,10 @@ function sendeplanReducer(state = initialState, action) {
         )
         .set('loading', true)
         .set('error', false);
+    case SET_ACTIVE_DAYS:
+      return state
+        .set('currentDay', action.currentDay)
+        .set('nextDay', action.nextDay);
     default:
       return state;
   }
