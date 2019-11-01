@@ -4,8 +4,8 @@ import { getGraphQL } from 'utils/api';
 import { LOAD_FOOTER_PENDING } from './constants';
 import { footerLoaded, footerError } from './actions';
 
-// Individual exports for testing
 export function* loadFooter() {
+  console.log('fetching footer');
   const query = `query {
     settings {
       chiefEditor,
@@ -15,7 +15,9 @@ export function* loadFooter() {
   }`;
   try {
     const {
-      data: { settings: { chiefEditor, radioEditor, musicProducer } },
+      data: {
+        settings: { chiefEditor, radioEditor, musicProducer },
+      },
     } = yield call(getGraphQL, query);
     yield put(
       footerLoaded({
@@ -29,9 +31,5 @@ export function* loadFooter() {
   }
 }
 
-export function* loadFooterWatcher() {
-  yield takeEvery(LOAD_FOOTER_PENDING, loadFooter);
-}
-
 // All sagas to be loaded
-export default [loadFooterWatcher];
+export default [takeEvery(LOAD_FOOTER_PENDING, loadFooter)];

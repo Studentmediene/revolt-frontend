@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import styles from './AudioProgress.css';
+import styles from './AudioProgress.scss';
 
 export default class AudioProgress extends Component {
   constructor(props) {
@@ -112,7 +112,7 @@ export default class AudioProgress extends Component {
     const displayDuration = this.convertSecondsToDisplayTime(duration / 1000);
 
     let timeRatio = `${displayPosition} / ${displayDuration}`;
-    let progressBarWidth = `${position / duration * 100}%`;
+    let progressBarWidth = `${(position / duration) * 100}%`;
 
     if (this.props.live) {
       timeRatio = null;

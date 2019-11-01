@@ -6,7 +6,7 @@ import {
 } from './constants';
 
 const initialState = fromJS({
-  privacyPolicy: '',
+  content: null,
   loading: false,
   error: false,
 });
@@ -19,7 +19,7 @@ function privacyPolicyReducer(state = initialState, action) {
       return state
         .set('loading', false)
         .set('error', false)
-        .set('privacyPolicy', action.privacyPolicy);
+        .set('content', action.content);
     case LOAD_PRIVACY_POLICY_FAILED:
       return state.set('loading', false).set('error', true);
     default:

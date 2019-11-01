@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 import styles from './styles.scss';
 import ImageLink from 'components/common/ImageLink';
-import transparentPixel from './assets/transparent-pixel.png';
 
 class HighlightedPosts extends React.Component {
   constructor(props) {
@@ -15,9 +14,6 @@ class HighlightedPosts extends React.Component {
 
     // fields for keeping state while dragging
     this.postContainerRef = React.createRef();
-    const dragGhostImage = new Image();
-    dragGhostImage.src = transparentPixel;
-    this.dragGhostImage = dragGhostImage;
     this.initialPointerX = null;
     this.initialContainerScroll = null;
   }
@@ -35,6 +31,9 @@ class HighlightedPosts extends React.Component {
   }
 
   dragStart(event) {
+    const dragGhostImage = new Image();
+    dragGhostImage.src = '/assets/transparent-pixel.png';
+    this.dragGhostImage = dragGhostImage;
     // Set the "ghost image" shown on drag to a transparent pixel
     event.nativeEvent.dataTransfer.setDragImage(this.dragGhostImage, 0, 0);
 
@@ -46,14 +45,11 @@ class HighlightedPosts extends React.Component {
     if (this.props.posts && !this.props.posts.isEmpty()) {
       const posts = this.props.posts.toJS().map(post => {
         return (
-          <div
-            key={post.title}
-            className={styles.highlightedPost}
-            key={post.id}
-          >
+          <div key={post.id} className={styles.highlightedPost}>
             <ImageLink
               images={post.croppedImages}
-              link={`/post/${post.slug}`}
+              as={`/post/${post.slug}`}
+              href={`/post/[slug]`}
               imageDescription={post.title}
             >
               <div className={styles.imageText}>{post.title}</div>

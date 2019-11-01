@@ -1,10 +1,12 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
-import { frontPagePostsLoaded, frontPagePostsError } from './actions';
-import { LOAD_FRONT_PAGE_POSTS_PENDING, POSTS_PER_PAGE } from './constants';
+import { call, put, takeLatest } from 'redux-saga/effects';
+
 import { getGraphQL } from 'utils/api';
 import { postFormat } from 'utils/dataFormatters';
+import { frontPagePostsLoaded, frontPagePostsError } from './actions';
+import { LOAD_FRONT_PAGE_POSTS_PENDING, POSTS_PER_PAGE } from './constants';
 
 export function* loadFrontPageArticles({ postOffset }) {
+  console.log('fetching frontpage');
   const query = `query {
     allPosts(offset: ${postOffset}, count: ${POSTS_PER_PAGE}) {
       id,
@@ -34,10 +36,9 @@ export function* loadFrontPageArticles({ postOffset }) {
     }
   }`;
   try {
-    const { data: { allPosts, highlightedPosts } } = yield call(
-      getGraphQL,
-      query,
-    );
+    const {
+      data: { allPosts, highlightedPosts },
+    } = yield call(getGraphQL, query);
     const formattedPosts = allPosts.map(postFormat);
     const formattedHighlightedPosts = highlightedPosts.map(postFormat);
 
@@ -52,9 +53,6 @@ export function* loadFrontPageArticles({ postOffset }) {
   }
 }
 
-export function* loadFrontPageArticlesWatcher() {
-  yield takeEvery(LOAD_FRONT_PAGE_POSTS_PENDING, loadFrontPageArticles);
-}
-
-// All sagas to be loaded
-export default [loadFrontPageArticlesWatcher];
+export default [
+  takeLatest(LOAD_FRONT_PAGE_POSTS_PENDING, loadFrontPageArticles),
+];

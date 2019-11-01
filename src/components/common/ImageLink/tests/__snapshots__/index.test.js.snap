@@ -2,27 +2,31 @@
 
 exports[`<ImageLink /> renders correctly 1`] = `
 <Link
-  replace={false}
-  to="/link/to/resource"
+  as="/post/actualLink"
+  href="/post/[internalLink]"
 >
-  <LazyLoad
-    height={350}
-    offset={100}
-    once={true}
-    overflow={false}
-    resize={false}
-    scroll={true}
-    unmountIfInvisible={false}
+  <a
+    href="/post/actualLink"
   >
-    <img
-      alt=" img description"
-      className="image"
-      src="/large.jpg"
-      srcSet="/large.jpg 1024w, /medium.jpg 768w, /small.jpg 300w"
-    />
-  </LazyLoad>
-  <div>
-    Hello world!
-  </div>
+    <LazyLoad
+      height={350}
+      offset={100}
+      once={true}
+      overflow={false}
+      resize={false}
+      scroll={true}
+      unmountIfInvisible={false}
+    >
+      <img
+        alt=" img description"
+        className="image"
+        src="/large.jpg"
+        srcSet="/large.jpg 1024w, /medium.jpg 768w, /small.jpg 300w"
+      />
+    </LazyLoad>
+    <div>
+      Hello world!
+    </div>
+  </a>
 </Link>
 `;

@@ -2,13 +2,22 @@ import { createSelector } from 'reselect';
 
 const selectAboutDomain = () => state => state.get('about');
 
-const selectAbout = () =>
-  createSelector(selectAboutDomain(), about => about.get('about'));
+const selectContent = () =>
+  createSelector(
+    selectAboutDomain(),
+    about => about.get('content'),
+  );
 
 const selectAboutLoading = () =>
-  createSelector(selectAboutDomain(), about => about.get('loading'));
+  createSelector(
+    selectAboutDomain(),
+    about => about.get('loading'),
+  );
 
 const selectAboutError = () =>
-  createSelector(selectAboutDomain(), about => about.get('error'));
+  createSelector(
+    selectAboutDomain(),
+    about => about.get('error'),
+  );
 
-export { selectAbout, selectAboutLoading, selectAboutError };
+export { selectContent, selectAboutLoading, selectAboutError };

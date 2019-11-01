@@ -12,6 +12,7 @@ import {
   togglePlayPause,
   playNext,
   playPrevious,
+  liveTitleUpdater,
 } from './actions';
 import {
   selectOffset,
@@ -35,6 +36,14 @@ class Player extends React.Component {
     // Duration of the audio (estimate)
     duration: 0,
   };
+
+  static async getInitialProps({ isServer }) {
+    return { isServer };
+  }
+
+  componentDidMount() {
+    this.props.updateLiveTitle();
+  }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.url != nextProps.url) {
@@ -63,6 +72,9 @@ class Player extends React.Component {
   }
 
   render() {
+    if (this.props.isServer) {
+      return null;
+    }
     const { position } = this.state;
     return (
       <div className={styles.container} title={this.props.playingTitle}>
@@ -141,6 +153,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
+    updateLiveTitle: () => dispatch(liveTitleUpdater()),
     togglePlayPause: () => dispatch(togglePlayPause()),
     resume: () => dispatch(resume()),
     pause: () => dispatch(pause()),
@@ -149,4 +162,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Player);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Player);

@@ -3,24 +3,28 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import Loader from 'components/Loader';
-import { loadPrivacyPolicy } from './actions';
+import 'components/common/styles/editor.scss';
+
 import {
-  selectPrivacyPolicy,
+  selectContent,
   selectPrivacyPolicyLoading,
   selectPrivacyPolicyError,
 } from './selectors';
+import Loader from 'components/Loader';
+import { loadPrivacyPolicy } from './actions';
 
 export class PrivacyPolicy extends React.Component {
   static propTypes = {
-    privacyPolicy: PropTypes.string.isRequired,
+    content: PropTypes.string,
     loading: PropTypes.bool.isRequired,
     error: PropTypes.bool.isRequired,
-    loadPrivacyPolicy: PropTypes.func.isRequired,
   };
 
-  componentWillMount() {
-    this.props.loadPrivacyPolicy();
+  static async getInitialProps({ store }) {
+    if (!selectContent()(store.getState())) {
+      store.dispatch(loadPrivacyPolicy());
+    }
+    return {};
   }
 
   render() {
@@ -28,24 +32,18 @@ export class PrivacyPolicy extends React.Component {
       return <Loader />;
     } else if (this.props.error) {
       return <div>Kunne ikke laste inn siden.</div>;
+    } else if (this.props.content) {
+      return <div dangerouslySetInnerHTML={{ __html: this.props.content }} />;
     } else {
-      return (
-        <div dangerouslySetInnerHTML={{ __html: this.props.privacyPolicy }} />
-      );
+      return <Loader />;
     }
   }
 }
 
 const mapStateToProps = createStructuredSelector({
-  privacyPolicy: selectPrivacyPolicy(),
+  content: selectContent(),
   loading: selectPrivacyPolicyLoading(),
   error: selectPrivacyPolicyError(),
 });
 
-function mapDispatchToProps(dispatch) {
-  return {
-    loadPrivacyPolicy: () => dispatch(loadPrivacyPolicy()),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(PrivacyPolicy);
+export default connect(mapStateToProps)(PrivacyPolicy);

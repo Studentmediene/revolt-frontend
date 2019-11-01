@@ -1,4 +1,3 @@
-
 export const PLAY_LIVE = 'app/Player/PLAY_LIVE';
 export const PLAY_LIVE_PENDING = 'app/Player/PLAY_LIVE_PENDING';
 
@@ -27,3 +26,4 @@ export const PLAY_NEXT = 'app/Player/PLAY_NEXT';
 export const PLAY_PREVIOUS = 'app/Player/PLAY_PREVIOUS';
 
 export const PLAY_ON_DEMAND_EPISODE = 'app/Player/PLAY_ON_DEMAND_EPISODE';
+export const LIVE_TITLE_UPDATER = 'app/Player/LIVE_TITLE_UPDATER';

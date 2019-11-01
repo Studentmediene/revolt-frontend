@@ -2,13 +2,12 @@
 
 exports[`<Logo /> renders correctly 1`] = `
 <Link
-  replace={false}
-  to="/"
+  href="/"
 >
   <img
-    alt="Logo"
+    alt="Radio Revolt Logo"
     className="logo"
-    src="RR_logo.png"
+    src="/assets/RR_logo.png"
   />
 </Link>
 `;
