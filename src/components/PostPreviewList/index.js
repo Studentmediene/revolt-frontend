@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import styles from './styles.scss';
 import PostPreview from 'components/PostPreview';
 import HighlightedPosts from 'components/FrontPage/components/HighlightedPosts';
-import HighlightedShows from 'components/FrontPage/components/HighlightedShows';
+import NewestEpisodes from 'components/FrontPage/components/NewestEpisodes';
 
 const PostPreviewList = props => {
   const posts = props.posts.toJS().map((post, index) => (
@@ -24,7 +24,7 @@ const PostPreviewList = props => {
     posts.splice(
       2,
       0,
-      <HighlightedShows shows={props.newestEpisodes} key={'newestEpisodes'} />,
+      <NewestEpisodes shows={props.newestEpisodes} key={'newestEpisodes'} />,
     );
   }
   if (!props.highlightedPosts.isEmpty()) {
