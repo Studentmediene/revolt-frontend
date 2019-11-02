@@ -1,7 +1,10 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable react/jsx-no-comment-textnodes */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Immutable from 'immutable';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import styles from './styles.scss';
 import classNames from 'classnames';
 import Episode from 'components/Episode';
@@ -27,17 +30,17 @@ class HighlightedShows extends Component {
         if (this.props.paused || this.state.playingEpisodeIndex === -1) { //&& this.state.playingEpisodeIndex === -1
           this.setState({
             selectedShowIndex:
-              this.state.selectedShowIndex === this.props.shows.length - 1
+              this.state.selectedShowIndex === this.props.shows.toJS().length - 1
                 ? 0
                 : this.state.selectedShowIndex + 1,
           });
-        } else { //if (this.state.playingEpisodeIndex != -1)
+        } else {
           if (
-            this.props.shows[this.state.playingEpisodeIndex].id !=
+            this.props.shows.toJS()[this.state.playingEpisodeIndex].id !=
             this.props.currentlyPlayingId
           ) {
             // eslint-disable-next-line no-console
-            console.log('reset');
+            //console.log('reset');
             this.setState({
               playingEpisodeIndex: -1,
             });
@@ -48,7 +51,7 @@ class HighlightedShows extends Component {
           }
         }
       }
-      // eslint-disable-next-line no-console
+      /* // eslint-disable-next-line no-console
       console.log(
         'selectedShowIndex: ' +
           this.state.selectedShowIndex +
@@ -58,8 +61,8 @@ class HighlightedShows extends Component {
           this.state.selected +
           ' paused: ' +
           this.props.paused,
-      );
-    }, 5000);
+      ); */
+    }, 1000000);
   }
 
   componentDidMount() {
@@ -70,24 +73,8 @@ class HighlightedShows extends Component {
     clearInterval(this.interval);
   }
 
-  /* playSelectedEpisode() {
-    this.setState({
-      playingEpisodeIndex: this.state.selectedShowIndex,
-      selected: false,
-    });
-     if (this.props.paused) {
-      this.setState({
-        playingEpisodeIndex: this.state.selectedShowIndex,
-      });
-    } else {
-      this.setState({
-        playingEpisodeIndex: -1,
-      });
-    } 
-  } */
-
   mapShows() {
-    return this.props.shows.map((show, index) => (
+    return this.props.shows.toJS().map((show, index) => (
       <div
         className={classNames(styles.showImage, {
           [styles.selected]: index === this.state.selectedShowIndex,
@@ -114,18 +101,19 @@ class HighlightedShows extends Component {
   }
 
   render() {
-    const show = this.props.shows[this.state.selectedShowIndex];
+    const show = this.props.shows.toJS()[this.state.selectedShowIndex];
     return (
       <div className={styles.container}>
         <div className={styles.title}>De nyeste episodene</div>
         <div className={styles.showsContainer}>{this.mapShows()}</div>
         <div className={styles.playerContainer}>
-          <div className={styles.player} onClick={() => {
+          <div
+            className={styles.player}
+            onClick={() => {
               this.setState({
                 playingEpisodeIndex: this.state.selectedShowIndex,
                 selected: false,
               });
-              //this.playSelectedEpisode();
             }}
           >
             <Episode
@@ -134,6 +122,7 @@ class HighlightedShows extends Component {
               id={show.id}
               key={show.id}
               playOnDemand={this.props.playOnDemand}
+              cropOverflow={true}
             />
           </div>
         </div>
@@ -143,7 +132,7 @@ class HighlightedShows extends Component {
 }
 
 HighlightedShows.propTypes = {
-  shows: PropTypes.array,
+  shows: PropTypes.instanceOf(Immutable.List),
   playOnDemand: PropTypes.func,
   paused: PropTypes.bool.isRequired,
   currentlyPlayingId: PropTypes.number,
@@ -162,4 +151,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HighlightedShows));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(HighlightedShows);

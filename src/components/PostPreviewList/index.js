@@ -20,14 +20,11 @@ const PostPreviewList = props => {
     </div>
   ));
 
-  if(!props.newestEpisodes.isEmpty()) {
+  if (!props.newestEpisodes.isEmpty()) {
     posts.splice(
       2,
       0,
-      <HighlightedShows
-        shows={props.newestEpisodes}
-        key={'newestEpisodes'}
-      />,
+      <HighlightedShows shows={props.newestEpisodes} key={'newestEpisodes'} />,
     );
   }
   if (!props.highlightedPosts.isEmpty()) {
@@ -47,8 +44,8 @@ const PostPreviewList = props => {
 
 PostPreviewList.propTypes = {
   posts: PropTypes.instanceOf(Immutable.List).isRequired,
-  highlightedPosts: PropTypes.instanceOf(Immutable.List),
-  newestEpisodes: PropTypes.instanceOf(Immutable.List),
+  highlightedPosts: PropTypes.instanceOf(Immutable.List).isRequired,
+  newestEpisodes: PropTypes.instanceOf(Immutable.List).isRequired,
 };
 
 export default PostPreviewList;
