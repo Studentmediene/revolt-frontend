@@ -17,19 +17,22 @@ import {
   getPodcastPlaylist,
   getOnDemandPlaylist,
 } from 'components/Player/actions';
+import Meta from './meta';
 import { loadShow } from './actions';
 import Loader from 'components/Loader';
 import Episode from 'components/Episode';
 import PostPreview from 'components/PostPreview';
 import ShowHeader from 'components/Show/ShowHeader';
+import { getUrlInfo } from '../../utils/headUtils';
 
 export class Show extends React.Component {
-  static async getInitialProps({ store, query: { slug } }) {
+  static async getInitialProps({ store, query: { slug }, isServer, req }) {
     if (!selectShow()(store.getState()).get(slug)) {
       store.dispatch(loadShow(slug));
     }
+    const { host, url } = getUrlInfo(req, isServer);
 
-    return { slug };
+    return { slug, host, url };
   }
 
   render() {
@@ -82,6 +85,7 @@ export class Show extends React.Component {
     });
     return (
       <div>
+        <Meta show={show.show} host={this.props.host} url={this.props.url} />
         <ShowHeader show={show} />
         <div>{elements}</div>
       </div>
@@ -99,6 +103,8 @@ Show.propTypes = {
   error: PropTypes.bool,
   playPodcast: PropTypes.func,
   playOnDemand: PropTypes.func,
+  host: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
