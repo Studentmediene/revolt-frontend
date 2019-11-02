@@ -3,8 +3,8 @@
 .shows {
   display: grid;
   grid-template-columns: 100%;
-  grid-row-gap: 24px;
-  justify-items: center;
+  grid-row-gap: 15px;
+  /* justify-items: center; */
 }
 
 .hidden {
@@ -15,12 +15,13 @@
   .shows {
     grid-template-columns: 48% 48%;
     grid-column-gap: 4%;
+    grid-row-gap: 24px;
   }
 }
 
-@media screen and (min-width: $breakpoint-medium) {
+/* @media screen and (min-width: $breakpoint-medium) {
   .shows {
     grid-template-columns: 32% 32% 32%;
     grid-column-gap: 2%;
   }
-}
+} */
