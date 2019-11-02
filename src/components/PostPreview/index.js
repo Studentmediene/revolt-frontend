@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import LazyLoad from 'react-lazyload';
-import { Link } from 'react-router-dom';
 
 import styles from './styles.scss';
 import ImageLink from 'components/common/ImageLink';
@@ -19,26 +17,23 @@ const PostPreview = props => {
       />
     ));
   }
-
   return (
-    <div className={styles.postPreview}>
-      <ImageLink
-        images={props.croppedImages}
-        link={`/post/${props.slug}`}
-        imageDescription={props.title}
-      >
-        {categories}
-      </ImageLink>
-      <Link className={styles.titleLink} to={`/post/${props.slug}`}>
-        <h2 className={styles.title}>{props.title}</h2>
-      </Link>
-    </div>
+    <ImageLink
+      images={props.croppedImages}
+      href={`/post/[slug]`}
+      as={`/post/${props.slug}`}
+      imageDescription=""
+      className={styles.link}
+    >
+      {categories}
+      <h2 className={styles.title}>{props.title}</h2>
+    </ImageLink>
   );
 };
 
 PostPreview.propTypes = {
-  title: PropTypes.string.isRequired,
-  slug: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  slug: PropTypes.string,
   croppedImages: PropTypes.shape({
     small: PropTypes.string,
     medium: PropTypes.string,

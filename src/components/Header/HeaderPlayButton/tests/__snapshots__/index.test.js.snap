@@ -1,10 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<HeaderPlayButton /> renders correctly 1`] = `
-<div
+<button
   className="container"
   onClick={[Function]}
 >
+  <Head>
+    <title>
+      Radio Revolt
+    </title>
+  </Head>
   <PlayPauseButton
     paused={true}
   />
@@ -22,5 +27,5 @@ exports[`<HeaderPlayButton /> renders correctly 1`] = `
        Current show
     </div>
   </div>
-</div>
+</button>
 `;

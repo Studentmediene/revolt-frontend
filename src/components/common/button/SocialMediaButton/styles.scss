@@ -1,7 +1,16 @@
-@import 'variables.scss';
+@import '../../../../variables.scss';
 
 .socialMediaButton {
   width: $social-media-button-width;
   margin-left: $social-media-button-margin;
   margin-right: $social-media-button-margin;
+}
+
+.link {
+  &:focus {
+    // Gray, since the buttons can be over light or dark background
+    outline-color: #888;
+    // Also add some brightness, since the outline is more subtle
+    filter: brightness(115%);
+  }
 }

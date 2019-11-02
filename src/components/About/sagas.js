@@ -4,8 +4,8 @@ import { getGraphQL } from 'utils/api';
 import { LOAD_ABOUT_PENDING } from './constants';
 import { aboutLoaded, aboutError } from './actions';
 
-// Individual exports for testing
 export function* loadAbout() {
+  console.log('fetching about');
   const query = `query {
     settings {
       about
@@ -19,9 +19,4 @@ export function* loadAbout() {
   }
 }
 
-export function* loadAboutWatcher() {
-  yield takeEvery(LOAD_ABOUT_PENDING, loadAbout);
-}
-
-// All sagas to be loaded
-export default [loadAboutWatcher];
+export default [takeEvery(LOAD_ABOUT_PENDING, loadAbout)];

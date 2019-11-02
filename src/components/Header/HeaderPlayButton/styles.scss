@@ -1,6 +1,10 @@
-@import 'variables.scss';
+@import '../../../variables.scss';
 
 .container {
+  // Reset browser button styles
+  border: none;
+
+  // Our own styles
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -18,7 +22,7 @@
   display: none;
   flex-direction: column;
   align-items: flex-start;
-  color: #FFF;
+  color: #fff;
   padding: 0 0 0 10px;
 }
 
@@ -36,6 +40,7 @@
   .buttonText {
     display: flex;
   }
+
   .largeText {
     display: block;
   }
@@ -46,6 +51,7 @@
     margin-right: 0;
     background-color: $color-radiorevolt-lightgrey;
   }
+
   .smallText {
     display: block;
   }

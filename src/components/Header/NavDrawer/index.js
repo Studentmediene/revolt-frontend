@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { withRouter  } from 'react-router-dom';
+import { withRouter } from 'next/router';
 
-import logo from 'components/Header/Logo/RR_logo.png';
 import styles from './styles.scss';
 
 export class NavDrawer extends React.Component {
@@ -13,8 +12,8 @@ export class NavDrawer extends React.Component {
     onNavigation: PropTypes.func.isRequired,
   };
 
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
 
     this.navigate = this.navigate.bind(this);
     this.preventInteraction = this.preventInteraction.bind(this);
@@ -22,7 +21,9 @@ export class NavDrawer extends React.Component {
 
   navigate(e, destination) {
     this.props.onNavigation(e);
-    this.props.history.push(destination)
+    this.props.router.push(destination);
+    // Stop browser from acting on the link click
+    return false;
   }
 
   preventInteraction(e) {
@@ -30,29 +31,39 @@ export class NavDrawer extends React.Component {
   }
 
   render() {
-    const navbarComponents = links => links.map(link => (
-      <div 
-        key={link.path}
-        className={styles.navItem}
-        onClick={(e) => this.navigate(e, link.path)}
-      >
-        {link.title}
-      </div>
-    ))
+    const navbarComponents = links =>
+      links.map(link => (
+        <a
+          href={link.path}
+          key={link.path}
+          className={styles.navItem}
+          onClick={e => this.navigate(e, link.path)}
+        >
+          {link.title}
+        </a>
+      ));
 
     return (
-      <div className={
-        classNames({
+      <div
+        className={classNames({
           [styles.navDrawer]: true,
           [styles.open]: this.props.open,
         })}
-        onClick={this.preventInteraction}>
-        <div className={styles.logoRow}>
-          <img src={logo} className={styles.logo} onClick={(e) => this.navigate(e, '/')} />
-        </div>
+        onClick={this.preventInteraction}
+      >
+        <a
+          href="/"
+          className={styles.logoRow}
+          onClick={e => this.navigate(e, '/')}
+        >
+          <img
+            src="/assets/RR_logo.png"
+            className={styles.logo}
+            alt="Radio Revolt Logo"
+          />
+        </a>
         {navbarComponents(this.props.links)}
       </div>
-    
     );
   }
 }

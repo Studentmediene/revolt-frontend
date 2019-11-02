@@ -1,4 +1,4 @@
-@import 'variables.scss';
+@import '../../variables.scss';
 
 .header {
   display: flex;
@@ -7,10 +7,17 @@
 
   flex: 1;
   height: $header-height;
-  
 
   color: $color-text-light;
   background-color: $color-radiorevolt-lightgrey;
+
+  // Change to light color for outline, due to dark background
+  a,
+  button {
+    &:focus {
+      outline-color: white;
+    }
+  }
 }
 
 .headerContent {
@@ -18,7 +25,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  
+
   flex: 1;
   max-width: $breakpoint-large;
 }

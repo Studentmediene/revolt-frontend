@@ -1,11 +1,12 @@
-import { take, call, put } from 'redux-saga/effects';
+import { takeEvery, call, put } from 'redux-saga/effects';
+
+import { getGraphQL } from 'utils/api';
 import { LOAD_POST_PENDING } from './constants';
 import { postLoaded, postError } from './actions';
-import { getGraphQL } from 'utils/api';
 import { postFormat } from 'utils/dataFormatters';
 
-// Individual exports for testing
-export function* loadPost(slug) {
+export function* loadPost({ slug }) {
+  console.log('fetching post', slug);
   const query = `query {
     post(slug:"${slug}") {
       id,
@@ -28,24 +29,16 @@ export function* loadPost(slug) {
         id,
         title,
         lead,
+        publishAt,
       }
     }
   }`;
   try {
     const result = yield call(getGraphQL, query);
-    yield put(postLoaded(postFormat(result.data.post)));
+    yield put(postLoaded(postFormat(result.data.post), slug));
   } catch (error) {
     yield put(postError());
   }
 }
 
-export function* loadPostWatcher() {
-  // eslint-disable-next-line no-constant-condition
-  while (true) {
-    const { slug } = yield take(LOAD_POST_PENDING);
-    yield call(loadPost, slug);
-  }
-}
-
-// All sagas to be loaded
-export default [loadPostWatcher];
+export default [takeEvery(LOAD_POST_PENDING, loadPost)];

@@ -1,43 +1,25 @@
-/**
- * Combine all reducers in this file and export the combined reducers.
- * If we were to do this in store.js, reducers wouldn't be hot reloadable.
- */
-
-import { fromJS } from 'immutable';
 import { combineReducers } from 'redux-immutable';
-import { LOCATION_CHANGE } from 'react-router-redux';
 
+import aboutReducer from 'components/About/reducer';
 import playerReducer from 'components/Player/reducer';
 import footerReducer from 'components/Footer/reducer';
+import showListReducer from 'components/ShowList/reducer';
+import postReducer from 'components/Post/reducer';
+import showReducer from 'components/Show/reducer';
+import sendeplanReducer from 'components/Sendeplan/reducer';
+import frontPageReducer from 'components/FrontPage/reducer';
+import privacyPolicyReducer from 'components/PrivacyPolicy/reducer';
 
-/*
- * routeReducer
- *
- * The reducer merges route location changes into our immutable state.
- * The change is necessitated by moving to react-router-redux@4
- *
- */
-const routeInitialState = fromJS({
-  location: null,
-});
-
-function routeReducer(state = routeInitialState, action) {
-  switch (action.type) {
-    case LOCATION_CHANGE:
-      return state.set('location', action.payload);
-    default:
-      return state;
-  }
-}
-
-/**
- * Creates the main reducer with the asynchronously loaded ones
- */
-export default function createReducer(asyncReducers) {
+export default function createReducer() {
   return combineReducers({
-    router: routeReducer,
     player: playerReducer,
     footer: footerReducer,
-    ...asyncReducers,
+    showList: showListReducer,
+    post: postReducer,
+    show: showReducer,
+    sendeplan: sendeplanReducer,
+    frontPage: frontPageReducer,
+    privacyPolicy: privacyPolicyReducer,
+    about: aboutReducer,
   });
 }

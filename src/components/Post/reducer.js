@@ -1,9 +1,3 @@
-/*
- *
- * Post reducer
- *
- */
-
 import { fromJS } from 'immutable';
 import {
   LOAD_POST_PENDING,
@@ -12,7 +6,7 @@ import {
 } from './constants';
 
 const initialState = fromJS({
-  post: false,
+  post: {},
   loading: false,
   error: false,
 });
@@ -25,7 +19,14 @@ function postReducer(state = initialState, action) {
       return state
         .set('loading', false)
         .set('error', false)
-        .set('post', action.post);
+        .set(
+          'post',
+          state.get('post').merge(
+            fromJS({
+              [action.slug]: action.post,
+            }),
+          ),
+        );
     case LOAD_POST_FAILED:
       return state.set('loading', false).set('error', true);
     default:

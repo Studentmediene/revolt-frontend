@@ -6,16 +6,16 @@ module.exports = {
     'declaration-empty-line-before': [
       'never',
       {
-        ignore: ['after-declaration'],
-      },
+        ignore: ['after-declaration']
+      }
     ],
     'font-family-name-quotes': 'always-where-recommended',
     'selector-pseudo-class-no-unknown': [
       true,
       {
-        ignorePseudoClasses: ['global'],
-      },
+        ignorePseudoClasses: ['global']
+      }
     ],
-    indentation: 2,
-  },
+    indentation: 2
+  }
 };

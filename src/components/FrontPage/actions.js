@@ -1,13 +1,13 @@
 import {
   LOAD_FRONT_PAGE_POSTS_PENDING,
   LOAD_FRONT_PAGE_POSTS_SUCCESS,
-  LOAD_FRONT_PAGE_POSTS_FAILED,
+  LOAD_FRONT_PAGE_POSTS_FAILED
 } from './constants';
 
 export function loadFrontPagePosts(postOffset) {
   return {
     type: LOAD_FRONT_PAGE_POSTS_PENDING,
-    postOffset,
+    postOffset
   };
 }
 
@@ -15,12 +15,12 @@ export function frontPagePostsLoaded({ highlightedPosts, posts }) {
   return {
     type: LOAD_FRONT_PAGE_POSTS_SUCCESS,
     highlightedPosts,
-    posts,
+    posts
   };
 }
 
 export function frontPagePostsError() {
   return {
-    type: LOAD_FRONT_PAGE_POSTS_FAILED,
+    type: LOAD_FRONT_PAGE_POSTS_FAILED
   };
 }

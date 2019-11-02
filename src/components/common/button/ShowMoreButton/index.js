@@ -3,13 +3,12 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import styles from './styles.scss';
-import arrowImage from './arrow-down.svg';
 
 const ShowMoreButton = props => (
   <button className={styles.showMoreButton} onClick={props.onClick}>
     {`${props.text} `}
     <img
-      src={arrowImage}
+      src="/assets/arrow_down.svg"
       alt="Arrow"
       className={classNames(styles.arrow, {
         [styles.rotated]: props.active,

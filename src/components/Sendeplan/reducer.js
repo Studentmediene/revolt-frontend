@@ -5,6 +5,7 @@ import {
   LOAD_SENDEPLAN_FAILED,
   GET_NEXT_DAY,
   GET_PREV_DAY,
+  SET_ACTIVE_DAYS,
 } from './constants';
 import moment from 'moment';
 
@@ -12,8 +13,8 @@ const initialState = fromJS({
   loading: false,
   error: false,
   sendeplan: {},
-  currentDay: moment(),
-  nextDay: moment().add(1, 'days'),
+  currentDay: false,
+  nextDay: false,
 });
 
 function sendeplanReducer(state = initialState, action) {
@@ -24,25 +25,23 @@ function sendeplanReducer(state = initialState, action) {
       return state
         .set('loading', false)
         .set('error', false)
-        .set('sendeplan', {
-          ...state.get('sendeplan'),
-          [`${action.year}.${action.month}.${action.date}`]: action.sendeplan,
-        });
+        .set(
+          'sendeplan',
+          state.get('sendeplan').merge(fromJS(action.sendeplans)),
+        );
     case LOAD_SENDEPLAN_FAILED:
       return state.set('loading', false).set('error', true);
     case GET_NEXT_DAY:
       return state
         .set(
           'currentDay',
-          state
-            .get('currentDay')
+          moment(state.get('currentDay'))
             .clone()
             .add(1, 'days'),
         )
         .set(
           'nextDay',
-          state
-            .get('nextDay')
+          moment(state.get('nextDay'))
             .clone()
             .add(1, 'days'),
         )
@@ -53,20 +52,22 @@ function sendeplanReducer(state = initialState, action) {
       return state
         .set(
           'currentDay',
-          state
-            .get('currentDay')
+          moment(state.get('currentDay'))
             .clone()
             .subtract(1, 'days'),
         )
         .set(
           'nextDay',
-          state
-            .get('nextDay')
+          moment(state.get('nextDay'))
             .clone()
             .subtract(1, 'days'),
         )
         .set('loading', true)
         .set('error', false);
+    case SET_ACTIVE_DAYS:
+      return state
+        .set('currentDay', action.currentDay)
+        .set('nextDay', action.nextDay);
     default:
       return state;
   }

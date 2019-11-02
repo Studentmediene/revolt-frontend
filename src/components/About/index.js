@@ -3,20 +3,28 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
+import 'components/common/styles/editor.scss';
+
+import {
+  selectContent,
+  selectAboutLoading,
+  selectAboutError,
+} from './selectors';
 import { loadAbout } from './actions';
 import Loader from 'components/Loader';
-import { selectAbout, selectAboutLoading, selectAboutError } from './selectors';
 
 export class About extends React.Component {
   static propTypes = {
-    about: PropTypes.string.isRequired,
+    content: PropTypes.string,
     loading: PropTypes.bool.isRequired,
     error: PropTypes.bool.isRequired,
-    loadAbout: PropTypes.func.isRequired,
   };
 
-  componentWillMount() {
-    this.props.loadAbout();
+  static async getInitialProps({ store }) {
+    if (!selectContent()(store.getState())) {
+      store.dispatch(loadAbout());
+    }
+    return {};
   }
 
   render() {
@@ -24,22 +32,18 @@ export class About extends React.Component {
       return <Loader />;
     } else if (this.props.error) {
       return <div>Kunne ikke laste inn siden.</div>;
+    } else if (this.props.content) {
+      return <div dangerouslySetInnerHTML={{ __html: this.props.content }} />;
     } else {
-      return <div dangerouslySetInnerHTML={{ __html: this.props.about }} />;
+      return <Loader />;
     }
   }
 }
 
 const mapStateToProps = createStructuredSelector({
-  about: selectAbout(),
+  content: selectContent(),
   loading: selectAboutLoading(),
   error: selectAboutError(),
 });
 
-function mapDispatchToProps(dispatch) {
-  return {
-    loadAbout: () => dispatch(loadAbout()),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(About);
+export default connect(mapStateToProps)(About);

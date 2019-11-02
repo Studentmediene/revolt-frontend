@@ -10,10 +10,10 @@ export function loadPrivacyPolicy() {
   };
 }
 
-export function privacyPolicyLoaded(privacyPolicy) {
+export function privacyPolicyLoaded(content) {
   return {
     type: LOAD_PRIVACY_POLICY_SUCCESS,
-    privacyPolicy,
+    content,
   };
 }
 

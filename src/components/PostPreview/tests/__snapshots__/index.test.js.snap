@@ -1,76 +1,63 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<PostPreview /> renders correctly with categories 1`] = `
-<div
-  className="postPreview"
->
-  <ImageLink
-    imageDescription="title"
-    images={
-      Object {
-        "large": "large_image",
-        "medium": "medium_image",
-        "small": "small_image",
-      }
+<ImageLink
+  as="/post/slug"
+  className="link"
+  href="/post/[slug]"
+  imageDescription=""
+  imageProps={Object {}}
+  images={
+    Object {
+      "large": "large_image",
+      "medium": "medium_image",
+      "small": "small_image",
     }
-    link="/post/slug"
+  }
+>
+  <CategoryTag
+    backgroundColor="#FFFFFF"
+    index={0}
+    key="0"
+    name="categoryName1"
+    position="bottom"
+    textColor="#000000"
+  />
+  <CategoryTag
+    backgroundColor="#FFFFFF"
+    index={1}
+    key="1"
+    name="categoryName1"
+    position="bottom"
+    textColor="#000000"
+  />
+  <h2
+    className="title"
   >
-    <CategoryTag
-      backgroundColor="#FFFFFF"
-      index={0}
-      key="0"
-      name="categoryName1"
-      position="bottom"
-      textColor="#000000"
-    />
-    <CategoryTag
-      backgroundColor="#FFFFFF"
-      index={1}
-      key="1"
-      name="categoryName1"
-      position="bottom"
-      textColor="#000000"
-    />
-  </ImageLink>
-  <Link
-    className="titleLink"
-    replace={false}
-    to="/post/slug"
-  >
-    <h2
-      className="title"
-    >
-      title
-    </h2>
-  </Link>
-</div>
+    title
+  </h2>
+</ImageLink>
 `;
 
 exports[`<PostPreview /> renders correctly without categories 1`] = `
-<div
-  className="postPreview"
->
-  <ImageLink
-    imageDescription="title"
-    images={
-      Object {
-        "large": "large_image",
-        "medium": "medium_image",
-        "small": "small_image",
-      }
+<ImageLink
+  as="/post/slug"
+  className="link"
+  href="/post/[slug]"
+  imageDescription=""
+  imageProps={Object {}}
+  images={
+    Object {
+      "large": "large_image",
+      "medium": "medium_image",
+      "small": "small_image",
     }
-    link="/post/slug"
-  />
-  <Link
-    className="titleLink"
-    replace={false}
-    to="/post/slug"
+  }
+>
+  <h2
+    className="title"
   >
-    <h2
-      className="title"
-    >
-      title
-    </h2>
-  </Link>
-</div>
+    title
+  </h2>
+</ImageLink>
 `;

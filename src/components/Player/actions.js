@@ -14,6 +14,7 @@ import {
   GET_ON_DEMAND_PLAYLIST_SUCCESS,
   GET_ON_DEMAND_PLAYLIST_FAILED,
   GET_LIVE_TITLE,
+  LIVE_TITLE_UPDATER,
   TOGGLE_PLAY_PAUSE,
   RESUME,
   PAUSE,
@@ -131,5 +132,11 @@ export function playOnDemandEpisode(index, offset = 0) {
     type: PLAY_ON_DEMAND_EPISODE,
     index,
     offset,
+  };
+}
+
+export function liveTitleUpdater() {
+  return {
+    type: LIVE_TITLE_UPDATER,
   };
 }

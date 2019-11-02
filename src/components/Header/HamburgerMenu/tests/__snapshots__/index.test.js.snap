@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<HamburgerMenu /> renders correctly 1`] = `
-<div
+<button
   className="container"
   onClick={[Function]}
 >
   <img
     className="hamburgerIcon"
-    src="hamburger-menu.svg"
+    src="/assets/hamburger-menu.svg"
   />
   <div
     className="hamburgerText"
@@ -37,5 +37,5 @@ exports[`<HamburgerMenu /> renders correctly 1`] = `
     onNavigation={[Function]}
     open={false}
   />
-</div>
+</button>
 `;

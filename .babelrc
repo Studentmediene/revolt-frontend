@@ -1,43 +1,24 @@
 {
-  "presets": [
-    ["env", {
-        "targets": {
-          "browsers": ["last 2 versions"],
-          "node": "current"
-        }
-      }
-    ],
-    "react"
-  ],
+  "presets": ["next/babel"],
   "plugins": [
-    ["module-resolver", {
-      "root": ["./src"]
-    }],
-    ["transform-runtime", {
-      "polyfill": true,
-      "regenerator": true
-    }],
-    "transform-class-properties",
-    "transform-object-rest-spread",
-    "syntax-dynamic-import"
+    [
+      "module-resolver",
+      {
+        "root": ["./src"]
+      }
+    ]
   ],
   "env": {
     "production": {
       "plugins": [
-        "transform-es2015-destructuring",
-        "transform-react-constant-elements",
-        "transform-react-inline-elements",
-        "transform-react-remove-prop-types",
-        "emotion"
+        "@babel/transform-destructuring",
+        "@babel/transform-react-constant-elements",
+        "@babel/transform-react-inline-elements",
+        "transform-react-remove-prop-types"
       ]
-    },
-    "development": {
-      "presets": ["react-hmre"]
     },
     "test": {
-      "plugins": [
-        "dynamic-import-node"
-      ]
+      "plugins": ["dynamic-import-node"]
     }
   }
 }

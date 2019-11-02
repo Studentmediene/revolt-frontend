@@ -1,5 +1,6 @@
-@import 'variables.scss';
+@import '../../../variables.scss';
 
 .logo {
+  cursor: pointer;
   width: $header-height - 15px;
 }

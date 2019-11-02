@@ -1,6 +1,8 @@
 import React from 'react';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import classNames from 'classnames';
 import { createStructuredSelector } from 'reselect';
 
 import styles from './styles.scss';
@@ -10,11 +12,11 @@ import { selectEpisodeId, selectPaused } from 'components/Player/selectors';
 
 export class Episode extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       expanded: false,
-    }
+    };
   }
   static propTypes = {
     digasBroadcastId: PropTypes.number,
@@ -22,23 +24,29 @@ export class Episode extends React.Component {
     title: PropTypes.string,
     lead: PropTypes.string,
     playOnDemand: PropTypes.func,
-  }
+    togglePlayPause: PropTypes.func.isRequired,
+    playingEpisodeId: PropTypes.number,
+    publishAt: PropTypes.string.isRequired,
+    paused: PropTypes.bool.isRequired,
+  };
 
   render() {
     if (this.props.digasBroadcastId === 0) {
       return null;
     }
 
+    const publishedAt = moment(this.props.publishAt);
+
     let isCurrentlyPlaying = false;
-  
+
     if (this.props.playingEpisodeId === this.props.id && !this.props.paused) {
       isCurrentlyPlaying = true;
     }
 
     const playOnDemand = event => {
       event.preventDefault();
-      if(this.props.playingEpisodeId === this.props.id) {
-        this.props.togglePlayPause()
+      if (this.props.playingEpisodeId === this.props.id) {
+        this.props.togglePlayPause();
       } else {
         this.props.playOnDemand(this.props.id);
       }
@@ -50,17 +58,21 @@ export class Episode extends React.Component {
         onClick={playOnDemand}
         onKeyPress={playOnDemand}
       >
-        <PlayPauseButton
-          paused={!isCurrentlyPlaying}
-        />
+        <PlayPauseButton paused={!isCurrentlyPlaying} />
         <div className={styles.meta}>
           <div className={styles.title}>{this.props.title}</div>
-          <div className={styles.lead} dangerouslySetInnerHTML={{ __html: this.props.lead }} />
+          <div
+            className={styles.lead}
+            dangerouslySetInnerHTML={{ __html: this.props.lead }}
+          />
+          <div className={classNames(styles.lead, styles.publishedAt)}>
+            Publisert: {publishedAt.format('DD.MM.YYYY')}
+          </div>
         </div>
       </div>
     );
   }
-};
+}
 
 const mapStateToProps = createStructuredSelector({
   playingEpisodeId: selectEpisodeId(),
@@ -73,5 +85,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Episode);
-
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Episode);

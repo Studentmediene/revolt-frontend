@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { createStructuredSelector } from 'reselect';
 
 import { loadFooter } from './actions';
@@ -18,33 +18,35 @@ import SocialMediaContainer from 'components/common/container/SocialMediaContain
 
 export class Footer extends React.Component {
   static propTypes = {
-    radioEditor: PropTypes.string.isRequired,
-    chiefEditor: PropTypes.string.isRequired,
-    musicProducer: PropTypes.string.isRequired,
+    radioEditor: PropTypes.string,
+    chiefEditor: PropTypes.string,
+    musicProducer: PropTypes.string,
     loading: PropTypes.bool.isRequired,
     error: PropTypes.bool.isRequired,
     loadFooter: PropTypes.func.isRequired,
   };
 
-  componentWillMount() {
-    this.props.loadFooter();
+  static async getInitialProps({ store, isServer }) {
+    if (isServer) {
+      store.dispatch(loadFooter());
+    }
+
+    return { isServer };
   }
 
   render() {
     let { radioEditor, chiefEditor, musicProducer } = this.props;
 
     return (
-      <div className={styles.footer}>
+      <footer className={styles.footer}>
         <div className={styles.content}>
-          <div>
+          <p>
             Denne tjenesten tilbys av Studentmediene i Trondheim AS. Musikken er
-            gjengitt med tilatelse fra TONO/NCB.
-          </div>
-          <div>
+            gjengitt med tillatelse fra TONO/NCB.
+            <br />
             Uautorisert lenking, videreføring eller kopiering er ulovlig.
-          </div>
-          <br />
-          <div className={styles.bold}>Kontakt oss</div>
+          </p>
+          <h2 className={styles.contactHeader}>Kontakt oss</h2>
           <a
             className={styles.footerLink}
             href="mailto:radioredaktor@studentmediene.no"
@@ -68,15 +70,19 @@ export class Footer extends React.Component {
             <SocialMediaContainer />
             <br />
           </div>
-          <Link className={styles.footerLink} to="/om">
-            Om oss
+          <Link href="/om">
+            <a className={styles.footerLink} href="/om">
+              Om oss
+            </a>
           </Link>
-          <Link className={styles.footerLink} to="/personvern">
-            Personvern
+          <Link href="/personvern">
+            <a className={styles.footerLink} href="/personvern">
+              Personvern
+            </a>
           </Link>
           <p>{new Date().getFullYear()} © Radio Revolt</p>
         </div>
-      </div>
+      </footer>
     );
   }
 }
@@ -95,4 +101,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Footer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Footer);

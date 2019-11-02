@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import styles from './styles.css';
-import arrow from './assets/arrow_down.svg';
+import styles from './styles.scss';
 
 const LoadPostsButton = props => (
   <button className={styles.loadMore} onClick={props.loadPosts}>
     Last inn flere artikler
-    <img src={arrow} alt="Arrow" className={styles.arrow} />
+    <img
+      src="/assets/arrow_down.svg"
+      alt="Pointing arrow"
+      className={styles.arrow}
+    />
   </button>
 );
 

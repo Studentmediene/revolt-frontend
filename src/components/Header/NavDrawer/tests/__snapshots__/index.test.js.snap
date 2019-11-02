@@ -1,7 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<NavDrawer /> renders correctly 1`] = `
-<Route
-  render={[Function]}
-/>
+<div
+  className="navDrawer open"
+  onClick={[Function]}
+>
+  <a
+    className="logoRow"
+    href="/"
+    onClick={[Function]}
+  >
+    <img
+      alt="Radio Revolt Logo"
+      className="logo"
+      src="/assets/RR_logo.png"
+    />
+  </a>
+  <a
+    className="navItem"
+    href="/link1"
+    key="/link1"
+    onClick={[Function]}
+  >
+    Link1
+  </a>
+  <a
+    className="navItem"
+    href="/link2"
+    key="/link2"
+    onClick={[Function]}
+  >
+    Link2
+  </a>
+</div>
 `;

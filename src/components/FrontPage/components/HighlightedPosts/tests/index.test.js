@@ -1,11 +1,12 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import Immutable, { fromJS } from 'immutable';
 
 import HighlightedPosts from '../';
 
 describe('<HighlightedPosts />', () => {
   const emptyProps = {
-    posts: false,
+    posts: Immutable.List(),
   };
 
   it('renders correctly when empty', () => {
@@ -14,7 +15,7 @@ describe('<HighlightedPosts />', () => {
   });
 
   const noPostsProps = {
-    posts: [],
+    posts: Immutable.List(),
   };
 
   it('renders correctly when there are no posts', () => {
@@ -23,7 +24,7 @@ describe('<HighlightedPosts />', () => {
   });
 
   const props = {
-    posts: [
+    posts: fromJS([
       {
         id: 364,
         croppedImages: {
@@ -44,7 +45,7 @@ describe('<HighlightedPosts />', () => {
         title: 'title2',
         slug: 'slug2',
       },
-    ],
+    ]),
   };
 
   it('renders correctly', () => {
