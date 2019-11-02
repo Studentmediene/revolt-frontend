@@ -1,22 +1,30 @@
 @import '../../../variables.scss';
 
 $max-width: 340px;
-$padding: 14px;
-$image-height: $max-width - 2 * $padding;
+$padding: 10px;
+$image-height: $max-width/3 - 2 * $padding;
 
 .container {
+  display: flex;
   background-color: #fff;
   border-top: 3px solid $color-radiorevolt-orange;
   box-shadow: -1px 0 2px 0 rgba(0, 0, 0, 0.12), 1px 0 2px 0 rgba(0, 0, 0, 0.12),
     0 1px 2px 0 rgba(0, 0, 0, 0.12);
   height: 100%;
-  max-width: $max-width;
+  flex:1;
+  align-items: stretch;
+  min-width: 100%;
+  > * {
+    flex: 1 100%;
+  }
 }
 
 .padding {
   display: flex;
-  flex-direction: column;
-  padding: $padding;
+  flex-direction: row;
+  justify-content: center;
+  flex:1;
+  padding: 1.5*$padding $padding 1.5*$padding $padding;
 }
 
 .imageWrapper {
@@ -24,14 +32,34 @@ $image-height: $max-width - 2 * $padding;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex:1;
   height: $image-height;
+
 }
 
 .image {
-  width: 100%;
-  height: auto;
-  max-height: $image-height;
+  height: 100%;
+  width: $image-height;
 }
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: $image-height;
+  flex-grow: 1;
+
+  h2 {
+    margin: 0 0 0 0;
+    
+  }
+
+  .lead {
+    display: none;
+  }
+}
+
 
 .link {
   color: inherit;
@@ -41,5 +69,36 @@ $image-height: $max-width - 2 * $padding;
   &:hover,
   &:focus {
     text-decoration: underline;
+  }
+}
+
+@media screen and (min-width: $breakpoint-medium) {
+  .container {
+    height: 100%;
+    width: 100%;
+  }
+
+  .textContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content:start;
+    align-items: center;
+    height: 100%;
+    padding: 5px;
+    flex-grow: 1;
+    margin-top: 0;
+  
+    h2 {
+      margin: 0 0 0 0;
+    }
+  
+    .lead {
+      height: 100%;
+      display: block;
+      text-overflow: ellipsis;
+    }
+  }
+  .imageWrapper {
+    margin-top: 1.5em;
   }
 }
