@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -8,28 +8,58 @@ import Episode from 'components/Episode';
 import { getOnDemandPlaylist } from 'components/Player/actions';
 import { createStructuredSelector } from 'reselect';
 import { selectNewestEpisodes } from '../../selectors.js';
+import { selectPaused, selectEpisodeId } from 'components/Player/selectors';
 
-
-class HighlightedShows extends React.Component {
+class HighlightedShows extends Component {
   constructor(props) {
     super(props);
     // test state
     this.state = {
       selectedShowIndex: 0,
+      playingEpisodeIndex: -1,
+      selected: false,
     };
   }
 
   startInterval() {
-      this.interval = setInterval(
-        () =>
+    this.interval = setInterval(() => {
+      if (!this.state.selected) {
+        if (this.props.paused || this.state.playingEpisodeIndex === -1) { //&& this.state.playingEpisodeIndex === -1
           this.setState({
             selectedShowIndex:
-              this.state.selectedShowIndex === this.props.shows.length-1
+              this.state.selectedShowIndex === this.props.shows.length - 1
                 ? 0
                 : this.state.selectedShowIndex + 1,
-          }),
-        4000,
-      ); 
+          });
+        } else { //if (this.state.playingEpisodeIndex != -1)
+          if (
+            this.props.shows[this.state.playingEpisodeIndex].id !=
+            this.props.currentlyPlayingId
+          ) {
+            // eslint-disable-next-line no-console
+            console.log('reset');
+            this.setState({
+              playingEpisodeIndex: -1,
+            });
+          } else {
+            this.setState({
+              selectedShowIndex: this.state.playingEpisodeIndex,
+            });
+          }
+        }
+      }
+      // eslint-disable-next-line no-console
+      console.log(
+        'selectedShowIndex: ' +
+          this.state.selectedShowIndex +
+          ' playingEpisodeIndex: ' +
+          this.state.playingEpisodeIndex +
+          ' selected: ' +
+          this.state.selected +
+          ' paused: ' +
+          this.props.paused,
+      );
+    }, 5000);
   }
 
   componentDidMount() {
@@ -39,6 +69,22 @@ class HighlightedShows extends React.Component {
   componentWillUnmount() {
     clearInterval(this.interval);
   }
+
+  /* playSelectedEpisode() {
+    this.setState({
+      playingEpisodeIndex: this.state.selectedShowIndex,
+      selected: false,
+    });
+     if (this.props.paused) {
+      this.setState({
+        playingEpisodeIndex: this.state.selectedShowIndex,
+      });
+    } else {
+      this.setState({
+        playingEpisodeIndex: -1,
+      });
+    } 
+  } */
 
   mapShows() {
     return this.props.shows.map((show, index) => (
@@ -50,10 +96,11 @@ class HighlightedShows extends React.Component {
         key={index}
         onMouseEnter={() => {
           clearInterval(this.interval);
-          this.setState({ selectedShowIndex: index});
+          this.setState({ selectedShowIndex: index, selected: true });
         }}
         onMouseLeave={() => {
-            this.startInterval();
+          this.setState({ selected: false });
+          this.startInterval();
         }}
       >
         <img
@@ -74,8 +121,13 @@ class HighlightedShows extends React.Component {
         <div className={styles.showsContainer}>{this.mapShows()}</div>
         <div className={styles.playerContainer}>
           <div className={styles.player} onClick={() => {
-          clearInterval(this.interval);
-        }}>
+              this.setState({
+                playingEpisodeIndex: this.state.selectedShowIndex,
+                selected: false,
+              });
+              //this.playSelectedEpisode();
+            }}
+          >
             <Episode
               title={show.title}
               publishAt={show.publishAt}
@@ -93,10 +145,14 @@ class HighlightedShows extends React.Component {
 HighlightedShows.propTypes = {
   shows: PropTypes.array,
   playOnDemand: PropTypes.func,
+  paused: PropTypes.bool.isRequired,
+  currentlyPlayingId: PropTypes.number,
 };
 
 const mapStateToProps = createStructuredSelector({
   shows: selectNewestEpisodes(),
+  paused: selectPaused(),
+  currentlyPlayingId: selectEpisodeId(),
 });
 
 function mapDispatchToProps(dispatch) {
