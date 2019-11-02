@@ -9,20 +9,23 @@ import { createStructuredSelector } from 'reselect';
 import styles from './styles.scss';
 import 'components/common/styles/editor.scss';
 
+import Meta from './meta';
 import { loadPost } from './actions';
-import Episode from 'components/Episode';
 import Loader from 'components/Loader';
+import Episode from 'components/Episode';
+import { getUrlInfo } from 'utils/headUtils';
 import { getNormalizedDateString } from 'utils/dateUtils';
 import { getOnDemandPlaylist } from 'components/Player/actions';
 import { selectPost, selectPostLoading, selectPostError } from './selectors';
 
 export class Post extends React.Component {
-  static async getInitialProps({ store, query: { slug } }) {
+  static async getInitialProps({ store, query: { slug }, req, isServer }) {
     if (!selectPost()(store.getState()).get(slug)) {
       store.dispatch(loadPost(slug));
     }
+    const { host, url } = getUrlInfo(req, isServer);
 
-    return { slug };
+    return { slug, host, url };
   }
 
   render() {
@@ -55,6 +58,7 @@ export class Post extends React.Component {
     }
     return (
       <article className={styles.post}>
+        <Meta post={post} host={this.props.host} url={this.props.url} />
         <h1 className={styles.title}>{post.title}</h1>
         <div className={styles.meta}>
           {categories}

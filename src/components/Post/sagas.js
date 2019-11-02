@@ -11,8 +11,12 @@ export function* loadPost({ slug }) {
     post(slug:"${slug}") {
       id,
       title,
+      lead,
       content,
       publishAt,
+      croppedImages {
+        medium
+      },
       createdBy {
         fullName
       },

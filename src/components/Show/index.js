@@ -23,7 +23,7 @@ import Loader from 'components/Loader';
 import Episode from 'components/Episode';
 import PostPreview from 'components/PostPreview';
 import ShowHeader from 'components/Show/ShowHeader';
-import { getUrlInfo } from '../../utils/headUtils';
+import { getUrlInfo } from 'utils/headUtils';
 
 export class Show extends React.Component {
   static async getInitialProps({ store, query: { slug }, isServer, req }) {
