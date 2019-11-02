@@ -6,7 +6,9 @@ exports[`<HeaderPlayButton /> renders correctly 1`] = `
   onClick={[Function]}
 >
   <Head>
-    <title>
+    <title
+      key="title"
+    >
       Radio Revolt
     </title>
   </Head>

@@ -39,7 +39,7 @@ export class HeaderPlayButton extends React.Component {
     return (
       <button className={styles.container} onClick={buttonClicked}>
         <Head>
-          <title>Radio Revolt</title>
+          <title key="title">Radio Revolt</title>
         </Head>
         <PlayPauseButton paused={!isCurrentlyLive} />
         <div className={styles.buttonText}>
