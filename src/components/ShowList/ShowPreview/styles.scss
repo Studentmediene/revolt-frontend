@@ -34,7 +34,6 @@ $image-height: $max-width/3 - 2 * $padding;
   align-items: center;
   flex:1;
   height: $image-height;
-
 }
 
 .image {
@@ -49,10 +48,11 @@ $image-height: $max-width/3 - 2 * $padding;
   justify-content: center;
   height: $image-height;
   flex-grow: 1;
+  max-width: 100%;
 
   h2 {
     margin: 0 0 0 0;
-    
+    font-size: 1.1em;
   }
 
   .lead {
@@ -89,7 +89,7 @@ $image-height: $max-width/3 - 2 * $padding;
     margin-top: 0;
   
     h2 {
-      margin: 0 0 0 0;
+      font-size: 1.5em;
     }
   
     .lead {
