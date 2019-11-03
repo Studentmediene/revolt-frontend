@@ -21,10 +21,22 @@ $image-height: $max-width/3 - 2 * $padding;
 
 .padding {
   display: flex;
-  flex-direction: row;
+  
   justify-content: center;
   flex:1;
   padding: 1.5*$padding $padding 1.5*$padding $padding;
+}
+
+.alignDirectionCompact {
+  flex-direction: row;
+}
+
+.alignDirectionExpanded {
+  flex-direction: column;
+}
+
+.expandedImage {
+  
 }
 
 .imageWrapper {
@@ -73,10 +85,6 @@ $image-height: $max-width/3 - 2 * $padding;
 }
 
 @media screen and (min-width: $breakpoint-medium) {
-  .container {
-    height: 100%;
-    width: 100%;
-  }
 
   .textContainer {
     display: flex;
