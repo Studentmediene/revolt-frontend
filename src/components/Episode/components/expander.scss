@@ -1,0 +1,24 @@
+@import 'variables.scss';
+
+.downButton {
+    border: solid $color-text-dark;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 10px;
+}
+
+.upButton {
+    border: solid $color-text-dark;;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 10px;
+}
+
+.expanderContainer {
+    cursor: pointer;
+    border: none;
+    align-self: right; 
+    position: absolute;
+    right: 30px;
+    top: 20px;
+}

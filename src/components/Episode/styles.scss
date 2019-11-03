@@ -12,6 +12,8 @@
   width: 100%;
   margin-bottom: 2em;
   cursor: pointer;
+
+  position: relative;
 }
 
 .meta {
@@ -22,10 +24,12 @@
   padding-left: 16px;
 }
 
-.lead {
+.expandable {
   padding-top: 4px;
   text-align: left;
   color: $color-text-dark;
+  display: block;
+  max-width: 93%;
 
   & > * {
     margin: 0;
@@ -34,4 +38,10 @@
 
 .publishedAt {
   padding-top: 8px;
+  color: $color-text-dark;
 }
+
+
+
+
+
