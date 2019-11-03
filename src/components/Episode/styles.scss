@@ -12,6 +12,8 @@
   width: 100%;
   margin-bottom: 2em;
   cursor: pointer;
+
+  position: relative;
 }
 
 .meta {
@@ -26,20 +28,9 @@
   position: relative;
 }
 
-.lead {
-  padding-top: 4px;
-  text-align: left;
-  color: $color-text-dark;
-  
-  
-
-  & > * {
-    margin: 0;
-  }
-}
-
 .publishedAt {
   padding-top: 8px;
+  color: $color-text-dark;
 }
 
 .cropOverflow {
