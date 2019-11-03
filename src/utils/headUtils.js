@@ -1,5 +1,4 @@
 export function getUrlInfo(req, isServer) {
-  const protocol = 'https://';
   let host = '';
   let url = '';
 
@@ -10,9 +9,6 @@ export function getUrlInfo(req, isServer) {
     host = `${window.location.protocol}//${window.location.host}`;
     url = window.location.href;
   }
-
-  console.log(host);
-  console.log(url);
   return {
     host,
     url,

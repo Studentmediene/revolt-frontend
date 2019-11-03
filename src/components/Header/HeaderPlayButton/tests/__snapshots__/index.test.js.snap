@@ -5,13 +5,6 @@ exports[`<HeaderPlayButton /> renders correctly 1`] = `
   className="container"
   onClick={[Function]}
 >
-  <Head>
-    <title
-      key="title"
-    >
-      Radio Revolt
-    </title>
-  </Head>
   <PlayPauseButton
     paused={true}
   />
