@@ -1,0 +1,39 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import Head from 'next/head';
+
+const Meta = props => {
+  const {
+    host,
+    url,
+    post: {
+      title,
+      lead: description,
+      croppedImages: { medium: imageUrl },
+    },
+  } = props;
+  const image = host + imageUrl;
+  const suffix = ' - Radio Revolt';
+  return (
+    <Head>
+      <title key="title">{title + suffix}</title>
+      <meta key="og:url" property="og:url" content={url} />
+      <meta key="og:type" property="og:type" content="article" />
+      <meta key="og:title" property="og:title" content={title} />
+      <meta
+        key="og:description"
+        property="og:description"
+        content={description}
+      />
+      <meta key="og:image" property="og:image" content={image} />
+    </Head>
+  );
+};
+
+Meta.propTypes = {
+  host: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
+  post: PropTypes.object.isRequired,
+};
+
+export default Meta;

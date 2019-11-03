@@ -1,5 +1,4 @@
 import React from 'react';
-import Head from 'next/head';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -38,9 +37,6 @@ export class HeaderPlayButton extends React.Component {
 
     return (
       <button className={styles.container} onClick={buttonClicked}>
-        <Head>
-          <title>Radio Revolt</title>
-        </Head>
         <PlayPauseButton paused={!isCurrentlyLive} />
         <div className={styles.buttonText}>
           <div className={styles.largeText}>Lytt direkte!</div>

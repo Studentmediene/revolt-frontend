@@ -14,7 +14,9 @@ import Sidebar from 'components/Sidebar';
 import Footer from 'components/Footer';
 import Player from 'components/Player';
 
+import Meta from 'utils/meta';
 import configureStore from '../store';
+import { getUrlInfo } from 'utils/headUtils';
 
 // Set global locales for moment
 moment.updateLocale('NB_no', {
@@ -58,6 +60,7 @@ Router.events.on('routeChangeComplete', () => {
 
 class RadioRevolt extends App {
   static async getInitialProps({ Component, ctx }) {
+    const { req, isServer } = ctx;
     let pageProps = {};
     let footerProps = {};
 
@@ -68,18 +71,39 @@ class RadioRevolt extends App {
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
     }
+    const { host } = getUrlInfo(req, isServer);
+    const url = host + ctx.pathname;
 
-    return { pageProps, footerProps, pathname: ctx.pathname };
+    return { pageProps, footerProps, pathname: ctx.pathname, host, url };
   }
 
   render() {
-    const { Component, pageProps, footerProps, store, pathname } = this.props;
+    const {
+      Component,
+      pageProps,
+      footerProps,
+      store,
+      pathname,
+      host,
+      url,
+    } = this.props;
     const plain = pathname.includes('/plainpost/');
+
+    const meta = (
+      <Meta
+        host={host}
+        url={url}
+        title="Radio Revolt"
+        description="Studentradion i Trondheim"
+        image="/assets/RR_logo.png"
+      />
+    );
 
     if (plain) {
       return (
         <Provider store={store}>
           <div className={styles.container}>
+            {meta}
             <main className={styles.content}>
               <Component {...pageProps} />
             </main>
@@ -91,6 +115,7 @@ class RadioRevolt extends App {
     return (
       <Provider store={store}>
         <div className={styles.container}>
+          {meta}
           <Header />
           <main className={styles.content}>
             <Component {...pageProps} />
