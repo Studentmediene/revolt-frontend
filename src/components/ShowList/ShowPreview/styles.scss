@@ -32,7 +32,7 @@ $image-height: $max-width/3 - 2 * $padding;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex:1;
+  flex-shrink: 0;
   height: $image-height;
 }
 

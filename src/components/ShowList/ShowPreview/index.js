@@ -16,13 +16,13 @@ const ShowPreview = props => {
   }
 
   return (
-    <Link href={`/programmer/[slug]`} as={`/programmer/${props.slug}`}>
-      <a className={styles.link} href={`/programmer/${props.slug}`}>
-        <div className={styles.container}>
-          {categories}
+    <div className={styles.container}>
+      {categories}
+      <Link href={`/programmer/[slug]`} as={`/programmer/${props.slug}`}>
+        <a className={styles.link} href={`/programmer/${props.slug}`}>
           <div className={styles.padding}>
             <div className={styles.imageWrapper}>
-              <LazyLoad height={300} offset={100} once>
+              <LazyLoad height={'100%'} offset={50} once>
                 <img className={styles.image} src={props.logoImageUrl} alt="" />
               </LazyLoad>
             </div>
@@ -31,9 +31,9 @@ const ShowPreview = props => {
               <div className={styles.lead}>{props.lead}</div>
             </div>
           </div>
-        </div>
-      </a>
-    </Link>
+        </a>
+      </Link>
+    </div>
   );
 
   /* return (
