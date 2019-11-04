@@ -31,6 +31,8 @@ class Player extends React.Component {
   }
 
   state = {
+    // Used to determine when to reset player position
+    currentUrl: '',
     // Number of seconds played
     position: 0,
     // Duration of the audio (estimate)
@@ -45,16 +47,17 @@ class Player extends React.Component {
     this.props.updateLiveTitle();
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.url != nextProps.url) {
+  componentDidUpdate() {
+    if (this.props.url != this.state.currentUrl) {
       // Audio URL has changed, so let's reset progress position
-      this.resetPosition();
+      this.resetPosition(this.props.url);
     }
   }
 
-  resetPosition() {
+  resetPosition(currentUrl) {
     this.setState({
       position: 0,
+      currentUrl,
     });
   }
 
@@ -102,7 +105,7 @@ class Player extends React.Component {
               if (this.state.position < backLimit) {
                 this.props.playPrevious();
               } else {
-                this.resetPosition();
+                this.resetPosition(this.state.currentUrl);
               }
             }
           }}
