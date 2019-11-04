@@ -19,7 +19,7 @@ export const trackPage = () => {
   }
 };
 
-export const tractEvent = (category, action) => {
+export const trackEvent = (category, action) => {
   if (process.env.NODE_ENV === 'production') {
     ReactGA.event({
       category,

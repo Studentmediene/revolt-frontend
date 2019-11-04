@@ -3,6 +3,7 @@ import classNames from 'classnames';
 
 import styles from './styles.scss';
 import NavDrawer from 'components/Header/NavDrawer';
+import { trackEvent } from 'utils/analytics';
 
 const navLinks = [
   {
@@ -30,6 +31,7 @@ export class HamburgerMenu extends React.Component {
 
   toggleMenu(e) {
     e.preventDefault();
+    trackEvent('button', 'open navigation menu');
     this.setState(prevState => {
       return {
         isOpen: !prevState.isOpen,
