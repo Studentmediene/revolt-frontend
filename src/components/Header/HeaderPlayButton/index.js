@@ -29,7 +29,7 @@ export class HeaderPlayButton extends React.Component {
 
     const buttonClicked = event => {
       event.preventDefault();
-      trackEvent('button', 'click header player');
+      trackEvent('player', 'header toggle play/pause');
       if (this.props.isLive) {
         this.props.togglePlayPause();
       } else {

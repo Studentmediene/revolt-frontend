@@ -22,6 +22,7 @@ import {
   selectUrl,
 } from './selectors';
 import styles from './styles.scss';
+import { trackEvent } from 'utils/analytics';
 
 class Player extends React.Component {
   constructor(props) {
@@ -98,8 +99,12 @@ class Player extends React.Component {
           }}
         />
         <AudioControls
-          playNext={() => this.props.playNext()}
+          playNext={() => {
+            trackEvent('player', 'play next song');
+            this.props.playNext();
+          }}
           playPrevious={() => {
+            trackEvent('player', 'play previous sond');
             if (!this.props.live) {
               const backLimit = 2 * 1000; // two seconds
               if (this.state.position < backLimit) {
@@ -109,7 +114,10 @@ class Player extends React.Component {
               }
             }
           }}
-          togglePlayPause={() => this.props.togglePlayPause()}
+          togglePlayPause={() => {
+            trackEvent('player', 'toggle play/pause');
+            this.props.togglePlayPause();
+          }}
           paused={this.props.paused}
           live={this.props.live}
           url={this.props.url}
