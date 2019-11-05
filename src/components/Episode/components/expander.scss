@@ -17,8 +17,7 @@
 .expanderContainer {
     cursor: pointer;
     border: none;
-    align-self: right; 
-    position: absolute;
-    right: 30px;
-    top: 20px;
+    position: relative;
+    height: 100%;
+    flex-shrink:0;
 }
