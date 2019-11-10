@@ -2,6 +2,7 @@ const express = require('express');
 const logger = require('./logger');
 const next = require('next');
 const sitemap = require('./sitemap');
+const robots = require('./robots');
 
 const isDev = process.env.NODE_ENV !== 'production';
 const ngrok = isDev && process.env.ENABLE_TUNNEL ? require('ngrok') : false;
@@ -57,6 +58,9 @@ app
         server.use(proxyMiddleware(context, devProxy[context]));
       });
     }
+
+    // enable crawlers to generate sitemap
+    server.get('/robots.txt', robots);
 
     // enable crawlers to generate sitemap
     server.get('/sitemap.xml', sitemap);
