@@ -7,6 +7,11 @@ const Meta = props => {
   return (
     <Head>
       {browserTitle ? <title key="title">{browserTitle}</title> : null}
+      {description ? (
+        <meta key="description" name="description" content={description} />
+      ) : null}
+
+      {/* Open Graph tags */}
       {url ? <meta key="og:url" property="og:url" content={url} /> : null}
       {type ? (
         <meta key="og:type" property="og:type" content="article" />
