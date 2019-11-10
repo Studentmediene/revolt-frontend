@@ -17,6 +17,7 @@ import Player from 'components/Player';
 import Meta from 'components/Meta';
 import configureStore from '../store';
 import { getUrlInfo } from 'utils/headUtils';
+import { SITE_DESCRIPTION } from 'utils/constants';
 
 // Set global locales for moment
 moment.updateLocale('NB_no', {
@@ -95,7 +96,7 @@ class RadioRevolt extends App {
         pageTitle={'Radio Revolt'}
         type="website"
         url={url}
-        description={'Studentradion i Trondheim'}
+        description={SITE_DESCRIPTION}
         image={host + '/assets/RR_logo.png'}
       />
     );
