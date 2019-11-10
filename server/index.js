@@ -59,7 +59,7 @@ app
       });
     }
 
-    // enable crawlers to generate sitemap
+    // generate robots.txt dynamically to stop brawling of BETA
     server.get('/robots.txt', robots);
 
     // enable crawlers to generate sitemap
