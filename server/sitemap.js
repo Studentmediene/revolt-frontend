@@ -2,6 +2,10 @@ require('isomorphic-unfetch');
 const moment = require('moment');
 
 module.exports = (req, res) => {
+  if (process.env.BETA) {
+    res.sendStatus(404);
+    return;
+  }
   res.header('Content-Type', 'application/xml');
   (async function sendXML() {
     let xmlFile = await createSitemap();
@@ -25,9 +29,7 @@ const query = `query {
   }
 }`;
 
-const domain = process.env.BETA
-  ? 'https://beta.radiorevolt.no'
-  : 'https://radiorevolt.no';
+const domain = 'https://radiorevolt.no';
 
 const createSitemap = async () => {
   let xml = '';
