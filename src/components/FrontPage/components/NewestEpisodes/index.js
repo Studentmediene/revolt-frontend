@@ -18,6 +18,8 @@ class NewestEpisodes extends Component {
       playingEpisodeIndex: -1, // the currently playing new episode or last played new episode if paused
       hover: false, // if the user is currently hovering over one of the new episodes
     };
+    this.startInterval = this.startInterval.bind(this);
+    this.mapEpisodes = this.mapEpisodes.bind(this);
   }
 
   componentDidMount() {
