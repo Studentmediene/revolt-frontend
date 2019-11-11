@@ -29,6 +29,14 @@ export const episodeFormat = ({ id, title, showName, publishAt, lead }) => ({
   lead,
 });
 
+export const newestEpisodesFormat = ({ id, title, show, publishAt }) => ({
+  id,
+  title,
+  imgURL: show.image,
+  name: show.name,
+  publishAt,
+});
+
 export const postFormat = ({
   id,
   croppedImages,
