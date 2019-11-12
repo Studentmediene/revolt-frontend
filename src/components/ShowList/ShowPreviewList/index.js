@@ -13,12 +13,12 @@ const ShowPreviewList = props => {
   const activeShows = props.shows
     .filter(show => !show.archived)
     .sort(compareShows)
-    .map((show, index) => <ShowPreview {...show} compact={props.compact} key={`active-${index}`} />);
+    .map((show, index) => <ShowPreview {...show} key={`active-${index}`} />);
 
   const archivedShows = props.shows
     .filter(show => show.archived)
     .sort(compareShows)
-    .map((show, index) => <ShowPreview {...show} compact={props.compact} key={`archived-${index}`} />);
+    .map((show, index) => <ShowPreview {...show} key={`archived-${index}`} />);
 
   return (
     <React.Fragment>
@@ -43,7 +43,6 @@ ShowPreviewList.propTypes = {
   shows: PropTypes.array.isRequired,
   showArchivedShows: PropTypes.bool.isRequired,
   toggleArchivedShows: PropTypes.func.isRequired,
-  compact: PropTypes.bool.isRequired,
 };
 
 export default ShowPreviewList;
