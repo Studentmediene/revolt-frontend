@@ -117,7 +117,6 @@ export class Shows extends React.Component {
             shows={showsToDisplay}
             showArchivedShows={this.state.showArchivedShows}
             toggleArchivedShows={this.toggleArchivedShows}
-            compact={true}
           />
         );
       }
