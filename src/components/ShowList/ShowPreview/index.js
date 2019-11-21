@@ -31,7 +31,7 @@ const ShowPreview = props => {
             </div>
           </div>
         </a>
-      </Link>
+      </Link> 
     </div>
   );
 };
