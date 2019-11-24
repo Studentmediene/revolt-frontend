@@ -37,6 +37,7 @@ describe('<PostPreviewList />', () => {
         },
       ]),
       highlightedPosts: Immutable.List(),
+      newestEpisodes: Immutable.List(),
     };
     const tree = shallow(<PostPreviewList {...mockProps} />);
     expect(tree).toMatchSnapshot();
@@ -45,6 +46,7 @@ describe('<PostPreviewList />', () => {
     const mockProps = {
       posts: Immutable.List(),
       highlightedPosts: Immutable.List(),
+      newestEpisodes: Immutable.List(),
     };
     const tree = shallow(<PostPreviewList {...mockProps} />);
     expect(tree).toMatchSnapshot();

@@ -18,6 +18,7 @@ import {
   selectSendeplanCurrentDay,
   selectSendeplanNextDay,
 } from './selectors';
+import Meta from 'components/Meta';
 import Loader from 'components/Loader';
 import { timestampKey } from './utils';
 import SendeplanTable from './components/SendeplanTable';
@@ -71,6 +72,10 @@ export class Sendeplan extends React.Component {
 
     return (
       <div className={styles.wrapper}>
+        <Meta
+          browserTitle={'Sendeplan - Radio Revolt'}
+          pageTitle={'Sendeplan'}
+        />
         <SendeplanButton onClick={clickPrevDay}>&lt;</SendeplanButton>
         <SendeplanTable day={firstDay} shows={firstDayShows} />
         <SendeplanTable

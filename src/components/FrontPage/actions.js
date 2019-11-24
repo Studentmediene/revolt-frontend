@@ -11,11 +11,12 @@ export function loadFrontPagePosts(postOffset) {
   };
 }
 
-export function frontPagePostsLoaded({ highlightedPosts, posts }) {
+export function frontPagePostsLoaded({ highlightedPosts, posts, newestEpisodes, }) {
   return {
     type: LOAD_FRONT_PAGE_POSTS_SUCCESS,
     highlightedPosts,
-    posts
+    posts,
+    newestEpisodes,
   };
 }
 
