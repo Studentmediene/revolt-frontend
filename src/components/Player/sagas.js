@@ -133,7 +133,6 @@ function* playLiveSaga() {
 function* updateLiveTitle() {
   try {
     const currentShow = yield call(getCurrentShows);
-    console.log(currentShow);
     const liveTitle = currentShow.current.title;
     yield put(currentShowTitle(liveTitle));
   } catch (e) {
