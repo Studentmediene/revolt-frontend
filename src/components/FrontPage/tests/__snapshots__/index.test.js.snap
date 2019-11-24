@@ -4,6 +4,7 @@ exports[`<FrontPage /> renders correctly 1`] = `
 <Fragment>
   <PostPreviewList
     highlightedPosts={Immutable.List []}
+    newestEpisodes={Immutable.List []}
     posts={Immutable.List []}
   />
   <div
@@ -26,6 +27,7 @@ exports[`<FrontPage /> renders correctly while loading 1`] = `
 <Fragment>
   <PostPreviewList
     highlightedPosts={Immutable.List []}
+    newestEpisodes={Immutable.List []}
     posts={Immutable.List []}
   />
   <div

@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Immutable from 'immutable'
+import Immutable from 'immutable';
 
 import { FrontPage } from '../';
 
@@ -9,6 +9,7 @@ describe('<FrontPage />', () => {
     const stateProps = {
       posts: Immutable.List(),
       highlightedPosts: Immutable.List(),
+      newestEpisodes: Immutable.List(),
       loading: false,
       error: false,
       postOffset: 0,
@@ -17,7 +18,7 @@ describe('<FrontPage />', () => {
 
     const actionProps = {
       loadPosts: jest.fn(),
-    }
+    };
 
     const tree = shallow(<FrontPage {...stateProps} {...actionProps} />);
     expect(tree).toMatchSnapshot();
@@ -26,6 +27,7 @@ describe('<FrontPage />', () => {
     const stateProps = {
       posts: Immutable.List(),
       highlightedPosts: Immutable.List(),
+      newestEpisodes: Immutable.List(),
       loading: true,
       error: false,
       postOffset: 0,
@@ -34,7 +36,7 @@ describe('<FrontPage />', () => {
 
     const actionProps = {
       loadPosts: jest.fn(),
-    }
+    };
 
     const tree = shallow(<FrontPage {...stateProps} {...actionProps} />);
     expect(tree).toMatchSnapshot();
@@ -43,6 +45,7 @@ describe('<FrontPage />', () => {
     const stateProps = {
       posts: Immutable.List(),
       highlightedPosts: Immutable.List(),
+      newestEpisodes: Immutable.List(),
       loading: false,
       error: true,
       postOffset: 0,
@@ -51,7 +54,7 @@ describe('<FrontPage />', () => {
 
     const actionProps = {
       loadPosts: jest.fn(),
-    }
+    };
 
     const tree = shallow(<FrontPage {...stateProps} {...actionProps} />);
     expect(tree).toMatchSnapshot();
