@@ -22,7 +22,7 @@
   }
 
   .title {
-    font-size: 1.5em;
+    font-size: $frontpage-title-size - 10px ;
     font-weight: bold;
     margin: 0 0 10px 2.5%;
     text-align: center;
@@ -68,6 +68,16 @@
     outline: solid $color-radiorevolt-lightgrey 1px;
   } 
 }
+
+@media screen and (min-width: 400px) {
+  .container{
+    .title {
+      font-size: $frontpage-title-size;
+    }
+  }
+  
+} 
+
 /* Desktop specific */
 @media screen and (min-width: $breakpoint-large) {
   .container {

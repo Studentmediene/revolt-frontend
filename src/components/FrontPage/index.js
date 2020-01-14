@@ -25,7 +25,7 @@ export class FrontPage extends React.Component {
   static propTypes = {
     posts: PropTypes.instanceOf(Immutable.List).isRequired,
     highlightedPosts: PropTypes.instanceOf(Immutable.List).isRequired,
-    newestEpisodes: PropTypes.instanceOf(Immutable.List).isRequired,
+    newestEpisodes: PropTypes.instanceOf(Immutable.List),
     loading: PropTypes.bool.isRequired,
     error: PropTypes.bool.isRequired,
     loadPosts: PropTypes.func.isRequired,

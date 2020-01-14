@@ -45,7 +45,7 @@ const PostPreviewList = props => {
 PostPreviewList.propTypes = {
   posts: PropTypes.instanceOf(Immutable.List).isRequired,
   highlightedPosts: PropTypes.instanceOf(Immutable.List).isRequired,
-  newestEpisodes: PropTypes.instanceOf(Immutable.List).isRequired,
+  newestEpisodes: PropTypes.instanceOf(Immutable.List),
 };
 
 export default PostPreviewList;
