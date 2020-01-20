@@ -4,16 +4,20 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: center;
-
-  background-color: $color-radiorevolt-darkgrey;
-  color: $color-text-light;
-  padding: 16px;
+  align-items: stretch;
+  
+  border: solid 0.25em $color-radiorevolt-orange;
+  color: black;
+  padding: 0px;
   width: 100%;
-  margin-bottom: 2em;
+  margin-top: 2em;
+  margin-bottom: 2.5em;
   cursor: pointer;
-
   position: relative;
+}
+
+.title {
+  font-size: large;
 }
 
 .meta {
@@ -21,8 +25,22 @@
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  padding-left: 16px;
+  padding: 16px;
 }
+
+.playbuttonbox {
+  display: flex;
+  padding: 0.5em 1.4em 0.5em 1.4em;
+  background-color: $color-radiorevolt-orange;
+  align-items: center;
+}
+
+.expanderbox {
+  display: flex;
+  align-items: flex-start;
+  padding: 1em;
+}
+
 
 .expandable {
   padding-top: 4px;

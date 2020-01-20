@@ -75,7 +75,9 @@ export class Episode extends React.Component {
         onClick={playOnDemand}
         onKeyPress={playOnDemand}
       >
-        <PlayPauseButton paused={!isCurrentlyPlaying} />
+        <div className={styles.playbuttonbox}>
+          <PlayPauseButton paused={!isCurrentlyPlaying}/>
+        </div>
         <div className={styles.meta}>
           <div className={styles.title}>{this.props.title}</div>
           <div className={styles.expandable} style={isExpanded}
@@ -85,7 +87,9 @@ export class Episode extends React.Component {
             Publisert: {publishedAt.format('DD.MM.YYYY')}
           </div>
         </div>
-        <Expander expanded={this.state.expanded} expandFunction={toggleExpanded}/>
+        <div className={styles.expanderbox}>
+          <Expander expanded={this.state.expanded} expandFunction={toggleExpanded}/>
+        </div>
       </div>
     );
   }
