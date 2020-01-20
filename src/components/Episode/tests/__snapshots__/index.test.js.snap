@@ -6,9 +6,13 @@ exports[`<Episode /> renders correctly 1`] = `
   onClick={[Function]}
   onKeyPress={[Function]}
 >
-  <PlayPauseButton
-    paused={true}
-  />
+  <div
+    className="playbuttonbox"
+  >
+    <PlayPauseButton
+      paused={true}
+    />
+  </div>
   <div
     className="meta"
   >
@@ -18,19 +22,32 @@ exports[`<Episode /> renders correctly 1`] = `
       Episode title
     </div>
     <div
-      className="lead"
+      className="expandable"
       dangerouslySetInnerHTML={
         Object {
           "__html": "Episode lead",
         }
       }
+      style={
+        Object {
+          "display": "none",
+        }
+      }
     />
     <div
-      className="lead publishedAt"
+      className="publishedAt"
     >
       Publisert: 
       08.09.2014
     </div>
+  </div>
+  <div
+    className="expanderbox"
+  >
+    <Expander
+      expandFunction={[Function]}
+      expanded={false}
+    />
   </div>
 </div>
 `;
