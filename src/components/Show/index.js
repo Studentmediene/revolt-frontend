@@ -20,7 +20,7 @@ import {
 import Meta from './meta';
 import { loadShow } from './actions';
 import Loader from 'components/Loader';
-import Episode from 'components/Episode';
+import NewEpisode from 'components/NewEpisode';
 import { getUrlInfo } from 'utils/headUtils';
 import PostPreview from 'components/PostPreview';
 import ShowHeader from 'components/Show/ShowHeader';
@@ -69,7 +69,7 @@ export class Show extends React.Component {
     const elements = elementList.map((element, index) => {
       if (element.episode) {
         return (
-          <Episode
+          <NewEpisode
             {...element}
             showName={show.title}
             key={index}
