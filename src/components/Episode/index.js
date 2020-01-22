@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { createStructuredSelector } from 'reselect';
-import Expander from './components/Expander';
 
 import styles from './styles.scss';
 import { togglePlayPause } from 'components/Player/actions';
@@ -61,15 +60,6 @@ export class Episode extends React.Component {
       }
     };
 
-    const toggleExpanded = event => {
-      event.preventDefault();
-      event.stopPropagation()
-      this.setState({
-          expanded: !this.state.expanded
-        }
-      )
-    }
-
     return (
       <div
         className={styles.episode}
@@ -99,7 +89,6 @@ export class Episode extends React.Component {
           </div>
         </div>
         <div className={styles.expanderbox}>
-          <Expander expanded={this.state.expanded} expandFunction={toggleExpanded}/>
         </div>
       </div>
     );
@@ -121,6 +110,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(Episode);
-
-
-// Mine endringer pga merge conflict:  <div className={styles.expandable} style={isExpanded}
