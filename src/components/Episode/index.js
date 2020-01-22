@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { createStructuredSelector } from 'reselect';
-import Expander from './components/Expander';
 
 import styles from './styles.scss';
 import { togglePlayPause } from 'components/Player/actions';
@@ -84,7 +83,6 @@ export class Episode extends React.Component {
           </div>
         </div>
         <div className={styles.expanderbox}>
-          <Expander expanded={this.state.expanded} expandFunction={toggleExpanded}/>
         </div>
       </div>
     );
