@@ -41,12 +41,13 @@ $image-height-small: $max-width/3 - 2 * $padding;
   flex-direction: column;
   justify-content: center;
   height: $image-height-small;
-  
+  padding: 0 0 0 10px;
+  text-align: left;
 
   h2 {
-    font-size: 1em;
-    overflow: hidden;
+    font-size: 1.1em;
     text-overflow: ellipsis;
+    overflow: hidden;
   }
 
   .lead {
@@ -84,6 +85,7 @@ $image-height-small: $max-width/3 - 2 * $padding;
     
     h2 {
       font-size: 1.35em;
+      text-align: center;
     }
   
     .lead {
