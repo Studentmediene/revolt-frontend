@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { createStructuredSelector } from 'reselect';
-
 import styles from './styles.scss';
 import { togglePlayPause } from 'components/Player/actions';
 import PlayPauseButton from 'components/Player/components/PlayPauseButton';
@@ -28,6 +27,7 @@ export class Episode extends React.Component {
     playingEpisodeId: PropTypes.number,
     publishAt: PropTypes.string.isRequired,
     paused: PropTypes.bool.isRequired,
+    cropOverflow: PropTypes.bool,
   };
 
   render() {
@@ -60,9 +60,17 @@ export class Episode extends React.Component {
       >
         <PlayPauseButton paused={!isCurrentlyPlaying} />
         <div className={styles.meta}>
-          <div className={styles.title}>{this.props.title}</div>
           <div
-            className={styles.lead}
+            className={classNames(styles.title, {
+              [styles.cropOverflow]: this.props.cropOverflow,
+            })}
+          >
+            {this.props.title}
+          </div>
+          <div
+            className={classNames(styles.lead, {
+              [styles.cropOverflow]: this.props.cropOverflow,
+            })}
             dangerouslySetInnerHTML={{ __html: this.props.lead }}
           />
           <div className={classNames(styles.lead, styles.publishedAt)}>

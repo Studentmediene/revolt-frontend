@@ -10,6 +10,11 @@ const selectHighlightedPosts = () =>
     frontPage.get('highlightedPosts'),
   );
 
+const selectNewestEpisodes = () =>
+  createSelector(selectFrontPageDomain(), frontPage =>
+    frontPage.get('newestEpisodes'),
+  );
+
 const selectFrontPagePostsLoading = () =>
   createSelector(selectFrontPageDomain(), frontPage =>
     frontPage.get('loading'),
@@ -35,4 +40,5 @@ export {
   selectFrontPagePostsError,
   selectPostOffset,
   selectHasLoaded,
+  selectNewestEpisodes,
 };

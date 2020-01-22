@@ -4,6 +4,7 @@ import { getGraphQL } from 'utils/api';
 import { postFormat } from 'utils/dataFormatters';
 import { frontPagePostsLoaded, frontPagePostsError } from './actions';
 import { LOAD_FRONT_PAGE_POSTS_PENDING, POSTS_PER_PAGE } from './constants';
+import { newestEpisodesFormat } from '../../utils/dataFormatters';
 
 export function* loadFrontPageArticles({ postOffset }) {
   console.log('fetching frontpage');
@@ -34,18 +35,30 @@ export function* loadFrontPageArticles({ postOffset }) {
         small
       },
     }
+    allEpisodes(count: 3) {
+      id,
+      title,
+      show {
+        name
+        image
+      } 
+      publishAt,
+    }
   }`;
   try {
-    const {
-      data: { allPosts, highlightedPosts },
-    } = yield call(getGraphQL, query);
+    const { data: { allPosts, highlightedPosts, allEpisodes, } } = yield call(
+      getGraphQL,
+      query,
+    );
     const formattedPosts = allPosts.map(postFormat);
     const formattedHighlightedPosts = highlightedPosts.map(postFormat);
+    const formattedNewestEpisodes = allEpisodes.map(newestEpisodesFormat);
 
     yield put(
       frontPagePostsLoaded({
         posts: formattedPosts,
         highlightedPosts: formattedHighlightedPosts,
+        newestEpisodes: formattedNewestEpisodes,
       }),
     );
   } catch (error) {

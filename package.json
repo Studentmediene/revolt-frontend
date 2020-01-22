@@ -35,7 +35,8 @@
     "lint": "npm run lint:js && npm run lint:css",
     "lint:js": "eslint src/",
     "lint:css": "stylelint ./src/**/*css",
-    "test": "jest src/"
+    "test": "jest src/",
+    "test:update": "npm test -- --u"
   },
   "lint-staged": {
     "*.js": [
