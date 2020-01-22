@@ -1,0 +1,73 @@
+@import '../../variables.scss';
+
+.episode {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  
+  border: solid 0.25em $color-radiorevolt-orange;
+  color: black;
+  padding: 0px;
+  width: 100%;
+  margin-top: 2em;
+  margin-bottom: 2.5em;
+  cursor: pointer;
+  position: relative;
+}
+
+.title {
+  font-size: large;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: 16px;
+}
+
+.playbuttonbox {
+  display: flex;
+  padding: 0.5em 1.4em 0.5em 1.4em;
+  background-color: $color-radiorevolt-orange;
+  align-items: center;
+  padding-left: 16px;
+  max-width: 90%;
+}
+
+.title {
+  position: relative;
+}
+
+.expanderbox {
+  display: flex;
+  align-items: flex-start;
+  padding: 1em;
+}
+
+
+.expandable {
+  padding-top: 4px;
+  text-align: left;
+  color: $color-text-dark;
+  display: block;
+  max-width: 93%;
+
+  & > * {
+    margin: 0;
+  }
+}
+
+.publishedAt {
+  padding-top: 8px;
+  color: $color-text-dark;
+}
+
+.cropOverflow {
+  overflow:hidden; 
+  white-space:nowrap; 
+  text-overflow:ellipsis;
+  max-width: 100%; 
+}
