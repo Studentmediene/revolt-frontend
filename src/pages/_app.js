@@ -14,9 +14,10 @@ import Sidebar from 'components/Sidebar';
 import Footer from 'components/Footer';
 import Player from 'components/Player';
 
-import Meta from 'utils/meta';
+import Meta from 'components/Meta';
 import configureStore from '../store';
 import { getUrlInfo } from 'utils/headUtils';
+import { SITE_DESCRIPTION } from 'utils/constants';
 
 // Set global locales for moment
 moment.updateLocale('NB_no', {
@@ -91,11 +92,12 @@ class RadioRevolt extends App {
 
     const meta = (
       <Meta
-        host={host}
+        browserTitle={'Radio Revolt'}
+        pageTitle={'Radio Revolt'}
+        type="website"
         url={url}
-        title="Radio Revolt"
-        description="Studentradion i Trondheim"
-        image="/assets/RR_logo.png"
+        description={SITE_DESCRIPTION}
+        image={host + '/assets/RR_logo.png'}
       />
     );
 

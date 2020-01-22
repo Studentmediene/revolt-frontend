@@ -32,6 +32,7 @@ export class Episode extends React.Component {
     publishAt: PropTypes.string.isRequired,
     paused: PropTypes.bool.isRequired,
     toggleExpanded: PropTypes.func,
+    cropOverflow: PropTypes.bool,
   };
 
   render() {
@@ -79,10 +80,20 @@ export class Episode extends React.Component {
           <PlayPauseButton paused={!isCurrentlyPlaying}/>
         </div>
         <div className={styles.meta}>
-          <div className={styles.title}>{this.props.title}</div>
-          <div className={styles.expandable} style={isExpanded}
+          <div
+            className={classNames(styles.title, {
+              [styles.cropOverflow]: this.props.cropOverflow,
+            })}
+          >
+            {this.props.title}
+          </div>
+          <div
+            className={classNames(styles.lead, {
+              [styles.cropOverflow]: this.props.cropOverflow,
+            })}
             dangerouslySetInnerHTML={{ __html: this.props.lead }}
           />
+          
           <div className={classNames(styles.publishedAt)}>
             Publisert: {publishedAt.format('DD.MM.YYYY')}
           </div>
@@ -110,3 +121,6 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(Episode);
+
+
+// Mine endringer pga merge conflict:  <div className={styles.expandable} style={isExpanded}

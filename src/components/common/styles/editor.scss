@@ -10,7 +10,7 @@ body {
 }
 
 a {
-  background: transparent;
+  background: transparent !important;
   color: black;
   text-decoration-color: black;
 }
@@ -19,6 +19,31 @@ img {
   height: auto;
   max-width: 100%;
 }
+
+/**
+* START Spotify CKEditor Plugin
+*/
+
+:global(.spotify-playlist-wrapper.align-right) {
+  float: right;
+}
+
+:global(.spotify-playlist-wrapper.align-left) {
+  float: left;
+}
+
+:global(.spotify-playlist-wrapper.align-center) {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+:global(.spotify-playlist-wrapper > iframe.no-border) {
+  border: none;
+}
+
+/**
+* END Spotify CKEditor Plugin
+*/
 
 /**
 * START: Old classes used by the old Summernote editor. Must be included to ensure

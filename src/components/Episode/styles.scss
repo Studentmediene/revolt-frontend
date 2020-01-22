@@ -33,6 +33,12 @@
   padding: 0.5em 1.4em 0.5em 1.4em;
   background-color: $color-radiorevolt-orange;
   align-items: center;
+  padding-left: 16px;
+  max-width: 90%;
+}
+
+.title {
+  position: relative;
 }
 
 .expanderbox {
@@ -59,7 +65,9 @@
   color: $color-text-dark;
 }
 
-
-
-
-
+.cropOverflow {
+  overflow:hidden; 
+  white-space:nowrap; 
+  text-overflow:ellipsis;
+  max-width: 100%; 
+}
