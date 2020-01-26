@@ -11,6 +11,7 @@ import {
   selectPaused,
   selectLive,
 } from 'components/Player/selectors';
+import { trackEvent } from 'utils/analytics';
 
 export class HeaderPlayButton extends React.Component {
   static propTypes = {
@@ -28,6 +29,7 @@ export class HeaderPlayButton extends React.Component {
 
     const buttonClicked = event => {
       event.preventDefault();
+      trackEvent('player', 'header toggle play/pause');
       if (this.props.isLive) {
         this.props.togglePlayPause();
       } else {

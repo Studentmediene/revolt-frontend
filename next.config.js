@@ -6,6 +6,8 @@ const config = {
   },
   env: {
     BETA: process.env.BETA,
+    G_ANALYTICS: process.env.G_ANALYTICS,
+    SENTRY_URL: process.env.SENTRY_URL,
   },
   webpack(config) {
     // access to webpack config here

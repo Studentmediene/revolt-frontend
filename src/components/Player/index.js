@@ -22,6 +22,7 @@ import {
   selectUrl,
 } from './selectors';
 import styles from './styles.scss';
+import { trackEvent } from 'utils/analytics';
 
 class Player extends React.Component {
   constructor(props) {
@@ -31,6 +32,8 @@ class Player extends React.Component {
   }
 
   state = {
+    // Used to determine when to reset player position
+    currentUrl: '',
     // Number of seconds played
     position: 0,
     // Duration of the audio (estimate)
@@ -45,16 +48,17 @@ class Player extends React.Component {
     this.props.updateLiveTitle();
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.url != nextProps.url) {
+  componentDidUpdate() {
+    if (this.props.url != this.state.currentUrl) {
       // Audio URL has changed, so let's reset progress position
-      this.resetPosition();
+      this.resetPosition(this.props.url);
     }
   }
 
-  resetPosition() {
+  resetPosition(currentUrl) {
     this.setState({
       position: 0,
+      currentUrl,
     });
   }
 
@@ -95,18 +99,25 @@ class Player extends React.Component {
           }}
         />
         <AudioControls
-          playNext={() => this.props.playNext()}
+          playNext={() => {
+            trackEvent('player', 'play next song');
+            this.props.playNext();
+          }}
           playPrevious={() => {
+            trackEvent('player', 'play previous sond');
             if (!this.props.live) {
               const backLimit = 2 * 1000; // two seconds
               if (this.state.position < backLimit) {
                 this.props.playPrevious();
               } else {
-                this.resetPosition();
+                this.resetPosition(this.state.currentUrl);
               }
             }
           }}
-          togglePlayPause={() => this.props.togglePlayPause()}
+          togglePlayPause={() => {
+            trackEvent('player', 'toggle play/pause');
+            this.props.togglePlayPause();
+          }}
           paused={this.props.paused}
           live={this.props.live}
           url={this.props.url}

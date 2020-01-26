@@ -25,6 +25,7 @@ import SendeplanTable from './components/SendeplanTable';
 import SendeplanButton from './components/SendeplanButton';
 
 import styles from './styles.scss';
+import { trackEvent } from '../../utils/analytics';
 
 export class Sendeplan extends React.Component {
   static async getInitialProps(ctx) {
@@ -59,24 +60,30 @@ export class Sendeplan extends React.Component {
       timestampKey(secondDay.year(), secondDay.month() + 1, secondDay.date()),
     );
 
+    const clickPrevDay = () => {
+      trackEvent('button', 'get prev sendeplan day');
+      this.props.getPrevDay(firstDay);
+    };
+
+    const clickNextDay = () => {
+      trackEvent('button', 'get next sendeplan day');
+      this.props.getNextDay(firstDay);
+    };
+
     return (
       <div className={styles.wrapper}>
         <Meta
           browserTitle={'Sendeplan - Radio Revolt'}
           pageTitle={'Sendeplan'}
         />
-        <SendeplanButton onClick={() => this.props.getPrevDay(firstDay)}>
-          &lt;
-        </SendeplanButton>
+        <SendeplanButton onClick={clickPrevDay}>&lt;</SendeplanButton>
         <SendeplanTable day={firstDay} shows={firstDayShows} />
         <SendeplanTable
           day={secondDay}
           shows={secondDayShows}
           hideOnSmallScreen
         />
-        <SendeplanButton onClick={() => this.props.getNextDay(secondDay)}>
-          &gt;
-        </SendeplanButton>
+        <SendeplanButton onClick={clickNextDay}>&gt;</SendeplanButton>
       </div>
     );
   }
