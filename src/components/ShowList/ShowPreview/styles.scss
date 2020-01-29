@@ -4,23 +4,27 @@ $max-width: 340px;
 $max-width-large: 240px;
 $padding: 10px;
 $image-height: 2*$max-width/3 - 2 * $padding;
-$image-height-small: $max-width/3 - 2 * $padding;
+$image-height-small: $max-width/3 - 3* $padding;
 
 
 .container {
   background-color: #fff;
-  border-top: 3px solid $color-radiorevolt-orange;
+  // border-top: 3px solid $color-radiorevolt-orange;
   box-shadow: -1px 0 2px 0 rgba(0, 0, 0, 0.12), 1px 0 2px 0 rgba(0, 0, 0, 0.12),
     0 1px 2px 0 rgba(0, 0, 0, 0.12);
   height: 100%;
   min-width: 100%;
 }
 
+.categoryTag {
+  display: none;
+}
+
 .padding {
   display: grid;
   justify-content: center;
   grid-template-columns: 1fr 3fr;
-  padding: 1.5*$padding $padding 1.5*$padding $padding;
+  padding: 10px 5px 10px 5px;
 }
 
 .imageWrapper {
@@ -28,7 +32,6 @@ $image-height-small: $max-width/3 - 2 * $padding;
   justify-content: center;
   align-items: center;
   height: $image-height-small;
-  
 }
 
 .image {
@@ -45,9 +48,7 @@ $image-height-small: $max-width/3 - 2 * $padding;
   text-align: left;
 
   h2 {
-    font-size: 1.1em;
-    text-overflow: ellipsis;
-    overflow: hidden;
+    font-size: 1.4em;
   }
 
   .lead {
@@ -66,10 +67,22 @@ $image-height-small: $max-width/3 - 2 * $padding;
   }
 }
 
+
+
 @media screen and (min-width: $breakpoint-medium) {
+
+  .container {
+    border-left: none !important;
+    border-top: 3px solid $color-radiorevolt-orange;
+  }
+
+  .categoryTag {
+    display: block;
+  }
 
   .padding {
     grid-template-columns: 1fr;
+    padding: 1.5*$padding $padding 1.5*$padding $padding;
   }
 
   .imageWrapper {
