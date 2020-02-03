@@ -77,7 +77,7 @@ export class NewEpisode extends React.Component {
         onKeyPress={playOnDemand}
       >
         <div className={styles.playbuttonbox}>
-          <PlayPauseButton paused={!isCurrentlyPlaying}/>
+          <PlayPauseButton paused={!isCurrentlyPlaying} black={true}/>
         </div>
         <div className={styles.meta}>
           <div

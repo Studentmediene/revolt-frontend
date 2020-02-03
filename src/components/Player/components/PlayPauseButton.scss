@@ -1,3 +1,4 @@
+@import 'variables.scss';
 
 $button-length: 32px;
 $pause-button-width: 11px;
@@ -25,6 +26,7 @@ $animation-effect: 0.3s ease;
   padding: 0;
   width: $button-length;
   height: $button-length;
+
 }
 
 .left {
@@ -43,6 +45,14 @@ $animation-effect: 0.3s ease;
     border-left: $button-length solid white;
     border-bottom: $button-length / 2 solid transparent;
     border-top: $button-length / 2 solid transparent;
+
+    &.black {
+      border-left: $button-length solid $color-radiorevolt-darkgrey;
+    }
+  }
+
+  &.black {
+    border-left: $pause-button-width solid $color-radiorevolt-darkgrey;
   }
 
   transition: height $animation-effect;
@@ -66,6 +76,11 @@ $animation-effect: 0.3s ease;
     border-bottom: 0 solid transparent;
     border-top: 0 solid transparent;
   }
+
+  &.black {
+    border-left: $pause-button-width solid $color-radiorevolt-darkgrey;
+  }
+
   transition: height $animation-effect;
   transition: border-left $animation-effect;
 }
