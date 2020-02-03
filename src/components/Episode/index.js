@@ -88,8 +88,6 @@ export class Episode extends React.Component {
             Publisert: {publishedAt.format('DD.MM.YYYY')}
           </div>
         </div>
-        <div className={styles.expanderbox}>
-        </div>
       </div>
     );
   }
