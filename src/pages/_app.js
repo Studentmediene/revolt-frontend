@@ -1,7 +1,5 @@
 import React from 'react';
 import App from 'next/app';
-import moment from 'moment';
-import ReactGA from 'react-ga';
 import { Provider } from 'react-redux';
 import withRedux from 'next-redux-wrapper';
 import withReduxSaga from 'next-redux-saga';
@@ -9,6 +7,7 @@ import withReduxSaga from 'next-redux-saga';
 import styles from './styles.scss';
 import './sanitize.scss';
 
+import ErrorComponent from './_error';
 import Header from 'components/Header';
 import Sidebar from 'components/Sidebar';
 import Footer from 'components/Footer';
@@ -17,47 +16,15 @@ import Player from 'components/Player';
 import Meta from 'components/Meta';
 import configureStore from '../store';
 import { getUrlInfo } from 'utils/headUtils';
+import { initMoment } from 'utils/dateUtils';
+import { initDevTools } from 'utils/devTools';
+import { initTracking, trackPage } from 'utils/analytics';
+import { initErrorReporting } from 'utils/errorReporting';
 import { SITE_DESCRIPTION } from 'utils/constants';
 
-// Set global locales for moment
-moment.updateLocale('NB_no', {
-  calendar: {
-    lastDay: '[I går] HH:mm',
-    sameDay: '[I dag] HH:mm',
-    nextDay: '[I morgen] HH:mm',
-    sameElse: 'DD.MM.YY HH:mm',
-  },
-  weekdaysShort: 'man_tirs_ons_tors_fre_lør_søn'.split('_'),
-  weekdays: 'mandag_tirsdag_onsdag_torsdag_fredag_lørdag_søndag'.split('_'),
-});
-
-import { initializeErrorReporting } from 'utils/errorReporting';
-
-if (process.env.NODE_ENV === 'production') {
-  initializeErrorReporting();
-
-  if (typeof window !== 'undefined') {
-    ReactGA.initialize('UA-4404225-6', {
-      gaOptions: {
-        anonymizeIp: true,
-      },
-    });
-    ReactGA.pageview(window.location.pathname + window.location.search);
-  }
-}
-import ErrorComponent from './_error';
-// Force CSS reloading in dev
-import Router from 'next/router';
-
-Router.events.on('routeChangeComplete', () => {
-  if (process.env.NODE_ENV !== 'production') {
-    const els = document.querySelectorAll(
-      'link[href*="/_next/static/css/styles.chunk.css"]',
-    );
-    const timestamp = new Date().valueOf();
-    els[0].href = '/_next/static/css/styles.chunk.css?v=' + timestamp;
-  }
-});
+initMoment();
+initErrorReporting();
+initDevTools();
 
 class RadioRevolt extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -76,6 +43,15 @@ class RadioRevolt extends App {
     const url = host + ctx.pathname;
 
     return { pageProps, footerProps, pathname: ctx.pathname, host, url };
+  }
+
+  componentDidMount() {
+    initTracking();
+    trackPage();
+  }
+
+  componentDidUpdate() {
+    trackPage();
   }
 
   render() {
@@ -101,31 +77,17 @@ class RadioRevolt extends App {
       />
     );
 
-    if (plain) {
-      return (
-        <Provider store={store}>
-          <div className={styles.container}>
-            {meta}
-            <main className={styles.content}>
-              <Component {...pageProps} />
-            </main>
-          </div>
-        </Provider>
-      );
-    }
-
     return (
       <Provider store={store}>
         <div className={styles.container}>
           {meta}
-          <Header />
+          {plain ? null : <Header />}
           <main className={styles.content}>
             <Component {...pageProps} />
           </main>
-          <Sidebar />
-
-          <Footer {...footerProps} />
-          <Player />
+          {plain ? null : <Sidebar />}
+          {plain ? null : <Footer {...footerProps} />}
+          {plain ? null : <Player />}
         </div>
       </Provider>
     );

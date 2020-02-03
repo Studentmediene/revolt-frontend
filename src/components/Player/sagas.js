@@ -131,9 +131,13 @@ function* playLiveSaga() {
 }
 
 function* updateLiveTitle() {
-  const currentShow = yield call(getCurrentShows);
-  const liveTitle = currentShow.current.title;
-  yield put(currentShowTitle(liveTitle));
+  try {
+    const currentShow = yield call(getCurrentShows);
+    const liveTitle = currentShow.current.title;
+    yield put(currentShowTitle(liveTitle));
+  } catch (e) {
+    console.error('Could not load current show.', e);
+  }
 }
 
 function* updateLiveTitleTimer() {
