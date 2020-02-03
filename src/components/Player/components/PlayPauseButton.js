@@ -6,7 +6,7 @@ import styles from './PlayPauseButton.scss';
 
 import SrOnly from 'components/common/SrOnly';
 
-const PlayPauseButton = ({ togglePlayPause, paused }) => {
+const PlayPauseButton = ({ togglePlayPause, paused, black}) => {
   // Label for our screenreader friends
   const label = paused ? 'Spill av' : 'Pause';
 
@@ -15,11 +15,13 @@ const PlayPauseButton = ({ togglePlayPause, paused }) => {
       <div
         className={classNames(styles.left, {
           [styles.paused]: paused,
+          [styles.black]: black,
         })}
       />
       <div
         className={classNames(styles.right, {
           [styles.paused]: paused,
+          [styles.black]: black,
         })}
       />
       <SrOnly>{label}</SrOnly>
@@ -41,6 +43,7 @@ const PlayPauseButton = ({ togglePlayPause, paused }) => {
 PlayPauseButton.propTypes = {
   togglePlayPause: PropTypes.func,
   paused: PropTypes.bool.isRequired,
+  black: PropTypes.bool,
 };
 
 export default PlayPauseButton;
