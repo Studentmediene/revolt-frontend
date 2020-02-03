@@ -19,7 +19,6 @@ const ShowPreview = props => {
       );
     });
   }
-  // eslint-disable-next-line no-console
 
   return (
     <div className={styles.container} style={leftBorder}>
