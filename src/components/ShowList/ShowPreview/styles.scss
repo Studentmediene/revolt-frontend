@@ -23,15 +23,16 @@ $image-height-small: $max-width/3 - 3* $padding;
 .padding {
   display: grid;
   justify-content: center;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: auto 3fr;
   padding: 10px 5px 10px 5px;
 }
 
 .imageWrapper {
-  display: flex;
+  display: grid;
   justify-content: center;
   align-items: center;
   height: $image-height-small;
+  width:  $image-height-small;
 }
 
 .image {
@@ -41,14 +42,16 @@ $image-height-small: $max-width/3 - 3* $padding;
 
 .textContainer {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-content: center;
   height: $image-height-small;
   padding: 0 0 0 10px;
   text-align: left;
 
   h2 {
     font-size: 1.4em;
+    word-break: break-word;
   }
 
   .lead {
@@ -86,7 +89,9 @@ $image-height-small: $max-width/3 - 3* $padding;
   }
 
   .imageWrapper {
+    display: flex;
     height: $image-height;
+    width:  auto;
   }
   
   .image {
@@ -95,6 +100,8 @@ $image-height-small: $max-width/3 - 3* $padding;
 
   .textContainer {
     height: 100%;
+    display: flex;
+    flex-direction: column;
     
     h2 {
       font-size: 1.35em;
@@ -103,16 +110,6 @@ $image-height-small: $max-width/3 - 3* $padding;
   
     .lead {
       display: block;
-    }
-  }
-}
-
-@media screen and (min-width: $breakpoint-large) {
-  .textContainer {
-    max-width: $max-width-large;
-    h2 {
-      font-size: 1.2em;
-     
     }
   }
 }
