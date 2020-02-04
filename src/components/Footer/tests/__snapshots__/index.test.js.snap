@@ -38,6 +38,20 @@ exports[`<Footer /> renders correctly 1`] = `
       Musikkprodusent: 
       musicProducer
     </a>
+    <a
+      className="footerLink"
+      href="mailto:kulturprodusent@studentmediene.no"
+    >
+      Kulturprodusent: 
+      culturalProducer
+    </a>
+    <a
+      className="footerLink"
+      href="mailto:underholdningsprodusent@studentmediene.no"
+    >
+      Underholdningsprodusent: 
+      entertainmentProducer
+    </a>
     <br />
     <div
       className="socialMediaLinks"
@@ -111,6 +125,20 @@ exports[`<Footer /> renders correctly on error 1`] = `
       Musikkprodusent: 
       musicProducer
     </a>
+    <a
+      className="footerLink"
+      href="mailto:kulturprodusent@studentmediene.no"
+    >
+      Kulturprodusent: 
+      culturalProducer
+    </a>
+    <a
+      className="footerLink"
+      href="mailto:underholdningsprodusent@studentmediene.no"
+    >
+      Underholdningsprodusent: 
+      entertainmentProducer
+    </a>
     <br />
     <div
       className="socialMediaLinks"
@@ -183,6 +211,20 @@ exports[`<Footer /> renders correctly while loading 1`] = `
     >
       Musikkprodusent: 
       musicProducer
+    </a>
+    <a
+      className="footerLink"
+      href="mailto:kulturprodusent@studentmediene.no"
+    >
+      Kulturprodusent: 
+      culturalProducer
+    </a>
+    <a
+      className="footerLink"
+      href="mailto:underholdningsprodusent@studentmediene.no"
+    >
+      Underholdningsprodusent: 
+      entertainmentProducer
     </a>
     <br />
     <div
