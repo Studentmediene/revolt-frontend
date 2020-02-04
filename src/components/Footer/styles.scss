@@ -48,6 +48,14 @@
   margin-bottom: 0;
 }
 
+.vtSupportText {
+  margin-top: 14px;
+}
+
+.vtLogo {
+  width: 100px;
+}
+
 @media screen and (min-width: $social-media-button-breakpoint) {
   .socialMediaLinks {
     display: none;
