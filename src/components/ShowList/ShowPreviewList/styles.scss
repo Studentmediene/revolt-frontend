@@ -3,7 +3,7 @@
 .shows {
   display: grid;
   grid-template-columns: 100%;
-  grid-row-gap: 24px;
+  grid-row-gap: 12px;
   justify-items: center;
 }
 
@@ -13,14 +13,24 @@
 
 @media screen and (min-width: $breakpoint-small) {
   .shows {
-    grid-template-columns: 48% 48%;
-    grid-column-gap: 4%;
+    grid-row-gap: 24px;
+    grid-template-columns: 49% 49%;
+    grid-column-gap: 2%;
   }
 }
 
 @media screen and (min-width: $breakpoint-medium) {
   .shows {
-    grid-template-columns: 32% 32% 32%;
+    grid-template-columns: repeat(3, 32%);
     grid-column-gap: 2%;
   }
 }
+
+@media screen and (min-width: $breakpoint-large ) {
+  .shows {
+    grid-template-columns: repeat(4, 24%);
+    grid-column-gap: 1%;
+    grid-row-gap: 12px;
+  }
+}
+
