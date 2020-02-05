@@ -46,6 +46,22 @@ export class Footer extends React.Component {
             <br />
             Uautorisert lenking, videreføring eller kopiering er ulovlig.
           </p>
+          <span className={styles.vtSupportText}>
+            Radio Revolt er laget med støtte fra Velferdstinget
+          </span>
+          <a
+            href="https://velferdstinget.no/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="/assets/vt-logo.svg"
+              className={styles.vtLogo}
+              alt="Velferdstinget logo"
+            ></img>
+          </a>
+        </div>
+        <div className={styles.content}>
           <h2 className={styles.contactHeader}>Kontakt oss</h2>
           <a
             className={styles.footerLink}
@@ -80,20 +96,6 @@ export class Footer extends React.Component {
               Personvern
             </a>
           </Link>
-          <span className={styles.vtSupportText}>
-            Radio Revolt er laget med støtte fra Velferdstinget
-          </span>
-          <a
-            href="https://velferdstinget.no/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src="/assets/vt-logo.svg"
-              className={styles.vtLogo}
-              alt="Velferdstinget logo"
-            ></img>
-          </a>
           <p>{new Date().getFullYear()} © Radio Revolt</p>
         </div>
       </footer>
