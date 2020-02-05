@@ -11,6 +11,12 @@ const selectRadioEditor = () =>
 const selectMusicProducer = () =>
   createSelector(selectFooterDomain(), about => about.get('musicProducer'));
 
+const selectCulturalProducer = () =>
+  createSelector(selectFooterDomain(), about => about.get('culturalProducer'));
+
+const selectEntertainmentProducer = () =>
+  createSelector(selectFooterDomain(), about => about.get('entertainmentProducer'));
+
 const selectFooterLoading = () =>
   createSelector(selectFooterDomain(), about => about.get('loading'));
 
@@ -21,6 +27,8 @@ export {
   selectChiefEditor,
   selectRadioEditor,
   selectMusicProducer,
+  selectCulturalProducer,
+  selectEntertainmentProducer,
   selectFooterLoading,
   selectFooterError,
 };

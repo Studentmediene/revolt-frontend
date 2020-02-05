@@ -10,12 +10,14 @@ export function loadFooter() {
   };
 }
 
-export function footerLoaded({ chiefEditor, radioEditor, musicProducer }) {
+export function footerLoaded({ chiefEditor, radioEditor, musicProducer, culturalProducer, entertainmentProducer }) {
   return {
     type: LOAD_FOOTER_SUCCESS,
     chiefEditor,
     radioEditor,
     musicProducer,
+    culturalProducer,
+    entertainmentProducer,
   };
 }
 

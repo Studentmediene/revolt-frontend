@@ -10,13 +10,15 @@ export function* loadFooter() {
     settings {
       chiefEditor,
       radioEditor,
-      musicProducer
+      musicProducer,
+      culturalProducer,
+      entertainmentProducer
     }
   }`;
   try {
     const {
       data: {
-        settings: { chiefEditor, radioEditor, musicProducer },
+        settings: { chiefEditor, radioEditor, musicProducer, culturalProducer, entertainmentProducer },
       },
     } = yield call(getGraphQL, query);
     yield put(
@@ -24,6 +26,8 @@ export function* loadFooter() {
         chiefEditor,
         radioEditor,
         musicProducer,
+        culturalProducer,
+        entertainmentProducer,
       }),
     );
   } catch (error) {

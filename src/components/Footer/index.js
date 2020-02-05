@@ -9,6 +9,8 @@ import {
   selectChiefEditor,
   selectRadioEditor,
   selectMusicProducer,
+  selectCulturalProducer,
+  selectEntertainmentProducer,
   selectFooterLoading,
   selectFooterError,
 } from './selectors';
@@ -21,6 +23,8 @@ export class Footer extends React.Component {
     radioEditor: PropTypes.string,
     chiefEditor: PropTypes.string,
     musicProducer: PropTypes.string,
+    culturalProducer: PropTypes.string,
+    entertainmentProducer: PropTypes.string,
     loading: PropTypes.bool.isRequired,
     error: PropTypes.bool.isRequired,
     loadFooter: PropTypes.func.isRequired,
@@ -35,7 +39,7 @@ export class Footer extends React.Component {
   }
 
   render() {
-    let { radioEditor, chiefEditor, musicProducer } = this.props;
+    let { radioEditor, chiefEditor, musicProducer, culturalProducer, entertainmentProducer } = this.props;
 
     return (
       <footer className={styles.footer}>
@@ -81,6 +85,18 @@ export class Footer extends React.Component {
           >
             Musikkprodusent: {musicProducer}
           </a>
+          <a
+            className={styles.footerLink}
+            href="mailto:kulturprodusent@studentmediene.no"
+          >
+            Kulturprodusent: {culturalProducer}
+          </a>
+          <a
+            className={styles.footerLink}
+            href="mailto:underholdningsprodusent@studentmediene.no"
+          >
+            Underholdningsprodusent: {entertainmentProducer}
+          </a>
           <br />
           <div className={styles.socialMediaLinks}>
             <SocialMediaContainer />
@@ -107,6 +123,8 @@ const mapStateToProps = createStructuredSelector({
   chiefEditor: selectChiefEditor(),
   radioEditor: selectRadioEditor(),
   musicProducer: selectMusicProducer(),
+  culturalProducer: selectCulturalProducer(),
+  entertainmentProducer: selectEntertainmentProducer(),
   loading: selectFooterLoading(),
   error: selectFooterError(),
 });
