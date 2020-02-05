@@ -36,22 +36,21 @@ $image-height-small: $max-width/3 - 3* $padding;
 }
 
 .image {
-  max-height: 100%;
+  max-height:  $image-height-small;
   width: $image-height-small;
 }
 
 .textContainer {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  align-content: center;
-  height: $image-height-small;
+  display: grid;
+  align-content: stretch;
   padding: 0 0 0 10px;
   text-align: left;
 
   h2 {
     font-size: 1.4em;
     word-break: break-word;
+    -ms-word-break: break-all;
+    align-self: center;
   }
 
   .lead {
@@ -67,6 +66,24 @@ $image-height-small: $max-width/3 - 3* $padding;
   &:hover,
   &:focus {
     text-decoration: underline;
+  }
+}
+
+/* for small phones */
+@media screen and (max-width: 330px) {
+  .textContainer {
+    h2 {
+      font-size: 1.15em;
+    }
+  }
+}
+
+
+@media screen and (min-width:  $breakpoint-small) {
+  .textContainer {
+    h2 {
+      font-size: 1.2em;
+    }
   }
 }
 
@@ -89,22 +106,19 @@ $image-height-small: $max-width/3 - 3* $padding;
   }
 
   .imageWrapper {
-    display: flex;
     height: $image-height;
     width:  auto;
   }
   
   .image {
     width: $image-height;
+    max-height:  $image-height;
   }
 
   .textContainer {
     height: 100%;
-    display: flex;
-    flex-direction: column;
     
     h2 {
-      font-size: 1.35em;
       text-align: center;
     }
   

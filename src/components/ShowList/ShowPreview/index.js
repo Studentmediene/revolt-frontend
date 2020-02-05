@@ -14,6 +14,7 @@ const ShowPreview = props => {
         borderLeft: `${'solid 4px' +
           props.categories.map(category => category.backgroundColor)[0]}`,
       };
+      /* Selection between border and tag is done with mediaqueries in the corresponding scss file */
       return (
         <CategoryTag {...category} index={index} position={'top'} key={index} />
       );
@@ -28,7 +29,11 @@ const ShowPreview = props => {
           <div className={styles.padding}>
             <div className={styles.imageWrapper}>
               <LazyLoad height={'100%'} offset={50} once>
-                <img className={styles.image} src={props.logoImageUrl} alt="" />
+                <img
+                  className={styles.image}
+                  src={props.logoImageUrl}
+                  alt={props.title + '-logo'}
+                />
               </LazyLoad>
             </div>
             <div className={styles.textContainer}>
