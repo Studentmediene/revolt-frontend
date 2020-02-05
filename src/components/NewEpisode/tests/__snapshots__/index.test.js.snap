@@ -10,6 +10,7 @@ exports[`<NewEpisode /> renders correctly 1`] = `
     className="playbuttonbox"
   >
     <PlayPauseButton
+      black={true}
       paused={true}
     />
   </div>
