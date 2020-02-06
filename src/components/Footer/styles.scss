@@ -3,7 +3,7 @@
 .footer {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  justify-content: center;
   background-color: $color-radiorevolt-darkgrey;
   width: 100%;
   min-height: 10rem;
@@ -29,18 +29,9 @@
   text-align: center;
 }
 
-.content {
-  width: 25%;
-  max-width: $breakpoint-large;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
 .footerLink {
   color: $color-text-light;
-  text-decoration: none;
+  text-decoration: underline dotted;
 
   &:hover,
   &:focus {
