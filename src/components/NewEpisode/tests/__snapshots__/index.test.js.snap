@@ -3,11 +3,10 @@
 exports[`<NewEpisode /> renders correctly 1`] = `
 <div
   className="episode"
-  onClick={[Function]}
-  onKeyPress={[Function]}
 >
   <div
     className="playbuttonbox"
+    onClick={[Function]}
   >
     <PlayPauseButton
       black={true}
@@ -16,6 +15,8 @@ exports[`<NewEpisode /> renders correctly 1`] = `
   </div>
   <div
     className="meta"
+    onClick={[Function]}
+    onKeyPress={[Function]}
   >
     <div
       className="title"
@@ -44,6 +45,8 @@ exports[`<NewEpisode /> renders correctly 1`] = `
   </div>
   <div
     className="expanderbox"
+    onClick={[Function]}
+    onKeyPress={[Function]}
   >
     <Expander
       expandFunction={[Function]}
