@@ -73,13 +73,18 @@ export class NewEpisode extends React.Component {
     return (
       <div
         className={styles.episode}
-        onClick={playOnDemand}
-        onKeyPress={playOnDemand}
       >
-        <div className={styles.playbuttonbox}>
+        <div 
+          className={styles.playbuttonbox}
+          onClick={playOnDemand}
+          >
           <PlayPauseButton paused={!isCurrentlyPlaying} black={true}/>
         </div>
-        <div className={styles.meta}>
+        <div 
+          className={styles.meta}
+          onClick={toggleExpanded}
+          onKeyPress={toggleExpanded}
+        >
           <div
             className={classNames(styles.title, {
               [styles.cropOverflow]: this.props.cropOverflow,
@@ -99,7 +104,11 @@ export class NewEpisode extends React.Component {
             Publisert: {publishedAt.format('DD.MM.YYYY')}
           </div>
         </div>
-        <div className={styles.expanderbox}>
+        <div 
+          className={styles.expanderbox}
+          onClick={toggleExpanded}
+          onKeyPress={toggleExpanded}
+        >
           <Expander expanded={this.state.expanded} expandFunction={toggleExpanded}/>
         </div>
       </div>
