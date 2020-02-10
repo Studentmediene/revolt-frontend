@@ -6,12 +6,12 @@
   justify-content: flex-start;
   align-items: stretch;
   
-  border: solid 0.25em $color-radiorevolt-orange;
+  border: solid 0.2em $color-radiorevolt-orange;
   color: black;
   padding: 0px;
   width: 100%;
-  margin-top: 2em;
-  margin-bottom: 2.5em;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
   cursor: pointer;
   position: relative;
 }
@@ -26,7 +26,7 @@
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  padding: 16px 0 16px 16px;
+  padding: 1em 0 1em 1em;
 }
 
 .playbuttonbox {
@@ -34,14 +34,13 @@
   padding: 0.5em 1.4em 0.5em 1.4em;
   background-color: $color-radiorevolt-orange;
   align-items: center;
-  padding-left: 20px;
   max-width: 90%;
 }
 
 .expanderbox {
   display: flex;
   align-items: flex-start;
-  padding: 1em;
+  padding: 0.7em;
 }
 
 
@@ -67,4 +66,30 @@
   white-space:nowrap; 
   text-overflow:ellipsis;
   max-width: 100%; 
+}
+
+@media only screen and (max-width:1050px) {
+
+  .episode {
+    width: 100%;
+    margin: 1% 0 3% 0;
+    border: solid 0.15em $color-radiorevolt-orange;
+  }
+
+  .title {
+    font-size: 11pt;
+  }
+
+  .playbuttonbox {
+    padding: 0em 1.4em 0em 1.4em;
+  }
+
+  .meta {
+    padding: 0.5em 0 0.5em 0.8em;
+  }
+
+  .expandable {
+    margin-top: 0.2em;
+    margin-bottom: 0.5em;
+  }
 }
