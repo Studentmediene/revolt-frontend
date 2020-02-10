@@ -49,6 +49,10 @@ $animation-effect: 0.3s ease;
     &.black {
       border-left: $button-length solid $color-radiorevolt-darkgrey;
     }
+
+    &.black:hover {
+      border-left: $button-length solid #696969;
+    }
   }
 
   &.black {
