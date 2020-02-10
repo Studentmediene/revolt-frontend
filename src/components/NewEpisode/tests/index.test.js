@@ -37,7 +37,7 @@ describe('<NewEpisode />', () => {
       ...defaultProps,
     };
     const tree = mount(<NewEpisode {...mockProps} />);
-    tree.find('.episode').simulate('click');
+    tree.find('.playbuttonbox').simulate('click');
     expect(mockProps.playOnDemand).toBeCalled();
   });
 
@@ -46,7 +46,7 @@ describe('<NewEpisode />', () => {
       ...defaultProps,
     };
     const tree = mount(<NewEpisode {...mockProps} />);
-    tree.find('.episode').simulate('keypress');
+    tree.find('.playbuttonbox').simulate('keypress');
     expect(mockProps.playOnDemand).toBeCalled();
   });
 });
