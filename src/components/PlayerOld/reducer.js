@@ -74,9 +74,7 @@ function playerReducer(state = initialState, action) {
         .set('offset', action.offset)
         .set('url', episode.url)
         .set('episodeId', episode.id)
-        .set('playingShow', episode.show)
-        .set('showImage', episode.image)
-        .set('playingTitle', episode.title);
+        .set('playingTitle', `${episode.show}: ${episode.title}`);
     }
     case GET_ON_DEMAND_PLAYLIST_FAILED:
       return state

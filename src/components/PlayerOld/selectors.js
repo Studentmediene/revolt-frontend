@@ -32,16 +32,6 @@ const selectPlayingTitle = () =>
   createSelector(selectPlayerDomain(), playerState =>
     playerState.get('playingTitle'),
   );
-
-const selectPlayingShow = () =>
-  createSelector(selectPlayerDomain(), playerState =>
-    playerState.get('playingShow'),
-  );
-
-const selectShowImage = () =>
-  createSelector(selectPlayerDomain(), playerState =>
-    playerState.get('showImage'),
-  );
 const selectEpisodeId = () =>
   createSelector(selectPlayerDomain(), playerState =>
     playerState.get('episodeId'),
@@ -72,7 +62,5 @@ export {
   selectPlayerLoading,
   selectPlayerError,
   selectPlayingTitle,
-  selectPlayingShow,
-  selectShowImage,
   selectLiveTitle,
 };
