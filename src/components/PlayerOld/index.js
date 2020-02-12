@@ -3,11 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import PlayPauseButton from './components/PlayPauseButton';
 import AudioProgress from './components/AudioProgress';
 import AudioControls from './components/AudioControls';
 import SoundManager from './components/SoundManager';
-import PlayingInfo from './components/PlayingInfo';
 import {
   pause,
   resume,
@@ -20,10 +18,8 @@ import {
   selectOffset,
   selectLive,
   selectPlayingTitle,
-  selectPlayingShow,
   selectPaused,
   selectUrl,
-  selectShowImage,
 } from './selectors';
 import styles from './styles.scss';
 import { trackEvent } from 'utils/analytics';
@@ -32,7 +28,7 @@ class Player extends React.Component {
   constructor(props) {
     super(props);
     // Initial volume
-    this.volume = 60;
+    this.volume = 80;
   }
 
   state = {
@@ -86,17 +82,55 @@ class Player extends React.Component {
     const { position } = this.state;
     return (
       <div className={styles.container} title={this.props.playingTitle}>
-        <PlayingInfo
-          showName={this.props.playingShow}
-          episodeTitle={this.props.playingTitle}
-          showImageURL={this.props.showImage}
+        <SoundManager
+          url={this.props.url}
+          paused={this.props.paused}
+          position={position}
+          volume={this.volume}
+          whilePlaying={(...a) => this.whilePlaying(...a)}
+          onPause={() => {
+            this.props.pause();
+          }}
+          onResume={() => {
+            this.props.resume();
+          }}
+          onFinishedPlaying={() => {
+            this.props.playNext();
+          }}
         />
-        <div className={styles.controlContainer}>
-          <PlayPauseButton
-            paused={this.props.paused}
-            togglePlayPause={this.props.togglePlayPause}
-          />
-        </div>
+        <AudioControls
+          playNext={() => {
+            trackEvent('player', 'play next song');
+            this.props.playNext();
+          }}
+          playPrevious={() => {
+            trackEvent('player', 'play previous sond');
+            if (!this.props.live) {
+              const backLimit = 2 * 1000; // two seconds
+              if (this.state.position < backLimit) {
+                this.props.playPrevious();
+              } else {
+                this.resetPosition(this.state.currentUrl);
+              }
+            }
+          }}
+          togglePlayPause={() => {
+            trackEvent('player', 'toggle play/pause');
+            this.props.togglePlayPause();
+          }}
+          paused={this.props.paused}
+          live={this.props.live}
+          url={this.props.url}
+        />
+        <AudioProgress
+          displayText={this.props.playingTitle}
+          live={this.props.live}
+          paused={this.props.paused}
+          url={this.props.url}
+          position={this.state.position}
+          durationEstimate={this.state.durationEstimate}
+          onSeek={position => this.onSeek(position)}
+        />
       </div>
     );
   }
@@ -108,8 +142,6 @@ Player.propTypes = {
   paused: PropTypes.bool,
   url: PropTypes.string,
   playingTitle: PropTypes.string,
-  playingShow: PropTypes.string,
-  showImage: PropTypes.string,
   togglePlayPause: PropTypes.func.isRequired,
   resume: PropTypes.func.isRequired,
   pause: PropTypes.func.isRequired,
@@ -128,8 +160,6 @@ const mapStateToProps = createStructuredSelector({
   paused: selectPaused(),
   url: selectUrl(),
   playingTitle: selectPlayingTitle(),
-  playingShow: selectPlayingShow(),
-  showImage: selectShowImage(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -143,4 +173,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Player);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Player);

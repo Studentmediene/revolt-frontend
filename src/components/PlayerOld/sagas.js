@@ -44,7 +44,6 @@ export function* playPodcast({ episodeId, offset }) {
       id,
       show {
         name,
-        image,
         episodes {
           id,
           title,
@@ -65,7 +64,6 @@ export function* playPodcast({ episodeId, offset }) {
         title: episodes[i].title,
         show: episode.show.name,
         url: episodes[i].podcastUrl,
-        image: episode.show.image,
       });
       if (episodes[i].id === episode.id) {
         index = episodes.length - 1 - i;
@@ -83,7 +81,6 @@ export function* playOnDemand({ episodeId, offset }) {
       id,
       show {
         name,
-        image,
         episodes {
           id,
           title,
@@ -101,7 +98,6 @@ export function* playOnDemand({ episodeId, offset }) {
         id: e.id,
         title: e.title,
         show: episode.show.name,
-        image: episode.show.image,
         url: e.onDemandUrl,
       }))
       .reverse();
