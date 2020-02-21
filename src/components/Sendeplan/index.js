@@ -67,7 +67,7 @@ export class Sendeplan extends React.Component {
 
     const clickNextDay = () => {
       trackEvent('button', 'get next sendeplan day');
-      this.props.getNextDay(firstDay);
+      this.props.getNextDay(secondDay);
     };
 
     return (
