@@ -27,6 +27,10 @@ $image-height-small: $max-width/3 - 3* $padding;
   display: none; 
 }
 
+.categoryContainer {
+  margin-left: -0.5em;
+}
+
 .imageWrapper {
   display: grid;
   justify-content: center;

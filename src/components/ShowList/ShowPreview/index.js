@@ -22,11 +22,19 @@ const ShowPreview = props => {
   }
 
   return (
+<<<<<<< HEAD
     <div className={styles.container} style={leftBorder}>
       <div className={styles.categoryContainer}>{categories}</div>
       <Link href={`/programmer/[slug]`} as={`/programmer/${props.slug}`}>
         <a className={styles.link} href={`/programmer/${props.slug}`}>
           <div className={styles.padding}>
+=======
+    <div className={styles.container}>
+      <div className={styles.categoryContainer}>{categories}</div>
+      <div className={styles.padding}>
+        <Link href={`/programmer/[slug]`} as={`/programmer/${props.slug}`}>
+          <a className={styles.link} href={`/programmer/${props.slug}`}>
+>>>>>>> a6aa9dfb0f8bed34dcb1c9fe4059200f69edfd7f
             <div className={styles.imageWrapper}>
               <LazyLoad height={'100%'} offset={50} once>
                 <img
