@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import CategoryTag from 'components/common/tag/CategoryTag';
 import styles from './styles.scss';
 import 'components/common/styles/editor.scss';
 
@@ -13,9 +13,8 @@ const ShowHeader = ({
   if (categories && categories.length > 0) {
     categoryTags = (
       <div className={styles.categories}>
-        <span>Kategorier: </span>
         {categories.map((category, index) => (
-          <span key={index}>{category.name}</span>
+          <CategoryTag {...category} index={index} key={index} />
         ))}
       </div>
     );
@@ -27,9 +26,9 @@ const ShowHeader = ({
       </div>
       <div className={styles.showText}>
         <h2 className={styles.title}>{title}</h2>
+        {categoryTags}
         <div dangerouslySetInnerHTML={{ __html: content }} />
       </div>
-      {categoryTags}
     </div>
   );
 };
