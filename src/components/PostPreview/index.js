@@ -25,7 +25,7 @@ const PostPreview = props => {
       imageDescription=""
       className={styles.link}
     >
-      {categories}
+      <div className={styles.categoryContainer}>{categories}</div>
       <h2 className={styles.title}>{props.title}</h2>
     </ImageLink>
   );
