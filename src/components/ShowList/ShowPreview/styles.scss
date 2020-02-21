@@ -19,6 +19,10 @@ $image-height: $max-width - 2 * $padding;
   padding: $padding;
 }
 
+.categoryContainer {
+  margin-left: -0.5em;
+}
+
 .imageWrapper {
   display: flex;
   flex-direction: column;

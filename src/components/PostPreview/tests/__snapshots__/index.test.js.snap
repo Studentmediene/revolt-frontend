@@ -15,22 +15,26 @@ exports[`<PostPreview /> renders correctly with categories 1`] = `
     }
   }
 >
-  <CategoryTag
-    backgroundColor="#FFFFFF"
-    index={0}
-    key="0"
-    name="categoryName1"
-    position="bottom"
-    textColor="#000000"
-  />
-  <CategoryTag
-    backgroundColor="#FFFFFF"
-    index={1}
-    key="1"
-    name="categoryName1"
-    position="bottom"
-    textColor="#000000"
-  />
+  <div
+    className="categoryContainer"
+  >
+    <CategoryTag
+      backgroundColor="#FFFFFF"
+      index={0}
+      key="0"
+      name="categoryName1"
+      position="bottom"
+      textColor="#000000"
+    />
+    <CategoryTag
+      backgroundColor="#FFFFFF"
+      index={1}
+      key="1"
+      name="categoryName1"
+      position="bottom"
+      textColor="#000000"
+    />
+  </div>
   <h2
     className="title"
   >
@@ -54,6 +58,9 @@ exports[`<PostPreview /> renders correctly without categories 1`] = `
     }
   }
 >
+  <div
+    className="categoryContainer"
+  />
   <h2
     className="title"
   >
