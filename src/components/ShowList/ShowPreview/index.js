@@ -24,25 +24,25 @@ const ShowPreview = props => {
   return (
     <div className={styles.container} style={leftBorder}>
       <div className={styles.categoryContainer}>{categories}</div>
-      <div className={styles.padding}>
         <Link href={`/programmer/[slug]`} as={`/programmer/${props.slug}`}>
           <a className={styles.link} href={`/programmer/${props.slug}`}>
-            <div className={styles.imageWrapper}>
-              <LazyLoad height={'100%'} offset={50} once>
-                <img
-                  className={styles.image}
-                  src={props.logoImageUrl}
-                  alt={props.title + '-logo'}
-                />
-              </LazyLoad>
-            </div>
-            <div className={styles.textContainer}>
-              <h2>{props.title}</h2>
-              <div className={styles.lead}>{props.lead}</div>
+            <div className={styles.padding}>
+              <div className={styles.imageWrapper}>
+                <LazyLoad height={'100%'} offset={50} once>
+                  <img
+                    className={styles.image}
+                    src={props.logoImageUrl}
+                    alt={props.title + '-logo'}
+                  />
+                </LazyLoad>
+              </div>
+              <div className={styles.textContainer}>
+                <h2>{props.title}</h2>
+                <div className={styles.lead}>{props.lead}</div>
+              </div>
             </div>
           </a>
-      </Link>
-    </div>
+        </Link>
     </div>
   );
 };

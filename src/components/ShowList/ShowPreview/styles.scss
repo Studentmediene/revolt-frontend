@@ -16,10 +16,6 @@ $image-height-small: $max-width/3 - 3* $padding;
   min-width: 100%;
 }
 
-.categoryTag {
-  display: none;
-}
-
 .padding {
   display: grid;
   justify-content: center;
@@ -28,7 +24,7 @@ $image-height-small: $max-width/3 - 3* $padding;
 }
 
 .categoryContainer {
-  margin-left: -0.5em;
+  display: none;
 }
 
 .imageWrapper {
@@ -100,8 +96,9 @@ $image-height-small: $max-width/3 - 3* $padding;
     border-top: 3px solid $color-radiorevolt-orange;
   }
 
-  .categoryTag {
+  .categoryContainer {
     display: block;
+    margin-left: -0.4em;
   }
 
   .padding {
