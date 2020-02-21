@@ -22,29 +22,26 @@ exports[`<ShowHeader /> renders correctly 1`] = `
       Title
     </h2>
     <div
+      className="categories"
+    >
+      <CategoryTag
+        index={0}
+        key="0"
+        name="category1"
+      />
+      <CategoryTag
+        index={1}
+        key="1"
+        name="category2"
+      />
+    </div>
+    <div
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Content</p>",
         }
       }
     />
-  </div>
-  <div
-    className="categories"
-  >
-    <span>
-      Kategorier: 
-    </span>
-    <span
-      key="0"
-    >
-      category1
-    </span>
-    <span
-      key="1"
-    >
-      category2
-    </span>
   </div>
 </div>
 `;
