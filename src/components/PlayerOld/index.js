@@ -1,3 +1,6 @@
+/* 
+Will be deleted after the new desktop player is done
+ */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -24,7 +27,7 @@ import {
 import styles from './styles.scss';
 import { trackEvent } from 'utils/analytics';
 
-class Player extends React.Component {
+class PlayerOld extends React.Component {
   constructor(props) {
     super(props);
     // Initial volume
@@ -136,7 +139,7 @@ class Player extends React.Component {
   }
 }
 
-Player.propTypes = {
+PlayerOld.propTypes = {
   live: PropTypes.bool,
   offset: PropTypes.number,
   paused: PropTypes.bool,
@@ -149,7 +152,7 @@ Player.propTypes = {
   playPrevious: PropTypes.func.isRequired,
 };
 
-Player.defaultProps = {
+PlayerOld.defaultProps = {
   paused: true,
   url: null,
 };
@@ -176,4 +179,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Player);
+)(PlayerOld);

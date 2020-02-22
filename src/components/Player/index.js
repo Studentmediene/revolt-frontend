@@ -1,13 +1,16 @@
 import React from 'react';
+/* import ReactDom from 'react-dom'; */
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import PlayPauseButton from './components/PlayPauseButton';
+/* import PlayPauseButton from './components/PlayPauseButton';
 import AudioProgress from './components/AudioProgress';
 import AudioControls from './components/AudioControls';
 import SoundManager from './components/SoundManager';
-import PlayingInfo from './components/PlayingInfo';
+import PlayingInfo from './components/PlayingInfo'; */
+import PhonePlayer from './components/PhonePlayer/PhonePlayer';
+import PlayerOld from '../PlayerOld/index';
 import {
   pause,
   resume,
@@ -25,80 +28,36 @@ import {
   selectUrl,
   selectShowImage,
 } from './selectors';
-import styles from './styles.scss';
-import { trackEvent } from 'utils/analytics';
+/* import styles from './styles.scss';
+import { trackEvent } from 'utils/analytics'; */
 
 class Player extends React.Component {
   constructor(props) {
     super(props);
-    // Initial volume
-    this.volume = 60;
-  }
-
-  state = {
-    // Used to determine when to reset player position
-    currentUrl: '',
-    // Number of seconds played
-    position: 0,
-    // Duration of the audio (estimate)
-    duration: 0,
-  };
-
-  static async getInitialProps({ isServer }) {
-    return { isServer };
+    this.state = { width: 0, height: 0 };
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
 
   componentDidMount() {
-    this.props.updateLiveTitle();
+    this.updateWindowDimensions();
+    window.addEventListener('resize', this.updateWindowDimensions);
   }
 
-  componentDidUpdate() {
-    if (this.props.url != this.state.currentUrl) {
-      // Audio URL has changed, so let's reset progress position
-      this.resetPosition(this.props.url);
-    }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowDimensions);
   }
 
-  resetPosition(currentUrl) {
-    this.setState({
-      position: 0,
-      currentUrl,
-    });
+  updateWindowDimensions() {
+    this.setState({ width: window.innerWidth, height: window.innerHeight });
   }
-
-  onSeek(seekPosition) {
-    this.setState({
-      position: seekPosition,
-    });
-  }
-
-  whilePlaying(soundObject) {
-    this.setState({
-      position: soundObject.position,
-      durationEstimate: soundObject.durationEstimate,
-    });
-  }
-
   render() {
-    if (this.props.isServer) {
-      return null;
+    /* same as $breakpoint-medium in main variables.scss file */
+    const isMobile = this.state.width <= 800;
+    if (isMobile) {
+      return <PhonePlayer />;
+    } else {
+      return <PlayerOld />;
     }
-    const { position } = this.state;
-    return (
-      <div className={styles.container} title={this.props.playingTitle}>
-        <PlayingInfo
-          showName={this.props.playingShow}
-          episodeTitle={this.props.playingTitle}
-          showImageURL={this.props.showImage}
-        />
-        <div className={styles.controlContainer}>
-          <PlayPauseButton
-            paused={this.props.paused}
-            togglePlayPause={this.props.togglePlayPause}
-          />
-        </div>
-      </div>
-    );
   }
 }
 
@@ -143,4 +102,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Player);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Player);
