@@ -23,9 +23,12 @@
   
   .controlContainer {
     display: flex;
+    flex-shrink: 1;
     flex-direction: row;
+    justify-items: flex-end;
     justify-content: right;
     align-items: center;
+    justify-self: end;
     padding: 0 10px;
   }
 }
