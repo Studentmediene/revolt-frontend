@@ -77,7 +77,11 @@ class PhonePlayer extends React.Component {
             paused={this.props.paused}
           />
           <h1
-            style={{ margin: '0', transform: 'rotate(-180deg)' }}
+            style={{
+              margin: '0',
+              transform: 'rotate(-180deg)',
+              cursor: 'pointer'
+            }}
             onClick={() => this.setState({ expanded: false })}
           >
             ^
