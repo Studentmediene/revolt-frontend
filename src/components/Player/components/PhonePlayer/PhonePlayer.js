@@ -42,17 +42,17 @@ class PhonePlayer extends React.Component {
   }
 
   render() {
+    /*  const expand = () => {
+      this.setState({ expanded: true });
+    }; */
     const notExpandedRender = () => {
       return (
-        <div
-          onClick={() => this.setState({ expanded: true })}
-          className={styles.container}
-          title={this.props.playingTitle}
-        >
+        <div className={styles.container}>
           <PlayingInfo
             showName={this.props.playingShow}
             episodeTitle={this.props.playingTitle}
             showImageURL={this.props.showImage}
+            expand={() => this.setState({ expanded: true })}
           />
           <div className={styles.controlContainer}>
             <PlayPauseButton
@@ -71,9 +71,17 @@ class PhonePlayer extends React.Component {
             showName={this.props.playingShow}
             episodeTitle={this.props.playingTitle}
             showImageURL={this.props.showImage}
-            published={"22.02.2020"}
+            published={'22.02.2020'}
+            live={this.props.live}
+            togglePlayPause={this.props.togglePlayPause}
+            paused={this.props.paused}
           />
-          <h1 style={{margin:'0',transform: 'rotate(-180deg)'}} onClick={() => this.setState({ expanded: false })}>^</h1>
+          <h1
+            style={{ margin: '0', transform: 'rotate(-180deg)' }}
+            onClick={() => this.setState({ expanded: false })}
+          >
+            ^
+          </h1>
         </div>
       );
     };

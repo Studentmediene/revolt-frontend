@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './PlayingInfoExpanded.scss';
 
 import PlayerProgress from '../common/PlayerProgress';
+import LiveTag from '../common/LiveTag';
 import AudioControls from '../AudioControls';
 
 const PlayingInfoExpanded = ({
@@ -10,6 +11,9 @@ const PlayingInfoExpanded = ({
   episodeTitle,
   showImageURL,
   published,
+  live,
+  togglePlayPause,
+  paused,
 }) => (
   <div className={styles.Container}>
     <div className={styles.infoContainer}>
@@ -21,10 +25,9 @@ const PlayingInfoExpanded = ({
       <h3 className={styles.date}>{published}</h3>
     </div>
     <div className={styles.controls}>
-      <div className={styles.progress}>|------------------O------|</div>
-      {/* <PlayerProgress /> */}
-      <div className={styles.time}>20:03 / 59:30</div>
-      <AudioControls />
+      <PlayerProgress />
+      {live ? <LiveTag /> : <div className={styles.time}>20:03 / 59:30</div>}
+      <AudioControls togglePlayPause={togglePlayPause} paused={paused} />
     </div>
   </div>
 );
@@ -34,6 +37,9 @@ PlayingInfoExpanded.propTypes = {
   episodeTitle: PropTypes.string.isRequired,
   showImageURL: PropTypes.string.isRequired,
   published: PropTypes.string.isRequired,
+  live: PropTypes.bool.isRequired,
+  togglePlayPause: PropTypes.func.togglePlayPause,
+  paused: PropTypes.bool.isRequired,
 };
 
 export default PlayingInfoExpanded;
