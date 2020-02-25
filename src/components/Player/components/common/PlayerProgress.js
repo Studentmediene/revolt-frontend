@@ -1,14 +1,19 @@
 import React from 'react';
 import styles from './PlayerProgress.scss';
 
-const PlayerProgress = () => {
-  return (
-    <div className={styles.timelineContainer}>
-      <div id={styles.timeline}>
-        <div id={styles.handle} />
-      </div>
-    </div>
-  );
-};
+import { Component } from 'react';
 
-export default PlayerProgress;
+export default class PlayerProgress extends Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div className={styles.timelineContainer}>
+        <div id={styles.timeline}>
+          <div id={styles.handle} />
+        </div>
+      </div>
+    );
+  }
+}

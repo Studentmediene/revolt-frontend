@@ -20,12 +20,18 @@ const PlayingInfoExpanded = ({
       <div className={styles.imgContainer}>
         <img className={styles.img} src={showImageURL} alt={showName} />
       </div>
-      <h2 className={styles.showName}>{showName}</h2>
-      <h3 className={styles.episodeTitle}>{episodeTitle}</h3>
-      <h3 className={styles.date}>{published}</h3>
+      {live ? (
+        <h2 className={styles.showName}>{episodeTitle}</h2>
+      ) : (
+        <React.Fragment>
+          <h2 className={styles.showName}>{showName}</h2>
+          <h3 className={styles.episodeTitle}>{episodeTitle}</h3>
+          <h3 className={styles.date}>{published}</h3>
+        </React.Fragment>
+      )}
     </div>
     <div className={styles.controls}>
-      <PlayerProgress />
+      <PlayerProgress disabled={live} />
       {live ? <LiveTag /> : <div className={styles.time}>20:03 / 59:30</div>}
       <AudioControls togglePlayPause={togglePlayPause} paused={paused} />
     </div>
@@ -33,10 +39,10 @@ const PlayingInfoExpanded = ({
 );
 
 PlayingInfoExpanded.propTypes = {
-  showName: PropTypes.string.isRequired,
+  showName: PropTypes.string,
   episodeTitle: PropTypes.string.isRequired,
-  showImageURL: PropTypes.string.isRequired,
-  published: PropTypes.string.isRequired,
+  showImageURL: PropTypes.string,
+  published: PropTypes.string,
   live: PropTypes.bool.isRequired,
   togglePlayPause: PropTypes.func.togglePlayPause,
   paused: PropTypes.bool.isRequired,
