@@ -2,7 +2,7 @@
 
 $image-height: $player-height - 10px;
 $image-height-desktop: $player-height-desktop - 10px;
-
+$image-padding: 2px;
 
 .infoContainer {
     margin-right: auto;
@@ -16,6 +16,7 @@ $image-height-desktop: $player-height-desktop - 10px;
     cursor: pointer;
     
     .imgContainer {
+        outline: 2px solid $color-radiorevolt-orange;
         height: $image-height;
         max-width: $image-height;
         align-self: center;
@@ -23,10 +24,12 @@ $image-height-desktop: $player-height-desktop - 10px;
         display: flex;
         flex-direction: row;
         align-content: center;
+        background-color: white;
+        padding: $image-padding;
         img {
             align-self: center;
-            width: $image-height;
-            max-height: $image-height;
+            width: $image-height - $image-padding;
+            max-height: $image-height - $image-padding;
         }
     }
     .text{
