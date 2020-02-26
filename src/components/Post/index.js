@@ -12,7 +12,7 @@ import 'components/common/styles/editor.scss';
 import Meta from './meta';
 import { loadPost } from './actions';
 import Loader from 'components/Loader';
-import NewEpisode from 'components/NewEpisode';
+import Episode from 'components/Episode';
 import { getUrlInfo } from 'utils/headUtils';
 import { getNormalizedDateString } from 'utils/dateUtils';
 import { getOnDemandPlaylist } from 'components/Player/actions';
@@ -72,7 +72,7 @@ export class Post extends React.Component {
         />
         {episodes &&
           episodes.map(element => (
-            <NewEpisode
+            <Episode
               {...element}
               key={element.id}
               playOnDemand={this.props.playOnDemand}

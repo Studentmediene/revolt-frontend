@@ -1,0 +1,95 @@
+@import '../../variables.scss';
+
+.episode {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  
+  border: solid 0.2em $color-radiorevolt-orange;
+  color: black;
+  padding: 0px;
+  width: 100%;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  cursor: pointer;
+  position: relative;
+}
+
+.title {
+  font-size: large;
+  position: relative;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: 1em 0 1em 1em;
+}
+
+.playbuttonbox {
+  display: flex;
+  padding: 0.5em 1.4em 0.5em 1.4em;
+  background-color: $color-radiorevolt-orange;
+  align-items: center;
+  max-width: 90%;
+}
+
+.expanderbox {
+  display: flex;
+  align-items: flex-start;
+  padding: 0.7em;
+}
+
+
+.expandable {
+  padding-top: 4px;
+  text-align: left;
+  color: $color-text-dark;
+  display: block;
+  max-width: 93%;
+
+  & > * {
+    margin: 0;
+  }
+}
+
+.publishedAt {
+  padding-top: 8px;
+  color: $color-text-dark;
+}
+
+.cropOverflow {
+  overflow:hidden; 
+  white-space:nowrap; 
+  text-overflow:ellipsis;
+  max-width: 100%; 
+}
+
+@media only screen and (max-width:1050px) {
+
+  .episode {
+    width: 100%;
+    margin: 1% 0 3% 0;
+    border: solid 0.15em $color-radiorevolt-orange;
+  }
+
+  .title {
+    font-size: 11pt;
+  }
+
+  .playbuttonbox {
+    padding: 0em 1.4em 0em 1.4em;
+  }
+
+  .meta {
+    padding: 0.5em 0 0.5em 0.8em;
+  }
+
+  .expandable {
+    margin-top: 0.2em;
+    margin-bottom: 0.5em;
+  }
+}
