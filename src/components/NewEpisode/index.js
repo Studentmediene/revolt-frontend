@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { createStructuredSelector } from 'reselect';
-import Expander from './components/Expander';
+import Expander from 'components/common/expanderbutton/Expander';
 
 import styles from './styles.scss';
 import { togglePlayPause } from 'components/Player/actions';
