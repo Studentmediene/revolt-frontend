@@ -23,7 +23,7 @@ const ShowPreview = props => {
 
   return (
     <div className={styles.container} style={leftBorder}>
-      <span className={styles.categoryTag}>{categories}</span>
+      <div className={styles.categoryTag}>{categories}</div>
       <Link href={`/programmer/[slug]`} as={`/programmer/${props.slug}`}>
         <a className={styles.link} href={`/programmer/${props.slug}`}>
           <div className={styles.padding}>
