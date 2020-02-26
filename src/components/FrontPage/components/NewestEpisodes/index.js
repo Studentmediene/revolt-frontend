@@ -4,7 +4,7 @@ import Immutable from 'immutable';
 import { connect } from 'react-redux';
 import styles from './styles.scss';
 import classNames from 'classnames';
-import Episode from 'components/Episode';
+import EmbeddedEpisode from 'components/EmbeddedEpisode';
 import { getOnDemandPlaylist } from 'components/Player/actions';
 import { createStructuredSelector } from 'reselect';
 import { selectNewestEpisodes } from '../../selectors.js';
@@ -98,7 +98,7 @@ class NewestEpisodes extends Component {
               });
             }}
           >
-            <Episode
+            <EmbeddedEpisode
               title={episode.title}
               publishAt={episode.publishAt}
               id={episode.id}
