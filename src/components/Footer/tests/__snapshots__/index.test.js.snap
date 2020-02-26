@@ -12,6 +12,26 @@ exports[`<Footer /> renders correctly 1`] = `
       <br />
       Uautorisert lenking, videreføring eller kopiering er ulovlig.
     </p>
+    <span
+      className="vtSupportText"
+    >
+      Radio Revolt er laget med støtte fra Velferdstinget
+    </span>
+    <a
+      href="https://velferdstinget.no/"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      <img
+        alt="Velferdstinget logo"
+        className="vtLogo"
+        src="/assets/vt-logo.svg"
+      />
+    </a>
+  </div>
+  <div
+    className="content"
+  >
     <h2
       className="contactHeader"
     >
@@ -99,6 +119,26 @@ exports[`<Footer /> renders correctly on error 1`] = `
       <br />
       Uautorisert lenking, videreføring eller kopiering er ulovlig.
     </p>
+    <span
+      className="vtSupportText"
+    >
+      Radio Revolt er laget med støtte fra Velferdstinget
+    </span>
+    <a
+      href="https://velferdstinget.no/"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      <img
+        alt="Velferdstinget logo"
+        className="vtLogo"
+        src="/assets/vt-logo.svg"
+      />
+    </a>
+  </div>
+  <div
+    className="content"
+  >
     <h2
       className="contactHeader"
     >
@@ -186,6 +226,26 @@ exports[`<Footer /> renders correctly while loading 1`] = `
       <br />
       Uautorisert lenking, videreføring eller kopiering er ulovlig.
     </p>
+    <span
+      className="vtSupportText"
+    >
+      Radio Revolt er laget med støtte fra Velferdstinget
+    </span>
+    <a
+      href="https://velferdstinget.no/"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      <img
+        alt="Velferdstinget logo"
+        className="vtLogo"
+        src="/assets/vt-logo.svg"
+      />
+    </a>
+  </div>
+  <div
+    className="content"
+  >
     <h2
       className="contactHeader"
     >
