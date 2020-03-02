@@ -11,13 +11,14 @@ import AudioControls from '../../components/AudioControls';
 import SoundManager from '../../components/SoundManager';
 import PlayingInfo from '../common/PlayingInfo';
 import PlayingInfoExpanded from '../common/PlayingInfoExpanded';
+import Expander from '../../../common/expanderbutton/Expander.js';
 import {
   pause,
   resume,
   togglePlayPause,
   playNext,
   playPrevious,
-  liveTitleUpdater,
+  liveTitleUpdater
 } from '../../actions';
 import {
   selectOffset,
@@ -26,7 +27,7 @@ import {
   selectPlayingShow,
   selectPaused,
   selectUrl,
-  selectShowImage,
+  selectShowImage
 } from '../../selectors';
 import styles from './styles.scss';
 /* import { trackEvent } from '../../utils/analytics'; */
@@ -38,7 +39,7 @@ class PhonePlayer extends React.Component {
     this.volume = 60;
     this.state = {
       expanded: false,
-      height: '50px',
+      height: '50px'
     };
   }
 
@@ -86,15 +87,11 @@ class PhonePlayer extends React.Component {
             togglePlayPause={this.props.togglePlayPause}
             paused={this.props.paused}
           />
-          <h1
-            style={{
-              margin: '0',
-              transform: 'rotate(-180deg)',
-              cursor: 'pointer'
-            }}
-            onClick={() => this.setState({ expanded: false })}
-          >
-            ^
+          <h1 style={{ padding: '0 0 1rem 0', margin: '0' }}>
+            <Expander
+              expanded={false}
+              expandFunction={() => this.setState({ expanded: false })}
+            />
           </h1>
         </div>
       );
@@ -122,12 +119,12 @@ PhonePlayer.propTypes = {
   resume: PropTypes.func.isRequired,
   pause: PropTypes.func.isRequired,
   playNext: PropTypes.func.isRequired,
-  playPrevious: PropTypes.func.isRequired,
+  playPrevious: PropTypes.func.isRequired
 };
 
 PhonePlayer.defaultProps = {
   paused: true,
-  url: null,
+  url: null
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -137,7 +134,7 @@ const mapStateToProps = createStructuredSelector({
   url: selectUrl(),
   playingTitle: selectPlayingTitle(),
   playingShow: selectPlayingShow(),
-  showImage: selectShowImage(),
+  showImage: selectShowImage()
 });
 
 function mapDispatchToProps(dispatch) {
@@ -147,11 +144,11 @@ function mapDispatchToProps(dispatch) {
     resume: () => dispatch(resume()),
     pause: () => dispatch(pause()),
     playNext: () => dispatch(playNext()),
-    playPrevious: () => dispatch(playPrevious()),
+    playPrevious: () => dispatch(playPrevious())
   };
 }
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(PhonePlayer);
