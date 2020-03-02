@@ -14,6 +14,8 @@ $image-height-small: $max-width/3 - 3* $padding;
     0 1px 2px 0 rgba(0, 0, 0, 0.12);
   height: 100%;
   min-width: 100%;
+  display: grid;
+  align-items: center;
 }
 
 .categoryTag {
@@ -23,6 +25,7 @@ $image-height-small: $max-width/3 - 3* $padding;
 .padding {
   display: grid;
   justify-content: center;
+  align-items: center;
   grid-template-columns: auto 3fr;
   padding: 10px 5px 10px 5px;
 }
@@ -47,10 +50,11 @@ $image-height-small: $max-width/3 - 3* $padding;
   text-align: left;
 
   h2 {
-    font-size: 1.4em;
+    font-size: 1.4em; 
     word-break: break-word;
     -ms-word-break: break-all;
     align-self: center;
+    margin:0;
   }
 
   .lead {
@@ -92,6 +96,7 @@ $image-height-small: $max-width/3 - 3* $padding;
 @media screen and (min-width: $breakpoint-medium) {
 
   .container {
+    display: block;
     border-left: none !important;
     border-top: 3px solid $color-radiorevolt-orange;
   }
@@ -120,6 +125,7 @@ $image-height-small: $max-width/3 - 3* $padding;
     
     h2 {
       text-align: center;
+      margin:1rem 0;
     }
   
     .lead {
