@@ -2,13 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import classnames from 'classnames';
 import moment from 'moment';
 
 import PlayPauseButton from '../../components/PlayPauseButton';
-import AudioProgress from '../../components/AudioProgress';
+/* import AudioProgress from '../../components/AudioProgress';
 import AudioControls from '../../components/AudioControls';
-import SoundManager from '../../components/SoundManager';
+import SoundManager from '../../components/SoundManager'; */
 import PlayingInfo from '../common/PlayingInfo';
 import PlayingInfoExpanded from '../common/PlayingInfoExpanded';
 import Expander from '../../../common/expanderbutton/Expander.js';
@@ -18,7 +17,7 @@ import {
   togglePlayPause,
   playNext,
   playPrevious,
-  liveTitleUpdater
+  liveTitleUpdater,
 } from '../../actions';
 import {
   selectOffset,
@@ -27,7 +26,7 @@ import {
   selectPlayingShow,
   selectPaused,
   selectUrl,
-  selectShowImage
+  selectShowImage,
 } from '../../selectors';
 import styles from './styles.scss';
 /* import { trackEvent } from '../../utils/analytics'; */
@@ -39,7 +38,7 @@ class PhonePlayer extends React.Component {
     this.volume = 60;
     this.state = {
       expanded: false,
-      height: '50px'
+      height: '50px',
     };
   }
 
@@ -119,12 +118,12 @@ PhonePlayer.propTypes = {
   resume: PropTypes.func.isRequired,
   pause: PropTypes.func.isRequired,
   playNext: PropTypes.func.isRequired,
-  playPrevious: PropTypes.func.isRequired
+  playPrevious: PropTypes.func.isRequired,
 };
 
 PhonePlayer.defaultProps = {
   paused: true,
-  url: null
+  url: null,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -134,7 +133,7 @@ const mapStateToProps = createStructuredSelector({
   url: selectUrl(),
   playingTitle: selectPlayingTitle(),
   playingShow: selectPlayingShow(),
-  showImage: selectShowImage()
+  showImage: selectShowImage(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -144,11 +143,11 @@ function mapDispatchToProps(dispatch) {
     resume: () => dispatch(resume()),
     pause: () => dispatch(pause()),
     playNext: () => dispatch(playNext()),
-    playPrevious: () => dispatch(playPrevious())
+    playPrevious: () => dispatch(playPrevious()),
   };
 }
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(PhonePlayer);
