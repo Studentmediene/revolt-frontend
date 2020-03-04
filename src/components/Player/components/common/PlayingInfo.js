@@ -10,13 +10,10 @@ const PlayingInfo = ({
   expand,
 }) => {
   /* This will get changed later */
-  const getLiveImage = () =>
-    'http://localhost:3000/media/uploads/images/RR_LOGO.png'; 
-  let img = showImageURL && !live ? showImageURL : getLiveImage();
   return (
     <div className={styles.infoContainer} onClick={expand}>
       <div className={styles.imgContainer}>
-        <img className={styles.img} src={img} alt={showName} />
+        <img className={styles.img} src={showImageURL} alt={showName} />
       </div>
       <div className={styles.text}>
         {!live ? (
