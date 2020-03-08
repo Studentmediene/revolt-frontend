@@ -4,11 +4,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   background-color: $color-radiorevolt-darkgrey;
   width: 100%;
-  min-height: 10rem;
+  min-height: 21.5rem;
   margin-top: 5rem;
-  padding: 3rem 0;
+  padding: 1rem 0 3rem 0;
   color: $color-text-light;
 
   // Change to light color for outline, due to dark background
@@ -21,17 +22,20 @@
 }
 
 .content {
-  width: 95%;
+  width: 25%;
   max-width: $breakpoint-large;
+  min-width: 310px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  padding:0 5px 0 5px;
 }
 
 .footerLink {
   color: $color-text-light;
-  text-decoration: none;
+  text-decoration: underline dotted;
+  text-decoration: white;
 
   &:hover,
   &:focus {
@@ -48,8 +52,24 @@
   margin-bottom: 0;
 }
 
+.vtSupportText {
+  margin-top: 14px;
+}
+
+.vtLogo {
+  width: 100px;
+}
+
 @media screen and (min-width: $social-media-button-breakpoint) {
   .socialMediaLinks {
     display: none;
+  }
+}
+
+@media screen and (min-width: $breakpoint-medium) {
+  .footer {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
   }
 }

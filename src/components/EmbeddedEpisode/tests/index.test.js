@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 
-import { Episode } from '../index';
+import { EmbeddedEpisode } from '../';
 
-describe('<Episode />', () => {
+describe('<EmbeddedEpisode />', () => {
   const defaultProps = {
     digasBroadcastId: 123,
     id: 123,
@@ -19,7 +19,7 @@ describe('<Episode />', () => {
     const mockProps = {
       ...defaultProps,
     };
-    const tree = shallow(<Episode {...mockProps} />);
+    const tree = shallow(<EmbeddedEpisode {...mockProps} />);
     expect(tree).toMatchSnapshot();
   });
 
@@ -28,7 +28,7 @@ describe('<Episode />', () => {
       ...defaultProps,
       digasBroadcastId: 0,
     };
-    const tree = shallow(<Episode {...mockProps} />);
+    const tree = shallow(<EmbeddedEpisode {...mockProps} />);
     expect(tree).toMatchSnapshot();
   });
 
@@ -36,8 +36,8 @@ describe('<Episode />', () => {
     const mockProps = {
       ...defaultProps,
     };
-    const tree = mount(<Episode {...mockProps} />);
-    tree.find('.playbuttonbox').simulate('click');
+    const tree = mount(<EmbeddedEpisode {...mockProps} />);
+    tree.find('.episode').simulate('click');
     expect(mockProps.playOnDemand).toBeCalled();
   });
 
@@ -45,8 +45,8 @@ describe('<Episode />', () => {
     const mockProps = {
       ...defaultProps,
     };
-    const tree = mount(<Episode {...mockProps} />);
-    tree.find('.playbuttonbox').simulate('keypress');
+    const tree = mount(<EmbeddedEpisode {...mockProps} />);
+    tree.find('.episode').simulate('keypress');
     expect(mockProps.playOnDemand).toBeCalled();
   });
 });
