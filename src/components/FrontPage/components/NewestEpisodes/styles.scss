@@ -2,7 +2,7 @@
 
 .container  {
   position: relative;
-  display: block;
+  display: grid;
   height: auto;
   // Negative margin to force element to take
   // full width of container on smaller devices.
@@ -18,13 +18,12 @@
     left:0;
     right:0;
     width:100%;
-    margin-bottom: -2em;
+    margin-bottom: -32px;
   }
 
   .title {
     font-size: $frontpage-title-size - 10px ;
     font-weight: bold;
-    margin: 0 0 10px 2.5%;
     text-align: center;
   }
 }
@@ -36,11 +35,11 @@
   grid-column-gap: 20px;
   width: 100%;
   max-height: 40%;
-  margin: 1.5em 0 6em 0;
+  margin: 24px 0 96px 0;
   padding: 0;
 
   .showImage {
-    padding: 0.3em;
+    padding: 5px;
     display: grid;
     background-color: white;
     width: 100%;
@@ -86,14 +85,5 @@
     max-width: $breakpoint-large;
     grid-column-start: 2;
     grid-column-end: 3;
-
-  }
-
-  .showsContainer {
-    margin: 1em 0 1.5em 0;
-  }
-
-  .imageText {
-    font-size: 1.5em;
   }
 } 
