@@ -33,6 +33,11 @@ const selectPlayingTitle = () =>
     playerState.get('playingTitle'),
   );
 
+const selectPublishAt = () =>
+  createSelector(selectPlayerDomain(), playerState =>
+    playerState.get('publishAt'),
+  );
+
 const selectPlayingShow = () =>
   createSelector(selectPlayerDomain(), playerState =>
     playerState.get('playingShow'),
@@ -67,6 +72,7 @@ export {
   selectOffset,
   selectLive,
   selectPaused,
+  selectPublishAt,
   selectEpisodeId,
   selectUrl,
   selectPlayerLoading,

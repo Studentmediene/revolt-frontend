@@ -17,7 +17,7 @@ import {
   togglePlayPause,
   playNext,
   playPrevious,
-  liveTitleUpdater
+  liveTitleUpdater,
 } from '../../actions';
 import {
   selectOffset,
@@ -26,7 +26,8 @@ import {
   selectPlayingShow,
   selectPaused,
   selectUrl,
-  selectShowImage
+  selectShowImage,
+  selectPublishAt,
 } from '../../selectors';
 import styles from './styles.scss';
 /* import { trackEvent } from '../../utils/analytics'; */
@@ -38,7 +39,7 @@ class PhonePlayer extends React.Component {
     this.volume = 60;
     this.state = {
       expanded: false,
-      height: '50px'
+      height: '50px',
     };
   }
 
@@ -83,16 +84,17 @@ class PhonePlayer extends React.Component {
     };
 
     const expandedRender = () => {
+      const publishedAt = moment(this.props.publishAt);
       return (
         <div className={styles.expandedContainer}>
           <PlayingInfoExpanded
             showName={this.props.playingShow}
             episodeTitle={this.props.playingTitle}
             showImageURL={img}
-            published={'22.02.2020'}
             live={this.props.live}
             togglePlayPause={this.props.togglePlayPause}
             paused={this.props.paused}
+            publishAt={publishedAt.format('DD.MM.YYYY')}
           />
           <h1 style={{ padding: '0 0 1rem 0', margin: '0' }}>
             <Expander
@@ -116,6 +118,7 @@ class PhonePlayer extends React.Component {
 
 PhonePlayer.propTypes = {
   live: PropTypes.bool,
+  publishAt: PropTypes.string,
   offset: PropTypes.number,
   paused: PropTypes.bool,
   url: PropTypes.string,
@@ -126,12 +129,12 @@ PhonePlayer.propTypes = {
   resume: PropTypes.func.isRequired,
   pause: PropTypes.func.isRequired,
   playNext: PropTypes.func.isRequired,
-  playPrevious: PropTypes.func.isRequired
+  playPrevious: PropTypes.func.isRequired,
 };
 
 PhonePlayer.defaultProps = {
   paused: true,
-  url: null
+  url: null,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -141,7 +144,8 @@ const mapStateToProps = createStructuredSelector({
   url: selectUrl(),
   playingTitle: selectPlayingTitle(),
   playingShow: selectPlayingShow(),
-  showImage: selectShowImage()
+  showImage: selectShowImage(),
+  publishAt: selectPublishAt(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -157,5 +161,5 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(PhonePlayer);

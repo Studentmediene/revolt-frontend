@@ -10,7 +10,7 @@ const PlayingInfoExpanded = ({
   showName,
   episodeTitle,
   showImageURL,
-  published,
+  publishAt,
   live,
   togglePlayPause,
   paused,
@@ -26,7 +26,7 @@ const PlayingInfoExpanded = ({
         <React.Fragment>
           <h2 className={styles.showName}>{showName}</h2>
           <h3 className={styles.episodeTitle}>{episodeTitle}</h3>
-          <h3 className={styles.date}>{published}</h3>
+          <h3 className={styles.date}>{publishAt}</h3>
         </React.Fragment>
       )}
     </div>
@@ -42,7 +42,7 @@ PlayingInfoExpanded.propTypes = {
   showName: PropTypes.string,
   episodeTitle: PropTypes.string.isRequired,
   showImageURL: PropTypes.string,
-  published: PropTypes.string,
+  publishAt: PropTypes.string,
   live: PropTypes.bool.isRequired,
   togglePlayPause: PropTypes.func.togglePlayPause,
   paused: PropTypes.bool.isRequired,

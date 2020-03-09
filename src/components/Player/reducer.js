@@ -26,6 +26,7 @@ const initialState = fromJS({
   paused: true,
   episodeId: null,
   url: null,
+  publishAt: 'test',
 });
 
 function playerReducer(state = initialState, action) {
@@ -37,6 +38,7 @@ function playerReducer(state = initialState, action) {
         .set('paused', false)
         .set('episodeId', null)
         .set('offset', action.offset);
+        /* .set('publishAt', 'test') */
     case GET_PODCAST_PLAYLIST_PENDING:
       return state.set('loading', true).set('error', false);
     case GET_PODCAST_PLAYLIST_SUCCESS:
@@ -76,7 +78,8 @@ function playerReducer(state = initialState, action) {
         .set('episodeId', episode.id)
         .set('playingShow', episode.show)
         .set('showImage', episode.image)
-        .set('playingTitle', episode.title);
+        .set('playingTitle', episode.title)
+        .set('publishAt', episode.publishAt);
     }
     case GET_ON_DEMAND_PLAYLIST_FAILED:
       return state
