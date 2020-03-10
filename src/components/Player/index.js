@@ -10,7 +10,7 @@ import AudioControls from './components/AudioControls';
 import SoundManager from './components/SoundManager';
 import PlayingInfo from './components/PlayingInfo'; */
 import PhonePlayer from './components/PhonePlayer/PhonePlayer';
-import PlayerOld from '../PlayerOld/index';
+import DesktopPlayer from './components/DesktopPlayer/index';
 import {
   pause,
   resume,
@@ -56,7 +56,7 @@ class Player extends React.Component {
     if (isMobile) {
       return <PhonePlayer />;
     } else {
-      return <PlayerOld />;
+      return <DesktopPlayer />;
     }
   }
 }

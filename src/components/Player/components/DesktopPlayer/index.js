@@ -6,9 +6,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import AudioProgress from './components/AudioProgress';
-import AudioControls from './components/AudioControls';
-import SoundManager from './components/SoundManager';
+import AudioProgress from '../AudioProgress';
+import AudioControls from '../AudioControls';
+import SoundManager from '../SoundManager';
 import {
   pause,
   resume,
@@ -16,18 +16,18 @@ import {
   playNext,
   playPrevious,
   liveTitleUpdater,
-} from './actions';
+} from '../../actions';
 import {
   selectOffset,
   selectLive,
   selectPlayingTitle,
   selectPaused,
   selectUrl,
-} from './selectors';
+} from '../../selectors';
 import styles from './styles.scss';
 import { trackEvent } from 'utils/analytics';
 
-class PlayerOld extends React.Component {
+class Player extends React.Component {
   constructor(props) {
     super(props);
     // Initial volume
@@ -139,7 +139,7 @@ class PlayerOld extends React.Component {
   }
 }
 
-PlayerOld.propTypes = {
+Player.propTypes = {
   live: PropTypes.bool,
   offset: PropTypes.number,
   paused: PropTypes.bool,
@@ -152,7 +152,7 @@ PlayerOld.propTypes = {
   playPrevious: PropTypes.func.isRequired,
 };
 
-PlayerOld.defaultProps = {
+Player.defaultProps = {
   paused: true,
   url: null,
 };
@@ -179,4 +179,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(PlayerOld);
+)(Player);
