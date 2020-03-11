@@ -104,7 +104,7 @@ class PhonePlayer extends React.Component {
           />
           <h1 
           onClick={() => this.setState({ expanded: false })}
-            style={{ padding: '0 0 1rem 0', margin: '0', cursor: 'pointer' }}
+            className={styles.expanderButton}
           >
             <Expander
               expanded={false} //to point it down

@@ -1,25 +1,29 @@
 @import '../../variables.scss';
 
 .expandedContainer{
-  display: flex;
-  flex-direction: column;
+  display: grid;
   text-align:center;
   color:white;/* unødvendig */
   height: 100%;
   background-color: #333;
   position: fixed;
   width: 100%;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.4s ease;
   z-index: 4;
+  grid-template-rows: 1fr 50px;
+  .expanderButton{
+    padding: 0 0 1rem 0;
+    margin: 0;
+    cursor: pointer;
+  }
 }
-
 
 .expanded {
   bottom:0;
 }
 
  .hidden {
-  bottom:-100%;
+  bottom:-150%;
 } 
 
 
