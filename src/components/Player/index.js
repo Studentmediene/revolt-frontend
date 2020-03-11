@@ -4,11 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-/* import PlayPauseButton from './components/PlayPauseButton';
-import AudioProgress from './components/AudioProgress';
-import AudioControls from './components/AudioControls';
 import SoundManager from './components/SoundManager';
-import PlayingInfo from './components/PlayingInfo'; */
 import PhonePlayer from './components/PhonePlayer/PhonePlayer';
 import DesktopPlayer from './components/DesktopPlayer/index';
 import {
@@ -34,7 +30,16 @@ import { trackEvent } from 'utils/analytics'; */
 class Player extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { width: 0, height: 0 };
+    this.state = {
+      width: 0,
+      height: 0, // Used to determine when to reset player position
+      currentUrl: '',
+      // Number of seconds played
+      position: 0,
+      // Duration of the audio (estimate)
+      duration: 0,
+      volume: 80,
+    };
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
 
@@ -50,14 +55,59 @@ class Player extends React.Component {
   updateWindowDimensions() {
     this.setState({ width: window.innerWidth, height: window.innerHeight });
   }
+
+  componentDidUpdate() {
+    if (this.props.url != this.state.currentUrl) {
+      // Audio URL has changed, so let's reset progress position
+      this.resetPosition(this.props.url);
+    }
+  }
+
+  resetPosition(currentUrl) {
+    this.setState({
+      position: 0,
+      currentUrl,
+    });
+  }
+
+  onSeek(seekPosition) {
+    this.setState({
+      position: seekPosition,
+    });
+  }
+
+  whilePlaying(soundObject) {
+    this.setState({
+      position: soundObject.position,
+      durationEstimate: soundObject.durationEstimate,
+    });
+  }
+
   render() {
     /* same as $breakpoint-medium in main variables.scss file */
     const isMobile = this.state.width <= 800;
-    if (isMobile) {
-      return <PhonePlayer />;
-    } else {
-      return <DesktopPlayer />;
-    }
+    const position = this.state.position;
+    return (
+      <React.Fragment>
+        <SoundManager
+          url={this.props.url}
+          paused={this.props.paused}
+          volume={this.state.volume}
+          position={position}
+          whilePlaying={(...a) => this.whilePlaying(...a)}
+          onPause={() => {
+            this.props.pause();
+          }}
+          onResume={() => {
+            this.props.resume();
+          }}
+          onFinishedPlaying={() => {
+            this.props.playNext();
+          }}
+        />
+        {isMobile ? <PhonePlayer /> : <DesktopPlayer />}
+      </React.Fragment>
+    );
   }
 }
 
