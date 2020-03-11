@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import moment from 'moment';
+import classnames from 'classnames';
 
 import PlayPauseButton from '../../components/PlayPauseButton';
 /* import AudioProgress from '../../components/AudioProgress';
@@ -86,7 +87,12 @@ class PhonePlayer extends React.Component {
     const expandedRender = () => {
       const publishedAt = moment(this.props.publishAt);
       return (
-        <div className={styles.expandedContainer}>
+        <div
+          className={classnames(styles.expandedContainer, {
+            [styles.hidden]: !this.state.expanded,
+            [styles.expanded]: this.state.expanded,
+          })}
+        >
           <PlayingInfoExpanded
             showName={this.props.playingShow}
             episodeTitle={this.props.playingTitle}
@@ -96,10 +102,12 @@ class PhonePlayer extends React.Component {
             paused={this.props.paused}
             publishAt={publishedAt.format('DD.MM.YYYY')}
           />
-          <h1 style={{ padding: '0 0 1rem 0', margin: '0' }}>
+          <h1 
+          onClick={() => this.setState({ expanded: false })}
+            style={{ padding: '0 0 1rem 0', margin: '0', cursor: 'pointer' }}
+          >
             <Expander
-              expanded={false}
-              expandFunction={() => this.setState({ expanded: false })}
+              expanded={false} //to point it down
             />
           </h1>
         </div>
@@ -109,10 +117,12 @@ class PhonePlayer extends React.Component {
     if (this.props.isServer) {
       return null;
     }
-    if (this.state.expanded) {
-      return expandedRender();
-    }
-    return notExpandedRender();
+    return (
+      <React.Fragment>
+        {expandedRender()}
+        {notExpandedRender()}
+      </React.Fragment>
+    );
   }
 }
 

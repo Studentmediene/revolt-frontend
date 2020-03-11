@@ -8,9 +8,20 @@
   height: 100%;
   background-color: #333;
   position: fixed;
-  bottom: 0;
   width: 100%;
+  transition: all 0.2s ease-in-out;
+  z-index: 4;
 }
+
+
+.expanded {
+  bottom:0;
+}
+
+ .hidden {
+  bottom:-100%;
+} 
+
 
 .container {
   display: flex;
@@ -20,6 +31,7 @@
   position: fixed;
   bottom: 0;
   width: 100%;
+  z-index: 3;
   
   .controlContainer {
     display: flex;
