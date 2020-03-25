@@ -14,6 +14,11 @@ const PlayingInfoExpanded = ({
   live,
   togglePlayPause,
   paused,
+  onSeek,
+  url,
+  position,
+  durationEstimate,
+
 }) => (
   <div className={styles.Container}>
     <div className={styles.infoContainer}>
@@ -31,7 +36,14 @@ const PlayingInfoExpanded = ({
       )}
     </div>
     <div className={styles.controls}>
-      <PlayerProgress disabled={live} />
+      <PlayerProgress
+        onSeek={position => onSeek(position)}
+        live={live}
+        paused={paused}
+        url={url}
+        position={position}
+        durationEstimate={durationEstimate}
+      />
       {live ? <LiveTag /> : <div className={styles.time}>20:03 / 59:30</div>}
       <AudioControls togglePlayPause={togglePlayPause} paused={paused} />
     </div>
@@ -46,6 +58,10 @@ PlayingInfoExpanded.propTypes = {
   live: PropTypes.bool.isRequired,
   togglePlayPause: PropTypes.func.togglePlayPause,
   paused: PropTypes.bool.isRequired,
+  onSeek: PropTypes.func.isRequired,
+  url: PropTypes.string,
+  durationEstimate: PropTypes.number,
+  position: PropTypes.number.isRequired,
 };
 
 export default PlayingInfoExpanded;

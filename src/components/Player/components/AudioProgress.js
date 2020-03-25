@@ -78,10 +78,17 @@ export default class AudioProgress extends Component {
     const isTouch = event.type.slice(0, 5) === 'touch';
     const pageX = isTouch ? event.targetTouches.item(0).pageX : event.pageX;
     const position = pageX - boundingRect.left - document.body.scrollLeft;
+    // eslint-disable-next-line no-console
+    console.log('position' + position);
     const containerWidth = boundingRect.width;
+    // eslint-disable-next-line no-console
+    console.log('containerWidth' + containerWidth);
     const progressPercentage = position / containerWidth;
-
+    // eslint-disable-next-line no-console
+    console.log('progressPercentage' + progressPercentage);
     const durationEstimate = this.props.durationEstimate;
+    // eslint-disable-next-line no-console
+    console.log('durationEstimate' + durationEstimate);
     this.setState({
       seekPosition: progressPercentage * durationEstimate,
     });

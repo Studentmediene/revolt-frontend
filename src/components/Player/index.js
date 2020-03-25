@@ -105,7 +105,11 @@ class Player extends React.Component {
             this.props.playNext();
           }}
         />
-        {isMobile ? <PhonePlayer /> : <DesktopPlayer />}
+        {isMobile ? (
+          <PhonePlayer onSeek={position => this.onSeek(position)} />
+        ) : (
+          <DesktopPlayer />
+        )}
       </React.Fragment>
     );
   }

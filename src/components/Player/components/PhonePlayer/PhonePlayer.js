@@ -6,9 +6,6 @@ import moment from 'moment';
 import classnames from 'classnames';
 
 import PlayPauseButton from '../../components/PlayPauseButton';
-/* import AudioProgress from '../../components/AudioProgress';
-import AudioControls from '../../components/AudioControls';
-import SoundManager from '../../components/SoundManager'; */
 import PlayingInfo from '../common/PlayingInfo';
 import PlayingInfoExpanded from '../common/PlayingInfoExpanded';
 import Expander from '../../../common/expanderbutton/Expander.js';
@@ -53,10 +50,6 @@ class PhonePlayer extends React.Component {
   };
 
   render() {
-    /*  const expand = () => {
-      this.setState({ expanded: true });
-    }; */
-
     const getLiveImage = () =>
       'http://localhost:3000/media/uploads/images/RR_LOGO.png';
     let img =
@@ -101,6 +94,10 @@ class PhonePlayer extends React.Component {
             togglePlayPause={this.props.togglePlayPause}
             paused={this.props.paused}
             publishAt={publishedAt.format('DD.MM.YYYY')}
+            url={this.props.url}
+            position={this.props.position}
+            durationEstimate={this.props.durationEstimate}
+            onSeek={position => this.props.onSeek(position)}
           />
           <h1 
           onClick={() => this.setState({ expanded: false })}
@@ -140,6 +137,10 @@ PhonePlayer.propTypes = {
   pause: PropTypes.func.isRequired,
   playNext: PropTypes.func.isRequired,
   playPrevious: PropTypes.func.isRequired,
+
+  onSeek: PropTypes.func.isRequired,
+  durationEstimate: PropTypes.number,
+  position: PropTypes.number.isRequired,
 };
 
 PhonePlayer.defaultProps = {
