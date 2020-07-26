@@ -63,7 +63,7 @@ PlayingInfoExpanded.propTypes = {
   showImageURL: PropTypes.string,
   publishAt: PropTypes.string,
   live: PropTypes.bool.isRequired,
-  togglePlayPause: PropTypes.func.togglePlayPause,
+  togglePlayPause: PropTypes.func,
   paused: PropTypes.bool.isRequired,
   onSeek: PropTypes.func.isRequired,
   url: PropTypes.string,

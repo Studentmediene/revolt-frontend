@@ -280,7 +280,7 @@ Player.propTypes = {
   pause: PropTypes.func.isRequired,
   playNext: PropTypes.func.isRequired,
   playPrevious: PropTypes.func.isRequired,
-  publishAt: PropTypes.bool,
+  publishAt: PropTypes.string,
 };
 
 Player.defaultProps = {

@@ -30,7 +30,7 @@ const PlayingInfo = ({
 };
 
 PlayingInfo.propTypes = {
-  showName: PropTypes.string.isRequired,
+  showName: PropTypes.string,
   episodeTitle: PropTypes.string.isRequired,
   showImageURL: PropTypes.string.isRequired,
   expand: PropTypes.func,

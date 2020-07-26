@@ -26,7 +26,7 @@ const initialState = fromJS({
   paused: true,
   episodeId: null,
   url: null,
-  publishAt: 'test',
+  publishAt: null,
 });
 
 function playerReducer(state = initialState, action) {
