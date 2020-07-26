@@ -59,6 +59,7 @@ class Player extends React.Component {
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     this.getShowImage = this.getShowImage.bind(this);
     this.expandedRender = this.expandedRender.bind(this);
+    this.toggleExpander = this.toggleExpander.bind(this)
   }
 
   static async getInitialProps({ isServer }) {
@@ -110,6 +111,16 @@ class Player extends React.Component {
     this.setState({
       position: soundObject.position,
       durationEstimate: soundObject.durationEstimate,
+    });
+  }
+
+  toggleExpander(e) {
+    e.preventDefault();
+    trackEvent('expanded', 'toggle expaned player');
+    this.setState(prevState => {
+      return {
+        expanded: !prevState.expanded,
+      };
     });
   }
 
@@ -166,7 +177,7 @@ class Player extends React.Component {
           }}
         />
         <h1
-          onClick={() => this.setState({ expanded: false })}
+          onClick={this.toggleExpander}
           className={PhoneStyles.expanderButton}
         >
           <Expander
@@ -208,7 +219,7 @@ class Player extends React.Component {
                 showName={this.props.playingShow}
                 episodeTitle={this.props.playingTitle}
                 showImageURL={this.getShowImage()}
-                expand={() => this.setState({ expanded: true })}
+                expand={this.toggleExpander}
                 live={this.props.live}
               />
               <div className={PhoneStyles.controlContainer}>
