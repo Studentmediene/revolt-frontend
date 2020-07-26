@@ -162,7 +162,6 @@ class Player extends React.Component {
             trackEvent('player', 'toggle play/pause');
             this.props.togglePlayPause();
           }}
-          displayText={this.props.playingTitle}
         />
         <h1
           onClick={() => this.setState({ expanded: false })}

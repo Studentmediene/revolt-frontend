@@ -18,6 +18,8 @@ const PlayingInfoExpanded = ({
   url,
   position,
   durationEstimate,
+  playNext,
+  playPrevious,
 }) => (
   <div className={styles.Container}>
     <div className={styles.infoContainer}>
@@ -43,7 +45,14 @@ const PlayingInfoExpanded = ({
         position={position}
         durationEstimate={durationEstimate}
       />
-      <AudioControls togglePlayPause={togglePlayPause} paused={paused} />
+      <AudioControls
+        togglePlayPause={togglePlayPause}
+        paused={paused}
+        playNext={playNext}
+        playPrevious={playPrevious}
+        live={live}
+        url={url}
+      />
     </div>
   </div>
 );
@@ -60,6 +69,8 @@ PlayingInfoExpanded.propTypes = {
   url: PropTypes.string,
   durationEstimate: PropTypes.number,
   position: PropTypes.number.isRequired,
+  playNext: PropTypes.func.isRequired,
+  playPrevious: PropTypes.func.isRequired,
 };
 
 export default PlayingInfoExpanded;
