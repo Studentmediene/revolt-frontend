@@ -1,24 +1,22 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React from 'react';
-/* import ReactDom from 'react-dom'; */
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
+/* for mobile */
+import moment from 'moment';
+import classnames from 'classnames';
+import PhoneStyles from './PhoneStyles.scss';
 import PlayPauseButton from './components/PlayPauseButton';
 import PlayingInfo from './components/common/PlayingInfo';
 import PlayingInfoExpanded from './components/common/PlayingInfoExpanded';
 import Expander from '../common/expanderbutton/Expander.js';
 
-/* for mobile */
-import moment from 'moment';
-import classnames from 'classnames';
-import PhoneStyles from './components/PhonePlayer/styles.scss';
-
+/* for mobile and desktop */
 import SoundManager from './components/SoundManager';
 import AudioProgress from './components/AudioProgress';
 import AudioControls from './components/AudioControls';
-import DesktopStyles from './components/DesktopPlayer/styles.scss';
+import DesktopStyles from './DesktopStyles.scss';
 
 import {
   pause,
@@ -41,12 +39,15 @@ import {
 
 import { trackEvent } from 'utils/analytics';
 
+/* There is a mobile (Ipad size and smaller) and a desktop version of the player. The desktop player is going to be updated to use the same components and logic as 
+the mobile version */
 class Player extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       width: 0,
-      height: 0, // Used to determine when to reset player position
+      height: 0,
+      // Used to determine when to reset player position
       currentUrl: '',
       // Number of seconds played
       position: 0,
@@ -75,8 +76,7 @@ class Player extends React.Component {
   }
 
   getShowImage() {
-    const getLiveImage = () =>
-      'http://localhost:3000/media/uploads/images/RR_LOGO.png';
+    const getLiveImage = () => '/assets/RR_logo.png';
     return this.props.showImage && !this.props.live
       ? this.props.showImage
       : getLiveImage();
@@ -137,7 +137,9 @@ class Player extends React.Component {
           showImageURL={this.getShowImage()}
           live={this.props.live}
           paused={this.props.paused}
-          publishAt={publishedAt.format('DD.MM.YYYY')}
+          publishAt={
+            publishedAt.isValid() ? publishedAt.format('DD.MM.YYYY') : null
+          }
           url={this.props.url}
           position={this.state.position}
           durationEstimate={this.state.durationEstimate}
@@ -176,10 +178,10 @@ class Player extends React.Component {
   }
 
   render() {
-    /* same as $breakpoint-medium in main variables.scss file */
-    const isMobile = this.state.width <= 800;
+    const isMobile = this.state.width <= 800; // (800) same as $breakpoint-medium in main variables.scss file
     const position = this.state.position;
     return (
+      //the soundmanager is shared between desktop and mobile. This makes the playback not break when scaling the site
       <React.Fragment>
         <SoundManager
           url={this.props.url}

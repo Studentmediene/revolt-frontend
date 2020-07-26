@@ -32,7 +32,7 @@ const PlayingInfoExpanded = ({
         <span className={styles.text}>
           <h2 className={styles.showName}>{showName}</h2>
           <h3 className={styles.episodeTitle}>{episodeTitle}</h3>
-          <h3 className={styles.date}>{publishAt}</h3>
+          <h3 className={styles.date}>{publishAt ? publishAt : ''}</h3>
         </span>
       )}
     </div>
