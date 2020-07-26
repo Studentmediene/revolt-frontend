@@ -5,6 +5,7 @@ import styles from './PlayingInfoExpanded.scss';
 import PlayerProgress from '../common/PlayerProgress';
 
 import AudioControls from '../AudioControls';
+import LiveTag from './LiveTag';
 
 const PlayingInfoExpanded = ({
   showName,
@@ -27,7 +28,10 @@ const PlayingInfoExpanded = ({
         <img className={styles.img} src={showImageURL} alt={showName} />
       </div>
       {live ? (
-        <h2 className={styles.showName}>{episodeTitle}</h2>
+        <span className={styles.text}>
+          <h2 className={styles.showName}>{episodeTitle}</h2>
+          <LiveTag />
+        </span>
       ) : (
         <span className={styles.text}>
           <h2 className={styles.showName}>{showName}</h2>

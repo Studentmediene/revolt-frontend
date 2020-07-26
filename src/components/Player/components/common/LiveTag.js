@@ -8,7 +8,8 @@ const LiveTag = () => {
         border: '3px solid ' + color,
         color: color,
         width: '75px',
-        margin: '30px 0',
+        margin: '10px 0',
+        textAlign: 'center',
       }}
     >
       Direkte

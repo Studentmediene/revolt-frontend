@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import LiveTag from '../common/LiveTag';
+import classnames from 'classnames';
 
 import styles from './PlayerProgress.scss';
 
@@ -124,11 +124,19 @@ export default class AudioProgress extends Component {
       width: progressBarWidth,
     };
     if (live) {
-      audioProgressStyle.color = '#868686';
+      audioProgressStyle.backgroundColor = '#868686';
+      audioProgressStyle.cursor = 'default';
     }
 
     return (
-      <React.Fragment>
+      <div className={styles.timeline}>
+        <span
+          className={classnames({
+            [styles.hidden]: live,
+          })}
+        >
+          {displayPosition}
+        </span>
         <div
           role="toolbar"
           className={styles.audioProgressContainer}
@@ -144,8 +152,16 @@ export default class AudioProgress extends Component {
             <div className={styles.handle} />
           </div>
         </div>
-        {live ? <LiveTag /> : <div className={styles.time}>{timeRatio}</div>}
-      </React.Fragment>
+        {
+          <span
+            className={classnames({
+              [styles.hidden]: live,
+            })}
+          >
+            {displayDuration}
+          </span>
+        }
+      </div>
     );
   }
 }
