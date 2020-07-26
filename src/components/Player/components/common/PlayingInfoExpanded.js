@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './PlayingInfoExpanded.scss';
 
 import PlayerProgress from '../common/PlayerProgress';
-import LiveTag from '../common/LiveTag';
+
 import AudioControls from '../AudioControls';
 
 const PlayingInfoExpanded = ({
@@ -18,7 +18,6 @@ const PlayingInfoExpanded = ({
   url,
   position,
   durationEstimate,
-
 }) => (
   <div className={styles.Container}>
     <div className={styles.infoContainer}>
@@ -28,11 +27,11 @@ const PlayingInfoExpanded = ({
       {live ? (
         <h2 className={styles.showName}>{episodeTitle}</h2>
       ) : (
-        <React.Fragment>
+        <span className={styles.text}>
           <h2 className={styles.showName}>{showName}</h2>
           <h3 className={styles.episodeTitle}>{episodeTitle}</h3>
           <h3 className={styles.date}>{publishAt}</h3>
-        </React.Fragment>
+        </span>
       )}
     </div>
     <div className={styles.controls}>
@@ -44,7 +43,6 @@ const PlayingInfoExpanded = ({
         position={position}
         durationEstimate={durationEstimate}
       />
-      {live ? <LiveTag /> : <div className={styles.time}>20:03 / 59:30</div>}
       <AudioControls togglePlayPause={togglePlayPause} paused={paused} />
     </div>
   </div>

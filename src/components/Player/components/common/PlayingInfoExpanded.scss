@@ -58,7 +58,6 @@ $image-height: 30vh;
       }
   }
   
-
   .controls {
     margin-top: auto;
     color: white;
@@ -78,13 +77,29 @@ $image-height: 30vh;
 
     }
 
-    .time {
-      font-size: 1em;
-      font-weight: normal;
-      font-style: oblique;
-      margin:10px 0;
-    }
+    
 
   }
 
+}
+
+/* Landscape */
+@media screen and (orientation:landscape) {
+/* Landscape styles */
+  .Container {
+    align-items: center;
+    grid-template-rows: 50% 50%;
+    .infoContainer {
+      grid-template-columns: 1fr 2fr;
+      align-items: center;
+      grid-gap: 10px;
+      .text {
+        text-align: left;
+      }
+    }
+  }
+
+  .controls {
+    align-self: start;
+  }
 }
