@@ -26,25 +26,37 @@
   bottom:-150%;
 } 
 
-
-.container {
+.metaContainer {
   display: flex;
-  flex-direction: row;
-  height: $player-height;
-  background-color: #333;
+  flex-direction: column;
+  height: $player-height + 3px;
   position: fixed;
   bottom: 0;
   width: 100%;
   z-index: 3;
-  
-  .controlContainer {
+
+  .timeline {
+    border-top: 3px solid #EBB71F;
+  }
+
+  .container {
     display: flex;
-    flex-shrink: 1;
     flex-direction: row;
-    justify-items: flex-end;
-    justify-content: right;
-    align-items: center;
-    justify-self: end;
-    padding: 0 10px;
+    height: $player-height;
+    background-color: #333;
+    width: 100%;
+
+    
+    
+    .controlContainer {
+      display: flex;
+      flex-shrink: 1;
+      flex-direction: row;
+      justify-items: flex-end;
+      justify-content: right;
+      align-items: center;
+      justify-self: end;
+      padding: 0 10px;
+    }
   }
 }

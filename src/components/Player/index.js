@@ -191,6 +191,16 @@ class Player extends React.Component {
   render() {
     const isMobile = this.state.width <= 800; // (800) same as $breakpoint-medium in main variables.scss file
     const position = this.state.position;
+    let progressBarWidth = `${(position / this.state.durationEstimate) * 100}%`;
+    if (this.props.live) {
+      progressBarWidth = `0%`;
+    } else if (!this.props.url || this.state.durationEstimate < 100) {
+      // Audio either hasn't loading or is playing blank.mp3
+      progressBarWidth = '0%';
+    }
+    const audioProgressStyle = {
+      width: progressBarWidth,
+    };
     return (
       //the soundmanager is shared between desktop and mobile. This makes the playback not break when scaling the site
       <React.Fragment>
@@ -214,6 +224,11 @@ class Player extends React.Component {
           /* start of phone player */
           <React.Fragment>
             {this.expandedRender()}
+            <div className={PhoneStyles.metaContainer}>
+            <div
+                className={PhoneStyles.timeline}
+                style={audioProgressStyle}
+              />
             <div className={PhoneStyles.container}>
               <PlayingInfo
                 showName={this.props.playingShow}
@@ -228,6 +243,7 @@ class Player extends React.Component {
                   togglePlayPause={this.props.togglePlayPause}
                 />
               </div>
+            </div>
             </div>
           </React.Fragment>
         ) : (
