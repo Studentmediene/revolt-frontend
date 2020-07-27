@@ -28,7 +28,7 @@ const PlayingInfoExpanded = ({
         <img className={styles.img} src={showImageURL} alt={showName} />
       </div>
       {live ? (
-        <span className={styles.text}>
+        <span>
           <h2 className={styles.showName}>{episodeTitle}</h2>
           <LiveTag />
         </span>

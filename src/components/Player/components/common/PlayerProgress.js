@@ -98,14 +98,13 @@ export default class AudioProgress extends Component {
   render() {
     const { live, paused } = this.props;
 
+    const duration = this.props.durationEstimate;
     const position = this.seekInProgress
-      ? this.state.seekPosition
+      ? Math.min(this.state.seekPosition, duration)
       : this.props.position;
 
-    const duration = this.props.durationEstimate;
-
-    const displayPosition = this.convertSecondsToDisplayTime(position / 1000);
     const displayDuration = this.convertSecondsToDisplayTime(duration / 1000);
+    const displayPosition = this.convertSecondsToDisplayTime(position / 1000);
 
     let timeRatio = `${displayPosition}  /  ${displayDuration}`;
     let progressBarWidth = `${(position / duration) * 100}%`;
