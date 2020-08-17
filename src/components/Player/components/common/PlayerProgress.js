@@ -119,7 +119,6 @@ export default class AudioProgress extends Component {
       progressBarWidth = '100%';
     }
 
-    const test = "test";
     const audioProgressStyle = {
       width: progressBarWidth,
     };
