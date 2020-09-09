@@ -60,10 +60,10 @@ const PlayerProgressFunctional = props => {
     const containerWidth = boundingRect.width;
     const progressPercentage = position / containerWidth;
 
-    const durationEstimate = props.durationEstimate;
+    const duration = props.duration;
     setSeek(state => ({
       ...state,
-      position: progressPercentage * durationEstimate,
+      position: progressPercentage * duration,
     }));
   };
 
@@ -75,7 +75,7 @@ const PlayerProgressFunctional = props => {
     return date.format('mm:ss');
   };
 
-  const duration = props.durationEstimate;
+  const duration = props.duration;
   const position = seek.inProgress
     ? Math.min(seek.position, duration)
     : props.position;
@@ -141,14 +141,14 @@ PlayerProgressFunctional.propTypes = {
   url: PropTypes.string,
   offset: PropTypes.string,
   onSeek: PropTypes.func.isRequired,
-  durationEstimate: PropTypes.number,
+  duration: PropTypes.number,
   position: PropTypes.number.isRequired,
 };
 
 PlayerProgressFunctional.defaultProps = {
   url: null,
   offset: null,
-  durationEstimate: null,
+  duration: null,
 };
 
 export default PlayerProgressFunctional;

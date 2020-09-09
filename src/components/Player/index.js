@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -41,32 +41,31 @@ import { trackEvent } from 'utils/analytics';
 
 /* There is a mobile (Ipad size and smaller) and a desktop version of the player. The desktop player is going to be updated to use the same components and logic as 
 the mobile version */
-class Player extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      width: 0,
-      height: 0,
-      // Used to determine when to reset player position
-      currentUrl: '',
-      // Number of seconds played
-      position: 0,
-      // Duration of the audio (estimate)
-      duration: 0,
-      volume: 80,
-      expanded: false,
+const Player = props => {
+  const [size, setSize] = useState({ width: 0, height: 0 });
+  const [sound, setSound] = useState({
+    currentUrl: '',
+    position: 0,
+    duration: 0,
+    volume: 80,
+  });
+  const [expanded, setExpanded] = useState(false);
+
+  useEffect(() => {
+    //equal to componentDidMount
+    props.updateLiveTitle();
+    updateWindowDimensions();
+    window.addEventListener('resize', updateWindowDimensions);
+    resetPosition(props.url);
+
+    //equal to componentWillUnmount
+    //TODO might need to add resizelisener, cant find any bugs without it yet.
+    return () => {
+      window.removeEventListener('resize', updateWindowDimensions);
     };
-    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
-    this.getShowImage = this.getShowImage.bind(this);
-    this.expandedRender = this.expandedRender.bind(this);
-    this.toggleExpander = this.toggleExpander.bind(this)
-  }
+  }, [props.url]);
 
-  static async getInitialProps({ isServer }) {
-    return { isServer };
-  }
-
-  componentDidMount() {
+  /* componentDidMount() {
     this.props.updateLiveTitle();
     this.updateWindowDimensions();
     window.addEventListener('resize', this.updateWindowDimensions);
@@ -74,225 +73,195 @@ class Player extends React.Component {
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.updateWindowDimensions);
-  }
+  } */
 
-  getShowImage() {
+  const getShowImage = () => {
     const getLiveImage = () => '/assets/RR_logo.png';
-    return this.props.showImage && !this.props.live
-      ? this.props.showImage
-      : getLiveImage();
-  }
+    return props.showImage && !props.live ? props.showImage : getLiveImage();
+  };
 
-  updateWindowDimensions() {
-    this.setState({ width: window.innerWidth, height: window.innerHeight });
-  }
+  const updateWindowDimensions = () => {
+    setSize({ width: window.innerWidth, height: window.innerHeight });
+  };
 
-  componentDidUpdate() {
+  /* componentDidUpdate() {
     if (this.props.url != this.state.currentUrl) {
       // Audio URL has changed, so let's reset progress position
       this.resetPosition(this.props.url);
     }
-  }
+  } */
 
-  resetPosition(currentUrl) {
-    this.setState({
-      position: 0,
-      currentUrl,
-    });
-  }
+  const resetPosition = () => {
+    setSound(state => ({ ...state, position: 0 }));
+  };
 
-  onSeek(seekPosition) {
-    this.setState({
-      position: seekPosition,
-    });
-  }
+  const onSeek = seekPosition => {
+    setSound(state => ({ ...state, position: seekPosition }));
+  };
 
-  whilePlaying(soundObject) {
-    this.setState({
+  const whilePlaying = soundObject => {
+    setSound(state => ({
+      ...state,
       position: soundObject.position,
-      durationEstimate: soundObject.durationEstimate,
-    });
-  }
+      duration: soundObject.duration,
+    }));
+  };
 
-  toggleExpander(e) {
+  const toggleExpander = e => {
     e.preventDefault();
     trackEvent('expanded', 'toggle expaned player');
-    this.setState(prevState => {
-      return {
-        expanded: !prevState.expanded,
-      };
-    });
-  }
-
-  convertSecondsToDisplayTime = number => {
-    const date = moment.utc(number * 1000);
-    if (date.hours() > 0) {
-      return date.format('HH:mm:ss');
-    }
-    return date.format('mm:ss');
+    setExpanded(state => !state);
   };
 
   /* Method for handling the expanded version of the player */
-  expandedRender() {
-    const publishedAt = moment(this.props.publishAt);
+  const expandedRender = () => {
+    const publishedAt = moment(props.publishAt);
     return (
       <div
         className={classnames(PhoneStyles.expandedContainer, {
-          [PhoneStyles.hidden]: !this.state.expanded,
-          [PhoneStyles.expanded]: this.state.expanded,
+          [PhoneStyles.hidden]: !expanded,
+          [PhoneStyles.expanded]: expanded,
         })}
       >
         <PlayingInfoExpanded
-          showName={this.props.playingShow}
-          episodeTitle={this.props.playingTitle}
-          showImageURL={this.getShowImage()}
-          live={this.props.live}
-          paused={this.props.paused}
+          showName={props.playingShow}
+          episodeTitle={props.playingTitle}
+          showImageURL={getShowImage()}
+          live={props.live}
+          paused={props.paused}
           publishAt={
             publishedAt.isValid() ? publishedAt.format('DD.MM.YYYY') : null
           }
-          url={this.props.url}
-          position={this.state.position}
-          durationEstimate={this.state.durationEstimate}
-          onSeek={position => this.onSeek(position)}
-
+          url={props.url}
+          position={sound.position}
+          duration={sound.duration}
+          onSeek={position => onSeek(position)}
           playNext={() => {
             trackEvent('player', 'play next song');
-            this.props.playNext();
+            props.playNext();
           }}
           playPrevious={() => {
             trackEvent('player', 'play previous sond');
-            if (!this.props.live) {
+            if (!props.live) {
               const backLimit = 2 * 1000; // two seconds
-              if (this.state.position < backLimit) {
-                this.props.playPrevious();
+              if (sound.position < backLimit) {
+                props.playPrevious();
               } else {
-                this.resetPosition(this.state.currentUrl);
+                resetPosition(sound.currentUrl);
               }
             }
           }}
           togglePlayPause={() => {
             trackEvent('player', 'toggle play/pause');
-            this.props.togglePlayPause();
+            props.togglePlayPause();
           }}
         />
-        <h1
-          onClick={this.toggleExpander}
-          className={PhoneStyles.expanderButton}
-        >
+        <h1 onClick={toggleExpander} className={PhoneStyles.expanderButton}>
           <Expander
             expanded={false} //to point arrow down
           />
         </h1>
       </div>
     );
-  }
+  };
 
-  render() {
-    const isMobile = this.state.width <= 800; // (800) same as $breakpoint-medium in main variables.scss file
-    const position = this.state.position;
-    let progressBarWidth = `${(position / this.state.durationEstimate) * 100}%`;
-    if (this.props.live) {
-      progressBarWidth = `0%`;
-    } else if (!this.props.url || this.state.durationEstimate < 100) {
-      // Audio either hasn't loading or is playing blank.mp3
-      progressBarWidth = '0%';
-    }
-    const audioProgressStyle = {
-      width: progressBarWidth,
-    };
-    return (
-      //the soundmanager is shared between desktop and mobile. This makes the playback not break when scaling the site
-      <React.Fragment>
-        <SoundManager
-          url={this.props.url}
-          paused={this.props.paused}
-          volume={this.state.volume}
-          position={position}
-          whilePlaying={(...a) => this.whilePlaying(...a)}
-          onPause={() => {
-            this.props.pause();
-          }}
-          onResume={() => {
-            this.props.resume();
-          }}
-          onFinishedPlaying={() => {
-            this.props.playNext();
-          }}
-        />
-        {isMobile ? (
-          /* start of phone player */
-          <React.Fragment>
-            {this.expandedRender()}
-            <div className={PhoneStyles.metaContainer}>
-            <div
-                className={PhoneStyles.timeline}
-                style={audioProgressStyle}
-              />
+  const isMobile = size.width <= 800; // (800) same as $breakpoint-medium in main variables.scss file
+  let progressBarWidth = `${(sound.position / sound.duration) * 100}%`;
+  if (props.live) {
+    progressBarWidth = `0%`;
+  } else if (!props.url || sound.duration < 100) {
+    // Audio either hasn't loading or is playing blank.mp3
+    progressBarWidth = '0%';
+  }
+  const audioProgressStyle = {
+    width: progressBarWidth,
+  };
+
+  return (
+    //the soundmanager is shared between desktop and mobile. This makes the playback not break when scaling the site
+    <React.Fragment>
+      <SoundManager
+        url={props.url}
+        paused={props.paused}
+        volume={sound.volume}
+        position={sound.position}
+        whilePlaying={(...a) => whilePlaying(...a)}
+        onPause={() => {
+          props.pause();
+        }}
+        onResume={() => {
+          props.resume();
+        }}
+        onFinishedPlaying={() => {
+          props.playNext();
+        }}
+      />
+      {isMobile ? (
+        /* start of phone player */
+        <React.Fragment>
+          {expandedRender()}
+          <div className={PhoneStyles.metaContainer}>
+            <div className={PhoneStyles.timeline} style={audioProgressStyle} />
             <div className={PhoneStyles.container}>
               <PlayingInfo
-                showName={this.props.playingShow}
-                episodeTitle={this.props.playingTitle}
-                showImageURL={this.getShowImage()}
-                expand={this.toggleExpander}
-                live={this.props.live}
+                showName={props.playingShow}
+                episodeTitle={props.playingTitle}
+                showImageURL={getShowImage()}
+                expand={toggleExpander}
+                live={props.live}
               />
               <div className={PhoneStyles.controlContainer}>
                 <PlayPauseButton
-                  paused={this.props.paused}
-                  togglePlayPause={this.props.togglePlayPause}
+                  paused={props.paused}
+                  togglePlayPause={props.togglePlayPause}
                 />
               </div>
             </div>
-            </div>
-          </React.Fragment>
-        ) : (
-          /* end of phone player */
-          /* start of desktop player */
-          <div
-            className={DesktopStyles.container}
-            title={this.props.playingTitle}
-          >
-            <AudioControls
-              playNext={() => {
-                trackEvent('player', 'play next song');
-                this.props.playNext();
-              }}
-              playPrevious={() => {
-                trackEvent('player', 'play previous sond');
-                if (!this.props.live) {
-                  const backLimit = 2 * 1000; // two seconds
-                  if (this.state.position < backLimit) {
-                    this.props.playPrevious();
-                  } else {
-                    this.resetPosition(this.state.currentUrl);
-                  }
-                }
-              }}
-              togglePlayPause={() => {
-                trackEvent('player', 'toggle play/pause');
-                this.props.togglePlayPause();
-              }}
-              paused={this.props.paused}
-              live={this.props.live}
-              url={this.props.url}
-            />
-            <AudioProgress
-              displayText={this.props.playingTitle}
-              live={this.props.live}
-              paused={this.props.paused}
-              url={this.props.url}
-              position={this.state.position}
-              durationEstimate={this.state.durationEstimate}
-              onSeek={position => this.onSeek(position)}
-            />
           </div>
-          /* end of desktop player */
-        )}
-      </React.Fragment>
-    );
-  }
-}
+        </React.Fragment>
+      ) : (
+        /* end of phone player */
+        /* start of desktop player */
+        <div className={DesktopStyles.container} title={props.playingTitle}>
+          <AudioControls
+            playNext={() => {
+              trackEvent('player', 'play next song');
+              props.playNext();
+            }}
+            playPrevious={() => {
+              trackEvent('player', 'play previous sond');
+              if (!props.live) {
+                const backLimit = 2 * 1000; // two seconds
+                if (sound.position < backLimit) {
+                  props.playPrevious();
+                } else {
+                  resetPosition(sound.currentUrl);
+                }
+              }
+            }}
+            togglePlayPause={() => {
+              trackEvent('player', 'toggle play/pause');
+              props.togglePlayPause();
+            }}
+            paused={props.paused}
+            live={props.live}
+            url={props.url}
+          />
+          <AudioProgress
+            displayText={props.playingTitle}
+            live={props.live}
+            paused={props.paused}
+            url={props.url}
+            position={sound.position}
+            durationEstimate={sound.duration}
+            onSeek={position => onSeek(position)}
+          />
+        </div>
+        /* end of desktop player */
+      )}
+    </React.Fragment>
+  );
+};
 
 Player.propTypes = {
   live: PropTypes.bool,
@@ -313,6 +282,10 @@ Player.propTypes = {
 Player.defaultProps = {
   paused: true,
   url: null,
+};
+
+Player.getInitialProps = ({ isServer }) => {
+  return { isServer };
 };
 
 const mapStateToProps = createStructuredSelector({

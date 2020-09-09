@@ -18,7 +18,7 @@ const PlayingInfoExpanded = ({
   onSeek,
   url,
   position,
-  durationEstimate,
+  duration,
   playNext,
   playPrevious,
 }) => (
@@ -47,7 +47,7 @@ const PlayingInfoExpanded = ({
         paused={paused}
         url={url}
         position={position}
-        durationEstimate={durationEstimate}
+        duration={duration}
       />
       <AudioControls
         togglePlayPause={togglePlayPause}
@@ -71,7 +71,7 @@ PlayingInfoExpanded.propTypes = {
   paused: PropTypes.bool.isRequired,
   onSeek: PropTypes.func.isRequired,
   url: PropTypes.string,
-  durationEstimate: PropTypes.number,
+  duration: PropTypes.number,
   position: PropTypes.number.isRequired,
   playNext: PropTypes.func.isRequired,
   playPrevious: PropTypes.func.isRequired,
