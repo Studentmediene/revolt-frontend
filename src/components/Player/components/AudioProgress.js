@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import styles from './AudioProgress.scss';
 
+/* This is the audioprogress file for the old player */
 export default class AudioProgress extends Component {
   constructor(props) {
     super(props);

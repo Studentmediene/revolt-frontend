@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './PlayingInfoExpanded.scss';
 
-import PlayerProgress from '../common/PlayerProgress';
+import PlayerProgressFunctional from '../common/PlayerProgressFunctional';
 
 import AudioControls from '../AudioControls';
 import LiveTag from './LiveTag';
@@ -41,7 +41,7 @@ const PlayingInfoExpanded = ({
       )}
     </div>
     <div className={styles.controls}>
-      <PlayerProgress
+      <PlayerProgressFunctional
         onSeek={position => onSeek(position)}
         live={live}
         paused={paused}
