@@ -11,39 +11,65 @@ const AudioControls = ({
   paused,
   live,
   url,
-}) => (
-  <div className={styles.audioControls}>
-    <button
-      disabled={live || !url}
-      className={classNames(styles.backButton, {
-        [styles.disabled]: live || !url,
-      })}
-      onClick={playPrevious}
-      onKeyPress={playPrevious}
-    >
-      <div className={styles.backButtonInner}>
-        <div className={styles.rightFacingTriangle} />
-        <div className={styles.line} />
+  skipAhead,
+  skipBackwards,
+  isLatestEpisodeInPlaylist,
+  isFirstEpisodeInPlaylist,
+}) => {
+  return (
+    <div className={styles.audioControls}>
+      <button
+        onClick={skipBackwards}
+        disabled={live || !url}
+        className={classNames({
+          [styles.disabled]: live || !url,
+        })}
+        styles={{ color: 'white' }}
+      >
+        B
+      </button>
+      <button
+        disabled={live || !url || isFirstEpisodeInPlaylist}
+        className={classNames(styles.backButton, {
+          [styles.disabled]: live || !url || isFirstEpisodeInPlaylist,
+        })}
+        onClick={playPrevious}
+        onKeyPress={playPrevious}
+      >
+        <div className={styles.backButtonInner}>
+          <div className={styles.rightFacingTriangle} />
+          <div className={styles.line} />
+        </div>
+      </button>
+      <div className={styles.audioControlContainer}>
+        <PlayPauseButton paused={paused} togglePlayPause={togglePlayPause} />
       </div>
-    </button>
-    <div className={styles.audioControlContainer}>
-      <PlayPauseButton paused={paused} togglePlayPause={togglePlayPause} />
+      <button
+        disabled={live || !url || isLatestEpisodeInPlaylist}
+        className={classNames(styles.forwardButton, {
+          [styles.disabled]: live || !url || isLatestEpisodeInPlaylist,
+        })}
+        onClick={playNext}
+        onKeyPress={playNext}
+      >
+        <div className={styles.forwardButtonInner}>
+          <div className={styles.rightFacingTriangle} />
+          <div className={styles.line} />
+        </div>
+      </button>
+      <button
+        onClick={skipAhead}
+        disabled={live || !url}
+        className={classNames({
+          [styles.disabled]: live || !url,
+        })}
+        styles={{ color: 'white' }}
+      >
+        A
+      </button>
     </div>
-    <button
-      disabled={live || !url}
-      className={classNames(styles.forwardButton, {
-        [styles.disabled]: live || !url,
-      })}
-      onClick={playNext}
-      onKeyPress={playNext}
-    >
-      <div className={styles.forwardButtonInner}>
-        <div className={styles.rightFacingTriangle} />
-        <div className={styles.line} />
-      </div>
-    </button>
-  </div>
-);
+  );
+};
 
 AudioControls.propTypes = {
   playNext: PropTypes.func.isRequired,
@@ -52,6 +78,10 @@ AudioControls.propTypes = {
   paused: PropTypes.bool.isRequired,
   live: PropTypes.bool.isRequired,
   url: PropTypes.string,
+  skipAhead: PropTypes.func.isRequired,
+  skipBackwards: PropTypes.func.isRequired,
+  isLatestEpisodeInPlaylist: PropTypes.bool,
+  isFirstEpisodeInPlaylist: PropTypes.bool,
 };
 
 export default AudioControls;

@@ -15,13 +15,13 @@ import {
 } from './constants';
 
 const initialState = fromJS({
-  live: false,
+  live: true,
   offset: 0,
   index: 0,
   playlist: false,
   loading: false,
   error: false,
-  playingTitle: 'Radio Revolt',
+  playingTitle: 'Radio Revolt Direkte',
   liveTitle: '',
   paused: true,
   episodeId: null,

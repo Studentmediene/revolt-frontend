@@ -102,6 +102,7 @@ class Player extends React.Component {
   }
 
   onSeek(seekPosition) {
+    console.log('onseek');
     this.setState({
       position: seekPosition,
     });
@@ -153,7 +154,7 @@ class Player extends React.Component {
           }
           url={this.props.url}
           position={this.state.position}
-          durationEstimate={this.state.durationEstimate}
+          duration={this.state.durationEstimate}
           onSeek={position => this.onSeek(position)}
 
           playNext={() => {
@@ -276,6 +277,17 @@ class Player extends React.Component {
               paused={this.props.paused}
               live={this.props.live}
               url={this.props.url}
+              skipAhead={() =>
+                this.onSeek(
+                  Math.min(
+                    this.state.durationEstimate,
+                    this.state.position + 30 * 1000,
+                  ),
+                )
+              }
+              skipBackwards={() =>
+                this.onSeek(Math.max(0, this.state.position - 30 * 1000))
+              }
             />
             <AudioProgress
               displayText={this.props.playingTitle}

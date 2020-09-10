@@ -4,7 +4,6 @@ import styles from './PlayingInfoExpanded.scss';
 
 import PlayerProgressFunctional from '../common/PlayerProgressFunctional';
 
-import AudioControls from '../AudioControls';
 import LiveTag from './LiveTag';
 
 const PlayingInfoExpanded = ({
@@ -13,14 +12,12 @@ const PlayingInfoExpanded = ({
   showImageURL,
   publishAt,
   live,
-  togglePlayPause,
   paused,
   onSeek,
   url,
   position,
   duration,
-  playNext,
-  playPrevious,
+  audioControls,
 }) => (
   <div className={styles.Container}>
     <div className={styles.infoContainer}>
@@ -41,22 +38,19 @@ const PlayingInfoExpanded = ({
       )}
     </div>
     <div className={styles.controls}>
-      <PlayerProgressFunctional
-        onSeek={position => onSeek(position)}
-        live={live}
-        paused={paused}
-        url={url}
-        position={position}
-        duration={duration}
-      />
-      <AudioControls
-        togglePlayPause={togglePlayPause}
-        paused={paused}
-        playNext={playNext}
-        playPrevious={playPrevious}
-        live={live}
-        url={url}
-      />
+      {!live ? (
+        <PlayerProgressFunctional
+          onSeek={position => onSeek(position)}
+          live={live}
+          paused={paused}
+          url={url}
+          position={position}
+          duration={duration}
+        />
+      ) : (
+        <div />
+      )}
+      {audioControls}
     </div>
   </div>
 );
@@ -75,6 +69,7 @@ PlayingInfoExpanded.propTypes = {
   position: PropTypes.number.isRequired,
   playNext: PropTypes.func.isRequired,
   playPrevious: PropTypes.func.isRequired,
+  audioControls: PropTypes.element.isRequired,
 };
 
 export default PlayingInfoExpanded;

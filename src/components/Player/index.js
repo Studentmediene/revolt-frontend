@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -35,6 +35,8 @@ import {
   selectUrl,
   selectShowImage,
   selectPublishAt,
+  selectIndex,
+  selectPlaylist,
 } from './selectors';
 
 import { trackEvent } from 'utils/analytics';
@@ -52,28 +54,36 @@ const Player = props => {
   const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
-    //equal to componentDidMount
+    //equal to componentDidMount and componentDidUpdate
     props.updateLiveTitle();
     updateWindowDimensions();
     window.addEventListener('resize', updateWindowDimensions);
     resetPosition(props.url);
 
     //equal to componentWillUnmount
-    //TODO might need to add resizelisener, cant find any bugs without it yet.
     return () => {
       window.removeEventListener('resize', updateWindowDimensions);
     };
   }, [props.url]);
 
-  /* componentDidMount() {
-    this.props.updateLiveTitle();
-    this.updateWindowDimensions();
-    window.addEventListener('resize', this.updateWindowDimensions);
-  }
+  /* need to use callback, else we will spawn a new function each time we click the button */
+  const skipAhead = useCallback(
+    () =>
+      setSound(sound => ({
+        ...sound,
+        position: Math.min(sound.position + 30 * 1000, sound.duration),
+      })),
+    [sound.position],
+  );
 
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.updateWindowDimensions);
-  } */
+  const skipBackwards = useCallback(
+    () =>
+      setSound(sound => ({
+        ...sound,
+        position: Math.max(0, sound.position - 30 * 1000),
+      })),
+    [sound.position],
+  );
 
   const getShowImage = () => {
     const getLiveImage = () => '/assets/RR_logo.png';
@@ -83,13 +93,6 @@ const Player = props => {
   const updateWindowDimensions = () => {
     setSize({ width: window.innerWidth, height: window.innerHeight });
   };
-
-  /* componentDidUpdate() {
-    if (this.props.url != this.state.currentUrl) {
-      // Audio URL has changed, so let's reset progress position
-      this.resetPosition(this.props.url);
-    }
-  } */
 
   const resetPosition = () => {
     setSound(state => ({ ...state, position: 0 }));
@@ -112,6 +115,37 @@ const Player = props => {
     trackEvent('expanded', 'toggle expaned player');
     setExpanded(state => !state);
   };
+
+  const audioControls = (
+    <AudioControls
+      playNext={() => {
+        trackEvent('player', 'play next song');
+        props.playNext();
+      }}
+      playPrevious={() => {
+        trackEvent('player', 'play previous sond');
+        if (!props.live) {
+          const backLimit = 2 * 1000; // two seconds
+          if (sound.position < backLimit) {
+            props.playPrevious();
+          } else {
+            resetPosition(sound.currentUrl);
+          }
+        }
+      }}
+      togglePlayPause={() => {
+        trackEvent('player', 'toggle play/pause');
+        props.togglePlayPause();
+      }}
+      paused={props.paused}
+      live={props.live}
+      url={props.url}
+      skipAhead={skipAhead}
+      skipBackwards={skipBackwards}
+      isLatestEpisodeInPlaylist={props.index === props.playlist.length - 1}
+      isFirstEpisodeInPlaylist={props.index === 0}
+    />
+  );
 
   /* Method for handling the expanded version of the player */
   const expandedRender = () => {
@@ -155,6 +189,7 @@ const Player = props => {
             trackEvent('player', 'toggle play/pause');
             props.togglePlayPause();
           }}
+          audioControls={audioControls}
         />
         <h1 onClick={toggleExpander} className={PhoneStyles.expanderButton}>
           <Expander
@@ -223,30 +258,7 @@ const Player = props => {
         /* end of phone player */
         /* start of desktop player */
         <div className={DesktopStyles.container} title={props.playingTitle}>
-          <AudioControls
-            playNext={() => {
-              trackEvent('player', 'play next song');
-              props.playNext();
-            }}
-            playPrevious={() => {
-              trackEvent('player', 'play previous sond');
-              if (!props.live) {
-                const backLimit = 2 * 1000; // two seconds
-                if (sound.position < backLimit) {
-                  props.playPrevious();
-                } else {
-                  resetPosition(sound.currentUrl);
-                }
-              }
-            }}
-            togglePlayPause={() => {
-              trackEvent('player', 'toggle play/pause');
-              props.togglePlayPause();
-            }}
-            paused={props.paused}
-            live={props.live}
-            url={props.url}
-          />
+          {audioControls}
           <AudioProgress
             displayText={props.playingTitle}
             live={props.live}
@@ -277,6 +289,9 @@ Player.propTypes = {
   playNext: PropTypes.func.isRequired,
   playPrevious: PropTypes.func.isRequired,
   publishAt: PropTypes.string,
+  updateLiveTitle: PropTypes.func.isRequired,
+  index: PropTypes.number,
+  playlist: PropTypes.array,
 };
 
 Player.defaultProps = {
@@ -297,6 +312,8 @@ const mapStateToProps = createStructuredSelector({
   playingShow: selectPlayingShow(),
   showImage: selectShowImage(),
   publishAt: selectPublishAt(),
+  index: selectIndex(),
+  playlist: selectPlaylist(),
 });
 
 function mapDispatchToProps(dispatch) {

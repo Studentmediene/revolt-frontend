@@ -40,7 +40,6 @@ const PlayerProgressFunctional = props => {
     setSeek(state => ({ ...state, inProgress: false }));
   };
 
-
   const updateDisplayPosition = event => {
     //only update timeline and audioprogress, not on mouseMove and TouchMove
     if (event.type === 'mousedown' || event.type === 'touchstart') {
@@ -103,7 +102,7 @@ const PlayerProgressFunctional = props => {
   return (
     <div className={styles.timeline}>
       <span
-        className={classnames({
+        className={classnames(styles.time, {
           [styles.hidden]: props.live,
         })}
       >
@@ -113,18 +112,23 @@ const PlayerProgressFunctional = props => {
         role="toolbar"
         className={styles.audioProgressContainer}
         ref={audioProgressContainer}
-        onMouseDown={e => updateDisplayPosition(e)}
         onMouseMove={e => updateDisplayPosition(e)}
-        onTouchStart={e => updateDisplayPosition(e)}
         onTouchMove={e => updateDisplayPosition(e)}
       >
-        <div className={styles.audioProgress} style={audioProgressStyle}>
-          <div className={styles.handle} />
+        <div
+          role="toolbar"
+          className={styles.audioProgressline}
+          onMouseDown={e => updateDisplayPosition(e)}
+          onTouchStart={e => updateDisplayPosition(e)}
+        >
+          <div className={styles.audioProgress} style={audioProgressStyle}>
+            <div className={styles.handle} />
+          </div>
         </div>
       </div>
       {
         <span
-          className={classnames({
+          className={classnames(styles.time, {
             [styles.hidden]: props.live,
           })}
         >
