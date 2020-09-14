@@ -51,7 +51,7 @@
 .rightFacingTriangle {
   width: 0;
   height: 0;
-  border-left: 28px solid #FFF;
+  border-left: 28px solid #fff;
   border-top: 14px solid transparent;
   border-bottom: 14px solid transparent;
 }
@@ -76,5 +76,10 @@
 
 .line {
   width: 4px;
-  background-color: #FFF;
+  background-color: #fff;
+}
+
+.skipBackwardsButton,
+.skipAheadButton {
+  color: white;
 }

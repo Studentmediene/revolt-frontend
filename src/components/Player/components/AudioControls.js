@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import PlayPauseButton from './PlayPauseButton';
 import styles from './AudioControls.scss';
 import classNames from 'classnames';
+import SkipBackwardsButton from './SkipBackwardsButton';
+import SkipAheadButton from './SkipAheadButton';
 
 const AudioControls = ({
   playNext,
@@ -14,24 +16,27 @@ const AudioControls = ({
   skipAhead,
   skipBackwards,
   isLatestEpisodeInPlaylist,
-  isFirstEpisodeInPlaylist,
+  isFirstEpisodeInPlaylist
 }) => {
   return (
     <div className={styles.audioControls}>
       <button
         onClick={skipBackwards}
         disabled={live || !url}
-        className={classNames({
-          [styles.disabled]: live || !url,
-        })}
+        className={classNames(
+          {
+            [styles.disabled]: live || !url
+          },
+          styles.skipBackwardsButton
+        )}
         styles={{ color: 'white' }}
       >
-        B
+        <SkipBackwardsButton />
       </button>
       <button
         disabled={live || !url || isFirstEpisodeInPlaylist}
         className={classNames(styles.backButton, {
-          [styles.disabled]: live || !url || isFirstEpisodeInPlaylist,
+          [styles.disabled]: live || !url || isFirstEpisodeInPlaylist
         })}
         onClick={playPrevious}
         onKeyPress={playPrevious}
@@ -47,7 +52,7 @@ const AudioControls = ({
       <button
         disabled={live || !url || isLatestEpisodeInPlaylist}
         className={classNames(styles.forwardButton, {
-          [styles.disabled]: live || !url || isLatestEpisodeInPlaylist,
+          [styles.disabled]: live || !url || isLatestEpisodeInPlaylist
         })}
         onClick={playNext}
         onKeyPress={playNext}
@@ -60,12 +65,15 @@ const AudioControls = ({
       <button
         onClick={skipAhead}
         disabled={live || !url}
-        className={classNames({
-          [styles.disabled]: live || !url,
-        })}
+        className={classNames(
+          {
+            [styles.disabled]: live || !url
+          },
+          styles.skipAheadButton
+        )}
         styles={{ color: 'white' }}
       >
-        A
+        <SkipAheadButton />
       </button>
     </div>
   );
@@ -81,7 +89,7 @@ AudioControls.propTypes = {
   skipAhead: PropTypes.func.isRequired,
   skipBackwards: PropTypes.func.isRequired,
   isLatestEpisodeInPlaylist: PropTypes.bool,
-  isFirstEpisodeInPlaylist: PropTypes.bool,
+  isFirstEpisodeInPlaylist: PropTypes.bool
 };
 
 export default AudioControls;

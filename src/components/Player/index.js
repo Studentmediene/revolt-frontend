@@ -24,7 +24,7 @@ import {
   togglePlayPause,
   playNext,
   playPrevious,
-  liveTitleUpdater,
+  liveTitleUpdater
 } from './actions';
 import {
   selectOffset,
@@ -36,7 +36,7 @@ import {
   selectShowImage,
   selectPublishAt,
   selectIndex,
-  selectPlaylist,
+  selectPlaylist
 } from './selectors';
 
 import { trackEvent } from 'utils/analytics';
@@ -49,7 +49,7 @@ const Player = props => {
     currentUrl: '',
     position: 0,
     duration: 0,
-    volume: 80,
+    volume: 80
   });
   const [expanded, setExpanded] = useState(false);
 
@@ -71,18 +71,18 @@ const Player = props => {
     () =>
       setSound(sound => ({
         ...sound,
-        position: Math.min(sound.position + 30 * 1000, sound.duration),
+        position: Math.min(sound.position + 30 * 1000, sound.duration)
       })),
-    [sound.position],
+    [sound.position]
   );
 
   const skipBackwards = useCallback(
     () =>
       setSound(sound => ({
         ...sound,
-        position: Math.max(0, sound.position - 30 * 1000),
+        position: Math.max(0, sound.position - 10 * 1000)
       })),
-    [sound.position],
+    [sound.position]
   );
 
   const getShowImage = () => {
@@ -106,7 +106,7 @@ const Player = props => {
     setSound(state => ({
       ...state,
       position: soundObject.position,
-      duration: soundObject.duration,
+      duration: soundObject.duration
     }));
   };
 
@@ -154,7 +154,7 @@ const Player = props => {
       <div
         className={classnames(PhoneStyles.expandedContainer, {
           [PhoneStyles.hidden]: !expanded,
-          [PhoneStyles.expanded]: expanded,
+          [PhoneStyles.expanded]: expanded
         })}
       >
         <PlayingInfoExpanded
@@ -209,7 +209,7 @@ const Player = props => {
     progressBarWidth = '0%';
   }
   const audioProgressStyle = {
-    width: progressBarWidth,
+    width: progressBarWidth
   };
 
   return (
@@ -291,12 +291,12 @@ Player.propTypes = {
   publishAt: PropTypes.string,
   updateLiveTitle: PropTypes.func.isRequired,
   index: PropTypes.number,
-  playlist: PropTypes.array,
+  playlist: PropTypes.array
 };
 
 Player.defaultProps = {
   paused: true,
-  url: null,
+  url: null
 };
 
 Player.getInitialProps = ({ isServer }) => {
@@ -313,7 +313,7 @@ const mapStateToProps = createStructuredSelector({
   showImage: selectShowImage(),
   publishAt: selectPublishAt(),
   index: selectIndex(),
-  playlist: selectPlaylist(),
+  playlist: selectPlaylist()
 });
 
 function mapDispatchToProps(dispatch) {
@@ -323,11 +323,11 @@ function mapDispatchToProps(dispatch) {
     resume: () => dispatch(resume()),
     pause: () => dispatch(pause()),
     playNext: () => dispatch(playNext()),
-    playPrevious: () => dispatch(playPrevious()),
+    playPrevious: () => dispatch(playPrevious())
   };
 }
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(Player);
