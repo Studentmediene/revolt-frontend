@@ -7,7 +7,7 @@ const PlayingInfo = ({
   episodeTitle,
   showImageURL,
   live,
-  expand,
+  expand
 }) => {
   /* This will get changed later */
   return (
@@ -34,7 +34,7 @@ PlayingInfo.propTypes = {
   episodeTitle: PropTypes.string.isRequired,
   showImageURL: PropTypes.string.isRequired,
   expand: PropTypes.func,
-  live: PropTypes.bool.isRequired,
+  live: PropTypes.bool.isRequired
 };
 
 export default PlayingInfo;

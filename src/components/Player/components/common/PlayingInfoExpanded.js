@@ -17,7 +17,7 @@ const PlayingInfoExpanded = ({
   url,
   position,
   duration,
-  audioControls,
+  audioControls
 }) => (
   <div className={styles.Container}>
     <div className={styles.infoContainer}>
@@ -69,7 +69,7 @@ PlayingInfoExpanded.propTypes = {
   position: PropTypes.number.isRequired,
   playNext: PropTypes.func.isRequired,
   playPrevious: PropTypes.func.isRequired,
-  audioControls: PropTypes.element.isRequired,
+  audioControls: PropTypes.element.isRequired
 };
 
 export default PlayingInfoExpanded;

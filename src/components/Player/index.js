@@ -17,6 +17,8 @@ import SoundManager from './components/SoundManager';
 import AudioProgress from './components/AudioProgress';
 import AudioControls from './components/AudioControls';
 import DesktopStyles from './DesktopStyles.scss';
+import PlayerProgressFunctional from './components/common/PlayerProgressFunctional';
+import LiveTag from './components/common/LiveTag';
 
 import {
   pause,
@@ -257,18 +259,41 @@ const Player = props => {
       ) : (
         /* end of phone player */
         /* start of desktop player */
-        <div className={DesktopStyles.container} title={props.playingTitle}>
-          {audioControls}
-          <AudioProgress
-            displayText={props.playingTitle}
-            live={props.live}
-            paused={props.paused}
-            url={props.url}
-            position={sound.position}
-            durationEstimate={sound.duration}
-            onSeek={position => onSeek(position)}
-          />
-        </div>
+        <>
+          {expandedRender()}
+          <div className={DesktopStyles.container} title={props.playingTitle}>
+            <div className={DesktopStyles.audioControls}>{audioControls}</div>
+            <div className={DesktopStyles.playingInfoContainer}>
+              <PlayingInfo
+                showName={props.playingShow}
+                episodeTitle={props.playingTitle}
+                showImageURL={getShowImage()}
+                expand={toggleExpander}
+                live={props.live}
+              />
+            </div>
+            <div className={DesktopStyles.progressBar}>
+              <PlayerProgressFunctional
+                onSeek={position => onSeek(position)}
+                paused={props.paused}
+                live={props.live}
+                url={props.url}
+                position={sound.position}
+                duration={sound.duration}
+              />
+            </div>
+            <div className={DesktopStyles.Expander}>
+              <Expander expandFunction={toggleExpander} expanded={true} />
+            </div>
+            {props.live ? (
+              <div className={DesktopStyles.LiveTag}>
+                <LiveTag />
+              </div>
+            ) : (
+              <></>
+            )}
+          </div>
+        </>
         /* end of desktop player */
       )}
     </React.Fragment>
@@ -280,6 +305,9 @@ Player.propTypes = {
   offset: PropTypes.number,
   paused: PropTypes.bool,
   url: PropTypes.string,
+  duration: PropTypes.number,
+  position: PropTypes.number.isRequired,
+  onSeek: PropTypes.func.isRequired,
   playingTitle: PropTypes.string,
   playingShow: PropTypes.string,
   showImage: PropTypes.string,

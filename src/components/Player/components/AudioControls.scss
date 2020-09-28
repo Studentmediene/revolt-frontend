@@ -1,8 +1,11 @@
+@import '../../../variables.scss';
+
 .audioControls {
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
   margin-left: 15px;
   margin-right: 15px;
+  //gap: 25px;
 }
 
 .audioControls button {
@@ -15,7 +18,6 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-
   margin: 0 4px;
   padding: 0 11px;
 }
@@ -31,16 +33,6 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  height: 50px;
-}
-
-.disabled {
-  opacity: 0.2;
-  cursor: default;
-}
-
-.disabled:focus {
-  outline: 0;
 }
 
 .backButtonInner {
@@ -82,4 +74,20 @@
 .skipBackwardsButton,
 .skipAheadButton {
   color: white;
+  cursor: pointer;
+}
+
+.disabled {
+  opacity: 0.2;
+  cursor: default;
+}
+
+.disabled:focus {
+  outline: 0;
+}
+
+@media screen and (min-width: $breakpoint-medium) {
+  .audioControls {
+    gap: 25px;
+  }
 }

@@ -1,9 +1,9 @@
 @import '../../variables.scss';
 
-.expandedContainer{
+.expandedContainer {
   display: grid;
-  text-align:center;
-  color:white;/* unødvendig */
+  text-align: center;
+  color: white; /* unødvendig */
   height: 100%;
   background-color: #333;
   position: fixed;
@@ -11,7 +11,7 @@
   transition: all 0.4s ease;
   z-index: 4;
   grid-template-rows: 1fr 50px;
-  .expanderButton{
+  .expanderButton {
     padding: 0 0 1rem 0;
     margin: 0;
     cursor: pointer;
@@ -19,35 +19,33 @@
 }
 
 .expanded {
-  bottom:0;
+  bottom: 0;
 }
 
- .hidden {
-  bottom:-150%;
-} 
+.hidden {
+  bottom: -150%;
+}
 
 .metaContainer {
   display: flex;
   flex-direction: column;
-  height: $player-height + 3px;
+  height: $player-height-desktop + 3px;
   position: fixed;
   bottom: 0;
   width: 100%;
   z-index: 3;
 
   .timeline {
-    border-top: 3px solid #EBB71F;
+    border-top: 3px solid #ebb71f;
   }
 
   .container {
     display: flex;
     flex-direction: row;
-    height: $player-height;
+    height: $player-height-desktop;
     background-color: #333;
     width: 100%;
 
-    
-    
     .controlContainer {
       display: flex;
       flex-shrink: 1;

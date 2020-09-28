@@ -5,56 +5,63 @@ $image-height-desktop: $player-height-desktop - 10px;
 $image-padding: 2px;
 
 .infoContainer {
-    margin-right: auto;
-    width: 100%;
-    max-width: calc(100% - 52px);
-    padding: 0 0;
-    display: flex;
-    color:white;
-    flex-direction: row;
-    justify-items: center; 
-    flex-shrink: 1;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    cursor: pointer;
-    
-    .imgContainer { 
-        height: $image-height;
-        max-width: $image-height;
-        align-self: center;
-        flex-shrink:0;
-        display: flex;
-        flex-direction: row;
-        align-content: center;
-        background-color: $color-radiorevolt-white;
-        padding: $image-padding;
-        img {
-            align-self: center;
-            width: $image-height - $image-padding;
-            max-height: $image-height - $image-padding;
-        }
-    }
-    .text{
-        display:flex;
-        flex-direction: column;
-        justify-content: center;
-        margin-left: 7px;
-        min-width:0;    
-        flex-wrap: nowrap;
+  margin-right: auto;
+  margin-left: 5px;
+  width: 100%;
+  max-width: calc(100% - 52px);
+  padding: 0 0;
+  display: flex;
+  color: white;
+  flex-direction: row;
+  justify-items: center;
+  flex-shrink: 1;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  cursor: pointer;
 
-        .showName {
-            font-size: 1em;
-            font-weight: bold;
-            margin: 0;  
-            white-space: nowrap; 
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .episodeTitle {
-            font-size: 0.7em;
-            font-weight: lighter;
-            margin: 0;
-            font-style: oblique;
-        }
+  .imgContainer {
+    height: $image-height;
+    max-width: $image-height;
+    align-self: center;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    background-color: $color-radiorevolt-white;
+    padding: $image-padding;
+    img {
+      align-self: center;
+      width: $image-height - $image-padding;
+      max-height: $image-height - $image-padding;
     }
-    
+  }
+  .text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 7px;
+    min-width: 0;
+    flex-wrap: nowrap;
+    max-lines: 4;
+
+    .showName {
+      font-size: 1em;
+      font-weight: bold;
+      margin: 0;
+      white-space: nowrap;
+      overflow: auto;
+      text-overflow: ellipsis;
+    }
+    .episodeTitle {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      font-size: 0.7em;
+      font-weight: lighter;
+      margin: 0;
+      font-style: oblique;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
 }

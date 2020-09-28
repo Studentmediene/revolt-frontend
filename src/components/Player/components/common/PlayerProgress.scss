@@ -1,72 +1,67 @@
- .timeline {
-    display: flex;
-    flex-direction: row;
+.timeline {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-bottom: 0px;
+
+  span {
+    margin: -3px 10px 0 10px;
+    min-width: 43px;
+    font-size: 0.7em;
+  }
+
+  .hidden {
+    visibility: hidden;
+  }
+
+  .handle {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    margin-top: -6px;
+    margin-left: -9px;
+    background: white;
+    border: 1px solid white;
+    text-align: right;
+    float: right;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .audioProgressContainer {
     width: 100%;
-    margin-bottom: 0px;
+    margin-left: 9px;
+    position: relative;
+    background-color: none;
+    height: 100px;
+    border-radius: 3px;
+    padding-top: 46px;
+  }
 
-    span {
-        margin: -3px 10px 0 10px;
-        min-width:43px;
-        font-size: 0.7em;
-    }
+  .audioProgressline {
+    width: 100%;
+    position: relative;
+    background-color: #868686;
+    height: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+  }
 
-    .hidden {
-        visibility: hidden;
-    }
+  .audioProgress {
+    background-color: #ebb71f;
+    height: 5px;
+    width: 0;
+    will-change: width;
+    border-radius: 3px;
+    position: relative;
+    display: block;
+    cursor: pointer;
+    visibility: visible;
+  }
 
-    .handle{
-        width: 18px;
-        height: 18px;
-        border-radius: 50%;
-        margin-top: -6px;
-        margin-left: -9px;
-        background: white;
-        border: 1px solid white;
-        text-align: right;
-        float:right;
-        position: relative;
-        cursor: pointer;
-    }
-
-    .audioProgressContainer {
-        width: 100%;
-        margin-left: 9px;
-        position: relative;
-        background-color: none;
-        height: 100px;
-        border-radius: 3px;
-        padding-top: 46px;
-    }
-
-    .audioProgressline {
-        width: 100%;
-        position: relative;
-        background-color: #868686;
-        height: 5px;
-        border-radius: 3px;
-        cursor: pointer;
-    }
-    
-    .audioProgress {
-        background-color: #EBB71F;
-        height: 5px;
-        width: 0;
-        will-change: width;
-        border-radius: 3px;
-        position: relative;
-        display: block;
-        cursor: pointer;
-        visibility: visible;
-    }
-
-    .time {
-        position: relative;
-        padding-top:46px;
-        user-select: none;
-    }
-
- }
-  
-
-
-  
+  .time {
+    position: relative;
+    padding-top: 46px;
+    user-select: none;
+  }
+}

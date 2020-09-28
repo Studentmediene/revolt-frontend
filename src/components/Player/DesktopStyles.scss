@@ -1,11 +1,58 @@
 @import '../../variables.scss';
 
 .container {
-  display: flex;
-  flex-direction: row;
-  height: $player-height;
+  display: grid;
+  grid-template-columns: 25vw 25vw 25vw 12.5vw 12.5vw;
+  grid-template-rows: $player-height-desktop/2 $player-height-desktop/2;
+  grid-template-areas:
+    'a b b c e'
+    'a d d c e';
   background-color: #333;
   position: fixed;
   bottom: 0;
-  width: 100%;
+}
+
+.playingInfoContainer {
+  grid-area: a;
+  align-self: center;
+}
+
+.audioControls {
+  grid-area: b;
+  transform: scale(0.7);
+  z-index: 1;
+  justify-self: center;
+}
+
+.audioControlsLive {
+  grid-row-start: b;
+  grid-row-end: d;
+  grid-column-start: b;
+  grid-column-end: d;
+  transform: scale(0.7);
+  align-self: center;
+  justify-self: center;
+}
+
+.progressBar {
+  grid-area: d;
+  align-self: center;
+  color: white;
+}
+
+.LiveTag {
+  grid-area: c;
+  align-self: center;
+  justify-self: center;
+}
+
+.Expander {
+  transform: scale(3);
+  grid-area: e;
+  align-self: center;
+  justify-self: center;
+}
+
+.ExpanderColor {
+  color: white;
 }

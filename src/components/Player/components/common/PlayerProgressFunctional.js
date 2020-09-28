@@ -62,7 +62,7 @@ const PlayerProgressFunctional = props => {
     const duration = props.duration;
     setSeek(state => ({
       ...state,
-      position: progressPercentage * duration,
+      position: progressPercentage * duration
     }));
   };
 
@@ -92,7 +92,7 @@ const PlayerProgressFunctional = props => {
   }
 
   const audioProgressStyle = {
-    width: progressBarWidth,
+    width: progressBarWidth
   };
   if (props.live) {
     audioProgressStyle.backgroundColor = '#868686';
@@ -103,7 +103,7 @@ const PlayerProgressFunctional = props => {
     <div className={styles.timeline}>
       <span
         className={classnames(styles.time, {
-          [styles.hidden]: props.live,
+          [styles.hidden]: props.live
         })}
       >
         {displayPosition}
@@ -122,14 +122,18 @@ const PlayerProgressFunctional = props => {
           onTouchStart={e => updateDisplayPosition(e)}
         >
           <div className={styles.audioProgress} style={audioProgressStyle}>
-            <div className={styles.handle} />
+            <div
+              className={classnames({
+                [styles.handle]: !props.live
+              })}
+            />
           </div>
         </div>
       </div>
       {
         <span
           className={classnames(styles.time, {
-            [styles.hidden]: props.live,
+            [styles.hidden]: props.live
           })}
         >
           {displayDuration}
@@ -146,13 +150,13 @@ PlayerProgressFunctional.propTypes = {
   offset: PropTypes.string,
   onSeek: PropTypes.func.isRequired,
   duration: PropTypes.number,
-  position: PropTypes.number.isRequired,
+  position: PropTypes.number.isRequired
 };
 
 PlayerProgressFunctional.defaultProps = {
   url: null,
   offset: null,
-  duration: null,
+  duration: null
 };
 
 export default PlayerProgressFunctional;
