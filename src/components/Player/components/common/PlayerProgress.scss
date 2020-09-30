@@ -31,6 +31,7 @@
   .audioProgressContainer {
     width: 100%;
     margin-left: 9px;
+    margin-right: 9px;
     position: relative;
     background-color: none;
     height: 100px;
@@ -58,10 +59,43 @@
     cursor: pointer;
     visibility: visible;
   }
+}
+.currentTime,
+.totalTime {
+  position: relative;
+  padding-top: 46px;
+  user-select: none;
+}
 
-  .time {
-    position: relative;
-    padding-top: 46px;
-    user-select: none;
+.currentTime {
+  text-align: right;
+}
+
+@media only screen and (max-width: 800px) {
+  .timeline {
+    display: grid;
+    grid-template-areas: 'a a a' 'b x c';
+    grid-template-columns: 14% 72% 14%;
+    grid-template-rows: 50% 50%;
+
+    .audioProgressContainer {
+      grid-area: a;
+      width: 90%;
+      justify-self: center;
+    }
+
+    .currentTime {
+      text-align: center;
+      justify-self: center;
+      grid-area: b;
+      padding-top: 10px;
+    }
+
+    .totalTime {
+      text-align: center;
+      justify-self: center;
+      grid-area: c;
+      padding-top: 10px;
+    }
   }
 }

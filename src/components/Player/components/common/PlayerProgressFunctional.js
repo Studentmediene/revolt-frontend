@@ -102,7 +102,7 @@ const PlayerProgressFunctional = props => {
   return (
     <div className={styles.timeline}>
       <span
-        className={classnames(styles.time, {
+        className={classnames(styles.currentTime, {
           [styles.hidden]: props.live
         })}
       >
@@ -132,7 +132,7 @@ const PlayerProgressFunctional = props => {
       </div>
       {
         <span
-          className={classnames(styles.time, {
+          className={classnames(styles.totalTime, {
             [styles.hidden]: props.live
           })}
         >
