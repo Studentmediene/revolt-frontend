@@ -18,6 +18,21 @@
   }
 }
 
+.closeButton {
+  position: absolute;
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+  margin: 5px;
+  top: 0px;
+  stroke-width: 2px;
+  stroke: $color-text-dark;
+}
+
+.closeButton:hover {
+  stroke: white;
+}
+
 .expanded {
   bottom: 0;
 }

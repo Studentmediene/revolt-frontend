@@ -11,7 +11,7 @@ import PlayPauseButton from './components/PlayPauseButton';
 import PlayingInfo from './components/common/PlayingInfo';
 import PlayingInfoExpanded from './components/common/PlayingInfoExpanded';
 import Expander from '../common/expanderbutton/Expander.js';
-import CloseButton from './components/closeButton.js';
+import CloseButton from './components/CloseButton.js';
 
 /* for mobile and desktop */
 import SoundManager from './components/SoundManager';
@@ -160,9 +160,9 @@ const Player = props => {
           [PhoneStyles.expanded]: expanded
         })}
       >
-        <h1 onClick={toggleExpander} className={PhoneStyles.expanderButton}>
+        <div onClick={toggleExpander} className={PhoneStyles.closeButton}>
           <CloseButton />
-        </h1>
+        </div>
         <PlayingInfoExpanded
           showName={props.playingShow}
           episodeTitle={props.playingTitle}
@@ -197,6 +197,11 @@ const Player = props => {
           }}
           audioControls={audioControls}
         />
+        <h1 onClick={toggleExpander} className={PhoneStyles.expanderButton}>
+          <Expander
+            expanded={false} //to point arrow down
+          />
+        </h1>
       </div>
     );
   };
