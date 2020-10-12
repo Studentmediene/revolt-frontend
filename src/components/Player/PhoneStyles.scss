@@ -1,29 +1,11 @@
 @import '../../variables.scss';
 
-.expandedContainer {
-  display: grid;
-  text-align: center;
-  color: white; /* unødvendig */
-  height: 100%;
-  background-color: #333;
-  position: fixed;
-  width: 100%;
-  transition: all 0.4s ease;
-  z-index: 4;
-  grid-template-rows: 1fr 50px;
-  .expanderButton {
-    padding: 0 0 1rem 0;
-    margin: 0;
-    cursor: pointer;
-  }
-}
-
 .closeButton {
   position: absolute;
   cursor: pointer;
   width: 35px;
   height: 35px;
-  margin: 5px;
+  margin: 15px;
   top: 0px;
   stroke-width: 2px;
   stroke: $color-text-dark;
@@ -31,14 +13,6 @@
 
 .closeButton:hover {
   stroke: white;
-}
-
-.expanded {
-  bottom: 0;
-}
-
-.hidden {
-  bottom: -150%;
 }
 
 .metaContainer {

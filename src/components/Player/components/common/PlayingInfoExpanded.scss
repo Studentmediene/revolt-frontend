@@ -2,6 +2,37 @@
 
 $image-height: 30vh;
 
+.expandedContainer {
+  text-align: center;
+  color: white; /* unødvendig */
+  height: 100%;
+  background-color: #333;
+  position: fixed;
+  width: 100%;
+  transition: all 0.4s ease;
+  z-index: 4;
+  padding-bottom: 15px;
+}
+
+.expanded {
+  bottom: 0;
+}
+
+.hidden {
+  bottom: -150%;
+}
+
+.closeButton {
+  position: absolute;
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+  margin: 15px;
+  top: 0px;
+  stroke-width: 2px;
+  stroke: $color-text-dark;
+}
+
 .Container {
   display: grid;
   color: white;
@@ -64,23 +95,37 @@ $image-height: 30vh;
       margin-bottom: 0;
     }
   }
+}
 
-  .controls {
-    margin-top: auto;
+.progressAndControls {
+  display: grid;
+  grid-template-areas: 'e e e e' 'a b c d';
+  grid-template-columns: 25vw 50vw 12.5vw 12.5vw;
+  grid-template-rows: 10vh 10vh;
+  margin-top: auto;
+  color: white;
+  align-self: start;
+  align-items: center;
+  justify-items: center;
+  .expanderButton {
+    transform: scale(3);
+    grid-area: d;
+    cursor: pointer;
+    align-self: center;
+    justify-self: center;
+  }
+  .progress {
+    grid-area: e;
+    width: 95vw;
+    align-content: end;
+    /*font-size: 2em;
     color: white;
-    align-self: start;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    .progress {
-      font-size: 2em;
-      color: white;
-      margin: 0 10px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
+    margin: 0 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;*/
+  }
+  .controls {
+    grid-area: b;
   }
 }
 

@@ -11,7 +11,6 @@ import PlayPauseButton from './components/PlayPauseButton';
 import PlayingInfo from './components/common/PlayingInfo';
 import PlayingInfoExpanded from './components/common/PlayingInfoExpanded';
 import Expander from '../common/expanderbutton/Expander.js';
-import CloseButton from './components/CloseButton.js';
 
 /* for mobile and desktop */
 import SoundManager from './components/SoundManager';
@@ -150,61 +149,7 @@ const Player = props => {
     />
   );
 
-  /* Method for handling the expanded version of the player */
-  const expandedRender = () => {
-    const publishedAt = moment(props.publishAt);
-    return (
-      <div
-        className={classnames(PhoneStyles.expandedContainer, {
-          [PhoneStyles.hidden]: !expanded,
-          [PhoneStyles.expanded]: expanded
-        })}
-      >
-        <div onClick={toggleExpander} className={PhoneStyles.closeButton}>
-          <CloseButton />
-        </div>
-        <PlayingInfoExpanded
-          showName={props.playingShow}
-          episodeTitle={props.playingTitle}
-          showImageURL={getShowImage()}
-          live={props.live}
-          paused={props.paused}
-          publishAt={
-            publishedAt.isValid() ? publishedAt.format('DD.MM.YYYY') : null
-          }
-          url={props.url}
-          position={sound.position}
-          duration={sound.duration}
-          onSeek={position => onSeek(position)}
-          playNext={() => {
-            trackEvent('player', 'play next song');
-            props.playNext();
-          }}
-          playPrevious={() => {
-            trackEvent('player', 'play previous sond');
-            if (!props.live) {
-              const backLimit = 2 * 1000; // two seconds
-              if (sound.position < backLimit) {
-                props.playPrevious();
-              } else {
-                resetPosition(sound.currentUrl);
-              }
-            }
-          }}
-          togglePlayPause={() => {
-            trackEvent('player', 'toggle play/pause');
-            props.togglePlayPause();
-          }}
-          audioControls={audioControls}
-        />
-        <h1 onClick={toggleExpander} className={PhoneStyles.expanderButton}>
-          <Expander
-            expanded={false} //to point arrow down
-          />
-        </h1>
-      </div>
-    );
-  };
+  const publishedAt = moment(props.publishAt);
 
   const isMobile = size.width <= 800; // (800) same as $breakpoint-medium in main variables.scss file
   let progressBarWidth = `${(sound.position / sound.duration) * 100}%`;
@@ -237,10 +182,46 @@ const Player = props => {
           props.playNext();
         }}
       />
+      <PlayingInfoExpanded
+        showName={props.playingShow}
+        episodeTitle={props.playingTitle}
+        showImageURL={getShowImage()}
+        live={props.live}
+        paused={props.paused}
+        publishAt={
+          publishedAt.isValid() ? publishedAt.format('DD.MM.YYYY') : null
+        }
+        url={props.url}
+        position={sound.position}
+        duration={sound.duration}
+        onSeek={position => onSeek(position)}
+        playNext={() => {
+          trackEvent('player', 'play next song');
+          props.playNext();
+        }}
+        playPrevious={() => {
+          trackEvent('player', 'play previous sond');
+          if (!props.live) {
+            const backLimit = 2 * 1000; // two seconds
+            if (sound.position < backLimit) {
+              props.playPrevious();
+            } else {
+              resetPosition(sound.currentUrl);
+            }
+          }
+        }}
+        togglePlayPause={() => {
+          trackEvent('player', 'toggle play/pause');
+          props.togglePlayPause();
+        }}
+        audioControls={audioControls}
+        expanded={expanded}
+        isMobile={isMobile}
+        toggleExpander={toggleExpander}
+      />
       {isMobile ? (
         /* start of phone player */
         <React.Fragment>
-          {expandedRender()}
           <div className={PhoneStyles.metaContainer}>
             <div className={PhoneStyles.timeline} style={audioProgressStyle} />
             <div className={PhoneStyles.container}>
@@ -264,7 +245,6 @@ const Player = props => {
         /* end of phone player */
         /* start of desktop player */
         <>
-          {expandedRender()}
           <div className={DesktopStyles.container} title={props.playingTitle}>
             <div className={DesktopStyles.audioControls}>{audioControls}</div>
             <div className={DesktopStyles.playingInfoContainer}>
@@ -286,11 +266,11 @@ const Player = props => {
                 duration={sound.duration}
               />
             </div>
-            <div className={DesktopStyles.Expander}>
+            <div className={DesktopStyles.expander}>
               <Expander expandFunction={toggleExpander} expanded={true} />
             </div>
             {props.live ? (
-              <div className={DesktopStyles.LiveTag}>
+              <div className={DesktopStyles.liveTag}>
                 <LiveTag />
               </div>
             ) : (

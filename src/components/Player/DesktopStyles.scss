@@ -40,19 +40,15 @@
   color: white;
 }
 
-.LiveTag {
+.liveTag {
   grid-area: c;
   align-self: center;
   justify-self: center;
 }
 
-.Expander {
+.expander {
   transform: scale(3);
   grid-area: e;
   align-self: center;
   justify-self: center;
-}
-
-.ExpanderColor {
-  color: white;
 }
