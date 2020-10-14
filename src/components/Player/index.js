@@ -290,8 +290,8 @@ Player.propTypes = {
   paused: PropTypes.bool,
   url: PropTypes.string,
   duration: PropTypes.number,
-  position: PropTypes.number.isRequired,
-  onSeek: PropTypes.func.isRequired,
+  position: PropTypes.number,
+  onSeek: PropTypes.func,
   playingTitle: PropTypes.string,
   playingShow: PropTypes.string,
   showImage: PropTypes.string,
@@ -303,7 +303,7 @@ Player.propTypes = {
   publishAt: PropTypes.string,
   updateLiveTitle: PropTypes.func.isRequired,
   index: PropTypes.number,
-  playlist: PropTypes.array
+  playlist: PropTypes.bool
 };
 
 Player.defaultProps = {

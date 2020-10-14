@@ -112,9 +112,11 @@ $image-height: 30vh;
     grid-area: d;
     cursor: pointer;
     align-self: center;
-    justify-self: center;
+    justify-self: end;
+    margin-right: 3vw;
   }
   .progress {
+    margin-bottom: 3vh;
     grid-area: e;
     width: 95vw;
     align-content: end;
@@ -129,7 +131,7 @@ $image-height: 30vh;
   }
 }
 
-/* Landscape
+/*
 @media screen and (orientation: landscape) {
   .Container {
     align-items: center;
@@ -145,10 +147,6 @@ $image-height: 30vh;
         text-align: left;
       }
     }
-  }
-
-  .controls {
-    align-self: start;
   }
 }
 */
