@@ -31,7 +31,7 @@ const AudioControls = ({
         )}
         styles={{ color: 'white' }}
       >
-        <SkipBackwardsButton />
+        <SkipBackwardsButton/>
       </button>
       <button
         disabled={live || !url || isFirstEpisodeInPlaylist}
