@@ -5,7 +5,7 @@ import { createStructuredSelector } from 'reselect';
 
 import styles from './styles.scss';
 import { togglePlayPause, playLive } from 'components/Player/actions';
-import PlayPauseButton from 'components/Player/components/PlayPauseButton';
+import PlayPauseButton from '../../common/button/PlayPauseButton/PlayPauseButton';
 import {
   selectLiveTitle,
   selectPaused,

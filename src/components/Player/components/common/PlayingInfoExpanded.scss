@@ -120,11 +120,6 @@ $image-height: 30vh;
     grid-area: e;
     width: 95vw;
     align-content: end;
-    /*font-size: 2em;
-    color: white;
-    margin: 0 10px;
-    overflow: hidden;
-    text-overflow: ellipsis;*/
   }
   .controls {
     grid-area: b;
@@ -132,6 +127,7 @@ $image-height: 30vh;
 }
 
 /*
+For info next to program-cover on desktop
 @media screen and (orientation: landscape) {
   .Container {
     align-items: center;

@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PlayPauseButton from './PlayPauseButton';
+import PlayPauseButton from '../../common/button/PlayPauseButton/PlayPauseButton';
 import styles from './AudioControls.scss';
 import classNames from 'classnames';
-import SkipBackwardsButton from './SkipBackwardsButton';
-import SkipAheadButton from './SkipAheadButton';
+import SkipBackwardsButton from '../../common/button/skipBackwardsButton/SkipBackwardsButton';
+import SkipAheadButton from '../../common/button/skipAheadButton/SkipAheadButton';
 
 const AudioControls = ({
   playNext,
@@ -29,7 +29,6 @@ const AudioControls = ({
           },
           styles.skipBackwardsButton
         )}
-        styles={{ color: 'white' }}
       >
         <SkipBackwardsButton/>
       </button>
@@ -71,7 +70,6 @@ const AudioControls = ({
           },
           styles.skipAheadButton
         )}
-        styles={{ color: 'white' }}
       >
         <SkipAheadButton />
       </button>

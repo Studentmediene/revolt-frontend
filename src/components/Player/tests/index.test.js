@@ -3,7 +3,7 @@ import { shallow, mount } from 'enzyme';
 import sinon from "sinon";
 
 import AudioControls from "../components/AudioControls";
-import SkipBackwardsButton from "../components/SkipBackwardsButton";
+import SkipBackwardsButton from "../../../common/button/SkipBackwardsButton/SkipBackwardsButton";
 import PlayingInfoExpanded from '../components/common/PlayingInfoExpanded';
 
 const AudioControlsProps = {

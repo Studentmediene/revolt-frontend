@@ -5,20 +5,18 @@ import { createStructuredSelector } from 'reselect';
 
 /* for mobile */
 import moment from 'moment';
-import classnames from 'classnames';
 import PhoneStyles from './PhoneStyles.scss';
-import PlayPauseButton from './components/PlayPauseButton';
+import PlayPauseButton from '../common/button/PlayPauseButton/PlayPauseButton';
 import PlayingInfo from './components/common/PlayingInfo';
 import PlayingInfoExpanded from './components/common/PlayingInfoExpanded';
-import Expander from '../common/expanderbutton/Expander.js';
+import Expander from '../common/button/ExpanderButton/Expander.js';
 
 /* for mobile and desktop */
 import SoundManager from './components/SoundManager';
-import AudioProgress from './components/AudioProgress';
 import AudioControls from './components/AudioControls';
 import DesktopStyles from './DesktopStyles.scss';
-import PlayerProgressFunctional from './components/common/PlayerProgressFunctional';
-import LiveTag from './components/common/LiveTag';
+import PlayerProgress from './components/common/PlayerProgress';
+import LiveTag from '../common/LiveTag/LiveTag';
 
 import {
   pause,
@@ -257,7 +255,7 @@ const Player = props => {
               />
             </div>
             <div className={DesktopStyles.progressBar}>
-              <PlayerProgressFunctional
+              <PlayerProgress
                 onSeek={position => onSeek(position)}
                 paused={props.paused}
                 live={props.live}

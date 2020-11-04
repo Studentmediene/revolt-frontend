@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import styles from './PlayingInfoExpanded.scss';
 import PhoneStyles from '../../PhoneStyles.scss';
-import CloseButton from './CloseButton';
-import Expander from '../../../common/expanderbutton/Expander';
+import CloseButton from '../../../common/button/CloseButton/CloseButton';
+import Expander from '../../../common/button/ExpanderButton/Expander';
 
-import PlayerProgressFunctional from '../common/PlayerProgressFunctional';
+import PlayerProgress from './PlayerProgress';
 
-import LiveTag from './LiveTag';
+import LiveTag from '../../../common/LiveTag/LiveTag';
 
 const PlayingInfoExpanded = ({
   showName,
@@ -60,7 +60,7 @@ const PlayingInfoExpanded = ({
         <div className={styles.progressAndControls}>
           {!live ? (
             <div className={styles.progress}>
-            <PlayerProgressFunctional
+            <PlayerProgress
               onSeek={position => onSeek(position)}
               live={live}
               paused={paused}

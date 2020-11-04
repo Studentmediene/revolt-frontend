@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { createStructuredSelector } from 'reselect';
-import Expander from 'components/common/expanderbutton/Expander';
+import Expander from '../common/button/ExpanderButton/Expander';
 
 import styles from './styles.scss';
 import { togglePlayPause } from 'components/Player/actions';
-import PlayPauseButton from 'components/Player/components/PlayPauseButton';
+import PlayPauseButton from '../common/button/PlayPauseButton/PlayPauseButton';
 import { selectEpisodeId, selectPaused } from 'components/Player/selectors';
 
 export class Episode extends React.Component {

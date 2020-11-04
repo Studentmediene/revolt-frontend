@@ -7,7 +7,7 @@ import { createStructuredSelector } from 'reselect';
 
 import styles from './styles.scss';
 import { togglePlayPause } from 'components/Player/actions';
-import PlayPauseButton from 'components/Player/components/PlayPauseButton';
+import PlayPauseButton from '../common/button/PlayPauseButton/PlayPauseButton';
 import { selectEpisodeId, selectPaused } from 'components/Player/selectors';
 
 export class EmbeddedEpisode extends React.Component {
