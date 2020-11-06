@@ -3,19 +3,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-/* for mobile */
 import moment from 'moment';
 import PhoneStyles from './PhoneStyles.scss';
 import PlayPauseButton from '../common/button/PlayPauseButton/PlayPauseButton';
-import PlayingInfo from './components/common/PlayingInfo';
-import PlayingInfoExpanded from './components/common/PlayingInfoExpanded';
+import PlayingInfo from './components/PlayingInfo';
+import ExpandedPlayer from './components/ExpandedPlayer';
 import Expander from '../common/button/ExpanderButton/Expander.js';
-
-/* for mobile and desktop */
 import SoundManager from './components/SoundManager';
 import AudioControls from './components/AudioControls';
 import DesktopStyles from './DesktopStyles.scss';
-import PlayerProgress from './components/common/PlayerProgress';
+import AudioTimeline from './components/AudioTimeline';
 import LiveTag from '../common/LiveTag/LiveTag';
 
 import {
@@ -180,7 +177,7 @@ const Player = props => {
           props.playNext();
         }}
       />
-      <PlayingInfoExpanded
+      <ExpandedPlayer
         showName={props.playingShow}
         episodeTitle={props.playingTitle}
         showImageURL={getShowImage()}
@@ -255,7 +252,7 @@ const Player = props => {
               />
             </div>
             <div className={DesktopStyles.progressBar}>
-              <PlayerProgress
+              <AudioTimeline
                 onSeek={position => onSeek(position)}
                 paused={props.paused}
                 live={props.live}

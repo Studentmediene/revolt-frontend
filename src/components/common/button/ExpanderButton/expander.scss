@@ -1,27 +1,23 @@
 @import 'variables.scss';
 
-.downButton {
-  border: solid $color-text-dark;
-  border-width: 0 1.5px 1.5px 0;
+.closeButton {
+  color: $color-text-dark;
   display: inline-block;
-  padding: 0.3em;
+  padding: 0.35em;
 }
 
-.downButton:hover {
-  border: solid white; /*solid $color-radiorevolt-lightgrey;*/
-  border-width: 0 1.5px 1.5px 0;
+.closeButton:hover {
+  color: white;
 }
 
-.upButton {
-  border: solid $color-text-dark;
-  border-width: 0 1.5px 1.5px 0;
+.expandButton {
+  color: $color-text-dark;
   display: inline-block;
-  padding: 0.3em;
+  padding: 0.35em;
 }
 
-.upButton:hover {
-  border: solid white; /*solid $color-radiorevolt-lightgrey;*/
-  border-width: 0 1.5px 1.5px 0;
+.expandButton:hover {
+  color: white;
 }
 
 .expanderContainer {

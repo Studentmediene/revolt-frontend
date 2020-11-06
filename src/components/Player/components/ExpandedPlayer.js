@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import styles from './PlayingInfoExpanded.scss';
-import PhoneStyles from '../../PhoneStyles.scss';
-import CloseButton from '../../../common/button/CloseButton/CloseButton';
-import Expander from '../../../common/button/ExpanderButton/Expander';
+import styles from './ExpandedPlayer.scss';
+import PhoneStyles from '../PhoneStyles.scss';
+import CloseButton from '../../common/button/CloseButton/CloseButton';
+import Expander from '../../common/button/ExpanderButton/Expander';
 
-import PlayerProgress from './PlayerProgress';
+import AudioTimeline from './AudioTimeline';
 
-import LiveTag from '../../../common/LiveTag/LiveTag';
+import LiveTag from '../../common/LiveTag/LiveTag';
 
-const PlayingInfoExpanded = ({
+const ExpandedPlayer = ({
   showName,
   episodeTitle,
   showImageURL,
@@ -60,7 +60,7 @@ const PlayingInfoExpanded = ({
         <div className={styles.progressAndControls}>
           {!live ? (
             <div className={styles.progress}>
-            <PlayerProgress
+            <AudioTimeline
               onSeek={position => onSeek(position)}
               live={live}
               paused={paused}
@@ -88,7 +88,7 @@ const PlayingInfoExpanded = ({
   </>
 );
 
-PlayingInfoExpanded.propTypes = {
+ExpandedPlayer.propTypes = {
   showName: PropTypes.string,
   episodeTitle: PropTypes.string.isRequired,
   showImageURL: PropTypes.string,
@@ -105,4 +105,4 @@ PlayingInfoExpanded.propTypes = {
   audioControls: PropTypes.element.isRequired
 };
 
-export default PlayingInfoExpanded;
+export default ExpandedPlayer;

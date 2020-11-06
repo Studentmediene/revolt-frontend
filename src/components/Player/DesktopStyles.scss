@@ -5,50 +5,50 @@
   grid-template-columns: 25vw 25vw 25vw 12.5vw 12.5vw;
   grid-template-rows: $player-height-desktop/2 $player-height-desktop/2;
   grid-template-areas:
-    'a b b c e'
-    'a d d c e';
+    'PlayingInfo AudioControls AudioControls LiveTag Expander'
+    'PlayingInfo ProgressBar ProgressBar LiveTag Expander';
   background-color: #333;
   position: fixed;
   bottom: 0;
 }
 
 .playingInfoContainer {
-  grid-area: a;
+  grid-area: PlayingInfo;
   align-self: center;
 }
 
 .audioControls {
-  grid-area: b;
+  grid-area: AudioControls;
   transform: scale(0.7);
   z-index: 1;
   justify-self: center;
 }
 
 .audioControlsLive {
-  grid-row-start: b;
-  grid-row-end: d;
-  grid-column-start: b;
-  grid-column-end: d;
+  grid-row-start: AudioControls;
+  grid-row-end: ProgressBar;
+  grid-column-start: AudioControls;
+  grid-column-end: ProgressBar;
   transform: scale(0.7);
   align-self: center;
   justify-self: center;
 }
 
 .progressBar {
-  grid-area: d;
+  grid-area: ProgressBar;
   align-self: center;
   color: white;
 }
 
 .liveTag {
-  grid-area: c;
+  grid-area: LiveTag;
   align-self: center;
   justify-self: center;
 }
 
 .expander {
   transform: scale(3);
-  grid-area: e;
+  grid-area: Expander;
   align-self: center;
   justify-self: end;
   margin-right: 3vw;

@@ -38,7 +38,6 @@ function playerReducer(state = initialState, action) {
         .set('paused', false)
         .set('episodeId', null)
         .set('offset', action.offset);
-        /* .set('publishAt', 'test') */
     case GET_PODCAST_PLAYLIST_PENDING:
       return state.set('loading', true).set('error', false);
     case GET_PODCAST_PLAYLIST_SUCCESS:

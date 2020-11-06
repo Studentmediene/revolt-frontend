@@ -9,7 +9,6 @@ const PlayingInfo = ({
   live,
   expand
 }) => {
-  /* This will get changed later */
   return (
     <div className={styles.infoContainer} onClick={expand}>
       <div className={styles.imgContainer}>

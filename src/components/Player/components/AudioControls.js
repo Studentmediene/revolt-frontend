@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import PlayPauseButton from '../../common/button/PlayPauseButton/PlayPauseButton';
 import styles from './AudioControls.scss';
 import classNames from 'classnames';
-import SkipBackwardsButton from '../../common/button/skipBackwardsButton/SkipBackwardsButton';
-import SkipAheadButton from '../../common/button/skipAheadButton/SkipAheadButton';
+import SkipBackwardsButton from '../../common/button/SkipBackwardsButton/SkipBackwardsButton';
+import SkipAheadButton from '../../common/button/SkipAheadButton/SkipAheadButton';
 
 const AudioControls = ({
   playNext,

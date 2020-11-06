@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import classnames from 'classnames';
 
-import styles from './PlayerProgress.scss';
+import styles from './AudioTimeline.scss';
 
-const PlayerProgress = props => {
+const AudioTimeline = props => {
   const [seek, setSeek] = useState({ position: 0, inProgress: false });
 
   // The HTML of the progress container
@@ -143,7 +143,7 @@ const PlayerProgress = props => {
   );
 };
 
-PlayerProgress.propTypes = {
+AudioTimeline.propTypes = {
   live: PropTypes.bool.isRequired,
   paused: PropTypes.bool.isRequired,
   url: PropTypes.string,
@@ -153,10 +153,10 @@ PlayerProgress.propTypes = {
   position: PropTypes.number.isRequired
 };
 
-PlayerProgress.defaultProps = {
+AudioTimeline.defaultProps = {
   url: null,
   offset: null,
   duration: null
 };
 
-export default PlayerProgress;
+export default AudioTimeline;
