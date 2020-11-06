@@ -30,7 +30,7 @@ const AudioControls = ({
           styles.skipBackwardsButton
         )}
       >
-        <SkipBackwardsButton/>
+        <SkipBackwardsButton number={10}/>
       </button>
       <button
         disabled={live || !url || isFirstEpisodeInPlaylist}
@@ -71,7 +71,7 @@ const AudioControls = ({
           styles.skipAheadButton
         )}
       >
-        <SkipAheadButton />
+        <SkipAheadButton number={30} />
       </button>
     </div>
   );
