@@ -19,8 +19,8 @@ const Expander = (props) => {
   )
 
   const content = props.expanded
-    ? openButton
-    : closeButton; 
+    ? closeButton
+    : openButton; 
 
 
   return (

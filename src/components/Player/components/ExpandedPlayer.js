@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import styles from './ExpandedPlayer.scss';
-import PhoneStyles from '../PhoneStyles.scss';
+import MobileStyles from './MobilePlayer.scss';
 import CloseButton from '../../common/button/CloseButton/CloseButton';
 import Expander from '../../common/button/ExpanderButton/Expander';
 
@@ -34,7 +34,7 @@ const ExpandedPlayer = ({
       })}
     >
       {isMobile ? (
-        <div onClick={toggleExpander} className={PhoneStyles.closeButton}>
+        <div onClick={toggleExpander} className={MobileStyles.closeButton}>
           <CloseButton />
         </div>
       ) : null}
@@ -78,7 +78,7 @@ const ExpandedPlayer = ({
             {!isMobile ? (
               <div onClick={toggleExpander} className={styles.expanderButton}>
               <Expander
-                expanded={false} //to point arrow down
+                expanded={true}
               />
             </div>
             ) : null}

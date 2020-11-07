@@ -4,16 +4,11 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import moment from 'moment';
-import PhoneStyles from './PhoneStyles.scss';
-import PlayPauseButton from '../common/button/PlayPauseButton/PlayPauseButton';
-import PlayingInfo from './components/PlayingInfo';
 import ExpandedPlayer from './components/ExpandedPlayer';
-import Expander from '../common/button/ExpanderButton/Expander.js';
+import MobilePlayer from "./components/MobilePlayer";
 import SoundManager from './components/SoundManager';
 import AudioControls from './components/AudioControls';
-import DesktopStyles from './DesktopStyles.scss';
-import AudioTimeline from './components/AudioTimeline';
-import LiveTag from '../common/LiveTag/LiveTag';
+import DesktopPlayer from "./components/DesktopPlayer";
 
 import {
   pause,
@@ -107,42 +102,33 @@ const Player = props => {
     }));
   };
 
+  const playPrevious = () => {
+      trackEvent('player', 'play previous sond');
+      if (!props.live) {
+        const backLimit = 2 * 1000; // two seconds
+        if (sound.position < backLimit) {
+          props.playPrevious();
+        } else {
+          resetPosition(sound.currentUrl);
+      }
+    }
+  }
+
+  const playNext = () => {
+    trackEvent('player', 'play next song');
+    props.playNext();
+  }
+
+  const togglePlayPause = () => {
+    trackEvent('player', 'toggle play/pause');
+    props.togglePlayPause();
+  }
+
   const toggleExpander = e => {
     e.preventDefault();
     trackEvent('expanded', 'toggle expaned player');
     setExpanded(state => !state);
   };
-
-  const audioControls = (
-    <AudioControls
-      playNext={() => {
-        trackEvent('player', 'play next song');
-        props.playNext();
-      }}
-      playPrevious={() => {
-        trackEvent('player', 'play previous sond');
-        if (!props.live) {
-          const backLimit = 2 * 1000; // two seconds
-          if (sound.position < backLimit) {
-            props.playPrevious();
-          } else {
-            resetPosition(sound.currentUrl);
-          }
-        }
-      }}
-      togglePlayPause={() => {
-        trackEvent('player', 'toggle play/pause');
-        props.togglePlayPause();
-      }}
-      paused={props.paused}
-      live={props.live}
-      url={props.url}
-      skipAhead={skipAhead}
-      skipBackwards={skipBackwards}
-      isLatestEpisodeInPlaylist={props.index === props.playlist.length - 1}
-      isFirstEpisodeInPlaylist={props.index === 0}
-    />
-  );
 
   const publishedAt = moment(props.publishAt);
 
@@ -157,6 +143,21 @@ const Player = props => {
   const audioProgressStyle = {
     width: progressBarWidth
   };
+
+  const audioControls = (
+    <AudioControls
+      playNext={playNext}
+      playPrevious={playPrevious}
+      togglePlayPause={togglePlayPause}
+      paused={props.paused}
+      live={props.live}
+      url={props.url}
+      skipAhead={skipAhead}
+      skipBackwards={skipBackwards}
+      isLatestEpisodeInPlaylist={props.index === props.playlist.length - 1}
+      isFirstEpisodeInPlaylist={props.index === 0}
+    />
+  );
 
   return (
     //the soundmanager is shared between desktop and mobile. This makes the playback not break when scaling the site
@@ -173,9 +174,7 @@ const Player = props => {
         onResume={() => {
           props.resume();
         }}
-        onFinishedPlaying={() => {
-          props.playNext();
-        }}
+        onFinishedPlaying={playNext}
       />
       <ExpandedPlayer
         showName={props.playingShow}
@@ -190,25 +189,9 @@ const Player = props => {
         position={sound.position}
         duration={sound.duration}
         onSeek={position => onSeek(position)}
-        playNext={() => {
-          trackEvent('player', 'play next song');
-          props.playNext();
-        }}
-        playPrevious={() => {
-          trackEvent('player', 'play previous sond');
-          if (!props.live) {
-            const backLimit = 2 * 1000; // two seconds
-            if (sound.position < backLimit) {
-              props.playPrevious();
-            } else {
-              resetPosition(sound.currentUrl);
-            }
-          }
-        }}
-        togglePlayPause={() => {
-          trackEvent('player', 'toggle play/pause');
-          props.togglePlayPause();
-        }}
+        playNext={playNext}
+        playPrevious={playPrevious}
+        togglePlayPause={togglePlayPause}
         audioControls={audioControls}
         expanded={expanded}
         isMobile={isMobile}
@@ -216,64 +199,29 @@ const Player = props => {
       />
       {isMobile ? (
         /* start of phone player */
-        <React.Fragment>
-          <div className={PhoneStyles.metaContainer}>
-            <div className={PhoneStyles.timeline} style={audioProgressStyle} />
-            <div className={PhoneStyles.container}>
-              <PlayingInfo
-                showName={props.playingShow}
-                episodeTitle={props.playingTitle}
-                showImageURL={getShowImage()}
-                expand={toggleExpander}
-                live={props.live}
-              />
-              <div className={PhoneStyles.controlContainer}>
-                <PlayPauseButton
-                  paused={props.paused}
-                  togglePlayPause={props.togglePlayPause}
-                />
-              </div>
-            </div>
-          </div>
-        </React.Fragment>
+        <MobilePlayer 
+          audioProgressStyle={audioProgressStyle}
+          getShowImage={getShowImage}
+          toggleExpander={toggleExpander}
+          live={props.live}
+          playingShow={props.playingShow}
+          playingTitle={props.playingTitle}
+          paused={props.paused}
+          togglePlayPause={props.togglePlayPause} 
+        />
       ) : (
-        /* end of phone player */
-        /* start of desktop player */
-        <>
-          <div className={DesktopStyles.container} title={props.playingTitle}>
-            <div className={DesktopStyles.audioControls}>{audioControls}</div>
-            <div className={DesktopStyles.playingInfoContainer}>
-              <PlayingInfo
-                showName={props.playingShow}
-                episodeTitle={props.playingTitle}
-                showImageURL={getShowImage()}
-                expand={toggleExpander}
-                live={props.live}
-              />
-            </div>
-            <div className={DesktopStyles.progressBar}>
-              <AudioTimeline
-                onSeek={position => onSeek(position)}
-                paused={props.paused}
-                live={props.live}
-                url={props.url}
-                position={sound.position}
-                duration={sound.duration}
-              />
-            </div>
-            <div className={DesktopStyles.expander}>
-              <Expander expandFunction={toggleExpander} expanded={true} />
-            </div>
-            {props.live ? (
-              <div className={DesktopStyles.liveTag}>
-                <LiveTag />
-              </div>
-            ) : (
-              <></>
-            )}
-          </div>
-        </>
-        /* end of desktop player */
+        <DesktopPlayer 
+          audioControls={audioControls}
+          getShowImage={getShowImage}
+          toggleExpander={toggleExpander}
+          sound={sound}
+          playingShow={props.playingShow}
+          playingTitle={props.playingTitle}
+          live={props.live}
+          onSeek={position => onSeek(position)}
+          paused={props.paused}
+          url={props.url}
+        />
       )}
     </React.Fragment>
   );
