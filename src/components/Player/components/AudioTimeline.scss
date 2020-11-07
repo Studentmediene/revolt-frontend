@@ -74,27 +74,29 @@
 @media only screen and (max-width: 800px) {
   .timeline {
     display: grid;
-    grid-template-areas: 'a a a' 'b x c';
+    grid-template-areas:
+      'AudioTimeline AudioTimeline AudioTimeline'
+      'CurrentTime x TotalTime';
     grid-template-columns: 14% 72% 14%;
-    grid-template-rows: 50% 50%;
+    grid-template-rows: 10vh 10vh;
 
     .audioProgressContainer {
-      grid-area: a;
+      grid-area: AudioTimeline;
       width: 90%;
       justify-self: center;
     }
 
     .currentTime {
+      grid-area: CurrentTime;
       text-align: center;
       justify-self: center;
-      grid-area: b;
       padding-top: 10px;
     }
 
     .totalTime {
+      grid-area: TotalTime;
       text-align: center;
       justify-self: center;
-      grid-area: c;
       padding-top: 10px;
     }
   }
