@@ -1,3 +1,6 @@
+# Project moved
+This repository and further development has been moved to [gitlab.smint.no](https://gitlab.smint.no/kapina/kapina-frontend)
+
 # kapina-frontend
 Frontend for radiorevolt.no
 
